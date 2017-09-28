@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -406,6 +407,7 @@ public class OverAllServiceImpl implements OverAllService {
 	@Override
 	public List<ShopBean> getTableshow(String business) throws Exception{
 		List<ShopBean> shopBeans = getShopBeans(business);
+		Collections.sort(shopBeans,new ShopBean());
 		Map<String, BigDecimal[]> map = new HashMap<String, BigDecimal[]>();
 		for (ShopBean shop : shopBeans) {
 			getBusinessHour(shop, map);
