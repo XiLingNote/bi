@@ -1,0 +1,247 @@
+package bi.baiqiu.controller;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import bi.baiqiu.mapper.WareHouseMapper;
+import bi.baiqiu.pojo.WareHouse;
+import bi.baiqiu.pojo.WareHouseExample;
+
+@Controller
+@RequestMapping("wareHouse")
+public class WareHouseController extends BaseController {
+
+	@Autowired
+	private WareHouseMapper wareHouseDao;
+
+	@ResponseBody
+	@RequestMapping(value = "queryWareHourse.do")
+	public void queryWareHourse(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			// Gson gson = new GsonBuilder().serializeNulls().create();
+			WareHouseExample example = new WareHouseExample();
+			example.createCriteria().andFacetEqualTo(true)
+					.andVisibleEqualTo(true);
+			example.setOrderByClause("sort");
+			List<WareHouse> list = wareHouseDao.selectByExample(example);
+			WareHouse totalWareHouse = new WareHouse(0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0);
+			for (WareHouse war : list) {
+				totalWareHouse.setNotTurnAmount(war.getNotTurnAmount()
+						+ totalWareHouse.getNotTurnAmount());
+				totalWareHouse.setTrunAmount(war.getTrunAmount()
+						+ totalWareHouse.getTrunAmount());
+				totalWareHouse.setNotPrintAmount(war.getNotPrintAmount()
+						+ totalWareHouse.getNotPrintAmount());
+				totalWareHouse.setDistributionAmount(war
+						.getDistributionAmount()
+						+ totalWareHouse.getDistributionAmount());
+				totalWareHouse.setTotalSingleAmount(war.getTotalSingleAmount()
+						+ totalWareHouse.getTotalSingleAmount());
+				totalWareHouse.setTodayShippedAmount(war
+						.getTodayShippedAmount()
+						+ totalWareHouse.getTodayShippedAmount());
+				totalWareHouse.setTodayShippedGeneralAmount(war
+						.getTodayShippedGeneralAmount()
+						+ totalWareHouse.getTodayShippedGeneralAmount());
+				totalWareHouse.setTodayShippedPresellAmount(war
+						.getTodayShippedPresellAmount()
+						+ totalWareHouse.getTodayShippedPresellAmount());
+				totalWareHouse.setLastMonthShippedAmount(war
+						.getLastMonthShippedAmount()
+						+ totalWareHouse.getLastMonthShippedAmount());
+				totalWareHouse.setPresentMonthShippedAmount(war
+						.getPresentMonthShippedAmount()
+						+ totalWareHouse.getPresentMonthShippedAmount());
+			}
+			// String json = "{\"total\":" +gson.toJson(totalWareHouse)+
+			// ",\"rows\":" + gson.toJson(list) + "}";
+			WriteObject(response, totalWareHouse);
+			WriteObject(response, list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			WriteObject(response, systemErroy);
+		}
+	}
+
+	/**
+	 *@Function WareHouseController.java
+	 *@Description: 仓库大屏幕页面
+	 *@param 
+	 *@return：String返回结果描述
+	 *@throws：异常描述
+	 *@author:Jim
+	 *@date 2017年9月20日
+	 *Modification History:
+	 *Date			Author	Version	Description
+	 *---------------------------------------------------------*
+	 2017年9月20日	Jim		 1.0.0	描述
+	 */
+	@RequestMapping(value = "screen")
+	public String screen(Model model, HttpServletRequest requset) {
+		// 未转单，总单量，分开
+		WareHouseExample example = new WareHouseExample();
+		example.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
+		example.setOrderByClause("sort");
+		List<WareHouse> list = wareHouseDao.selectByExample(example);
+		WareHouse total = new WareHouse(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+//		2次遍历需要开2个迭代器
+		Iterator<WareHouse> iter = list.iterator();
+		
+		// smcp 数据汇总显示 list 中只留一个对象，数据合并
+		WareHouse smcp = null;
+		// 数据 分显示、统计 合计4种情况
+		while (iter.hasNext()) {
+			WareHouse next = (WareHouse) iter.next();
+			// sandro官方旗舰店
+			if (next.getId() == 13) {
+				smcp = next;
+			}
+//			maje
+			if (next.getId() == 14) {
+				smcp.setNotTurnAmount(next.getNotTurnAmount()
+						+ smcp.getNotTurnAmount());
+
+				smcp.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ smcp.getTotalSingleAmount());
+				iter.remove();
+			}
+//cp
+			if (next.getId() == 15) {
+				smcp.setNotTurnAmount(next.getNotTurnAmount()
+						+ smcp.getNotTurnAmount());
+				smcp.setTrunAmount(next.getTrunAmount() + smcp.getTrunAmount());
+				smcp.setNotPrintAmount(next.getNotPrintAmount()
+						+ smcp.getNotPrintAmount());
+				smcp.setDistributionAmount(next.getDistributionAmount()
+						+ smcp.getDistributionAmount());
+				smcp.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ smcp.getTotalSingleAmount());
+				smcp.setTodayShippedAmount(next.getTodayShippedAmount()
+						+ smcp.getTodayShippedAmount());
+				smcp.setTodayShippedGeneralAmount(next
+						.getTodayShippedGeneralAmount()
+						+ smcp.getTodayShippedGeneralAmount());
+				smcp.setTodayShippedPresellAmount(next
+						.getTodayShippedPresellAmount()
+						+ smcp.getTodayShippedPresellAmount());
+				smcp.setLastMonthShippedAmount(next.getLastMonthShippedAmount()
+						+ smcp.getLastMonthShippedAmount());
+				smcp.setPresentMonthShippedAmount(next
+						.getPresentMonthShippedAmount()
+						+ smcp.getPresentMonthShippedAmount());
+				iter.remove();
+			}
+		}
+		
+		Iterator<WareHouse> iter2 = list.iterator();	
+		while (iter2.hasNext()) {
+			WareHouse next = (WareHouse) iter2.next();
+			// 统计
+			Boolean facet = next.getFacet();
+			// 显示
+			Boolean visible = next.getVisible();
+
+			// 显示，统计
+			if (facet && visible) {
+				total.setNotTurnAmount(next.getNotTurnAmount()
+						+ total.getNotTurnAmount());
+				total.setTrunAmount(next.getTrunAmount()
+						+ total.getTrunAmount());
+				total.setNotPrintAmount(next.getNotPrintAmount()
+						+ total.getNotPrintAmount());
+				total.setDistributionAmount(next
+						.getDistributionAmount()
+						+ total.getDistributionAmount());
+				total.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ total.getTotalSingleAmount());
+				total.setTodayShippedAmount(next
+						.getTodayShippedAmount()
+						+ total.getTodayShippedAmount());
+				total.setTodayShippedGeneralAmount(next
+						.getTodayShippedGeneralAmount()
+						+ total.getTodayShippedGeneralAmount());
+				total.setTodayShippedPresellAmount(next
+						.getTodayShippedPresellAmount()
+						+ total.getTodayShippedPresellAmount());
+				total.setLastMonthShippedAmount(next
+						.getLastMonthShippedAmount()
+						+ total.getLastMonthShippedAmount());
+				total.setPresentMonthShippedAmount(next
+						.getPresentMonthShippedAmount()
+						+ total.getPresentMonthShippedAmount());
+				// 显示，不统计
+			} else if (facet && !visible) {
+	
+				// 不显示，统计
+			} else if (!facet && visible) {
+				total.setNotTurnAmount(next.getNotTurnAmount()
+						+ total.getNotTurnAmount());
+				total.setTrunAmount(next.getTrunAmount()
+						+ total.getTrunAmount());
+				total.setNotPrintAmount(next.getNotPrintAmount()
+						+ total.getNotPrintAmount());
+				total.setDistributionAmount(next
+						.getDistributionAmount()
+						+ total.getDistributionAmount());
+				total.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ total.getTotalSingleAmount());
+				total.setTodayShippedAmount(next
+						.getTodayShippedAmount()
+						+ total.getTodayShippedAmount());
+				total.setTodayShippedGeneralAmount(next
+						.getTodayShippedGeneralAmount()
+						+ total.getTodayShippedGeneralAmount());
+				total.setTodayShippedPresellAmount(next
+						.getTodayShippedPresellAmount()
+						+ total.getTodayShippedPresellAmount());
+				total.setLastMonthShippedAmount(next
+						.getLastMonthShippedAmount()
+						+ total.getLastMonthShippedAmount());
+				total.setPresentMonthShippedAmount(next
+						.getPresentMonthShippedAmount()
+						+ total.getPresentMonthShippedAmount());
+				iter.remove();
+				// 不显示，不统计
+			} else {
+				iter.remove();
+			}
+		}
+		model.addAttribute("total", total);
+		model.addAttribute("list", list);
+
+		boolean sign = false;
+		String userAgent = requset.getHeader("user-agent");
+		System.out.println(userAgent);
+		if (userAgent.contains("Android")) {
+			sign = true;
+		} else if (userAgent.contains("iPhone")) {
+			sign = true;
+		} else if (userAgent.contains("iPad")) {
+			sign = true;
+		}
+
+		if (sign) {
+			// 移动端
+			return "/screen/mobile";
+		} else {
+			// pc端
+			return "/screen/pc";
+		}
+
+	}
+}

@@ -1,0 +1,16 @@
+driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://192.168.0.61:3306/bi?characterEncoding=UTF-8&allowMultiQueries=true 
+username=shoux
+password=shoux
+driverClassName1=com.mysql.jdbc.Driver
+url1=jdbc:mysql://192.168.0.61:3306/sys_info?characterEncoding=UTF-8&allowMultiQueries=true
+username1=shoux
+password1=shoux
+driverClassName2=com.mysql.jdbc.Driver
+url2=jdbc:mysql://192.168.6.234:3306/bi?characterEncoding=UTF-8&allowMultiQueries=true
+username2=root
+password2=123456
+driverClassName3=com.mysql.jdbc.Driver
+url3=jdbc:mysql://192.168.0.61:3306/bi2?characterEncoding=UTF-8&allowMultiQueries=true
+username3=shoux
+password3=shoux

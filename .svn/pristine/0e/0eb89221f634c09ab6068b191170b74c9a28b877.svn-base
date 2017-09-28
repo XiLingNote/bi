@@ -1,0 +1,206 @@
+body {
+	position: absolute;
+	height: 100%;
+	width: 96%;
+	color: #ffffff;
+	margin: 0% 2% 0% 2%;
+	background-color: #1c2b36;
+}
+
+.un-move {
+	position: fixed;
+	height: 25%;
+	width: 98%;
+	left: 1%;
+	background-color: #1c2b36;
+	z-index: 9999;
+	background-color: #1c2b36;
+}
+
+.screenHeader {
+	position: relative;
+	height: 32%;
+	width: 100%;
+}
+
+.screenTop {
+	position: relative;
+	width: 100%;
+	height: 40%;
+	top: 4%;
+}
+
+.slide-title {
+	position: relative;
+	width: 98%;
+	height: 20%;
+	left: 1%;
+	top: 8%;
+	background: #918779;
+	height: 20%;
+}
+
+.headline {
+	width: 70%;
+	margin-left: 15%;
+	text-align: center;
+	font-size: 36px;
+}
+
+.date {
+	height: 10%;
+	float: right;
+	position: relative;
+	margin-top: -4%;
+	margin-right: 20px;
+}
+
+.collect {
+	position: relative;
+	width: 20%;
+	height: 100%;
+	float: left;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	background-color: #2a2e3b;
+}
+
+.collect .explain {
+	position: relative;
+	height: 40%;
+	font-size: 36px;
+}
+
+.collect .num {
+	position: relative;
+	height: 60%;
+	font-size: 40px;
+	float: right;
+	margin-right: 10%;
+}
+
+.title {
+	list-style: none;
+	background: #2a2e3b;
+	/* line-height: 34px; 
+	font-size: 40px;
+	height: 1px;*/
+	/* 	background-color: #343838;
+	color: #ffffff;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #a9c6c9; */
+}
+
+.title span {
+	margin: -1px;
+	overflow: hidden;
+	border-width: 1px;
+	white-space: nowrap;
+	border-style: solid;
+	border-color: #a9c6c9;
+	display: inline-block;
+	text-overflow: ellipsis;
+}
+
+.slide-list {
+	position: relative;
+	width: 100%;
+	left: 0;
+	top: 0;
+	color: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+
+.slide-container {
+	position: relative;
+	height: 1000%;
+	top: 25%;
+	width: 100%;
+	z-index: 1;
+}
+
+.slide-list li {
+	height: 60px;
+	line-height: 60px;
+	list-style: none;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	padding: 0 0px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #a9c6c9;
+	color: #ffffff;
+}
+
+.slide-list li span {
+	margin: -1px;
+	overflow: hidden;
+	border-width: 1px;
+	white-space: nowrap;
+	border-style: solid;
+	display: inline-block;
+	border-color: #a9c6c9;
+	text-overflow: ellipsis;
+	border-color: #a9c6c9;
+}
+
+.slide-list li.odd {
+	/* 	background: #66cdaa; */
+	
+}
+
+.slide-list li.even {
+	/* 	background: rgba(51, 79, 109, .1); */
+	
+}
+
+.brand {
+	position: relative;
+	width: 28%;
+	text-align: center;
+	float: left;
+}
+
+.transfer {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}
+
+.print {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}
+
+.distribution {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}
+
+.send {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}
+
+.preSend {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}
+
+.totalSend {
+	position: relative;
+	width: 12%;
+	text-align: center;
+	float: left;
+}

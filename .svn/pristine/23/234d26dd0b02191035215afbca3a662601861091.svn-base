@@ -1,0 +1,10 @@
+package bi;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+public class My {
+	public static void main(String[] args) {
+		String password = DigestUtils.md5Hex("汉字");
+		System.out.println(password);
+	}
+}

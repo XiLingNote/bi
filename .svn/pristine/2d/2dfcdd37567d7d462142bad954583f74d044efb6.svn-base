@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.SaleProductsTreasureMapper">
+
+	<select id="queryByPage" resultType="SaleProductsTreasureBean">
+		select * from
+		bi_sale_products_treasure
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO `bi_sale_products_treasure` (
+		`date`,
+		`Show_amount`,
+		`click_quantity`,
+		`clickt_rate`,
+		`cost`,
+		`Cost_presenting_thousand`,
+		`Click_unit`,
+		`Show_transactions`,
+		`transaction_amount`,
+		`goods_collection`,
+		`Store_collection`,
+		`goods_shopping_cart_num`,
+		`Display_return_rate`,
+		`Click_return_rate`,
+		`Click_transactions`,
+		`Click_transaction_amount`,
+		`Visitor_num`,
+		`new_visitors_num`,
+		`Click_visitors_num`,
+		`Show_conversion_rate`,
+		`Click_conversion_rate`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.showAmount},
+			#{item.clickQuantity},
+			#{item.clicktRate},
+			#{item.cost},
+			#{item.costPresentingThousand},
+			#{item.clickUnit},
+			#{item.showTransactions},
+			#{item.transactionAmount},
+			#{item.goodsCollection},
+			#{item.storeCollection},
+			#{item.goodsShoppingCartNum},
+			#{item.displayReturnRate},
+			#{item.clickReturnRate},
+			#{item.clickTransactions},
+			#{item.clickTransactionAmount},
+			#{item.visitorNum},
+			#{item.newVisitorsNum},
+			#{item.clickVisitorsNum},
+			#{item.showConversionRate},
+			#{item.clickConversionRate},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

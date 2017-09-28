@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bi.baiqiu.mapper.BiTradeGoodsMapper">
+	<resultMap id="BaseResultMap" type="bi.baiqiu.pojo.BiTradeGoods">
+		<result column="adjust_fee" property="adjustFee" jdbcType="VARCHAR" />
+		<result column="assembly_rela" property="assemblyRela"
+			jdbcType="VARCHAR" />
+		<result column="assembly_price" property="assemblyPrice"
+			jdbcType="VARCHAR" />
+		<result column="buyer_rate" property="buyerRate" jdbcType="VARCHAR" />
+		<result column="bind_oid" property="bindOid" jdbcType="VARCHAR" />
+		<result column="bind_oids" property="bindOids" jdbcType="VARCHAR" />
+		<result column="combo_id" property="comboId" jdbcType="VARCHAR" />
+		<result column="cid" property="cid" jdbcType="VARCHAR" />
+		<result column="consign_time" property="consignTime" jdbcType="VARCHAR" />
+		<result column="customization" property="customization"
+			jdbcType="VARCHAR" />
+		<result column="discount_fee" property="discountFee" jdbcType="VARCHAR" />
+		<result column="divide_order_fee" property="divideOrderFee"
+			jdbcType="VARCHAR" />
+		<result column="end_time" property="endTime" jdbcType="VARCHAR" />
+		<result column="estConTime" property="estcontime" jdbcType="VARCHAR" />
+		<result column="estimate_con_time" property="estimateConTime"
+			jdbcType="VARCHAR" />
+		<result column="f_status" property="fStatus" jdbcType="VARCHAR" />
+		<result column="f_term" property="fTerm" jdbcType="VARCHAR" />
+		<result column="f_type" property="fType" jdbcType="VARCHAR" />
+		<result column="fqg_num" property="fqgNum" jdbcType="VARCHAR" />
+		<result column="invoice_no" property="invoiceNo" jdbcType="VARCHAR" />
+		<result column="inv_type" property="invType" jdbcType="VARCHAR" />
+		<result column="is_daixiao" property="isDaixiao" jdbcType="VARCHAR" />
+		<result column="is_fqg_s_fee" property="isFqgSFee" jdbcType="VARCHAR" />
+		<result column="is_oversold" property="isOversold" jdbcType="VARCHAR" />
+		<result column="is_sh_ship" property="isShShip" jdbcType="VARCHAR" />
+		<result column="is_www" property="isWww" jdbcType="VARCHAR" />
+		<result column="item_meal_id" property="itemMealId" jdbcType="VARCHAR" />
+		<result column="item_meal_name" property="itemMealName"
+			jdbcType="VARCHAR" />
+		<result column="item_memo" property="itemMemo" jdbcType="VARCHAR" />
+		<result column="logistics_company" property="logisticsCompany"
+			jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="VARCHAR" />
+		<result column="num_iid" property="numIid" jdbcType="VARCHAR" />
+		<result column="oid" property="oid" jdbcType="VARCHAR" />
+		<result column="order_attr" property="orderAttr" jdbcType="VARCHAR" />
+		<result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
+		<result column="outer_iid" property="outerIid" jdbcType="VARCHAR" />
+		<result column="outer_sku_id" property="outerSkuId" jdbcType="VARCHAR" />
+		<result column="part_mjz_discount" property="partMjzDiscount"
+			jdbcType="VARCHAR" />
+		<result column="payment" property="payment" jdbcType="VARCHAR" />
+		<result column="payCurrency" property="paycurrency" jdbcType="VARCHAR" />
+		<result column="pic_path" property="picPath" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="refund_id" property="refundId" jdbcType="VARCHAR" />
+		<result column="refund_status" property="refundStatus"
+			jdbcType="VARCHAR" />
+		<result column="seller_nick" property="sellerNick" jdbcType="VARCHAR" />
+		<result column="seller_rate" property="sellerRate" jdbcType="VARCHAR" />
+		<result column="seller_type" property="sellerType" jdbcType="VARCHAR" />
+		<result column="shipper" property="shipper" jdbcType="VARCHAR" />
+		<result column="shipping_type" property="shippingType"
+			jdbcType="VARCHAR" />
+		<result column="sku_id" property="skuId" jdbcType="VARCHAR" />
+		<result column="sku_properties_name" property="skuPropertiesName"
+			jdbcType="VARCHAR" />
+		<result column="snapshot_url" property="snapshotUrl" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+		<result column="sub_order_tax_fee" property="subOrderTaxFee"
+			jdbcType="VARCHAR" />
+		<result column="sub_order_tax_rate" property="subOrderTaxRate"
+			jdbcType="VARCHAR" />
+		<result column="sub_order_tax_promotion_fee" property="subOrderTaxPromotionFee"
+			jdbcType="VARCHAR" />
+		<result column="tmser_spu_code" property="tmserSpuCode"
+			jdbcType="VARCHAR" />
+		<result column="ticket_outer_id" property="ticketOuterId"
+			jdbcType="VARCHAR" />
+		<result column="ticket_expdate_key" property="ticketExpdateKey"
+			jdbcType="VARCHAR" />
+		<result column="timeout_action_time" property="timeoutActionTime"
+			jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="total_fee" property="totalFee" jdbcType="VARCHAR" />
+		<result column="is_service_order" property="isServiceOrder"
+			jdbcType="VARCHAR" />
+		<result column="zhengji_status" property="zhengjiStatus"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		adjust_fee, assembly_rela, assembly_price, buyer_rate, bind_oid, bind_oids,
+		combo_id,
+		cid, consign_time, customization, discount_fee, divide_order_fee,
+		end_time, estConTime,
+		estimate_con_time, f_status, f_term, f_type, fqg_num, invoice_no, inv_type, is_daixiao,
+		is_fqg_s_fee, is_oversold, is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo,
+		logistics_company, num, num_iid, oid, order_attr, order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment, payCurrency, pic_path, price, refund_id,
+		refund_status,
+		seller_nick, seller_rate, seller_type, shipper, shipping_type, sku_id,
+		sku_properties_name,
+		snapshot_url, status, store_code, sub_order_tax_fee, sub_order_tax_rate,
+		sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key, timeout_action_time, title,
+		total_fee, is_service_order, zhengji_status
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="bi.baiqiu.pojo.BiTradeGoodsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from bi_trade_goods
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="bi.baiqiu.pojo.BiTradeGoodsExample">
+		delete from bi_trade_goods
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="bi.baiqiu.pojo.BiTradeGoods">
+		insert into bi_trade_goods (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time, estConTime, estimate_con_time,
+		f_status, f_term, f_type,
+		fqg_num, invoice_no, inv_type,
+		is_daixiao, is_fqg_s_fee, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment, payCurrency,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{assemblyRela,jdbcType=VARCHAR},
+		#{assemblyPrice,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR}, #{bindOid,jdbcType=VARCHAR}, #{bindOids,jdbcType=VARCHAR},
+		#{comboId,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{customization,jdbcType=VARCHAR}, #{discountFee,jdbcType=VARCHAR}, #{divideOrderFee,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR}, #{estcontime,jdbcType=VARCHAR},
+		#{estimateConTime,jdbcType=VARCHAR},
+		#{fStatus,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR},
+		#{fqgNum,jdbcType=VARCHAR}, #{invoiceNo,jdbcType=VARCHAR},
+		#{invType,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isFqgSFee,jdbcType=VARCHAR}, #{isOversold,jdbcType=VARCHAR},
+		#{isShShip,jdbcType=VARCHAR}, #{isWww,jdbcType=VARCHAR},
+		#{itemMealId,jdbcType=VARCHAR},
+		#{itemMealName,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{oid,jdbcType=VARCHAR}, #{orderAttr,jdbcType=VARCHAR},
+		#{orderFrom,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR},
+		#{outerSkuId,jdbcType=VARCHAR},
+		#{partMjzDiscount,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR}, #{paycurrency,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{refundId,jdbcType=VARCHAR},
+		#{refundStatus,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerRate,jdbcType=VARCHAR},
+		#{sellerType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR},
+		#{shippingType,jdbcType=VARCHAR},
+		#{skuId,jdbcType=VARCHAR}, #{skuPropertiesName,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{subOrderTaxFee,jdbcType=VARCHAR},
+		#{subOrderTaxRate,jdbcType=VARCHAR},
+		#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		#{tmserSpuCode,jdbcType=VARCHAR}, #{ticketOuterId,jdbcType=VARCHAR},
+		#{ticketExpdateKey,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR},
+		#{isServiceOrder,jdbcType=VARCHAR}, #{zhengjiStatus,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertBys">
+		replace into bi_trade_goods (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{assemblyRela,jdbcType=VARCHAR},
+		#{assemblyPrice,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR}, #{bindOid,jdbcType=VARCHAR}, #{bindOids,jdbcType=VARCHAR},
+		#{comboId,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{customization,jdbcType=VARCHAR}, #{discountFee,jdbcType=VARCHAR}, #{divideOrderFee,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{fStatus,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR},
+		#{invoiceNo,jdbcType=VARCHAR}, #{invType,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isOversold,jdbcType=VARCHAR},
+		#{isShShip,jdbcType=VARCHAR}, #{isWww,jdbcType=VARCHAR},
+		#{itemMealId,jdbcType=VARCHAR},
+		#{itemMealName,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{oid,jdbcType=VARCHAR}, #{orderAttr,jdbcType=VARCHAR},
+		#{orderFrom,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR},
+		#{outerSkuId,jdbcType=VARCHAR},
+		#{partMjzDiscount,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{refundId,jdbcType=VARCHAR},
+		#{refundStatus,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR},
+		#{sellerType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR},
+		#{skuId,jdbcType=VARCHAR}, #{skuPropertiesName,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{subOrderTaxFee,jdbcType=VARCHAR},
+		#{subOrderTaxRate,jdbcType=VARCHAR},
+		#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		#{tmserSpuCode,jdbcType=VARCHAR}, #{ticketOuterId,jdbcType=VARCHAR},
+		#{ticketExpdateKey,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR},
+		#{isServiceOrder,jdbcType=VARCHAR}, #{zhengjiStatus,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertBysBefore2017">
+		replace into bi_trade_goods_before_2017 (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{assemblyRela,jdbcType=VARCHAR},
+		#{assemblyPrice,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR}, #{bindOid,jdbcType=VARCHAR}, #{bindOids,jdbcType=VARCHAR},
+		#{comboId,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{customization,jdbcType=VARCHAR}, #{discountFee,jdbcType=VARCHAR}, #{divideOrderFee,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{fStatus,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR},
+		#{invoiceNo,jdbcType=VARCHAR}, #{invType,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isOversold,jdbcType=VARCHAR},
+		#{isShShip,jdbcType=VARCHAR}, #{isWww,jdbcType=VARCHAR},
+		#{itemMealId,jdbcType=VARCHAR},
+		#{itemMealName,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{oid,jdbcType=VARCHAR}, #{orderAttr,jdbcType=VARCHAR},
+		#{orderFrom,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR},
+		#{outerSkuId,jdbcType=VARCHAR},
+		#{partMjzDiscount,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{refundId,jdbcType=VARCHAR},
+		#{refundStatus,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR},
+		#{sellerType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR},
+		#{skuId,jdbcType=VARCHAR}, #{skuPropertiesName,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{subOrderTaxFee,jdbcType=VARCHAR},
+		#{subOrderTaxRate,jdbcType=VARCHAR},
+		#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		#{tmserSpuCode,jdbcType=VARCHAR}, #{ticketOuterId,jdbcType=VARCHAR},
+		#{ticketExpdateKey,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR},
+		#{isServiceOrder,jdbcType=VARCHAR}, #{zhengjiStatus,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertBys2017">
+		replace into bi_trade_goods_2017 (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{assemblyRela,jdbcType=VARCHAR},
+		#{assemblyPrice,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR}, #{bindOid,jdbcType=VARCHAR}, #{bindOids,jdbcType=VARCHAR},
+		#{comboId,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{customization,jdbcType=VARCHAR}, #{discountFee,jdbcType=VARCHAR}, #{divideOrderFee,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{fStatus,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR},
+		#{invoiceNo,jdbcType=VARCHAR}, #{invType,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isOversold,jdbcType=VARCHAR},
+		#{isShShip,jdbcType=VARCHAR}, #{isWww,jdbcType=VARCHAR},
+		#{itemMealId,jdbcType=VARCHAR},
+		#{itemMealName,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{oid,jdbcType=VARCHAR}, #{orderAttr,jdbcType=VARCHAR},
+		#{orderFrom,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR},
+		#{outerSkuId,jdbcType=VARCHAR},
+		#{partMjzDiscount,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{refundId,jdbcType=VARCHAR},
+		#{refundStatus,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR},
+		#{sellerType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR},
+		#{skuId,jdbcType=VARCHAR}, #{skuPropertiesName,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{subOrderTaxFee,jdbcType=VARCHAR},
+		#{subOrderTaxRate,jdbcType=VARCHAR},
+		#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		#{tmserSpuCode,jdbcType=VARCHAR}, #{ticketOuterId,jdbcType=VARCHAR},
+		#{ticketExpdateKey,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR},
+		#{isServiceOrder,jdbcType=VARCHAR}, #{zhengjiStatus,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="bi.baiqiu.pojo.BiTradeGoods">
+		insert into bi_trade_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="adjustFee != null">
+				adjust_fee,
+			</if>
+			<if test="assemblyRela != null">
+				assembly_rela,
+			</if>
+			<if test="assemblyPrice != null">
+				assembly_price,
+			</if>
+			<if test="buyerRate != null">
+				buyer_rate,
+			</if>
+			<if test="bindOid != null">
+				bind_oid,
+			</if>
+			<if test="bindOids != null">
+				bind_oids,
+			</if>
+			<if test="comboId != null">
+				combo_id,
+			</if>
+			<if test="cid != null">
+				cid,
+			</if>
+			<if test="consignTime != null">
+				consign_time,
+			</if>
+			<if test="customization != null">
+				customization,
+			</if>
+			<if test="discountFee != null">
+				discount_fee,
+			</if>
+			<if test="divideOrderFee != null">
+				divide_order_fee,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="estcontime != null">
+				estConTime,
+			</if>
+			<if test="estimateConTime != null">
+				estimate_con_time,
+			</if>
+			<if test="fStatus != null">
+				f_status,
+			</if>
+			<if test="fTerm != null">
+				f_term,
+			</if>
+			<if test="fType != null">
+				f_type,
+			</if>
+			<if test="fqgNum != null">
+				fqg_num,
+			</if>
+			<if test="invoiceNo != null">
+				invoice_no,
+			</if>
+			<if test="invType != null">
+				inv_type,
+			</if>
+			<if test="isDaixiao != null">
+				is_daixiao,
+			</if>
+			<if test="isFqgSFee != null">
+				is_fqg_s_fee,
+			</if>
+			<if test="isOversold != null">
+				is_oversold,
+			</if>
+			<if test="isShShip != null">
+				is_sh_ship,
+			</if>
+			<if test="isWww != null">
+				is_www,
+			</if>
+			<if test="itemMealId != null">
+				item_meal_id,
+			</if>
+			<if test="itemMealName != null">
+				item_meal_name,
+			</if>
+			<if test="itemMemo != null">
+				item_memo,
+			</if>
+			<if test="logisticsCompany != null">
+				logistics_company,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="numIid != null">
+				num_iid,
+			</if>
+			<if test="oid != null">
+				oid,
+			</if>
+			<if test="orderAttr != null">
+				order_attr,
+			</if>
+			<if test="orderFrom != null">
+				order_from,
+			</if>
+			<if test="outerIid != null">
+				outer_iid,
+			</if>
+			<if test="outerSkuId != null">
+				outer_sku_id,
+			</if>
+			<if test="partMjzDiscount != null">
+				part_mjz_discount,
+			</if>
+			<if test="payment != null">
+				payment,
+			</if>
+			<if test="paycurrency != null">
+				payCurrency,
+			</if>
+			<if test="picPath != null">
+				pic_path,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="refundId != null">
+				refund_id,
+			</if>
+			<if test="refundStatus != null">
+				refund_status,
+			</if>
+			<if test="sellerNick != null">
+				seller_nick,
+			</if>
+			<if test="sellerRate != null">
+				seller_rate,
+			</if>
+			<if test="sellerType != null">
+				seller_type,
+			</if>
+			<if test="shipper != null">
+				shipper,
+			</if>
+			<if test="shippingType != null">
+				shipping_type,
+			</if>
+			<if test="skuId != null">
+				sku_id,
+			</if>
+			<if test="skuPropertiesName != null">
+				sku_properties_name,
+			</if>
+			<if test="snapshotUrl != null">
+				snapshot_url,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="storeCode != null">
+				store_code,
+			</if>
+			<if test="subOrderTaxFee != null">
+				sub_order_tax_fee,
+			</if>
+			<if test="subOrderTaxRate != null">
+				sub_order_tax_rate,
+			</if>
+			<if test="subOrderTaxPromotionFee != null">
+				sub_order_tax_promotion_fee,
+			</if>
+			<if test="tmserSpuCode != null">
+				tmser_spu_code,
+			</if>
+			<if test="ticketOuterId != null">
+				ticket_outer_id,
+			</if>
+			<if test="ticketExpdateKey != null">
+				ticket_expdate_key,
+			</if>
+			<if test="timeoutActionTime != null">
+				timeout_action_time,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="totalFee != null">
+				total_fee,
+			</if>
+			<if test="isServiceOrder != null">
+				is_service_order,
+			</if>
+			<if test="zhengjiStatus != null">
+				zhengji_status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="adjustFee != null">
+				#{adjustFee,jdbcType=VARCHAR},
+			</if>
+			<if test="assemblyRela != null">
+				#{assemblyRela,jdbcType=VARCHAR},
+			</if>
+			<if test="assemblyPrice != null">
+				#{assemblyPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerRate != null">
+				#{buyerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="bindOid != null">
+				#{bindOid,jdbcType=VARCHAR},
+			</if>
+			<if test="bindOids != null">
+				#{bindOids,jdbcType=VARCHAR},
+			</if>
+			<if test="comboId != null">
+				#{comboId,jdbcType=VARCHAR},
+			</if>
+			<if test="cid != null">
+				#{cid,jdbcType=VARCHAR},
+			</if>
+			<if test="consignTime != null">
+				#{consignTime,jdbcType=VARCHAR},
+			</if>
+			<if test="customization != null">
+				#{customization,jdbcType=VARCHAR},
+			</if>
+			<if test="discountFee != null">
+				#{discountFee,jdbcType=VARCHAR},
+			</if>
+			<if test="divideOrderFee != null">
+				#{divideOrderFee,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="estcontime != null">
+				#{estcontime,jdbcType=VARCHAR},
+			</if>
+			<if test="estimateConTime != null">
+				#{estimateConTime,jdbcType=VARCHAR},
+			</if>
+			<if test="fStatus != null">
+				#{fStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="fTerm != null">
+				#{fTerm,jdbcType=VARCHAR},
+			</if>
+			<if test="fType != null">
+				#{fType,jdbcType=VARCHAR},
+			</if>
+			<if test="fqgNum != null">
+				#{fqgNum,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceNo != null">
+				#{invoiceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="invType != null">
+				#{invType,jdbcType=VARCHAR},
+			</if>
+			<if test="isDaixiao != null">
+				#{isDaixiao,jdbcType=VARCHAR},
+			</if>
+			<if test="isFqgSFee != null">
+				#{isFqgSFee,jdbcType=VARCHAR},
+			</if>
+			<if test="isOversold != null">
+				#{isOversold,jdbcType=VARCHAR},
+			</if>
+			<if test="isShShip != null">
+				#{isShShip,jdbcType=VARCHAR},
+			</if>
+			<if test="isWww != null">
+				#{isWww,jdbcType=VARCHAR},
+			</if>
+			<if test="itemMealId != null">
+				#{itemMealId,jdbcType=VARCHAR},
+			</if>
+			<if test="itemMealName != null">
+				#{itemMealName,jdbcType=VARCHAR},
+			</if>
+			<if test="itemMemo != null">
+				#{itemMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="logisticsCompany != null">
+				#{logisticsCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=VARCHAR},
+			</if>
+			<if test="numIid != null">
+				#{numIid,jdbcType=VARCHAR},
+			</if>
+			<if test="oid != null">
+				#{oid,jdbcType=VARCHAR},
+			</if>
+			<if test="orderAttr != null">
+				#{orderAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="orderFrom != null">
+				#{orderFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="outerIid != null">
+				#{outerIid,jdbcType=VARCHAR},
+			</if>
+			<if test="outerSkuId != null">
+				#{outerSkuId,jdbcType=VARCHAR},
+			</if>
+			<if test="partMjzDiscount != null">
+				#{partMjzDiscount,jdbcType=VARCHAR},
+			</if>
+			<if test="payment != null">
+				#{payment,jdbcType=VARCHAR},
+			</if>
+			<if test="paycurrency != null">
+				#{paycurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="picPath != null">
+				#{picPath,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=VARCHAR},
+			</if>
+			<if test="refundId != null">
+				#{refundId,jdbcType=VARCHAR},
+			</if>
+			<if test="refundStatus != null">
+				#{refundStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerNick != null">
+				#{sellerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerRate != null">
+				#{sellerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerType != null">
+				#{sellerType,jdbcType=VARCHAR},
+			</if>
+			<if test="shipper != null">
+				#{shipper,jdbcType=VARCHAR},
+			</if>
+			<if test="shippingType != null">
+				#{shippingType,jdbcType=VARCHAR},
+			</if>
+			<if test="skuId != null">
+				#{skuId,jdbcType=VARCHAR},
+			</if>
+			<if test="skuPropertiesName != null">
+				#{skuPropertiesName,jdbcType=VARCHAR},
+			</if>
+			<if test="snapshotUrl != null">
+				#{snapshotUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="storeCode != null">
+				#{storeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subOrderTaxFee != null">
+				#{subOrderTaxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="subOrderTaxRate != null">
+				#{subOrderTaxRate,jdbcType=VARCHAR},
+			</if>
+			<if test="subOrderTaxPromotionFee != null">
+				#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="tmserSpuCode != null">
+				#{tmserSpuCode,jdbcType=VARCHAR},
+			</if>
+			<if test="ticketOuterId != null">
+				#{ticketOuterId,jdbcType=VARCHAR},
+			</if>
+			<if test="ticketExpdateKey != null">
+				#{ticketExpdateKey,jdbcType=VARCHAR},
+			</if>
+			<if test="timeoutActionTime != null">
+				#{timeoutActionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFee != null">
+				#{totalFee,jdbcType=VARCHAR},
+			</if>
+			<if test="isServiceOrder != null">
+				#{isServiceOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="zhengjiStatus != null">
+				#{zhengjiStatus,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="bi.baiqiu.pojo.BiTradeGoodsExample"
+		resultType="java.lang.Integer">
+		select count(*) from bi_trade_goods
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update bi_trade_goods
+		<set>
+			<if test="record.adjustFee != null">
+				adjust_fee = #{record.adjustFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.assemblyRela != null">
+				assembly_rela = #{record.assemblyRela,jdbcType=VARCHAR},
+			</if>
+			<if test="record.assemblyPrice != null">
+				assembly_price = #{record.assemblyPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerRate != null">
+				buyer_rate = #{record.buyerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bindOid != null">
+				bind_oid = #{record.bindOid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bindOids != null">
+				bind_oids = #{record.bindOids,jdbcType=VARCHAR},
+			</if>
+			<if test="record.comboId != null">
+				combo_id = #{record.comboId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cid != null">
+				cid = #{record.cid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.consignTime != null">
+				consign_time = #{record.consignTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.customization != null">
+				customization = #{record.customization,jdbcType=VARCHAR},
+			</if>
+			<if test="record.discountFee != null">
+				discount_fee = #{record.discountFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.divideOrderFee != null">
+				divide_order_fee = #{record.divideOrderFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.estcontime != null">
+				estConTime = #{record.estcontime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.estimateConTime != null">
+				estimate_con_time = #{record.estimateConTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fStatus != null">
+				f_status = #{record.fStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fTerm != null">
+				f_term = #{record.fTerm,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fType != null">
+				f_type = #{record.fType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fqgNum != null">
+				fqg_num = #{record.fqgNum,jdbcType=VARCHAR},
+			</if>
+			<if test="record.invoiceNo != null">
+				invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.invType != null">
+				inv_type = #{record.invType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isDaixiao != null">
+				is_daixiao = #{record.isDaixiao,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isFqgSFee != null">
+				is_fqg_s_fee = #{record.isFqgSFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isOversold != null">
+				is_oversold = #{record.isOversold,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isShShip != null">
+				is_sh_ship = #{record.isShShip,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isWww != null">
+				is_www = #{record.isWww,jdbcType=VARCHAR},
+			</if>
+			<if test="record.itemMealId != null">
+				item_meal_id = #{record.itemMealId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.itemMealName != null">
+				item_meal_name = #{record.itemMealName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.itemMemo != null">
+				item_memo = #{record.itemMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.logisticsCompany != null">
+				logistics_company = #{record.logisticsCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="record.num != null">
+				num = #{record.num,jdbcType=VARCHAR},
+			</if>
+			<if test="record.numIid != null">
+				num_iid = #{record.numIid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.oid != null">
+				oid = #{record.oid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orderAttr != null">
+				order_attr = #{record.orderAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orderFrom != null">
+				order_from = #{record.orderFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="record.outerIid != null">
+				outer_iid = #{record.outerIid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.outerSkuId != null">
+				outer_sku_id = #{record.outerSkuId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.partMjzDiscount != null">
+				part_mjz_discount = #{record.partMjzDiscount,jdbcType=VARCHAR},
+			</if>
+			<if test="record.payment != null">
+				payment = #{record.payment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paycurrency != null">
+				payCurrency = #{record.paycurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="record.picPath != null">
+				pic_path = #{record.picPath,jdbcType=VARCHAR},
+			</if>
+			<if test="record.price != null">
+				price = #{record.price,jdbcType=VARCHAR},
+			</if>
+			<if test="record.refundId != null">
+				refund_id = #{record.refundId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.refundStatus != null">
+				refund_status = #{record.refundStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerNick != null">
+				seller_nick = #{record.sellerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerRate != null">
+				seller_rate = #{record.sellerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerType != null">
+				seller_type = #{record.sellerType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shipper != null">
+				shipper = #{record.shipper,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shippingType != null">
+				shipping_type = #{record.shippingType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.skuId != null">
+				sku_id = #{record.skuId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.skuPropertiesName != null">
+				sku_properties_name = #{record.skuPropertiesName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.snapshotUrl != null">
+				snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.storeCode != null">
+				store_code = #{record.storeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subOrderTaxFee != null">
+				sub_order_tax_fee = #{record.subOrderTaxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subOrderTaxRate != null">
+				sub_order_tax_rate = #{record.subOrderTaxRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subOrderTaxPromotionFee != null">
+				sub_order_tax_promotion_fee =
+				#{record.subOrderTaxPromotionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tmserSpuCode != null">
+				tmser_spu_code = #{record.tmserSpuCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ticketOuterId != null">
+				ticket_outer_id = #{record.ticketOuterId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ticketExpdateKey != null">
+				ticket_expdate_key = #{record.ticketExpdateKey,jdbcType=VARCHAR},
+			</if>
+			<if test="record.timeoutActionTime != null">
+				timeout_action_time = #{record.timeoutActionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.totalFee != null">
+				total_fee = #{record.totalFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isServiceOrder != null">
+				is_service_order = #{record.isServiceOrder,jdbcType=VARCHAR},
+			</if>
+			<if test="record.zhengjiStatus != null">
+				zhengji_status = #{record.zhengjiStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update bi_trade_goods
+		set adjust_fee = #{record.adjustFee,jdbcType=VARCHAR},
+		assembly_rela = #{record.assemblyRela,jdbcType=VARCHAR},
+		assembly_price = #{record.assemblyPrice,jdbcType=VARCHAR},
+		buyer_rate = #{record.buyerRate,jdbcType=VARCHAR},
+		bind_oid = #{record.bindOid,jdbcType=VARCHAR},
+		bind_oids = #{record.bindOids,jdbcType=VARCHAR},
+		combo_id = #{record.comboId,jdbcType=VARCHAR},
+		cid = #{record.cid,jdbcType=VARCHAR},
+		consign_time = #{record.consignTime,jdbcType=VARCHAR},
+		customization = #{record.customization,jdbcType=VARCHAR},
+		discount_fee = #{record.discountFee,jdbcType=VARCHAR},
+		divide_order_fee = #{record.divideOrderFee,jdbcType=VARCHAR},
+		end_time = #{record.endTime,jdbcType=VARCHAR},
+		estConTime = #{record.estcontime,jdbcType=VARCHAR},
+		estimate_con_time = #{record.estimateConTime,jdbcType=VARCHAR},
+		f_status = #{record.fStatus,jdbcType=VARCHAR},
+		f_term = #{record.fTerm,jdbcType=VARCHAR},
+		f_type = #{record.fType,jdbcType=VARCHAR},
+		fqg_num = #{record.fqgNum,jdbcType=VARCHAR},
+		invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+		inv_type = #{record.invType,jdbcType=VARCHAR},
+		is_daixiao = #{record.isDaixiao,jdbcType=VARCHAR},
+		is_fqg_s_fee = #{record.isFqgSFee,jdbcType=VARCHAR},
+		is_oversold = #{record.isOversold,jdbcType=VARCHAR},
+		is_sh_ship = #{record.isShShip,jdbcType=VARCHAR},
+		is_www = #{record.isWww,jdbcType=VARCHAR},
+		item_meal_id = #{record.itemMealId,jdbcType=VARCHAR},
+		item_meal_name = #{record.itemMealName,jdbcType=VARCHAR},
+		item_memo = #{record.itemMemo,jdbcType=VARCHAR},
+		logistics_company = #{record.logisticsCompany,jdbcType=VARCHAR},
+		num = #{record.num,jdbcType=VARCHAR},
+		num_iid = #{record.numIid,jdbcType=VARCHAR},
+		oid = #{record.oid,jdbcType=VARCHAR},
+		order_attr = #{record.orderAttr,jdbcType=VARCHAR},
+		order_from = #{record.orderFrom,jdbcType=VARCHAR},
+		outer_iid = #{record.outerIid,jdbcType=VARCHAR},
+		outer_sku_id = #{record.outerSkuId,jdbcType=VARCHAR},
+		part_mjz_discount = #{record.partMjzDiscount,jdbcType=VARCHAR},
+		payment = #{record.payment,jdbcType=VARCHAR},
+		payCurrency = #{record.paycurrency,jdbcType=VARCHAR},
+		pic_path = #{record.picPath,jdbcType=VARCHAR},
+		price = #{record.price,jdbcType=VARCHAR},
+		refund_id = #{record.refundId,jdbcType=VARCHAR},
+		refund_status = #{record.refundStatus,jdbcType=VARCHAR},
+		seller_nick = #{record.sellerNick,jdbcType=VARCHAR},
+		seller_rate = #{record.sellerRate,jdbcType=VARCHAR},
+		seller_type = #{record.sellerType,jdbcType=VARCHAR},
+		shipper = #{record.shipper,jdbcType=VARCHAR},
+		shipping_type = #{record.shippingType,jdbcType=VARCHAR},
+		sku_id = #{record.skuId,jdbcType=VARCHAR},
+		sku_properties_name = #{record.skuPropertiesName,jdbcType=VARCHAR},
+		snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+		status = #{record.status,jdbcType=VARCHAR},
+		store_code = #{record.storeCode,jdbcType=VARCHAR},
+		sub_order_tax_fee = #{record.subOrderTaxFee,jdbcType=VARCHAR},
+		sub_order_tax_rate = #{record.subOrderTaxRate,jdbcType=VARCHAR},
+		sub_order_tax_promotion_fee =
+		#{record.subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		tmser_spu_code = #{record.tmserSpuCode,jdbcType=VARCHAR},
+		ticket_outer_id = #{record.ticketOuterId,jdbcType=VARCHAR},
+		ticket_expdate_key = #{record.ticketExpdateKey,jdbcType=VARCHAR},
+		timeout_action_time = #{record.timeoutActionTime,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		total_fee = #{record.totalFee,jdbcType=VARCHAR},
+		is_service_order = #{record.isServiceOrder,jdbcType=VARCHAR},
+		zhengji_status = #{record.zhengjiStatus,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<insert id="createTempTable">
+		CREATE TEMPORARY TABLE if not exists `temp_bi_trade_goods` (
+		`adjust_fee` varchar(30) DEFAULT NULL,
+		`assembly_rela` varchar(30) DEFAULT NULL,
+		`assembly_price` varchar(30) DEFAULT NULL,
+		`buyer_rate` varchar(30) DEFAULT NULL,
+		`bind_oid` varchar(30) DEFAULT NULL,
+		`bind_oids` varchar(30) DEFAULT NULL,
+		`combo_id` varchar(30) DEFAULT NULL,
+		`cid` varchar(30) DEFAULT NULL,
+		`consign_time` varchar(30) DEFAULT NULL,
+		`customization` varchar(30) DEFAULT NULL,
+		`discount_fee` varchar(30) DEFAULT NULL,
+		`divide_order_fee` varchar(30) DEFAULT NULL,
+		`end_time` varchar(30) DEFAULT NULL,
+		`estConTime` varchar(30) DEFAULT NULL,
+		`estimate_con_time` varchar(30) DEFAULT NULL,
+		`f_status` varchar(30) DEFAULT NULL,
+		`f_term` varchar(30) DEFAULT NULL,
+		`f_type` varchar(30) DEFAULT NULL,
+		`fqg_num` varchar(30) DEFAULT NULL,
+		`invoice_no` varchar(30) DEFAULT NULL,
+		`inv_type` varchar(30) DEFAULT NULL,
+		`is_daixiao` varchar(30) DEFAULT NULL,
+		`is_fqg_s_fee` varchar(30) DEFAULT NULL,
+		`is_oversold` varchar(30) DEFAULT NULL,
+		`is_sh_ship` varchar(30) DEFAULT NULL,
+		`is_www` varchar(30) DEFAULT NULL,
+		`item_meal_id` varchar(30) DEFAULT NULL,
+		`item_meal_name` varchar(30) DEFAULT NULL,
+		`item_memo` varchar(30) DEFAULT NULL,
+		`logistics_company` varchar(30) DEFAULT NULL,
+		`num` varchar(30) DEFAULT NULL,
+		`num_iid` varchar(30) DEFAULT NULL,
+		`oid` varchar(30) DEFAULT NULL,
+		`order_attr` varchar(30) DEFAULT NULL,
+		`order_from` varchar(30) DEFAULT NULL,
+		`outer_iid` varchar(30) DEFAULT NULL,
+		`outer_sku_id` varchar(30) DEFAULT NULL,
+		`part_mjz_discount` varchar(30) DEFAULT NULL,
+		`payment` varchar(30) DEFAULT NULL,
+		`payCurrency` varchar(30) DEFAULT NULL,
+		`pic_path` varchar(255) DEFAULT NULL,
+		`price` varchar(30) DEFAULT NULL,
+		`refund_id` varchar(30) DEFAULT NULL,
+		`refund_status` varchar(30) DEFAULT NULL,
+		`seller_nick` varchar(30) DEFAULT NULL,
+		`seller_rate` varchar(30) DEFAULT NULL,
+		`seller_type` varchar(30) DEFAULT NULL,
+		`shipper` varchar(30) DEFAULT NULL,
+		`shipping_type` varchar(30) DEFAULT NULL,
+		`sku_id` varchar(30) DEFAULT NULL,
+		`sku_properties_name` varchar(30) DEFAULT NULL,
+		`snapshot_url` varchar(255) DEFAULT NULL,
+		`status` varchar(30) DEFAULT NULL,
+		`store_code` varchar(30) DEFAULT NULL,
+		`sub_order_tax_fee` varchar(30) DEFAULT NULL,
+		`sub_order_tax_rate` varchar(30) DEFAULT NULL,
+		`sub_order_tax_promotion_fee` varchar(30) DEFAULT NULL,
+		`tmser_spu_code` varchar(30) DEFAULT NULL,
+		`ticket_outer_id` varchar(30) DEFAULT NULL,
+		`ticket_expdate_key` varchar(30) DEFAULT NULL,
+		`timeout_action_time` varchar(30) DEFAULT NULL,
+		`title` varchar(255) DEFAULT NULL,
+		`total_fee` varchar(30) DEFAULT NULL,
+		`is_service_order` varchar(30) DEFAULT NULL,
+		`zhengji_status` varchar(30) DEFAULT NULL
+		)
+	</insert>
+	<insert id="insertTempTableBys">
+		insert into bi_trade_goods (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{assemblyRela,jdbcType=VARCHAR},
+		#{assemblyPrice,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR}, #{bindOid,jdbcType=VARCHAR}, #{bindOids,jdbcType=VARCHAR},
+		#{comboId,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{customization,jdbcType=VARCHAR}, #{discountFee,jdbcType=VARCHAR}, #{divideOrderFee,jdbcType=VARCHAR},
+		#{endTime,jdbcType=VARCHAR},
+		#{fStatus,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR},
+		#{invoiceNo,jdbcType=VARCHAR}, #{invType,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isOversold,jdbcType=VARCHAR},
+		#{isShShip,jdbcType=VARCHAR}, #{isWww,jdbcType=VARCHAR},
+		#{itemMealId,jdbcType=VARCHAR},
+		#{itemMealName,jdbcType=VARCHAR}, #{itemMemo,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{oid,jdbcType=VARCHAR}, #{orderAttr,jdbcType=VARCHAR},
+		#{orderFrom,jdbcType=VARCHAR}, #{outerIid,jdbcType=VARCHAR},
+		#{outerSkuId,jdbcType=VARCHAR},
+		#{partMjzDiscount,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{refundId,jdbcType=VARCHAR},
+		#{refundStatus,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR},
+		#{sellerType,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR},
+		#{skuId,jdbcType=VARCHAR}, #{skuPropertiesName,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, #{subOrderTaxFee,jdbcType=VARCHAR},
+		#{subOrderTaxRate,jdbcType=VARCHAR},
+		#{subOrderTaxPromotionFee,jdbcType=VARCHAR},
+		#{tmserSpuCode,jdbcType=VARCHAR}, #{ticketOuterId,jdbcType=VARCHAR},
+		#{ticketExpdateKey,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR},
+		#{isServiceOrder,jdbcType=VARCHAR}, #{zhengjiStatus,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="getDateFromTempTable">
+		replace into bi_trade_goods (adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status)
+		select adjust_fee, assembly_rela, assembly_price,
+		buyer_rate, bind_oid, bind_oids,
+		combo_id, cid, consign_time,
+		customization, discount_fee, divide_order_fee,
+		end_time,
+		f_status, f_term, f_type,
+		invoice_no, inv_type,
+		is_daixiao, is_oversold,
+		is_sh_ship, is_www, item_meal_id,
+		item_meal_name, item_memo, logistics_company,
+		num, num_iid, oid, order_attr,
+		order_from, outer_iid, outer_sku_id,
+		part_mjz_discount, payment,
+		pic_path, price, refund_id,
+		refund_status, seller_nick, seller_rate,
+		seller_type, shipper, shipping_type,
+		sku_id, sku_properties_name, snapshot_url,
+		status, store_code, sub_order_tax_fee,
+		sub_order_tax_rate, sub_order_tax_promotion_fee,
+		tmser_spu_code, ticket_outer_id, ticket_expdate_key,
+		timeout_action_time, title, total_fee,
+		is_service_order, zhengji_status
+		from temp_bi_trade_goods
+	</insert>
+</mapper>

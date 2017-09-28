@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.FansMonthFeaturesMapper">
+
+	<select id="queryByPage" resultType="FansMonthFeaturesBean">
+		select * from
+		bi_fans_month_features
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO `bi_fans_month_features` (
+		`month`,
+		`feature`,
+		`property`,
+		`proportion`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.month},
+			#{item.feature},
+			#{item.property},
+			#{item.proportion},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

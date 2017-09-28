@@ -1,0 +1,91 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import bi.baiqiu.mapper.FansDailyMapper;
+import bi.baiqiu.page.PageHelper;
+import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.FansDailyBean;
+
+@Service
+@Transactional
+public class FansDailyServiceImpl {
+	@Autowired
+	private FansDailyMapper fansDailyDao;
+
+	/**
+	 * 分页查询方法s
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<FansDailyBean> queryByPage(FansDailyBean bean, Integer pageNum, Integer pageSize)
+			throws Exception {
+		PageHelper.startPage(pageNum, pageSize);
+		fansDailyDao.queryByPage(bean);
+		return PageHelper.endPage();
+
+	}
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public int insertByBatch(List<FansDailyBean> list) {
+
+		return fansDailyDao.insertByBatch(list);
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int insertFansDaliy(FansDailyBean bean) {
+
+		return fansDailyDao.insert(bean);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int updateFansDaliy(FansDailyBean bean) {
+
+		return fansDailyDao.updateByPrimaryKey(bean);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int deleteFansDaliy(FansDailyBean bean) {
+
+		return fansDailyDao.deleteByPrimaryKey(bean);
+	}
+
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deleteFansDaliyByBatch(int[] idArray) {
+
+		return fansDailyDao.deleteByBatch(idArray);
+	}
+
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.GoalMonthAlipMapper">
+
+	<!-- alipay的月目标查询 -->
+	<select id="queryGoalMonthAlip" resultType="bi.baiqiu.pojo.GoalMonthAlip">
+		SELECT * FROM pj_goal_month_alip where 1=1
+
+		<if test="id!=null">
+			and id =#{id}
+		</if>
+		<if test="shopId !=null">
+			and shopId =#{shopId}
+		</if>
+		<!-- 月计划的计划年份 -->
+		<if test="y!=null">
+			and y=#{y}
+		</if>
+		<if test="startY!=null">
+			and y &gt;= #{startY}
+		</if>
+		<if test="endY!=null">
+			and y &lt;= #{endY}
+		</if>
+		<!-- 计划的年份 -->
+		<if test="m01!=null">
+			and m01=#{m01}
+		</if>
+		<if test="m02!=null">
+			and m02=#{m02}
+		</if>
+		<if test="m03!=null">
+			and m03=#{m03}
+		</if>
+		<if test="m04!=null">
+			and m04=#{m04}
+		</if>
+		<if test="m05!=null">
+			and m05=#{m05}
+		</if>
+		<if test="m06!=null">
+			and m06=#{m06}
+		</if>
+		<if test="m07!=null">
+			and m07=#{m07}
+		</if>
+		<if test="m08!=null">
+			and m08=#{m08}
+		</if>
+		<if test="m09!=null">
+			and m09=#{m09}
+		</if>
+		<if test="m10!=null">
+			and m10=#{m10}
+		</if>
+		<if test="m11!=null">
+			and m11=#{m11}
+		</if>
+		<if test="m12!=null">
+			and m12=#{m12}
+		</if>
+	</select>
+
+	<!-- 批量增加 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO pj_goal_month_alip (
+		ex,
+		ct,
+		mt,
+		shop_id,
+		y,
+		m_01,
+		m_02,
+		m_03,
+		m_04,
+		m_05,
+		m_06,
+		m_07,
+		m_08,
+		m_09,
+		m_10,
+		m_11,
+		m_12,
+		remark,
+		seq
+		)
+		VALUES
+			 <foreach collection="list" item="item" index="index" separator="," >
+(#{item.ex},#{item.ct},#{item.mt},#{item.shopId},#{item.y},#{item.m01},#{item.m02},#{item.m03},#{item.m04},#{item.m05},#{item.m06},#{item.m07},#{item.m08},#{item.m09},#{item.m10},#{item.m11},#{item.m12},#{item.remark},#{item.seq})        </foreach>
+
+	</insert>
+	<!-- 批量删除 -->
+	<delete id="deleteGoalMonthAlipByBatch" parameterType="int">
+        delete from pj_goal_month_alip where id in
+        <foreach collection="array" item="idItem"  open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+</mapper>

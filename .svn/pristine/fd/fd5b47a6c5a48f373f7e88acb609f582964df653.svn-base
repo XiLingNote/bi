@@ -1,0 +1,29 @@
+package bi.baiqiu.mapper;
+
+import java.util.List;
+
+import com.github.abel533.mapper.Mapper;
+
+import bi.baiqiu.page.PageBean;
+import bi.baiqiu.pojo.FansDaliyBean;
+
+/**
+ * pc流量结构操作
+ * @author Administrator
+ *
+ */
+public interface FansDailyMapper  extends Mapper<FansDaliyBean>{
+	/**分页查询默认十条记录
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	public List<FansDaliyBean> queryByPage(FansDaliyBean bean,PageBean page);
+	
+	
+	/**批量增加
+	 * @param pcFlowStructureBeans
+	 * @return
+	 */
+	public int insertByBatch(List<FansDaliyBean> Beans);
+}

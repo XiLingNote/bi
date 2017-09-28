@@ -1,0 +1,12 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+
+import bi.baiqiu.pojo.DailyTarget;
+
+public class RedisServiceImpl {
+	
+	public void savetargetToRedis(String name, List<DailyTarget> list) {
+
+	}
+}

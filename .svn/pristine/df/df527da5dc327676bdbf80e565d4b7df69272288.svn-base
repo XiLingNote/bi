@@ -1,0 +1,569 @@
+<%@page import="bi.baiqiu.pojo.User"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	User user=(User)session.getAttribute("user");
+
+%>
+<html>
+<head>
+<base href="<%=basePath%>">
+
+</head>
+<link href="<%=basePath%>/css/bootstrap/bootstrap-editable.css"
+	rel="stylesheet" />
+
+<link rel="stylesheet"
+	href="<%=basePath%>/css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<%=basePath%>/css/fileinput.min.css">
+<link rel="stylesheet"
+	href="<%=basePath%>/css/bootstrap/bootstrap.min.css">
+<link href="<%=basePath%>/css/bootstrap/bootstrap-table.css"
+	rel="stylesheet" type="text/css">
+	<link href="<%=basePath%>/css/bi.css"
+	rel="stylesheet" type="text/css">
+	<jsp:include page="/page/left.do"></jsp:include>
+	<link rel="stylesheet" href="<%=basePath%>/css/localRightTable.css">
+	<style>
+	/* 行内编辑 */
+	.tabledit-toolbar-column{
+	width: 130;
+	}
+	
+	.tabledit-delete-button{
+	background-color:DarkSlateBlue ;color:white;border:0
+	}
+	.tabledit-edit-button{
+	background-color:DarkSlateBlue ;color:white;border:0
+	}
+
+	
+	</style>
+</head>
+
+<body>
+
+<div  id="wrapper">
+      
+		<div id="page-wrapper" style="background-color:DarkSlateBlue;">
+		  <div class="header" > 
+                        <h6 class="page-header" style="background-color:DarkSlateBlue;padding: 0px 22px 0px 0">
+                        </h6>
+						<ol class="breadcrumb" style="background-color:DarkSlateBlue; margin-bottom: 0    ; padding: 0px 10px 0px 20px;">
+					</ol> 						
+			</div>
+            <div id="">
+
+
+			 	<div style="margin-top:2%;background: DarkSlateBlue">
+			<div>
+				<div 
+					style="color:white; padding-top: 0.1% ;margin-bottom: 1%;">
+					<div id="selectp">
+					sku:
+					<input id="sku"  style=" position: relative;height:3%;width: 7%"/> 
+						spu: 
+						 <input id="spu" style=" position: relative;height:3%;width: 7%" />
+					goodsId: 
+						 <input id="shopId" style=" position: relative;height:3%;width: 7%" />
+				feature: 
+						 <input id="feature"  data-provide="typeahead" style=" position: relative;height:3%;width: 7%" />
+				property:
+						 <input id="property" data-provide="typeahead"  style=" position: relative;height:3%;width: 7%" />
+						 </div>
+				<div id="" class="btn-group" style="float: right;">
+				
+				<button id="query" type="button" class="btn btn-default" style="margin-left: 2px;margin-right: 0; background-color:DarkSlateBlue ;color:white;border :0 ">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search
+			</button>
+		
+			<button id="btn_imput" type="button" class="btn btn-default" style="margin-left: 0;margin-right: 3px; background-color:DarkSlateBlue ;color:white;border :0 ">
+				
+				<span class="glyphicon  glyphicon-import" aria-hidden="true"></span>IMPORT DATA
+			
+			</button>
+
+				</div>
+				</div>
+					
+		</div>
+
+		<form >
+			<div class="modal fade" id="myModalImoprt" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content ">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Please select a file(Excel)</h4>
+						</div>
+						<div id="uploadRemark"></div>
+						<div class="modal-body">
+							<a
+							id="downloadTemplate"
+								href="#"
+								class="form-control" style="border: none;">Download the import template</a> <input
+								type="file" name="txt_file" id="txt_file" multiple
+								class="file-loading" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div id="datetimeStart" hidden="true">
+			<input size="16" type="text" name='date' readonly="readonly"
+				class="form_datetime">
+		</div>
+		<div style="padding-left: 10%;padding-right: 10%">
+	
+		<table class="table" id="cusTable" data-pagination="true" style="border: 0px solid #d3d3d3;"
+			data-showColumns="true" data-checkbox="true">
+		</table>
+		</div>
+			<!-- 信息删除确认 -->  
+<div class="modal fade" id="delcfmModel">  
+  <div class="modal-dialog">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+        <h4 class="modal-title"> Prompt Message</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p>Are you sure you want to delete?</p>  
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="url"/>  
+         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
+         <a  onclick="deleteByArray()" class="btn btn-success" data-dismiss="modal">Confirm</a>  
+      </div>  
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->  
+	</div>
+			
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+</body>
+<script src="<%=basePath%>/js/jquery-1.8.3.min.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap.min.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap-table.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap-editable.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap-table-editable.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap-datetimepicker.js"></script>
+<script
+	src="<%=basePath%>/js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="<%=basePath%>/js/fileinput.min.js"></script>
+<script src="<%=basePath%>/js/fileinput_locale_zh.js"></script>
+<script src="<%=basePath%>/js/knockout-3.4.2.js"></script>
+<script src="<%=basePath%>/js/jquery.tabledit.min.js"></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap3-typeahead.js"></script>
+<script src="<%=basePath%>/js/localTableTitle.js"></script>
+
+<script>
+
+
+      /*   $(document).ready(function(){
+        	//初始化表格
+        	initTable();
+        	//日期初始化
+        	initDate();
+        	//初始化增删查改
+        	operate.operateInit();
+        	//初始化上传文件
+             inportInit("txt_file", "target/uploadDailyTarget.do");
+		
+        	initSelect();
+
+        }); */
+        var tableTitleName="commodityProperty";
+        var role=<%=user.getRole()%>;
+
+        function initTable(tableTitle) {
+            //先销毁表格
+            $('#cusTable').bootstrapTable('destroy');
+            //初始化表格,动态从服务器加载数据
+            $("#cusTable").bootstrapTable({
+                 method: "post",  //使用get请求到服务器获取数据
+                contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                url: "<%=basePath%>commodityProperty/queryCommodityPropertyByPage.do", //获取数据的Servlet地址
+                striped: false,  //表格显示条纹
+                pagination: true, //启动分页
+                pageSize: 15,  //每页显示的记录数
+                pageNumber:1, //当前第几页
+                pageList: [2,10, 25, 50, 100],  //记录数可选列表
+                search: false,  //是否启用查询
+                showColumns: false,  //显示下拉框勾选要显示的列
+                showRefresh: false,  //显示刷新按钮
+                showExport: false,
+                paginationPreText:'PreText',
+                paginationNextText:'NextText',
+                paginationDetailHAlign:'left',
+                sidePagination: "server", //表示服务端请求
+                exportDataType: "all",
+               	height : 780, // 行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+                //设置为limit可以获取limit, offset, search, sort, order
+                queryParamsType : "undefined",
+                columns:tableTitle,
+                uniqueId:'id',
+                onEditableSave: function (field, row, oldValue, $el) {
+                    $.ajax({
+                        type: "post",
+                        url: "<%=basePath%>commodityProperty/updateCommodityProperty.do",
+                        data: row,
+                        dataType: 'JSON',
+                        success: function (data, status) {
+                            if (status == "success") {
+                                alert('提交数据成功');
+                                
+                            }
+                        },
+                        error: function () {
+                            alert('编辑失败');
+                        },
+                        complete: function () {
+
+                        }
+                    });
+                    },
+                queryParams: function queryParams(param) {   //设置查询参数
+                     param = {
+                        pageNum:this.pageNumber,
+                        pageSize:this.pageSize,
+                        sortName:this.sortName,
+                        sortOrder:this.sortOrder,
+                        sku:$("#sku").val(),
+                        spu:$("#spu").val(),
+                        goodsId:$("#goodsId").val(),
+                        feature:$("#feature").val(),
+                        property:$("#property").val(),
+                    };
+                    return param;
+                    
+                },
+                onLoadError: function(){  //加载失败时执行
+                	showTip("请稍候",500);
+                },
+                onLoadSuccess:function(){
+                	$(".th-inner").each(function (index,element){
+            			$(this).attr("data-toggle","tooltip");
+            			$(this).attr("data-placement","top");
+            			$(this).attr("title",$(this).text());
+            			
+            		});
+                	$("[data-toggle='tooltip']").tooltip();
+                	$('#cusTable').Tabledit({
+                		restoreButton: false,
+                		url:"commodityProperty/postCommodityProper.do",
+            		    columns: {
+            		    	hideIdentifier: true,
+            		        identifier: [0, 'id'],
+            		        editable: [[1, 'sku'],[2, 'spu'],[3, 'goodsId'],[4, 'feature'],[5, 'property']]
+                		
+            		    },
+            		    onSuccess: function(data, textStatus, jqXHR) {
+            		    	if(data)
+            		    	showTip(data.data,1000);
+            		    	getTitle(tableTitleName,role);
+            		    },
+            		    
+            		});
+
+                }
+            });
+         
+        }
+      var operate = {
+          //初始化按钮事件
+          operateInit: function () {
+              this.operateDelete();
+              this.operateImput();
+              this.operateExput();
+              this.DepartmentModel = {
+            				  };
+              ko.applyBindings(this.myViewModel, document.getElementById("tb_dept"));
+
+          },
+          //删除
+          operateDelete: function () {
+              $('#btn_delete').on("click", function () {
+            	  var arrselectedData =  $('#cusTable').bootstrapTable("getAllSelections");
+            	
+            	  if (arrselectedData.length <= 0) {
+            		  showTip("请至少选择一行数据",1000);
+                      return ;
+                  }
+            	  $("#delcfmModel").modal().on("shown.bs.modal", function () {});
+       
+              });
+          },
+        //导入
+          operateImput: function () {
+              $('#btn_imput').on("click", function () {
+            	  $("#downloadTemplate").attr("href","<%=basePath%>download/downloadTemplate.do?fileName="+tableTitleName+"Template"); 
+            	  $("#myModalImoprt").modal().on("shown.bs.modal", function () {
+ 
+                  }).on('hidden.bs.modal', function () {
+                      //关闭弹出框的时候清除绑定(这个清空包括清空绑定和清空注册事件)
+                  });
+              });
+          },
+        //导出
+          operateExput: function () {
+              $('#btn_export').on("click", function () {
+            	  $("#form2").submit();
+              });
+          },
+
+      }
+    //日期插件初始化
+    var options = {
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 3,
+			minView :3,
+			format : 'yyyy-mm-dd',
+			forceParse : 0,
+			todayButton:true
+		};
+      function initDate(){
+    	  $("#datetimeStart>input[name = date ]").datetimepicker(options);
+    	  $("#date").datetimepicker(options);
+    	  $("#queryStartDate").datetimepicker(options);
+    	  $("#queryEndDate").datetimepicker(options);
+
+    	     var  end = new Date();
+    	  	var day = end.getDate();
+    	  	var year = end.getFullYear();
+    	  	var month = end.getMonth();
+    	  	var viewmonth =(month>8)?(month+1):"0"+(month+1);
+    	  	$('#datetimeStart>input[name = date ]').val(year + "-" + viewmonth+ "-" + day);
+    	    }
+
+      $("#datetimeStart>input[name = date ]").datetimepicker(options).on('changeDate',
+  			function(ev) {
+		});
+      $("#date").datetimepicker(options).on('changeDate',
+    			function(ev) {
+  		});
+      $("#queryStartDate").datetimepicker(options).on('changeDate',
+  			function(ev) {
+		});
+      $("#queryEndDate").datetimepicker(options).on('changeDate',
+  			function(ev) {
+		});
+    //初始化fileinput
+ 
+      function inportInit(ctrlName, uploadUrl) {
+          var control = $('#' + ctrlName);
+
+          //初始化上传控件的样式
+          control.fileinput({
+              language: 'zh', //设置语言
+              uploadUrl: uploadUrl, //上传的地址
+              allowedFileExtensions: ['xlsx','xls'],//接收的文件后缀
+              showPreview :true,//是否显示预览
+              showUpload: true, //是否显示上传按钮
+              showCaption: true,//是否显示标题
+              dropZoneEnabled: false,//是否显示拖拽区域
+              browseClass: "btn btn-primary", //按钮样式     
+              //dropZoneEnabled: false,//是否显示拖拽区域
+              //minImageWidth: 50, //图片的最小宽度
+              //minImageHeight: 50,//图片的最小高度
+              //maxImageWidth: 1000,//图片的最大宽度
+              //maxImageHeight: 1000,//图片的最大高度
+              //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+              //minFileCount: 0,
+              maxFileCount: 5, //表示允许同时上传的最大文件个数
+              enctype: 'multipart/form-data',
+              validateInitialCount:true,
+              previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+              previewFileIconSettings: {
+            	    'doc': '<i class="fa fa-file-word-o text-primary"></i>',
+            	    'xls': '<i class="fa fa-file-excel-o text-success"></i>',
+            	    'ppt': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+            	    'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+            	    'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+            	    'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+            	},
+              msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+          });
+          $("#div_startimport").show();
+
+          //导入文件上传完成之后的事件
+      }
+    
+    	  $("#txt_file").on("fileuploaded", function (event, data, previewId, index) {
+ 			 $("#uploadRemark").append("<p>"+data.filenames.pop()+":"+data.response.data+"</p>");
+      });
+      $(function() { 
+   $('#feature').typeahead({
+         	   
+         	   source: function (query, process) {
+                    return $.ajax({
+                        url: "<%=basePath%>commodityProperty/queryFeatureAndProperty.do",
+                        type: 'post',
+                        success: function (result) {
+                     	   var featuresArray=new Array();
+                     	   var  resultDa=JSON.parse(JSON.parse(result).data);
+                     	   for(var a in resultDa){
+                     		   featuresArray.push(resultDa[a].featuerKey);	
+                     	   	}
+                            return process(featuresArray);
+                        },
+                    });
+                },
+                showHintOnFocus:"all",
+                items:"all",
+                minLength:0,
+         	   	updater: function(item) {
+         	   		
+         	   	$('#property').remove();
+         	   	
+				$("#selectp").append("<input id='property' data-provide='typeahead'  style=' position: relative;height:3%;width: 7%'/>");
+         	   		$('#property').typeahead({
+         	   		
+         	   		source: function (query, process) {
+                   	   	return $.ajax({
+         	                url: "<%=basePath%>commodityProperty/queryFeatureAndProperty2.do",
+         	                type: 'post',
+         	               cache:false,
+         	                data:{"feature":item},
+         	                success: function (result) {
+         	             	   var propertyArray=new Array();
+         	             	var  resultDa=JSON.parse(JSON.parse(result).data);
+                       	   	for(var a in resultDa){
+                       	   	propertyArray.push(resultDa[a].propertyArray);	
+                       	   	}
+                       	   	console.log(propertyArray);
+         	                    return process(propertyArray);
+         	                },
+         	            });
+         	        },
+         	       setSource:function(array){
+        	   			console.log(array,"array");
+        	   		},
+         	        items:"all",
+         	        showHintOnFocus:"all",
+         	        minLength:0
+         	   		}); 
+         					         return item;
+         					         }
+            });
+   $('#property').typeahead({
+   		
+   		source: function (query, process) {
+      	   	return $.ajax({
+                url: "<%=basePath%>commodityProperty/queryFeatureAndProperty2.do",
+                type: 'post',
+               cache:false,
+                data:{"feature":"颜色"},
+                success: function (result) {
+             	   var propertyArray=new Array();
+             	var  resultDa=JSON.parse(JSON.parse(result).data);
+          	   	for(var a in resultDa){
+          	   	propertyArray.push(resultDa[a].propertyArray);	
+          	   	}
+          	   	console.log(propertyArray);
+                    return process(propertyArray);
+                },
+            });
+        },
+       setSource:function(array){
+  			console.log(array,"array");
+  		},
+        items:"all",
+        showHintOnFocus:"all",
+        minLength:0
+   		}); 
+  //初始化左侧菜单栏
+    	  $("#leftCommodityProperty").css("background","#333333");
+    	getTitle(tableTitleName,role);
+    	//初始化表格
+      
+      	//初始化增删查改
+      	operate.operateInit();
+      	//初始化上传文件
+           inportInit("txt_file", "<%=basePath%>commodityProperty/uploadCommodityProperty.do");
+  	//	pandora潘多拉官方旗舰店
+  		var datetype = $("input[name='datetype']:checked").val();
+  		$("input[name='datetype']:last").attr("checked", true);
+  		//	json.series[1].tooltip.valueSuffix = 'k';
+  		//		json.series[2].tooltip.valueSuffix = 'k';
+
+  		$("#query").click(function() {
+  		
+  			getTitle(tableTitleName,role);
+  		});
+
+  		
+
+  	
+
+  	});
+      function test(){
+    	  $('#cusTable').bootstrapTable('selectPage',2);
+      }
+          function deleteByArray(){
+    	  var idArray=new Array();
+    	  var arrselectedData =  $('#cusTable').bootstrapTable("getAllSelections");
+    	  console.log("选择",arrselectedData);
+    	  jQuery.each(arrselectedData, function(i, val) {  
+
+    		    idArray[i]=val.id;  
+
+    		});
+    	var a=  {"idArray":idArray};
+          $.ajax({
+              url: "<%=basePath%>commodityProperty/deleteCommodityPropertyByBatch.do",
+              type: "post",
+              data:a,
+              success: function (data, status) {
+            	  $('#cusTable').bootstrapTable('remove', {field: 'id', values: idArray})
+            	  if($('#cusTable').bootstrapTable('getData').length==0)
+                      getTitle(tableTitleName,role);
+              }
+          });
+    	  
+      }
+      function getFeaturesAndPropertys(){
+    		 
+    		 var a
+    	     $.ajax({
+    	         url: "<%=basePath%>commodityProperty/queryFeatureAndProperty.do",
+    	         type: "post",
+    	         data:a,
+    	         success: function (data, status) {
+    	      return JSON.parse(data).data;
+    	         }
+    	     });
+    		 return a;
+    	 }
+ //单条删除
+ function cpRowDelete(id){
+	 
+	 var a=  {"idArray":[id]};
+	 
+     $.ajax({
+         url: "<%=basePath%>commodityProperty/deleteCommodityPropertyByBatch.do",
+         type: "post",
+         data:a,
+         success: function (data, status) {
+        	 $('#cusTable').bootstrapTable('remove', {field: 'id',values:[id]});
+       	  if($('#cusTable').bootstrapTable('getData').length==0)
+                 getTitle(tableTitleName);
+         }
+     });
+ }
+</script>
+</html>

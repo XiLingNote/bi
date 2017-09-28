@@ -1,0 +1,102 @@
+    //动态表头
+    function   getTitle(tableName,role){
+    	var date ={"tableName":tableName}
+    	$.ajax({
+            url: "/table/getTableTitle.do",
+			type : "post",
+			data : date,
+			success : function(data, status) {
+				var arr = new Array();
+				if(tableName!="commodityProperty"){
+				arr.push({
+					title : '全选',
+					field : 'select',
+					checkbox : true,
+					width : 50,
+					align : 'center',
+					valign : 'middle',
+					
+					formatter : function(value, row, index) {
+						var nowdate=new Date();
+						nowdate.setMonth(nowdate.getMonth()-2);
+						console.log(new Date(row.date)<nowdate);
+						if(new Date(row.date)<nowdate&&!role){
+						        return {
+						            disabled : true
+						        };
+							}
+						}
+						
+				});
+				}
+				var jsonData = JSON.parse(data);
+				for (a in jsonData) {
+					if (jsonData[a].formatter == "percent") {
+						arr.push({
+							title : jsonData[a].title,
+							field : jsonData[a].field,
+							width : jsonData[a].width,
+							sortable : true,
+							formatter : function(value, row, index) {
+								return (Number(value) * 100).toFixed(2) + "%";
+							}
+
+						});
+					}else if (jsonData[a].formatter == "amount") {
+						arr.push({
+							title : jsonData[a].title,
+							field : jsonData[a].field,
+							width : jsonData[a].width,
+							sortable : true,
+							formatter : function(value, row, index) {
+								return (Number(value)).toFixed(2);
+							}
+
+						});
+					}
+					else if (jsonData[a].formatter == "integer") {
+						arr.push({
+							title : jsonData[a].title,
+							field : jsonData[a].field,
+							width : jsonData[a].width,
+							sortable : true,
+							formatter : function(value, row, index) {
+								return (Number(value)).toFixed(0);
+							}
+
+						});
+					}else if (jsonData[a].formatter == "integerAndPercent") {
+						arr.push({
+							title : jsonData[a].title,
+							field : jsonData[a].field,
+							width : jsonData[a].width,
+							sortable : true,
+							formatter : function(value, row, index) {
+								if(Number(value>=1))
+									return (Number(value).toFixed(0));
+									else
+									return (Number(value) * 100).toFixed(2) + "%";
+							}
+
+						});
+					} 
+					else {
+						arr.push({
+							title : jsonData[a].title,
+							field : jsonData[a].field,
+							width : jsonData[a].width,
+							sortable : true,
+							formatter : function(value, row, index) {
+								return value;
+							}
+
+						});
+
+					}
+
+				}
+				initTable(arr);
+			}
+		});
+
+	}

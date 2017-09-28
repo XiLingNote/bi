@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.GoalMonthSaleMapper">
+
+	<!-- alipay的月目标查询 -->
+	<select id="queryGoalMonthSale" resultType="bi.baiqiu.pojo.GoalMonthsale">
+		SELECT * FROM bi_month_target_sale where 1=1
+
+		<if test="id!=null and id !=''">
+			and id =#{id}
+		</if>
+		<if test="shopId !=null and shopId !=''">
+			and shop_id =#{shopId}
+		</if>
+		<!-- 月计划的计划年份 -->
+		<if test="y!=null and id !=''">
+			and y=#{y}
+		</if>
+		<if test="startY!=null and id !=''">
+			and y &gt;= #{startY}
+		</if>
+		<if test="endY!=null and id !=''">
+			and y &lt;= #{endY}
+		</if>
+		<!-- 计划的年份 -->
+		<if test="m01!=null and m01 !=''">
+			and m_01=#{m01}
+		</if>
+		<if test="m02!=null and m02 !=''">
+			and m_02=#{m02}
+		</if>
+		<if test="m03!=null and m03 !=''">
+			and m_03=#{m03}
+		</if>
+		<if test="m04!=null and m04 !=''">
+			and m_04=#{m04}
+		</if>
+		<if test="m05!=null and m05 !=''">
+			and m_05=#{m05}
+		</if>
+		<if test="m06!=null and m06 !=''">
+			and m_06=#{m06}
+		</if>
+		<if test="m07!=null and m07 !=''">
+			and m_07=#{m07}
+		</if>
+		<if test="m08!=null and m08 !=''">
+			and m_08=#{m08}
+		</if>
+		<if test="m09!=null and m09 !=''">
+			and m_09=#{m09}
+		</if>
+		<if test="m10!=null and m10 !=''">
+			and m_10=#{m10}
+		</if>
+		<if test="m11!=null and m11 !=''">
+			and m_11=#{m11}
+		</if>
+		<if test="m12!=null and m12 !=''">
+			and m_12=#{m12}
+		</if>
+	</select>
+
+	<!-- 批量增加 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO bi_month_target_sale (
+		ex,
+		ct,
+		mt,
+		shop_id,
+		y,
+		m_01,
+		m_02,
+		m_03,
+		m_04,
+		m_05,
+		m_06,
+		m_07,
+		m_08,
+		m_09,
+		m_10,
+		m_11,
+		m_12,
+		remark,
+		seq
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.ex},#{item.ct},#{item.mt},#{item.shopId},#{item.y},#{item.m01},#{item.m02},#{item.m03},#{item.m04},#{item.m05},#{item.m06},#{item.m07},#{item.m08},#{item.m09},#{item.m10},#{item.m11},#{item.m12},#{item.remark},#{item.seq})
+		</foreach>
+
+	</insert>
+	<!-- 批量删除 -->
+	<delete id="deleteGoalMonthSaleByBatch" parameterType="int">
+		delete from bi_month_target_sale where id in
+		<foreach collection="array" item="idItem" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	<!--更新 -->
+	<update id="updateGoalMonthSale" parameterType="bi.baiqiu.pojo.GoalMonthAlip">
+		update bi_month_target_sale set
+		m_01=#{m01},
+		m_02=#{m02},
+		m_03=#{m03},
+		m_04=#{m04},
+		m_05=#{m05},
+		m_06=#{m06},
+		m_07=#{m07},
+		m_08=#{m08},
+		m_09=#{m09},
+		m_10=#{m10},
+		m_11=#{m11},
+		m_12=#{m12}
+		where id =#{id}
+	</update>
+	<!-- 批量修改 -->
+	<update id="updateGoalMonthAlipBybatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"  separator=";">
+			update bi_month_target_sale
+		<set>
+			m_01=#{item.m01},
+			m_02=#{item.m02},
+			m_03=#{item.m03},
+			m_04=#{item.m04},
+			m_05=#{item.m05},
+			m_06=#{item.m06},
+			m_07=#{item.m07},
+			m_08=#{item.m08},
+			m_09=#{item.m09},
+			m_10=#{item.m10},
+			m_11=#{item.m11},
+			m_12=#{item.m12}
+		</set>
+		where id =#{item.id}
+		</foreach>
+		
+	</update>
+
+</mapper>

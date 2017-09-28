@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Demo5</title>
+<script src="/js/jquery-1.12.3.js"></script>
+<script>
+	$(function() {
+		var en  = encodeURI("Disney/迪士尼");
+		var data = "Disney/%E8%BF%AA%E5%A3%AB%E5%B0%BC";
+		var b = data.replace("%2F", "");
+		
+		     //     Disney/%E8%BF%AA%E5%A3%AB%E5%B0%BC
+		// cassile/%E5%8D%A1%E6%80%9D%E4%B9%90
+		var name = decodeURI(b);
+		alert(en);
+		alert(name);
+	});
+</script>
+</head>
+<body>
+</body>
+</html>

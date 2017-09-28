@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bi.baiqiu.mapper.WareHouseMapper" >
+  <resultMap id="BaseResultMap" type="bi.baiqiu.pojo.WareHouse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="show_name" property="showName" jdbcType="VARCHAR" />
+    <result column="visible" property="visible" jdbcType="BIT" />
+    <result column="facet" property="facet" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="repertory_name" property="repertoryName" jdbcType="VARCHAR" />
+    <result column="not_turn_amount" property="notTurnAmount" jdbcType="INTEGER" />
+    <result column="trun_amount" property="trunAmount" jdbcType="INTEGER" />
+    <result column="not_print_amount" property="notPrintAmount" jdbcType="INTEGER" />
+    <result column="distribution_amount" property="distributionAmount" jdbcType="INTEGER" />
+    <result column="total_single_amount" property="totalSingleAmount" jdbcType="INTEGER" />
+    <result column="today_shipped_amount" property="todayShippedAmount" jdbcType="INTEGER" />
+    <result column="today_shipped_general_amount" property="todayShippedGeneralAmount" jdbcType="INTEGER" />
+    <result column="today_shipped_presell_amount" property="todayShippedPresellAmount" jdbcType="INTEGER" />
+    <result column="last_month_shipped_amount" property="lastMonthShippedAmount" jdbcType="INTEGER" />
+    <result column="present_month_shipped_amount" property="presentMonthShippedAmount" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, shop_id, shop_name, show_name, visible, facet, sort, repertory_name, not_turn_amount, 
+    trun_amount, not_print_amount, distribution_amount, total_single_amount, today_shipped_amount, 
+    today_shipped_general_amount, today_shipped_presell_amount, last_month_shipped_amount, 
+    present_month_shipped_amount, modify_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bi.baiqiu.pojo.WareHouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_warehouse_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_warehouse_shop
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bi_warehouse_shop
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="bi.baiqiu.pojo.WareHouseExample" >
+    delete from bi_warehouse_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bi.baiqiu.pojo.WareHouse" >
+    insert into bi_warehouse_shop (id, shop_id, shop_name, 
+      show_name, visible, facet, sort, 
+      repertory_name, not_turn_amount, trun_amount, 
+      not_print_amount, distribution_amount, total_single_amount, 
+      today_shipped_amount, today_shipped_general_amount, 
+      today_shipped_presell_amount, last_month_shipped_amount, 
+      present_month_shipped_amount, modify_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
+      #{showName,jdbcType=VARCHAR}, #{visible,jdbcType=BIT}, #{facet,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
+      #{repertoryName,jdbcType=VARCHAR}, #{notTurnAmount,jdbcType=INTEGER}, #{trunAmount,jdbcType=INTEGER}, 
+      #{notPrintAmount,jdbcType=INTEGER}, #{distributionAmount,jdbcType=INTEGER}, #{totalSingleAmount,jdbcType=INTEGER}, 
+      #{todayShippedAmount,jdbcType=INTEGER}, #{todayShippedGeneralAmount,jdbcType=INTEGER}, 
+      #{todayShippedPresellAmount,jdbcType=INTEGER}, #{lastMonthShippedAmount,jdbcType=INTEGER}, 
+      #{presentMonthShippedAmount,jdbcType=INTEGER}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="bi.baiqiu.pojo.WareHouse" >
+    insert into bi_warehouse_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="showName != null" >
+        show_name,
+      </if>
+      <if test="visible != null" >
+        visible,
+      </if>
+      <if test="facet != null" >
+        facet,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="repertoryName != null" >
+        repertory_name,
+      </if>
+      <if test="notTurnAmount != null" >
+        not_turn_amount,
+      </if>
+      <if test="trunAmount != null" >
+        trun_amount,
+      </if>
+      <if test="notPrintAmount != null" >
+        not_print_amount,
+      </if>
+      <if test="distributionAmount != null" >
+        distribution_amount,
+      </if>
+      <if test="totalSingleAmount != null" >
+        total_single_amount,
+      </if>
+      <if test="todayShippedAmount != null" >
+        today_shipped_amount,
+      </if>
+      <if test="todayShippedGeneralAmount != null" >
+        today_shipped_general_amount,
+      </if>
+      <if test="todayShippedPresellAmount != null" >
+        today_shipped_presell_amount,
+      </if>
+      <if test="lastMonthShippedAmount != null" >
+        last_month_shipped_amount,
+      </if>
+      <if test="presentMonthShippedAmount != null" >
+        present_month_shipped_amount,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null" >
+        #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=BIT},
+      </if>
+      <if test="facet != null" >
+        #{facet,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="repertoryName != null" >
+        #{repertoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="notTurnAmount != null" >
+        #{notTurnAmount,jdbcType=INTEGER},
+      </if>
+      <if test="trunAmount != null" >
+        #{trunAmount,jdbcType=INTEGER},
+      </if>
+      <if test="notPrintAmount != null" >
+        #{notPrintAmount,jdbcType=INTEGER},
+      </if>
+      <if test="distributionAmount != null" >
+        #{distributionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="totalSingleAmount != null" >
+        #{totalSingleAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedAmount != null" >
+        #{todayShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedGeneralAmount != null" >
+        #{todayShippedGeneralAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedPresellAmount != null" >
+        #{todayShippedPresellAmount,jdbcType=INTEGER},
+      </if>
+      <if test="lastMonthShippedAmount != null" >
+        #{lastMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="presentMonthShippedAmount != null" >
+        #{presentMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bi.baiqiu.pojo.WareHouseExample" resultType="java.lang.Integer" >
+    select count(*) from bi_warehouse_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_warehouse_shop
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showName != null" >
+        show_name = #{record.showName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visible != null" >
+        visible = #{record.visible,jdbcType=BIT},
+      </if>
+      <if test="record.facet != null" >
+        facet = #{record.facet,jdbcType=BIT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.repertoryName != null" >
+        repertory_name = #{record.repertoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notTurnAmount != null" >
+        not_turn_amount = #{record.notTurnAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.trunAmount != null" >
+        trun_amount = #{record.trunAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.notPrintAmount != null" >
+        not_print_amount = #{record.notPrintAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.distributionAmount != null" >
+        distribution_amount = #{record.distributionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalSingleAmount != null" >
+        total_single_amount = #{record.totalSingleAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.todayShippedAmount != null" >
+        today_shipped_amount = #{record.todayShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.todayShippedGeneralAmount != null" >
+        today_shipped_general_amount = #{record.todayShippedGeneralAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.todayShippedPresellAmount != null" >
+        today_shipped_presell_amount = #{record.todayShippedPresellAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastMonthShippedAmount != null" >
+        last_month_shipped_amount = #{record.lastMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.presentMonthShippedAmount != null" >
+        present_month_shipped_amount = #{record.presentMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_warehouse_shop
+    set id = #{record.id,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      show_name = #{record.showName,jdbcType=VARCHAR},
+      visible = #{record.visible,jdbcType=BIT},
+      facet = #{record.facet,jdbcType=BIT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      repertory_name = #{record.repertoryName,jdbcType=VARCHAR},
+      not_turn_amount = #{record.notTurnAmount,jdbcType=INTEGER},
+      trun_amount = #{record.trunAmount,jdbcType=INTEGER},
+      not_print_amount = #{record.notPrintAmount,jdbcType=INTEGER},
+      distribution_amount = #{record.distributionAmount,jdbcType=INTEGER},
+      total_single_amount = #{record.totalSingleAmount,jdbcType=INTEGER},
+      today_shipped_amount = #{record.todayShippedAmount,jdbcType=INTEGER},
+      today_shipped_general_amount = #{record.todayShippedGeneralAmount,jdbcType=INTEGER},
+      today_shipped_presell_amount = #{record.todayShippedPresellAmount,jdbcType=INTEGER},
+      last_month_shipped_amount = #{record.lastMonthShippedAmount,jdbcType=INTEGER},
+      present_month_shipped_amount = #{record.presentMonthShippedAmount,jdbcType=INTEGER},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bi.baiqiu.pojo.WareHouse" >
+    update bi_warehouse_shop
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="showName != null" >
+        show_name = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="visible != null" >
+        visible = #{visible,jdbcType=BIT},
+      </if>
+      <if test="facet != null" >
+        facet = #{facet,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="repertoryName != null" >
+        repertory_name = #{repertoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="notTurnAmount != null" >
+        not_turn_amount = #{notTurnAmount,jdbcType=INTEGER},
+      </if>
+      <if test="trunAmount != null" >
+        trun_amount = #{trunAmount,jdbcType=INTEGER},
+      </if>
+      <if test="notPrintAmount != null" >
+        not_print_amount = #{notPrintAmount,jdbcType=INTEGER},
+      </if>
+      <if test="distributionAmount != null" >
+        distribution_amount = #{distributionAmount,jdbcType=INTEGER},
+      </if>
+      <if test="totalSingleAmount != null" >
+        total_single_amount = #{totalSingleAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedAmount != null" >
+        today_shipped_amount = #{todayShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedGeneralAmount != null" >
+        today_shipped_general_amount = #{todayShippedGeneralAmount,jdbcType=INTEGER},
+      </if>
+      <if test="todayShippedPresellAmount != null" >
+        today_shipped_presell_amount = #{todayShippedPresellAmount,jdbcType=INTEGER},
+      </if>
+      <if test="lastMonthShippedAmount != null" >
+        last_month_shipped_amount = #{lastMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="presentMonthShippedAmount != null" >
+        present_month_shipped_amount = #{presentMonthShippedAmount,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bi.baiqiu.pojo.WareHouse" >
+    update bi_warehouse_shop
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      show_name = #{showName,jdbcType=VARCHAR},
+      visible = #{visible,jdbcType=BIT},
+      facet = #{facet,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      repertory_name = #{repertoryName,jdbcType=VARCHAR},
+      not_turn_amount = #{notTurnAmount,jdbcType=INTEGER},
+      trun_amount = #{trunAmount,jdbcType=INTEGER},
+      not_print_amount = #{notPrintAmount,jdbcType=INTEGER},
+      distribution_amount = #{distributionAmount,jdbcType=INTEGER},
+      total_single_amount = #{totalSingleAmount,jdbcType=INTEGER},
+      today_shipped_amount = #{todayShippedAmount,jdbcType=INTEGER},
+      today_shipped_general_amount = #{todayShippedGeneralAmount,jdbcType=INTEGER},
+      today_shipped_presell_amount = #{todayShippedPresellAmount,jdbcType=INTEGER},
+      last_month_shipped_amount = #{lastMonthShippedAmount,jdbcType=INTEGER},
+      present_month_shipped_amount = #{presentMonthShippedAmount,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

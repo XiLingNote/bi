@@ -1,0 +1,99 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import bi.baiqiu.mapper.WirelessFlowStructureTreasureMapper;
+import bi.baiqiu.page.PageHelper;
+import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.WirelessFlowStructureBean;
+
+@Service
+@Transactional
+public class WirelessFlowStructureServiceImpl {
+	@Autowired
+	private WirelessFlowStructureTreasureMapper wirelessFlowStructureDao;
+
+	/**
+	 * 分页查询方法s
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<WirelessFlowStructureBean> queryByPage(WirelessFlowStructureBean bean, Integer pageNum, Integer pageSize)
+			throws Exception {
+		PageHelper.startPage(pageNum, pageSize);
+		wirelessFlowStructureDao.queryByPage(bean);
+		return PageHelper.endPage();
+
+	}
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public int insertByBatch(List<WirelessFlowStructureBean> list) {
+
+		return wirelessFlowStructureDao.insertByBatch(list);
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int insertWirelessFlowStructure(WirelessFlowStructureBean bean) {
+
+		return wirelessFlowStructureDao.insert(bean);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int updateWirelessFlowStructure(WirelessFlowStructureBean bean) {
+
+		return wirelessFlowStructureDao.updateByPrimaryKey(bean);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int deleteWirelessFlowStructure(WirelessFlowStructureBean bean) {
+
+		return wirelessFlowStructureDao.deleteByPrimaryKey(bean);
+	}
+
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deleteWirelessFlowStructureByBatch(int[] idArray) {
+
+		return wirelessFlowStructureDao.deleteByBatch(idArray);
+	}
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deleteWirelessFlowStructureByBatchList(WirelessFlowStructureBean bean) {
+
+		return wirelessFlowStructureDao.deleteByBatchList(bean);
+	}
+}

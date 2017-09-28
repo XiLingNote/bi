@@ -1,0 +1,43 @@
+package bi.baiqiu.mapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import bi.baiqiu.page.PageBean;
+import bi.baiqiu.pojo.CommodityPropertyBean;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
+public class CommodityPropertyMapperTest1 {
+
+	@Autowired
+	private CommodityPropertyMapper Dao;
+
+	@Test
+	public void test() {
+		List<CommodityPropertyBean> list= Dao.queryByPage(null, new PageBean());
+		
+		for(CommodityPropertyBean fa:list){
+			System.out.println("商品属性=============================="+fa.getId());
+		}
+		}
+	@Test
+	public void test2(){
+		List<CommodityPropertyBean> list= new ArrayList<>();
+		CommodityPropertyBean fans=new CommodityPropertyBean();
+		fans.setShopId(1);
+		list.add(fans);
+		list.add(fans);
+		System.out.println("------------------------------------------"+Dao.insertByBatch(list));
+		
+		
+		
+	}
+
+}

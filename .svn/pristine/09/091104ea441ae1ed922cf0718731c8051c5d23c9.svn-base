@@ -1,0 +1,3570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bi.baiqiu.mapper.BiTradeOrdersMapper">
+	<resultMap id="BaseResultMap" type="bi.baiqiu.pojo.BiTradeOrders">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="adjust_fee" property="adjustFee" jdbcType="VARCHAR" />
+		<result column="alipay_id" property="alipayId" jdbcType="VARCHAR" />
+		<result column="alipay_no" property="alipayNo" jdbcType="VARCHAR" />
+		<result column="alipay_point" property="alipayPoint" jdbcType="VARCHAR" />
+		<result column="assembly" property="assembly" jdbcType="VARCHAR" />
+		<result column="available_confirm_fee" property="availableConfirmFee"
+			jdbcType="VARCHAR" />
+		<result column="buyer_alipay_no" property="buyerAlipayNo"
+			jdbcType="VARCHAR" />
+		<result column="buyer_area" property="buyerArea" jdbcType="VARCHAR" />
+		<result column="buyer_cod_fee" property="buyerCodFee" jdbcType="VARCHAR" />
+		<result column="buyer_email" property="buyerEmail" jdbcType="VARCHAR" />
+		<result column="buyer_flag" property="buyerFlag" jdbcType="VARCHAR" />
+		<result column="buyer_ip" property="buyerIp" jdbcType="VARCHAR" />
+		<result column="buyer_memo" property="buyerMemo" jdbcType="VARCHAR" />
+		<result column="buyer_message" property="buyerMessage"
+			jdbcType="VARCHAR" />
+		<result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR" />
+		<result column="buyer_obtain_point_fee" property="buyerObtainPointFee"
+			jdbcType="VARCHAR" />
+		<result column="buyer_rate" property="buyerRate" jdbcType="VARCHAR" />
+		<result column="buyerTaxNO" property="buyertaxno" jdbcType="VARCHAR" />
+		<result column="car_store_code" property="carStoreCode"
+			jdbcType="VARCHAR" />
+		<result column="car_store_name" property="carStoreName"
+			jdbcType="VARCHAR" />
+		<result column="car_taker" property="carTaker" jdbcType="VARCHAR" />
+		<result column="car_taker_id" property="carTakerId" jdbcType="VARCHAR" />
+		<result column="car_taker_phone" property="carTakerPhone"
+			jdbcType="VARCHAR" />
+		<result column="cnAuto" property="cnauto" jdbcType="VARCHAR" />
+		<result column="cnService" property="cnservice" jdbcType="VARCHAR" />
+		<result column="cod_fee" property="codFee" jdbcType="VARCHAR" />
+		<result column="cod_status" property="codStatus" jdbcType="VARCHAR" />
+		<result column="commission_fee" property="commissionFee"
+			jdbcType="VARCHAR" />
+		<result column="consign_time" property="consignTime" jdbcType="VARCHAR" />
+		<result column="coupon_fee" property="couponFee" jdbcType="VARCHAR" />
+		<result column="created" property="created" jdbcType="VARCHAR" />
+		<result column="credit_card_fee" property="creditCardFee"
+			jdbcType="VARCHAR" />
+		<result column="delay_create_delivery" property="delayCreateDelivery"
+			jdbcType="VARCHAR" />
+		<result column="discount_fee" property="discountFee" jdbcType="VARCHAR" />
+		<result column="down_payment" property="downPayment" jdbcType="VARCHAR" />
+		<result column="down_payment_ratio" property="downPaymentRatio"
+			jdbcType="VARCHAR" />
+		<result column="encrypt_alipay_id" property="encryptAlipayId"
+			jdbcType="VARCHAR" />
+		<result column="end_time" property="endTime" jdbcType="VARCHAR" />
+		<result column="es_date" property="esDate" jdbcType="VARCHAR" />
+		<result column="es_range" property="esRange" jdbcType="VARCHAR" />
+		<result column="esDate" property="esdate" jdbcType="VARCHAR" />
+		<result column="esRange" property="esrange" jdbcType="VARCHAR" />
+		<result column="est_con_time" property="estConTime" jdbcType="VARCHAR" />
+		<result column="et_shop_id" property="etShopId" jdbcType="VARCHAR" />
+		<result column="et_shop_name" property="etShopName" jdbcType="VARCHAR" />
+		<result column="eticket_service_addr" property="eticketServiceAddr"
+			jdbcType="VARCHAR" />
+		<result column="express_agency_fee" property="expressAgencyFee"
+			jdbcType="VARCHAR" />
+		<result column="forbid_consign" property="forbidConsign"
+			jdbcType="VARCHAR" />
+		<result column="has_post_fee" property="hasPostFee" jdbcType="VARCHAR" />
+		<result column="has_yfx" property="hasYfx" jdbcType="VARCHAR" />
+		<result column="installment_num" property="installmentNum"
+			jdbcType="VARCHAR" />
+		<result column="invoice_kind" property="invoiceKind" jdbcType="VARCHAR" />
+		<result column="invoice_name" property="invoiceName" jdbcType="VARCHAR" />
+		<result column="invoice_type" property="invoiceType" jdbcType="VARCHAR" />
+		<result column="is_3D" property="is3d" jdbcType="VARCHAR" />
+		<result column="is_brand_sale" property="isBrandSale" jdbcType="VARCHAR" />
+		<result column="is_daixiao" property="isDaixiao" jdbcType="VARCHAR" />
+		<result column="is_force_wlb" property="isForceWlb" jdbcType="VARCHAR" />
+		<result column="is_lgtype" property="isLgtype" jdbcType="VARCHAR" />
+		<result column="is_part_consign" property="isPartConsign"
+			jdbcType="VARCHAR" />
+		<result column="is_sh_ship" property="isShShip" jdbcType="VARCHAR" />
+		<result column="is_wt" property="isWt" jdbcType="VARCHAR" />
+		<result column="mark_desc" property="markDesc" jdbcType="VARCHAR" />
+		<result column="market" property="market" jdbcType="VARCHAR" />
+		<result column="modified" property="modified" jdbcType="VARCHAR" />
+		<result column="month_payment" property="monthPayment"
+			jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="VARCHAR" />
+		<result column="num_iid" property="numIid" jdbcType="VARCHAR" />
+		<result column="o2o" property="o2o" jdbcType="VARCHAR" />
+		<result column="o2o_delivery" property="o2oDelivery" jdbcType="VARCHAR" />
+		<result column="o2o_et_order_id" property="o2oEtOrderId"
+			jdbcType="VARCHAR" />
+		<result column="o2o_guide_id" property="o2oGuideId" jdbcType="VARCHAR" />
+		<result column="o2o_guide_name" property="o2oGuideName"
+			jdbcType="VARCHAR" />
+		<result column="o2o_out_trade_id" property="o2oOutTradeId"
+			jdbcType="VARCHAR" />
+		<result column="o2o_shop_id" property="o2oShopId" jdbcType="VARCHAR" />
+		<result column="o2o_shop_name" property="o2oShopName" jdbcType="VARCHAR" />
+		<result column="o2o_step_order_id" property="o2oStepOrderId"
+			jdbcType="VARCHAR" />
+		<result column="o2o_step_trade_detail" property="o2oStepTradeDetail"
+			jdbcType="VARCHAR" />
+		<result column="o2o_voucher_price" property="o2oVoucherPrice"
+			jdbcType="VARCHAR" />
+		<result column="ofp_hold" property="ofpHold" jdbcType="VARCHAR" />
+		<result column="omni_attr" property="omniAttr" jdbcType="VARCHAR" />
+		<result column="omni_param" property="omniParam" jdbcType="VARCHAR" />
+		<result column="omnichannel_param" property="omnichannelParam"
+			jdbcType="VARCHAR" />
+		<result column="order_tax_fee" property="orderTaxFee" jdbcType="VARCHAR" />
+		<result column="order_tax_promotion_fee" property="orderTaxPromotionFee"
+			jdbcType="VARCHAR" />
+		<result column="os_date" property="osDate" jdbcType="VARCHAR" />
+		<result column="os_range" property="osRange" jdbcType="VARCHAR" />
+		<result column="osDate" property="osdate" jdbcType="VARCHAR" />
+		<result column="osRange" property="osrange" jdbcType="VARCHAR" />
+		<result column="out_unique_id" property="outUniqueId" jdbcType="VARCHAR" />
+		<result column="paid_coupon_fee" property="paidCouponFee"
+			jdbcType="VARCHAR" />
+		<result column="pay_time" property="payTime" jdbcType="VARCHAR" />
+		<result column="payCurrency" property="paycurrency" jdbcType="VARCHAR" />
+		<result column="payment" property="payment" jdbcType="VARCHAR" />
+		<result column="pcc_af" property="pccAf" jdbcType="VARCHAR" />
+		<result column="penalty" property="penalty" jdbcType="VARCHAR" />
+		<result column="pic_path" property="picPath" jdbcType="VARCHAR" />
+		<result column="point_fee" property="pointFee" jdbcType="VARCHAR" />
+		<result column="post_fee" property="postFee" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="promotion_details" property="promotionDetails"
+			jdbcType="VARCHAR" />
+		<result column="pushTime" property="pushtime" jdbcType="VARCHAR" />
+		<result column="real_point_fee" property="realPointFee"
+			jdbcType="VARCHAR" />
+		<result column="received_payment" property="receivedPayment"
+			jdbcType="VARCHAR" />
+		<result column="receiver_address" property="receiverAddress"
+			jdbcType="VARCHAR" />
+		<result column="receiver_city" property="receiverCity"
+			jdbcType="VARCHAR" />
+		<result column="receiver_country" property="receiverCountry"
+			jdbcType="VARCHAR" />
+		<result column="receiver_district" property="receiverDistrict"
+			jdbcType="VARCHAR" />
+		<result column="receiver_mobile" property="receiverMobile"
+			jdbcType="VARCHAR" />
+		<result column="receiver_name" property="receiverName"
+			jdbcType="VARCHAR" />
+		<result column="receiver_phone" property="receiverPhone"
+			jdbcType="VARCHAR" />
+		<result column="receiver_state" property="receiverState"
+			jdbcType="VARCHAR" />
+		<result column="receiver_town" property="receiverTown"
+			jdbcType="VARCHAR" />
+		<result column="receiver_zip" property="receiverZip" jdbcType="VARCHAR" />
+		<result column="rx_audit_status" property="rxAuditStatus"
+			jdbcType="VARCHAR" />
+		<result column="seller_alipay_no" property="sellerAlipayNo"
+			jdbcType="VARCHAR" />
+		<result column="seller_can_rate" property="sellerCanRate"
+			jdbcType="VARCHAR" />
+		<result column="seller_cod_fee" property="sellerCodFee"
+			jdbcType="VARCHAR" />
+		<result column="seller_email" property="sellerEmail" jdbcType="VARCHAR" />
+		<result column="seller_flag" property="sellerFlag" jdbcType="VARCHAR" />
+		<result column="seller_memo" property="sellerMemo" jdbcType="VARCHAR" />
+		<result column="seller_mobile" property="sellerMobile"
+			jdbcType="VARCHAR" />
+		<result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
+		<result column="seller_nick" property="sellerNick" jdbcType="VARCHAR" />
+		<result column="seller_phone" property="sellerPhone" jdbcType="VARCHAR" />
+		<result column="seller_rate" property="sellerRate" jdbcType="VARCHAR" />
+		<result column="send_time" property="sendTime" jdbcType="VARCHAR" />
+		<result column="service_fee" property="serviceFee" jdbcType="VARCHAR" />
+		<result column="service_orders" property="serviceOrders"
+			jdbcType="VARCHAR" />
+		<result column="service_tags" property="serviceTags" jdbcType="VARCHAR" />
+		<result column="service_type" property="serviceType" jdbcType="VARCHAR" />
+		<result column="share_group_hold" property="shareGroupHold"
+			jdbcType="VARCHAR" />
+		<result column="shipping_type" property="shippingType"
+			jdbcType="VARCHAR" />
+		<result column="shop_code" property="shopCode" jdbcType="VARCHAR" />
+		<result column="shop_pick" property="shopPick" jdbcType="VARCHAR" />
+		<result column="sid" property="sid" jdbcType="VARCHAR" />
+		<result column="snapshot_url" property="snapshotUrl" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="step_paid_fee" property="stepPaidFee" jdbcType="VARCHAR" />
+		<result column="step_trade_status" property="stepTradeStatus"
+			jdbcType="VARCHAR" />
+		<result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+		<result column="tail_payment" property="tailPayment" jdbcType="VARCHAR" />
+		<result column="team_buy_hold" property="teamBuyHold" jdbcType="VARCHAR" />
+		<result column="tid" property="tid" jdbcType="VARCHAR" />
+		<result column="tid_str" property="tidStr" jdbcType="VARCHAR" />
+		<result column="timeout_action_time" property="timeoutActionTime"
+			jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="top_hold" property="topHold" jdbcType="VARCHAR" />
+		<result column="toptype" property="toptype" jdbcType="VARCHAR" />
+		<result column="total_fee" property="totalFee" jdbcType="VARCHAR" />
+		<result column="trade_attr" property="tradeAttr" jdbcType="VARCHAR" />
+		<result column="trade_ext" property="tradeExt" jdbcType="VARCHAR" />
+		<result column="trade_from" property="tradeFrom" jdbcType="VARCHAR" />
+		<result column="trade_memo" property="tradeMemo" jdbcType="VARCHAR" />
+		<result column="trade_source" property="tradeSource" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="ws_bank_apply_no" property="wsBankApplyNo"
+			jdbcType="VARCHAR" />
+		<result column="yfx_fee" property="yfxFee" jdbcType="VARCHAR" />
+		<result column="yfx_id" property="yfxId" jdbcType="VARCHAR" />
+		<result column="yfx_type" property="yfxType" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, adjust_fee, alipay_id, alipay_no, alipay_point, assembly,
+		available_confirm_fee,
+		buyer_alipay_no, buyer_area, buyer_cod_fee, buyer_email, buyer_flag, buyer_ip,
+		buyer_memo,
+		buyer_message, buyer_nick, buyer_obtain_point_fee, buyer_rate, buyerTaxNO,
+		car_store_code,
+		car_store_name, car_taker, car_taker_id, car_taker_phone, cnAuto, cnService, cod_fee,
+		cod_status, commission_fee, consign_time, coupon_fee, created,
+		credit_card_fee, delay_create_delivery,
+		discount_fee, down_payment, down_payment_ratio, encrypt_alipay_id, end_time,
+		es_date,
+		es_range, esDate, esRange, est_con_time, et_shop_id, et_shop_name,
+		eticket_service_addr,
+		express_agency_fee, forbid_consign, has_post_fee, has_yfx, installment_num, invoice_kind,
+		invoice_name, invoice_type, is_3D, is_brand_sale, is_daixiao,
+		is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt, mark_desc, market, modified, month_payment, num,
+		num_iid, o2o, o2o_delivery, o2o_et_order_id, o2o_guide_id,
+		o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id, o2o_step_trade_detail,
+		o2o_voucher_price,
+		ofp_hold, omni_attr, omni_param, omnichannel_param, order_tax_fee,
+		order_tax_promotion_fee,
+		os_date, os_range, osDate, osRange, out_unique_id, paid_coupon_fee, pay_time,
+		payCurrency,
+		payment, pcc_af, penalty, pic_path, point_fee, post_fee, price,
+		promotion_details,
+		pushTime, real_point_fee, received_payment, receiver_address, receiver_city,
+		receiver_country,
+		receiver_district, receiver_mobile, receiver_name, receiver_phone, receiver_state,
+		receiver_town, receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate,
+		seller_cod_fee, seller_email, seller_flag, seller_memo, seller_mobile, seller_name,
+		seller_nick, seller_phone, seller_rate, send_time, service_fee,
+		service_orders, service_tags,
+		service_type, share_group_hold, shipping_type, shop_code, shop_pick, sid,
+		snapshot_url,
+		status, step_paid_fee, step_trade_status, store_code, tail_payment,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time, title, top_hold, toptype, total_fee,
+		trade_attr,
+		trade_ext, trade_from, trade_memo, trade_source, type, ws_bank_apply_no,
+		yfx_fee,
+		yfx_id, yfx_type
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="bi.baiqiu.pojo.BiTradeOrdersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from bi_trade_orders
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bi_trade_orders
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from bi_trade_orders
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="bi.baiqiu.pojo.BiTradeOrdersExample">
+		delete from bi_trade_orders
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insertBys">
+		replace into bi_trade_orders ( adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{alipayId,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR}, #{alipayPoint,jdbcType=VARCHAR},
+		#{assembly,jdbcType=VARCHAR},
+		#{availableConfirmFee,jdbcType=VARCHAR}, #{buyerAlipayNo,jdbcType=VARCHAR}, #{buyerArea,jdbcType=VARCHAR},
+		#{buyerCodFee,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR},
+		#{buyerFlag,jdbcType=VARCHAR},
+		#{buyerIp,jdbcType=VARCHAR}, #{buyerMemo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR},
+		#{buyerNick,jdbcType=VARCHAR},
+		#{buyerObtainPointFee,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR},
+		#{codFee,jdbcType=VARCHAR},
+		#{codStatus,jdbcType=VARCHAR}, #{commissionFee,jdbcType=VARCHAR}, #{consignTime,jdbcType=VARCHAR},
+		#{couponFee,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR},
+		#{creditCardFee,jdbcType=VARCHAR},
+		#{delayCreateDelivery,jdbcType=VARCHAR},
+		#{discountFee,jdbcType=VARCHAR},
+		#{encryptAlipayId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+		#{esRange,jdbcType=VARCHAR}, #{estConTime,jdbcType=VARCHAR}, #{etShopId,jdbcType=VARCHAR},
+		#{etShopName,jdbcType=VARCHAR},
+		#{eticketServiceAddr,jdbcType=VARCHAR},
+		#{expressAgencyFee,jdbcType=VARCHAR},
+		#{forbidConsign,jdbcType=VARCHAR}, #{hasPostFee,jdbcType=VARCHAR},
+		#{hasYfx,jdbcType=VARCHAR},
+		#{invoiceKind,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR},
+		#{invoiceType,jdbcType=VARCHAR}, #{is3D,jdbcType=VARCHAR}, #{isBrandSale,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isForceWlb,jdbcType=VARCHAR},
+		#{isLgtype,jdbcType=VARCHAR},
+		#{isPartConsign,jdbcType=VARCHAR}, #{isShShip,jdbcType=VARCHAR}, #{isWt,jdbcType=VARCHAR},
+		#{markDesc,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR},
+		#{modified,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{o2o,jdbcType=VARCHAR}, #{o2oDelivery,jdbcType=VARCHAR}, #{o2oEtOrderId,jdbcType=VARCHAR},
+		#{o2oGuideId,jdbcType=VARCHAR}, #{o2oGuideName,jdbcType=VARCHAR},
+		#{o2oOutTradeId,jdbcType=VARCHAR},
+		#{o2oShopId,jdbcType=VARCHAR}, #{o2oShopName,jdbcType=VARCHAR}, #{o2oStepOrderId,jdbcType=VARCHAR},
+		#{o2oStepTradeDetail,jdbcType=VARCHAR},
+		#{o2oVoucherPrice,jdbcType=VARCHAR}, #{ofpHold,jdbcType=VARCHAR},
+		#{omniAttr,jdbcType=VARCHAR}, #{omniParam,jdbcType=VARCHAR},
+		#{omnichannelParam,jdbcType=VARCHAR},
+		#{orderTaxFee,jdbcType=VARCHAR}, #{orderTaxPromotionFee,jdbcType=VARCHAR}, #{osDate,jdbcType=VARCHAR},
+		#{osRange,jdbcType=VARCHAR},
+		#{paidCouponFee,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR},
+		#{payment,jdbcType=VARCHAR}, #{pccAf,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{pointFee,jdbcType=VARCHAR},
+		#{postFee,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{realPointFee,jdbcType=VARCHAR}, #{receivedPayment,jdbcType=VARCHAR},
+		#{receiverAddress,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+		#{receiverCountry,jdbcType=VARCHAR},
+		#{receiverDistrict,jdbcType=VARCHAR},
+		#{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+		#{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR},
+		#{receiverTown,jdbcType=VARCHAR},
+		#{receiverZip,jdbcType=VARCHAR}, #{rxAuditStatus,jdbcType=VARCHAR},
+		#{sellerAlipayNo,jdbcType=VARCHAR},
+		#{sellerCanRate,jdbcType=VARCHAR}, #{sellerCodFee,jdbcType=VARCHAR}, #{sellerEmail,jdbcType=VARCHAR},
+		#{sellerFlag,jdbcType=VARCHAR}, #{sellerMemo,jdbcType=VARCHAR},
+		#{sellerMobile,jdbcType=VARCHAR},
+		#{sellerName,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerPhone,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+		#{serviceOrders,jdbcType=VARCHAR},
+		#{shareGroupHold,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR}, #{shopCode,jdbcType=VARCHAR},
+		#{shopPick,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{stepPaidFee,jdbcType=VARCHAR}, #{stepTradeStatus,jdbcType=VARCHAR},
+		#{teamBuyHold,jdbcType=VARCHAR},
+		#{tid,jdbcType=VARCHAR}, #{tidStr,jdbcType=VARCHAR}, #{timeoutActionTime,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{topHold,jdbcType=VARCHAR},
+		#{toptype,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR}, #{tradeAttr,jdbcType=VARCHAR}, #{tradeExt,jdbcType=VARCHAR},
+		#{tradeFrom,jdbcType=VARCHAR}, #{tradeMemo,jdbcType=VARCHAR},
+		#{tradeSource,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{yfxFee,jdbcType=VARCHAR},
+		#{yfxId,jdbcType=VARCHAR}, #{yfxType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertBys2017">
+		replace into bi_trade_orders_2017 ( adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{alipayId,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR}, #{alipayPoint,jdbcType=VARCHAR},
+		#{assembly,jdbcType=VARCHAR},
+		#{availableConfirmFee,jdbcType=VARCHAR}, #{buyerAlipayNo,jdbcType=VARCHAR}, #{buyerArea,jdbcType=VARCHAR},
+		#{buyerCodFee,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR},
+		#{buyerFlag,jdbcType=VARCHAR},
+		#{buyerIp,jdbcType=VARCHAR}, #{buyerMemo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR},
+		#{buyerNick,jdbcType=VARCHAR},
+		#{buyerObtainPointFee,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR},
+		#{codFee,jdbcType=VARCHAR},
+		#{codStatus,jdbcType=VARCHAR}, #{commissionFee,jdbcType=VARCHAR}, #{consignTime,jdbcType=VARCHAR},
+		#{couponFee,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR},
+		#{creditCardFee,jdbcType=VARCHAR},
+		#{delayCreateDelivery,jdbcType=VARCHAR},
+		#{discountFee,jdbcType=VARCHAR},
+		#{encryptAlipayId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+		#{esRange,jdbcType=VARCHAR}, #{estConTime,jdbcType=VARCHAR}, #{etShopId,jdbcType=VARCHAR},
+		#{etShopName,jdbcType=VARCHAR},
+		#{eticketServiceAddr,jdbcType=VARCHAR},
+		#{expressAgencyFee,jdbcType=VARCHAR},
+		#{forbidConsign,jdbcType=VARCHAR}, #{hasPostFee,jdbcType=VARCHAR},
+		#{hasYfx,jdbcType=VARCHAR},
+		#{invoiceKind,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR},
+		#{invoiceType,jdbcType=VARCHAR}, #{is3D,jdbcType=VARCHAR}, #{isBrandSale,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isForceWlb,jdbcType=VARCHAR},
+		#{isLgtype,jdbcType=VARCHAR},
+		#{isPartConsign,jdbcType=VARCHAR}, #{isShShip,jdbcType=VARCHAR}, #{isWt,jdbcType=VARCHAR},
+		#{markDesc,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR},
+		#{modified,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{o2o,jdbcType=VARCHAR}, #{o2oDelivery,jdbcType=VARCHAR}, #{o2oEtOrderId,jdbcType=VARCHAR},
+		#{o2oGuideId,jdbcType=VARCHAR}, #{o2oGuideName,jdbcType=VARCHAR},
+		#{o2oOutTradeId,jdbcType=VARCHAR},
+		#{o2oShopId,jdbcType=VARCHAR}, #{o2oShopName,jdbcType=VARCHAR}, #{o2oStepOrderId,jdbcType=VARCHAR},
+		#{o2oStepTradeDetail,jdbcType=VARCHAR},
+		#{o2oVoucherPrice,jdbcType=VARCHAR}, #{ofpHold,jdbcType=VARCHAR},
+		#{omniAttr,jdbcType=VARCHAR}, #{omniParam,jdbcType=VARCHAR},
+		#{omnichannelParam,jdbcType=VARCHAR},
+		#{orderTaxFee,jdbcType=VARCHAR}, #{orderTaxPromotionFee,jdbcType=VARCHAR}, #{osDate,jdbcType=VARCHAR},
+		#{osRange,jdbcType=VARCHAR},
+		#{paidCouponFee,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR},
+		#{payment,jdbcType=VARCHAR}, #{pccAf,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{pointFee,jdbcType=VARCHAR},
+		#{postFee,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{realPointFee,jdbcType=VARCHAR}, #{receivedPayment,jdbcType=VARCHAR},
+		#{receiverAddress,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+		#{receiverCountry,jdbcType=VARCHAR},
+		#{receiverDistrict,jdbcType=VARCHAR},
+		#{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+		#{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR},
+		#{receiverTown,jdbcType=VARCHAR},
+		#{receiverZip,jdbcType=VARCHAR}, #{rxAuditStatus,jdbcType=VARCHAR},
+		#{sellerAlipayNo,jdbcType=VARCHAR},
+		#{sellerCanRate,jdbcType=VARCHAR}, #{sellerCodFee,jdbcType=VARCHAR}, #{sellerEmail,jdbcType=VARCHAR},
+		#{sellerFlag,jdbcType=VARCHAR}, #{sellerMemo,jdbcType=VARCHAR},
+		#{sellerMobile,jdbcType=VARCHAR},
+		#{sellerName,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerPhone,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+		#{serviceOrders,jdbcType=VARCHAR},
+		#{shareGroupHold,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR}, #{shopCode,jdbcType=VARCHAR},
+		#{shopPick,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{stepPaidFee,jdbcType=VARCHAR}, #{stepTradeStatus,jdbcType=VARCHAR},
+		#{teamBuyHold,jdbcType=VARCHAR},
+		#{tid,jdbcType=VARCHAR}, #{tidStr,jdbcType=VARCHAR}, #{timeoutActionTime,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{topHold,jdbcType=VARCHAR},
+		#{toptype,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR}, #{tradeAttr,jdbcType=VARCHAR}, #{tradeExt,jdbcType=VARCHAR},
+		#{tradeFrom,jdbcType=VARCHAR}, #{tradeMemo,jdbcType=VARCHAR},
+		#{tradeSource,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{yfxFee,jdbcType=VARCHAR},
+		#{yfxId,jdbcType=VARCHAR}, #{yfxType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertBysBefore2017">
+		replace into bi_trade_orders_before_2017 ( adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{alipayId,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR}, #{alipayPoint,jdbcType=VARCHAR},
+		#{assembly,jdbcType=VARCHAR},
+		#{availableConfirmFee,jdbcType=VARCHAR}, #{buyerAlipayNo,jdbcType=VARCHAR}, #{buyerArea,jdbcType=VARCHAR},
+		#{buyerCodFee,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR},
+		#{buyerFlag,jdbcType=VARCHAR},
+		#{buyerIp,jdbcType=VARCHAR}, #{buyerMemo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR},
+		#{buyerNick,jdbcType=VARCHAR},
+		#{buyerObtainPointFee,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR},
+		#{codFee,jdbcType=VARCHAR},
+		#{codStatus,jdbcType=VARCHAR}, #{commissionFee,jdbcType=VARCHAR}, #{consignTime,jdbcType=VARCHAR},
+		#{couponFee,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR},
+		#{creditCardFee,jdbcType=VARCHAR},
+		#{delayCreateDelivery,jdbcType=VARCHAR},
+		#{discountFee,jdbcType=VARCHAR},
+		#{encryptAlipayId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+		#{esRange,jdbcType=VARCHAR}, #{estConTime,jdbcType=VARCHAR}, #{etShopId,jdbcType=VARCHAR},
+		#{etShopName,jdbcType=VARCHAR},
+		#{eticketServiceAddr,jdbcType=VARCHAR},
+		#{expressAgencyFee,jdbcType=VARCHAR},
+		#{forbidConsign,jdbcType=VARCHAR}, #{hasPostFee,jdbcType=VARCHAR},
+		#{hasYfx,jdbcType=VARCHAR},
+		#{invoiceKind,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR},
+		#{invoiceType,jdbcType=VARCHAR}, #{is3D,jdbcType=VARCHAR}, #{isBrandSale,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isForceWlb,jdbcType=VARCHAR},
+		#{isLgtype,jdbcType=VARCHAR},
+		#{isPartConsign,jdbcType=VARCHAR}, #{isShShip,jdbcType=VARCHAR}, #{isWt,jdbcType=VARCHAR},
+		#{markDesc,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR},
+		#{modified,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{o2o,jdbcType=VARCHAR}, #{o2oDelivery,jdbcType=VARCHAR}, #{o2oEtOrderId,jdbcType=VARCHAR},
+		#{o2oGuideId,jdbcType=VARCHAR}, #{o2oGuideName,jdbcType=VARCHAR},
+		#{o2oOutTradeId,jdbcType=VARCHAR},
+		#{o2oShopId,jdbcType=VARCHAR}, #{o2oShopName,jdbcType=VARCHAR}, #{o2oStepOrderId,jdbcType=VARCHAR},
+		#{o2oStepTradeDetail,jdbcType=VARCHAR},
+		#{o2oVoucherPrice,jdbcType=VARCHAR}, #{ofpHold,jdbcType=VARCHAR},
+		#{omniAttr,jdbcType=VARCHAR}, #{omniParam,jdbcType=VARCHAR},
+		#{omnichannelParam,jdbcType=VARCHAR},
+		#{orderTaxFee,jdbcType=VARCHAR}, #{orderTaxPromotionFee,jdbcType=VARCHAR}, #{osDate,jdbcType=VARCHAR},
+		#{osRange,jdbcType=VARCHAR},
+		#{paidCouponFee,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR},
+		#{payment,jdbcType=VARCHAR}, #{pccAf,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{pointFee,jdbcType=VARCHAR},
+		#{postFee,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{realPointFee,jdbcType=VARCHAR}, #{receivedPayment,jdbcType=VARCHAR},
+		#{receiverAddress,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+		#{receiverCountry,jdbcType=VARCHAR},
+		#{receiverDistrict,jdbcType=VARCHAR},
+		#{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+		#{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR},
+		#{receiverTown,jdbcType=VARCHAR},
+		#{receiverZip,jdbcType=VARCHAR}, #{rxAuditStatus,jdbcType=VARCHAR},
+		#{sellerAlipayNo,jdbcType=VARCHAR},
+		#{sellerCanRate,jdbcType=VARCHAR}, #{sellerCodFee,jdbcType=VARCHAR}, #{sellerEmail,jdbcType=VARCHAR},
+		#{sellerFlag,jdbcType=VARCHAR}, #{sellerMemo,jdbcType=VARCHAR},
+		#{sellerMobile,jdbcType=VARCHAR},
+		#{sellerName,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerPhone,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+		#{serviceOrders,jdbcType=VARCHAR},
+		#{shareGroupHold,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR}, #{shopCode,jdbcType=VARCHAR},
+		#{shopPick,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{stepPaidFee,jdbcType=VARCHAR}, #{stepTradeStatus,jdbcType=VARCHAR},
+		#{teamBuyHold,jdbcType=VARCHAR},
+		#{tid,jdbcType=VARCHAR}, #{tidStr,jdbcType=VARCHAR}, #{timeoutActionTime,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{topHold,jdbcType=VARCHAR},
+		#{toptype,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR}, #{tradeAttr,jdbcType=VARCHAR}, #{tradeExt,jdbcType=VARCHAR},
+		#{tradeFrom,jdbcType=VARCHAR}, #{tradeMemo,jdbcType=VARCHAR},
+		#{tradeSource,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{yfxFee,jdbcType=VARCHAR},
+		#{yfxId,jdbcType=VARCHAR}, #{yfxType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insert" parameterType="bi.baiqiu.pojo.BiTradeOrders">
+		insert into bi_trade_orders (id, adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+		buyerTaxNO, car_store_code, car_store_name,
+		car_taker, car_taker_id, car_taker_phone,
+		cnAuto, cnService, cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee, down_payment,
+		down_payment_ratio, encrypt_alipay_id, end_time,
+		es_date, es_range, esDate,
+		esRange, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		installment_num, invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		month_payment, num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, os_date,
+		os_range, osDate, osRange,
+		out_unique_id, paid_coupon_fee, pay_time,
+		payCurrency, payment, pcc_af,
+		penalty, pic_path, point_fee,
+		post_fee, price, promotion_details,
+		pushTime, real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time, service_fee,
+		service_orders, service_tags, service_type,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		store_code, tail_payment, team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, ws_bank_apply_no, yfx_fee,
+		yfx_id, yfx_type)
+		values (#{id,jdbcType=INTEGER}, #{adjustFee,jdbcType=VARCHAR},
+		#{alipayId,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR}, #{alipayPoint,jdbcType=VARCHAR}, #{assembly,jdbcType=VARCHAR},
+		#{availableConfirmFee,jdbcType=VARCHAR},
+		#{buyerAlipayNo,jdbcType=VARCHAR}, #{buyerArea,jdbcType=VARCHAR},
+		#{buyerCodFee,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR},
+		#{buyerFlag,jdbcType=VARCHAR},
+		#{buyerIp,jdbcType=VARCHAR}, #{buyerMemo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR},
+		#{buyerNick,jdbcType=VARCHAR},
+		#{buyerObtainPointFee,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR},
+		#{buyertaxno,jdbcType=VARCHAR}, #{carStoreCode,jdbcType=VARCHAR}, #{carStoreName,jdbcType=VARCHAR},
+		#{carTaker,jdbcType=VARCHAR}, #{carTakerId,jdbcType=VARCHAR},
+		#{carTakerPhone,jdbcType=VARCHAR},
+		#{cnauto,jdbcType=VARCHAR}, #{cnservice,jdbcType=VARCHAR}, #{codFee,jdbcType=VARCHAR},
+		#{codStatus,jdbcType=VARCHAR}, #{commissionFee,jdbcType=VARCHAR},
+		#{consignTime,jdbcType=VARCHAR},
+		#{couponFee,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR}, #{creditCardFee,jdbcType=VARCHAR},
+		#{delayCreateDelivery,jdbcType=VARCHAR},
+		#{discountFee,jdbcType=VARCHAR}, #{downPayment,jdbcType=VARCHAR},
+		#{downPaymentRatio,jdbcType=VARCHAR},
+		#{encryptAlipayId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+		#{esDate,jdbcType=VARCHAR}, #{esRange,jdbcType=VARCHAR},
+		#{esdate,jdbcType=VARCHAR},
+		#{esrange,jdbcType=VARCHAR}, #{estConTime,jdbcType=VARCHAR}, #{etShopId,jdbcType=VARCHAR},
+		#{etShopName,jdbcType=VARCHAR},
+		#{eticketServiceAddr,jdbcType=VARCHAR},
+		#{expressAgencyFee,jdbcType=VARCHAR},
+		#{forbidConsign,jdbcType=VARCHAR}, #{hasPostFee,jdbcType=VARCHAR},
+		#{hasYfx,jdbcType=VARCHAR},
+		#{installmentNum,jdbcType=VARCHAR}, #{invoiceKind,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR},
+		#{invoiceType,jdbcType=VARCHAR}, #{is3d,jdbcType=VARCHAR},
+		#{isBrandSale,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isForceWlb,jdbcType=VARCHAR}, #{isLgtype,jdbcType=VARCHAR},
+		#{isPartConsign,jdbcType=VARCHAR}, #{isShShip,jdbcType=VARCHAR},
+		#{isWt,jdbcType=VARCHAR},
+		#{markDesc,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{modified,jdbcType=VARCHAR},
+		#{monthPayment,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR},
+		#{numIid,jdbcType=VARCHAR},
+		#{o2o,jdbcType=VARCHAR}, #{o2oDelivery,jdbcType=VARCHAR}, #{o2oEtOrderId,jdbcType=VARCHAR},
+		#{o2oGuideId,jdbcType=VARCHAR}, #{o2oGuideName,jdbcType=VARCHAR},
+		#{o2oOutTradeId,jdbcType=VARCHAR},
+		#{o2oShopId,jdbcType=VARCHAR}, #{o2oShopName,jdbcType=VARCHAR}, #{o2oStepOrderId,jdbcType=VARCHAR},
+		#{o2oStepTradeDetail,jdbcType=VARCHAR},
+		#{o2oVoucherPrice,jdbcType=VARCHAR}, #{ofpHold,jdbcType=VARCHAR},
+		#{omniAttr,jdbcType=VARCHAR}, #{omniParam,jdbcType=VARCHAR},
+		#{omnichannelParam,jdbcType=VARCHAR},
+		#{orderTaxFee,jdbcType=VARCHAR}, #{orderTaxPromotionFee,jdbcType=VARCHAR}, #{osDate,jdbcType=VARCHAR},
+		#{osRange,jdbcType=VARCHAR}, #{osdate,jdbcType=VARCHAR},
+		#{osrange,jdbcType=VARCHAR},
+		#{outUniqueId,jdbcType=VARCHAR}, #{paidCouponFee,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR},
+		#{paycurrency,jdbcType=VARCHAR}, #{payment,jdbcType=VARCHAR},
+		#{pccAf,jdbcType=VARCHAR},
+		#{penalty,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR}, #{pointFee,jdbcType=VARCHAR},
+		#{postFee,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{promotionDetails,jdbcType=VARCHAR},
+		#{pushtime,jdbcType=VARCHAR}, #{realPointFee,jdbcType=VARCHAR},
+		#{receivedPayment,jdbcType=VARCHAR},
+		#{receiverAddress,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+		#{receiverCountry,jdbcType=VARCHAR},
+		#{receiverDistrict,jdbcType=VARCHAR},
+		#{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+		#{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR},
+		#{receiverTown,jdbcType=VARCHAR},
+		#{receiverZip,jdbcType=VARCHAR}, #{rxAuditStatus,jdbcType=VARCHAR},
+		#{sellerAlipayNo,jdbcType=VARCHAR},
+		#{sellerCanRate,jdbcType=VARCHAR}, #{sellerCodFee,jdbcType=VARCHAR}, #{sellerEmail,jdbcType=VARCHAR},
+		#{sellerFlag,jdbcType=VARCHAR}, #{sellerMemo,jdbcType=VARCHAR},
+		#{sellerMobile,jdbcType=VARCHAR},
+		#{sellerName,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerPhone,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+		#{serviceFee,jdbcType=VARCHAR},
+		#{serviceOrders,jdbcType=VARCHAR}, #{serviceTags,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR},
+		#{shareGroupHold,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR},
+		#{shopCode,jdbcType=VARCHAR},
+		#{shopPick,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, #{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{stepPaidFee,jdbcType=VARCHAR},
+		#{stepTradeStatus,jdbcType=VARCHAR},
+		#{storeCode,jdbcType=VARCHAR}, #{tailPayment,jdbcType=VARCHAR}, #{teamBuyHold,jdbcType=VARCHAR},
+		#{tid,jdbcType=VARCHAR}, #{tidStr,jdbcType=VARCHAR},
+		#{timeoutActionTime,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{topHold,jdbcType=VARCHAR}, #{toptype,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR}, #{tradeAttr,jdbcType=VARCHAR},
+		#{tradeExt,jdbcType=VARCHAR},
+		#{tradeFrom,jdbcType=VARCHAR}, #{tradeMemo,jdbcType=VARCHAR}, #{tradeSource,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{wsBankApplyNo,jdbcType=VARCHAR},
+		#{yfxFee,jdbcType=VARCHAR},
+		#{yfxId,jdbcType=VARCHAR}, #{yfxType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="bi.baiqiu.pojo.BiTradeOrders">
+		insert into bi_trade_orders
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="adjustFee != null">
+				adjust_fee,
+			</if>
+			<if test="alipayId != null">
+				alipay_id,
+			</if>
+			<if test="alipayNo != null">
+				alipay_no,
+			</if>
+			<if test="alipayPoint != null">
+				alipay_point,
+			</if>
+			<if test="assembly != null">
+				assembly,
+			</if>
+			<if test="availableConfirmFee != null">
+				available_confirm_fee,
+			</if>
+			<if test="buyerAlipayNo != null">
+				buyer_alipay_no,
+			</if>
+			<if test="buyerArea != null">
+				buyer_area,
+			</if>
+			<if test="buyerCodFee != null">
+				buyer_cod_fee,
+			</if>
+			<if test="buyerEmail != null">
+				buyer_email,
+			</if>
+			<if test="buyerFlag != null">
+				buyer_flag,
+			</if>
+			<if test="buyerIp != null">
+				buyer_ip,
+			</if>
+			<if test="buyerMemo != null">
+				buyer_memo,
+			</if>
+			<if test="buyerMessage != null">
+				buyer_message,
+			</if>
+			<if test="buyerNick != null">
+				buyer_nick,
+			</if>
+			<if test="buyerObtainPointFee != null">
+				buyer_obtain_point_fee,
+			</if>
+			<if test="buyerRate != null">
+				buyer_rate,
+			</if>
+			<if test="buyertaxno != null">
+				buyerTaxNO,
+			</if>
+			<if test="carStoreCode != null">
+				car_store_code,
+			</if>
+			<if test="carStoreName != null">
+				car_store_name,
+			</if>
+			<if test="carTaker != null">
+				car_taker,
+			</if>
+			<if test="carTakerId != null">
+				car_taker_id,
+			</if>
+			<if test="carTakerPhone != null">
+				car_taker_phone,
+			</if>
+			<if test="cnauto != null">
+				cnAuto,
+			</if>
+			<if test="cnservice != null">
+				cnService,
+			</if>
+			<if test="codFee != null">
+				cod_fee,
+			</if>
+			<if test="codStatus != null">
+				cod_status,
+			</if>
+			<if test="commissionFee != null">
+				commission_fee,
+			</if>
+			<if test="consignTime != null">
+				consign_time,
+			</if>
+			<if test="couponFee != null">
+				coupon_fee,
+			</if>
+			<if test="created != null">
+				created,
+			</if>
+			<if test="creditCardFee != null">
+				credit_card_fee,
+			</if>
+			<if test="delayCreateDelivery != null">
+				delay_create_delivery,
+			</if>
+			<if test="discountFee != null">
+				discount_fee,
+			</if>
+			<if test="downPayment != null">
+				down_payment,
+			</if>
+			<if test="downPaymentRatio != null">
+				down_payment_ratio,
+			</if>
+			<if test="encryptAlipayId != null">
+				encrypt_alipay_id,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="esDate != null">
+				es_date,
+			</if>
+			<if test="esRange != null">
+				es_range,
+			</if>
+			<if test="esdate != null">
+				esDate,
+			</if>
+			<if test="esrange != null">
+				esRange,
+			</if>
+			<if test="estConTime != null">
+				est_con_time,
+			</if>
+			<if test="etShopId != null">
+				et_shop_id,
+			</if>
+			<if test="etShopName != null">
+				et_shop_name,
+			</if>
+			<if test="eticketServiceAddr != null">
+				eticket_service_addr,
+			</if>
+			<if test="expressAgencyFee != null">
+				express_agency_fee,
+			</if>
+			<if test="forbidConsign != null">
+				forbid_consign,
+			</if>
+			<if test="hasPostFee != null">
+				has_post_fee,
+			</if>
+			<if test="hasYfx != null">
+				has_yfx,
+			</if>
+			<if test="installmentNum != null">
+				installment_num,
+			</if>
+			<if test="invoiceKind != null">
+				invoice_kind,
+			</if>
+			<if test="invoiceName != null">
+				invoice_name,
+			</if>
+			<if test="invoiceType != null">
+				invoice_type,
+			</if>
+			<if test="is3d != null">
+				is_3D,
+			</if>
+			<if test="isBrandSale != null">
+				is_brand_sale,
+			</if>
+			<if test="isDaixiao != null">
+				is_daixiao,
+			</if>
+			<if test="isForceWlb != null">
+				is_force_wlb,
+			</if>
+			<if test="isLgtype != null">
+				is_lgtype,
+			</if>
+			<if test="isPartConsign != null">
+				is_part_consign,
+			</if>
+			<if test="isShShip != null">
+				is_sh_ship,
+			</if>
+			<if test="isWt != null">
+				is_wt,
+			</if>
+			<if test="markDesc != null">
+				mark_desc,
+			</if>
+			<if test="market != null">
+				market,
+			</if>
+			<if test="modified != null">
+				modified,
+			</if>
+			<if test="monthPayment != null">
+				month_payment,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="numIid != null">
+				num_iid,
+			</if>
+			<if test="o2o != null">
+				o2o,
+			</if>
+			<if test="o2oDelivery != null">
+				o2o_delivery,
+			</if>
+			<if test="o2oEtOrderId != null">
+				o2o_et_order_id,
+			</if>
+			<if test="o2oGuideId != null">
+				o2o_guide_id,
+			</if>
+			<if test="o2oGuideName != null">
+				o2o_guide_name,
+			</if>
+			<if test="o2oOutTradeId != null">
+				o2o_out_trade_id,
+			</if>
+			<if test="o2oShopId != null">
+				o2o_shop_id,
+			</if>
+			<if test="o2oShopName != null">
+				o2o_shop_name,
+			</if>
+			<if test="o2oStepOrderId != null">
+				o2o_step_order_id,
+			</if>
+			<if test="o2oStepTradeDetail != null">
+				o2o_step_trade_detail,
+			</if>
+			<if test="o2oVoucherPrice != null">
+				o2o_voucher_price,
+			</if>
+			<if test="ofpHold != null">
+				ofp_hold,
+			</if>
+			<if test="omniAttr != null">
+				omni_attr,
+			</if>
+			<if test="omniParam != null">
+				omni_param,
+			</if>
+			<if test="omnichannelParam != null">
+				omnichannel_param,
+			</if>
+			<if test="orderTaxFee != null">
+				order_tax_fee,
+			</if>
+			<if test="orderTaxPromotionFee != null">
+				order_tax_promotion_fee,
+			</if>
+			<if test="osDate != null">
+				os_date,
+			</if>
+			<if test="osRange != null">
+				os_range,
+			</if>
+			<if test="osdate != null">
+				osDate,
+			</if>
+			<if test="osrange != null">
+				osRange,
+			</if>
+			<if test="outUniqueId != null">
+				out_unique_id,
+			</if>
+			<if test="paidCouponFee != null">
+				paid_coupon_fee,
+			</if>
+			<if test="payTime != null">
+				pay_time,
+			</if>
+			<if test="paycurrency != null">
+				payCurrency,
+			</if>
+			<if test="payment != null">
+				payment,
+			</if>
+			<if test="pccAf != null">
+				pcc_af,
+			</if>
+			<if test="penalty != null">
+				penalty,
+			</if>
+			<if test="picPath != null">
+				pic_path,
+			</if>
+			<if test="pointFee != null">
+				point_fee,
+			</if>
+			<if test="postFee != null">
+				post_fee,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="promotionDetails != null">
+				promotion_details,
+			</if>
+			<if test="pushtime != null">
+				pushTime,
+			</if>
+			<if test="realPointFee != null">
+				real_point_fee,
+			</if>
+			<if test="receivedPayment != null">
+				received_payment,
+			</if>
+			<if test="receiverAddress != null">
+				receiver_address,
+			</if>
+			<if test="receiverCity != null">
+				receiver_city,
+			</if>
+			<if test="receiverCountry != null">
+				receiver_country,
+			</if>
+			<if test="receiverDistrict != null">
+				receiver_district,
+			</if>
+			<if test="receiverMobile != null">
+				receiver_mobile,
+			</if>
+			<if test="receiverName != null">
+				receiver_name,
+			</if>
+			<if test="receiverPhone != null">
+				receiver_phone,
+			</if>
+			<if test="receiverState != null">
+				receiver_state,
+			</if>
+			<if test="receiverTown != null">
+				receiver_town,
+			</if>
+			<if test="receiverZip != null">
+				receiver_zip,
+			</if>
+			<if test="rxAuditStatus != null">
+				rx_audit_status,
+			</if>
+			<if test="sellerAlipayNo != null">
+				seller_alipay_no,
+			</if>
+			<if test="sellerCanRate != null">
+				seller_can_rate,
+			</if>
+			<if test="sellerCodFee != null">
+				seller_cod_fee,
+			</if>
+			<if test="sellerEmail != null">
+				seller_email,
+			</if>
+			<if test="sellerFlag != null">
+				seller_flag,
+			</if>
+			<if test="sellerMemo != null">
+				seller_memo,
+			</if>
+			<if test="sellerMobile != null">
+				seller_mobile,
+			</if>
+			<if test="sellerName != null">
+				seller_name,
+			</if>
+			<if test="sellerNick != null">
+				seller_nick,
+			</if>
+			<if test="sellerPhone != null">
+				seller_phone,
+			</if>
+			<if test="sellerRate != null">
+				seller_rate,
+			</if>
+			<if test="sendTime != null">
+				send_time,
+			</if>
+			<if test="serviceFee != null">
+				service_fee,
+			</if>
+			<if test="serviceOrders != null">
+				service_orders,
+			</if>
+			<if test="serviceTags != null">
+				service_tags,
+			</if>
+			<if test="serviceType != null">
+				service_type,
+			</if>
+			<if test="shareGroupHold != null">
+				share_group_hold,
+			</if>
+			<if test="shippingType != null">
+				shipping_type,
+			</if>
+			<if test="shopCode != null">
+				shop_code,
+			</if>
+			<if test="shopPick != null">
+				shop_pick,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="snapshotUrl != null">
+				snapshot_url,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="stepPaidFee != null">
+				step_paid_fee,
+			</if>
+			<if test="stepTradeStatus != null">
+				step_trade_status,
+			</if>
+			<if test="storeCode != null">
+				store_code,
+			</if>
+			<if test="tailPayment != null">
+				tail_payment,
+			</if>
+			<if test="teamBuyHold != null">
+				team_buy_hold,
+			</if>
+			<if test="tid != null">
+				tid,
+			</if>
+			<if test="tidStr != null">
+				tid_str,
+			</if>
+			<if test="timeoutActionTime != null">
+				timeout_action_time,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="topHold != null">
+				top_hold,
+			</if>
+			<if test="toptype != null">
+				toptype,
+			</if>
+			<if test="totalFee != null">
+				total_fee,
+			</if>
+			<if test="tradeAttr != null">
+				trade_attr,
+			</if>
+			<if test="tradeExt != null">
+				trade_ext,
+			</if>
+			<if test="tradeFrom != null">
+				trade_from,
+			</if>
+			<if test="tradeMemo != null">
+				trade_memo,
+			</if>
+			<if test="tradeSource != null">
+				trade_source,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="wsBankApplyNo != null">
+				ws_bank_apply_no,
+			</if>
+			<if test="yfxFee != null">
+				yfx_fee,
+			</if>
+			<if test="yfxId != null">
+				yfx_id,
+			</if>
+			<if test="yfxType != null">
+				yfx_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="adjustFee != null">
+				#{adjustFee,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayId != null">
+				#{alipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayNo != null">
+				#{alipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayPoint != null">
+				#{alipayPoint,jdbcType=VARCHAR},
+			</if>
+			<if test="assembly != null">
+				#{assembly,jdbcType=VARCHAR},
+			</if>
+			<if test="availableConfirmFee != null">
+				#{availableConfirmFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerAlipayNo != null">
+				#{buyerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerArea != null">
+				#{buyerArea,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerCodFee != null">
+				#{buyerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerEmail != null">
+				#{buyerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerFlag != null">
+				#{buyerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerIp != null">
+				#{buyerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerMemo != null">
+				#{buyerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerMessage != null">
+				#{buyerMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerNick != null">
+				#{buyerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerObtainPointFee != null">
+				#{buyerObtainPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerRate != null">
+				#{buyerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="buyertaxno != null">
+				#{buyertaxno,jdbcType=VARCHAR},
+			</if>
+			<if test="carStoreCode != null">
+				#{carStoreCode,jdbcType=VARCHAR},
+			</if>
+			<if test="carStoreName != null">
+				#{carStoreName,jdbcType=VARCHAR},
+			</if>
+			<if test="carTaker != null">
+				#{carTaker,jdbcType=VARCHAR},
+			</if>
+			<if test="carTakerId != null">
+				#{carTakerId,jdbcType=VARCHAR},
+			</if>
+			<if test="carTakerPhone != null">
+				#{carTakerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="cnauto != null">
+				#{cnauto,jdbcType=VARCHAR},
+			</if>
+			<if test="cnservice != null">
+				#{cnservice,jdbcType=VARCHAR},
+			</if>
+			<if test="codFee != null">
+				#{codFee,jdbcType=VARCHAR},
+			</if>
+			<if test="codStatus != null">
+				#{codStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="commissionFee != null">
+				#{commissionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="consignTime != null">
+				#{consignTime,jdbcType=VARCHAR},
+			</if>
+			<if test="couponFee != null">
+				#{couponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="created != null">
+				#{created,jdbcType=VARCHAR},
+			</if>
+			<if test="creditCardFee != null">
+				#{creditCardFee,jdbcType=VARCHAR},
+			</if>
+			<if test="delayCreateDelivery != null">
+				#{delayCreateDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="discountFee != null">
+				#{discountFee,jdbcType=VARCHAR},
+			</if>
+			<if test="downPayment != null">
+				#{downPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="downPaymentRatio != null">
+				#{downPaymentRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="encryptAlipayId != null">
+				#{encryptAlipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="esDate != null">
+				#{esDate,jdbcType=VARCHAR},
+			</if>
+			<if test="esRange != null">
+				#{esRange,jdbcType=VARCHAR},
+			</if>
+			<if test="esdate != null">
+				#{esdate,jdbcType=VARCHAR},
+			</if>
+			<if test="esrange != null">
+				#{esrange,jdbcType=VARCHAR},
+			</if>
+			<if test="estConTime != null">
+				#{estConTime,jdbcType=VARCHAR},
+			</if>
+			<if test="etShopId != null">
+				#{etShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="etShopName != null">
+				#{etShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="eticketServiceAddr != null">
+				#{eticketServiceAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="expressAgencyFee != null">
+				#{expressAgencyFee,jdbcType=VARCHAR},
+			</if>
+			<if test="forbidConsign != null">
+				#{forbidConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="hasPostFee != null">
+				#{hasPostFee,jdbcType=VARCHAR},
+			</if>
+			<if test="hasYfx != null">
+				#{hasYfx,jdbcType=VARCHAR},
+			</if>
+			<if test="installmentNum != null">
+				#{installmentNum,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceKind != null">
+				#{invoiceKind,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceName != null">
+				#{invoiceName,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceType != null">
+				#{invoiceType,jdbcType=VARCHAR},
+			</if>
+			<if test="is3d != null">
+				#{is3d,jdbcType=VARCHAR},
+			</if>
+			<if test="isBrandSale != null">
+				#{isBrandSale,jdbcType=VARCHAR},
+			</if>
+			<if test="isDaixiao != null">
+				#{isDaixiao,jdbcType=VARCHAR},
+			</if>
+			<if test="isForceWlb != null">
+				#{isForceWlb,jdbcType=VARCHAR},
+			</if>
+			<if test="isLgtype != null">
+				#{isLgtype,jdbcType=VARCHAR},
+			</if>
+			<if test="isPartConsign != null">
+				#{isPartConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="isShShip != null">
+				#{isShShip,jdbcType=VARCHAR},
+			</if>
+			<if test="isWt != null">
+				#{isWt,jdbcType=VARCHAR},
+			</if>
+			<if test="markDesc != null">
+				#{markDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="market != null">
+				#{market,jdbcType=VARCHAR},
+			</if>
+			<if test="modified != null">
+				#{modified,jdbcType=VARCHAR},
+			</if>
+			<if test="monthPayment != null">
+				#{monthPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=VARCHAR},
+			</if>
+			<if test="numIid != null">
+				#{numIid,jdbcType=VARCHAR},
+			</if>
+			<if test="o2o != null">
+				#{o2o,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oDelivery != null">
+				#{o2oDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oEtOrderId != null">
+				#{o2oEtOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oGuideId != null">
+				#{o2oGuideId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oGuideName != null">
+				#{o2oGuideName,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oOutTradeId != null">
+				#{o2oOutTradeId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oShopId != null">
+				#{o2oShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oShopName != null">
+				#{o2oShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oStepOrderId != null">
+				#{o2oStepOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oStepTradeDetail != null">
+				#{o2oStepTradeDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oVoucherPrice != null">
+				#{o2oVoucherPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="ofpHold != null">
+				#{ofpHold,jdbcType=VARCHAR},
+			</if>
+			<if test="omniAttr != null">
+				#{omniAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="omniParam != null">
+				#{omniParam,jdbcType=VARCHAR},
+			</if>
+			<if test="omnichannelParam != null">
+				#{omnichannelParam,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTaxFee != null">
+				#{orderTaxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTaxPromotionFee != null">
+				#{orderTaxPromotionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="osDate != null">
+				#{osDate,jdbcType=VARCHAR},
+			</if>
+			<if test="osRange != null">
+				#{osRange,jdbcType=VARCHAR},
+			</if>
+			<if test="osdate != null">
+				#{osdate,jdbcType=VARCHAR},
+			</if>
+			<if test="osrange != null">
+				#{osrange,jdbcType=VARCHAR},
+			</if>
+			<if test="outUniqueId != null">
+				#{outUniqueId,jdbcType=VARCHAR},
+			</if>
+			<if test="paidCouponFee != null">
+				#{paidCouponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				#{payTime,jdbcType=VARCHAR},
+			</if>
+			<if test="paycurrency != null">
+				#{paycurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="payment != null">
+				#{payment,jdbcType=VARCHAR},
+			</if>
+			<if test="pccAf != null">
+				#{pccAf,jdbcType=VARCHAR},
+			</if>
+			<if test="penalty != null">
+				#{penalty,jdbcType=VARCHAR},
+			</if>
+			<if test="picPath != null">
+				#{picPath,jdbcType=VARCHAR},
+			</if>
+			<if test="pointFee != null">
+				#{pointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="postFee != null">
+				#{postFee,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=VARCHAR},
+			</if>
+			<if test="promotionDetails != null">
+				#{promotionDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="pushtime != null">
+				#{pushtime,jdbcType=VARCHAR},
+			</if>
+			<if test="realPointFee != null">
+				#{realPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="receivedPayment != null">
+				#{receivedPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverAddress != null">
+				#{receiverAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverCity != null">
+				#{receiverCity,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverCountry != null">
+				#{receiverCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverDistrict != null">
+				#{receiverDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverMobile != null">
+				#{receiverMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverName != null">
+				#{receiverName,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverPhone != null">
+				#{receiverPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverState != null">
+				#{receiverState,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverTown != null">
+				#{receiverTown,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverZip != null">
+				#{receiverZip,jdbcType=VARCHAR},
+			</if>
+			<if test="rxAuditStatus != null">
+				#{rxAuditStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerAlipayNo != null">
+				#{sellerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerCanRate != null">
+				#{sellerCanRate,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerCodFee != null">
+				#{sellerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerEmail != null">
+				#{sellerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerFlag != null">
+				#{sellerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerMemo != null">
+				#{sellerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerMobile != null">
+				#{sellerMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerName != null">
+				#{sellerName,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerNick != null">
+				#{sellerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerPhone != null">
+				#{sellerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerRate != null">
+				#{sellerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				#{sendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceFee != null">
+				#{serviceFee,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceOrders != null">
+				#{serviceOrders,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceTags != null">
+				#{serviceTags,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceType != null">
+				#{serviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="shareGroupHold != null">
+				#{shareGroupHold,jdbcType=VARCHAR},
+			</if>
+			<if test="shippingType != null">
+				#{shippingType,jdbcType=VARCHAR},
+			</if>
+			<if test="shopCode != null">
+				#{shopCode,jdbcType=VARCHAR},
+			</if>
+			<if test="shopPick != null">
+				#{shopPick,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="snapshotUrl != null">
+				#{snapshotUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="stepPaidFee != null">
+				#{stepPaidFee,jdbcType=VARCHAR},
+			</if>
+			<if test="stepTradeStatus != null">
+				#{stepTradeStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="storeCode != null">
+				#{storeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="tailPayment != null">
+				#{tailPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="teamBuyHold != null">
+				#{teamBuyHold,jdbcType=VARCHAR},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=VARCHAR},
+			</if>
+			<if test="tidStr != null">
+				#{tidStr,jdbcType=VARCHAR},
+			</if>
+			<if test="timeoutActionTime != null">
+				#{timeoutActionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="topHold != null">
+				#{topHold,jdbcType=VARCHAR},
+			</if>
+			<if test="toptype != null">
+				#{toptype,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFee != null">
+				#{totalFee,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeAttr != null">
+				#{tradeAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeExt != null">
+				#{tradeExt,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeFrom != null">
+				#{tradeFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeMemo != null">
+				#{tradeMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeSource != null">
+				#{tradeSource,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="wsBankApplyNo != null">
+				#{wsBankApplyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxFee != null">
+				#{yfxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxId != null">
+				#{yfxId,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxType != null">
+				#{yfxType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="bi.baiqiu.pojo.BiTradeOrdersExample"
+		resultType="java.lang.Integer">
+		select count(*) from bi_trade_orders
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update bi_trade_orders
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.adjustFee != null">
+				adjust_fee = #{record.adjustFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alipayId != null">
+				alipay_id = #{record.alipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alipayNo != null">
+				alipay_no = #{record.alipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alipayPoint != null">
+				alipay_point = #{record.alipayPoint,jdbcType=VARCHAR},
+			</if>
+			<if test="record.assembly != null">
+				assembly = #{record.assembly,jdbcType=VARCHAR},
+			</if>
+			<if test="record.availableConfirmFee != null">
+				available_confirm_fee =
+				#{record.availableConfirmFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerAlipayNo != null">
+				buyer_alipay_no = #{record.buyerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerArea != null">
+				buyer_area = #{record.buyerArea,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerCodFee != null">
+				buyer_cod_fee = #{record.buyerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerEmail != null">
+				buyer_email = #{record.buyerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerFlag != null">
+				buyer_flag = #{record.buyerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerIp != null">
+				buyer_ip = #{record.buyerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerMemo != null">
+				buyer_memo = #{record.buyerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerMessage != null">
+				buyer_message = #{record.buyerMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerNick != null">
+				buyer_nick = #{record.buyerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerObtainPointFee != null">
+				buyer_obtain_point_fee =
+				#{record.buyerObtainPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyerRate != null">
+				buyer_rate = #{record.buyerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.buyertaxno != null">
+				buyerTaxNO = #{record.buyertaxno,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carStoreCode != null">
+				car_store_code = #{record.carStoreCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carStoreName != null">
+				car_store_name = #{record.carStoreName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carTaker != null">
+				car_taker = #{record.carTaker,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carTakerId != null">
+				car_taker_id = #{record.carTakerId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carTakerPhone != null">
+				car_taker_phone = #{record.carTakerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cnauto != null">
+				cnAuto = #{record.cnauto,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cnservice != null">
+				cnService = #{record.cnservice,jdbcType=VARCHAR},
+			</if>
+			<if test="record.codFee != null">
+				cod_fee = #{record.codFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.codStatus != null">
+				cod_status = #{record.codStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.commissionFee != null">
+				commission_fee = #{record.commissionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.consignTime != null">
+				consign_time = #{record.consignTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.couponFee != null">
+				coupon_fee = #{record.couponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.created != null">
+				created = #{record.created,jdbcType=VARCHAR},
+			</if>
+			<if test="record.creditCardFee != null">
+				credit_card_fee = #{record.creditCardFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.delayCreateDelivery != null">
+				delay_create_delivery =
+				#{record.delayCreateDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="record.discountFee != null">
+				discount_fee = #{record.discountFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.downPayment != null">
+				down_payment = #{record.downPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.downPaymentRatio != null">
+				down_payment_ratio = #{record.downPaymentRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="record.encryptAlipayId != null">
+				encrypt_alipay_id = #{record.encryptAlipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.esDate != null">
+				es_date = #{record.esDate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.esRange != null">
+				es_range = #{record.esRange,jdbcType=VARCHAR},
+			</if>
+			<if test="record.esdate != null">
+				esDate = #{record.esdate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.esrange != null">
+				esRange = #{record.esrange,jdbcType=VARCHAR},
+			</if>
+			<if test="record.estConTime != null">
+				est_con_time = #{record.estConTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.etShopId != null">
+				et_shop_id = #{record.etShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.etShopName != null">
+				et_shop_name = #{record.etShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.eticketServiceAddr != null">
+				eticket_service_addr = #{record.eticketServiceAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.expressAgencyFee != null">
+				express_agency_fee = #{record.expressAgencyFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.forbidConsign != null">
+				forbid_consign = #{record.forbidConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="record.hasPostFee != null">
+				has_post_fee = #{record.hasPostFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.hasYfx != null">
+				has_yfx = #{record.hasYfx,jdbcType=VARCHAR},
+			</if>
+			<if test="record.installmentNum != null">
+				installment_num = #{record.installmentNum,jdbcType=VARCHAR},
+			</if>
+			<if test="record.invoiceKind != null">
+				invoice_kind = #{record.invoiceKind,jdbcType=VARCHAR},
+			</if>
+			<if test="record.invoiceName != null">
+				invoice_name = #{record.invoiceName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.invoiceType != null">
+				invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.is3d != null">
+				is_3D = #{record.is3d,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isBrandSale != null">
+				is_brand_sale = #{record.isBrandSale,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isDaixiao != null">
+				is_daixiao = #{record.isDaixiao,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isForceWlb != null">
+				is_force_wlb = #{record.isForceWlb,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isLgtype != null">
+				is_lgtype = #{record.isLgtype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isPartConsign != null">
+				is_part_consign = #{record.isPartConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isShShip != null">
+				is_sh_ship = #{record.isShShip,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isWt != null">
+				is_wt = #{record.isWt,jdbcType=VARCHAR},
+			</if>
+			<if test="record.markDesc != null">
+				mark_desc = #{record.markDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.market != null">
+				market = #{record.market,jdbcType=VARCHAR},
+			</if>
+			<if test="record.modified != null">
+				modified = #{record.modified,jdbcType=VARCHAR},
+			</if>
+			<if test="record.monthPayment != null">
+				month_payment = #{record.monthPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.num != null">
+				num = #{record.num,jdbcType=VARCHAR},
+			</if>
+			<if test="record.numIid != null">
+				num_iid = #{record.numIid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2o != null">
+				o2o = #{record.o2o,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oDelivery != null">
+				o2o_delivery = #{record.o2oDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oEtOrderId != null">
+				o2o_et_order_id = #{record.o2oEtOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oGuideId != null">
+				o2o_guide_id = #{record.o2oGuideId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oGuideName != null">
+				o2o_guide_name = #{record.o2oGuideName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oOutTradeId != null">
+				o2o_out_trade_id = #{record.o2oOutTradeId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oShopId != null">
+				o2o_shop_id = #{record.o2oShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oShopName != null">
+				o2o_shop_name = #{record.o2oShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oStepOrderId != null">
+				o2o_step_order_id = #{record.o2oStepOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oStepTradeDetail != null">
+				o2o_step_trade_detail =
+				#{record.o2oStepTradeDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.o2oVoucherPrice != null">
+				o2o_voucher_price = #{record.o2oVoucherPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ofpHold != null">
+				ofp_hold = #{record.ofpHold,jdbcType=VARCHAR},
+			</if>
+			<if test="record.omniAttr != null">
+				omni_attr = #{record.omniAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.omniParam != null">
+				omni_param = #{record.omniParam,jdbcType=VARCHAR},
+			</if>
+			<if test="record.omnichannelParam != null">
+				omnichannel_param = #{record.omnichannelParam,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orderTaxFee != null">
+				order_tax_fee = #{record.orderTaxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orderTaxPromotionFee != null">
+				order_tax_promotion_fee =
+				#{record.orderTaxPromotionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.osDate != null">
+				os_date = #{record.osDate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.osRange != null">
+				os_range = #{record.osRange,jdbcType=VARCHAR},
+			</if>
+			<if test="record.osdate != null">
+				osDate = #{record.osdate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.osrange != null">
+				osRange = #{record.osrange,jdbcType=VARCHAR},
+			</if>
+			<if test="record.outUniqueId != null">
+				out_unique_id = #{record.outUniqueId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paidCouponFee != null">
+				paid_coupon_fee = #{record.paidCouponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.payTime != null">
+				pay_time = #{record.payTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paycurrency != null">
+				payCurrency = #{record.paycurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="record.payment != null">
+				payment = #{record.payment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pccAf != null">
+				pcc_af = #{record.pccAf,jdbcType=VARCHAR},
+			</if>
+			<if test="record.penalty != null">
+				penalty = #{record.penalty,jdbcType=VARCHAR},
+			</if>
+			<if test="record.picPath != null">
+				pic_path = #{record.picPath,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pointFee != null">
+				point_fee = #{record.pointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.postFee != null">
+				post_fee = #{record.postFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.price != null">
+				price = #{record.price,jdbcType=VARCHAR},
+			</if>
+			<if test="record.promotionDetails != null">
+				promotion_details = #{record.promotionDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pushtime != null">
+				pushTime = #{record.pushtime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.realPointFee != null">
+				real_point_fee = #{record.realPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receivedPayment != null">
+				received_payment = #{record.receivedPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverAddress != null">
+				receiver_address = #{record.receiverAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverCity != null">
+				receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverCountry != null">
+				receiver_country = #{record.receiverCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverDistrict != null">
+				receiver_district = #{record.receiverDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverMobile != null">
+				receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverName != null">
+				receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverPhone != null">
+				receiver_phone = #{record.receiverPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverState != null">
+				receiver_state = #{record.receiverState,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverTown != null">
+				receiver_town = #{record.receiverTown,jdbcType=VARCHAR},
+			</if>
+			<if test="record.receiverZip != null">
+				receiver_zip = #{record.receiverZip,jdbcType=VARCHAR},
+			</if>
+			<if test="record.rxAuditStatus != null">
+				rx_audit_status = #{record.rxAuditStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerAlipayNo != null">
+				seller_alipay_no = #{record.sellerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerCanRate != null">
+				seller_can_rate = #{record.sellerCanRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerCodFee != null">
+				seller_cod_fee = #{record.sellerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerEmail != null">
+				seller_email = #{record.sellerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerFlag != null">
+				seller_flag = #{record.sellerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerMemo != null">
+				seller_memo = #{record.sellerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerMobile != null">
+				seller_mobile = #{record.sellerMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerName != null">
+				seller_name = #{record.sellerName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerNick != null">
+				seller_nick = #{record.sellerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerPhone != null">
+				seller_phone = #{record.sellerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sellerRate != null">
+				seller_rate = #{record.sellerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sendTime != null">
+				send_time = #{record.sendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.serviceFee != null">
+				service_fee = #{record.serviceFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.serviceOrders != null">
+				service_orders = #{record.serviceOrders,jdbcType=VARCHAR},
+			</if>
+			<if test="record.serviceTags != null">
+				service_tags = #{record.serviceTags,jdbcType=VARCHAR},
+			</if>
+			<if test="record.serviceType != null">
+				service_type = #{record.serviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shareGroupHold != null">
+				share_group_hold = #{record.shareGroupHold,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shippingType != null">
+				shipping_type = #{record.shippingType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shopCode != null">
+				shop_code = #{record.shopCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.shopPick != null">
+				shop_pick = #{record.shopPick,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.snapshotUrl != null">
+				snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stepPaidFee != null">
+				step_paid_fee = #{record.stepPaidFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stepTradeStatus != null">
+				step_trade_status = #{record.stepTradeStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="record.storeCode != null">
+				store_code = #{record.storeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tailPayment != null">
+				tail_payment = #{record.tailPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="record.teamBuyHold != null">
+				team_buy_hold = #{record.teamBuyHold,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tid != null">
+				tid = #{record.tid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tidStr != null">
+				tid_str = #{record.tidStr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.timeoutActionTime != null">
+				timeout_action_time = #{record.timeoutActionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.topHold != null">
+				top_hold = #{record.topHold,jdbcType=VARCHAR},
+			</if>
+			<if test="record.toptype != null">
+				toptype = #{record.toptype,jdbcType=VARCHAR},
+			</if>
+			<if test="record.totalFee != null">
+				total_fee = #{record.totalFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tradeAttr != null">
+				trade_attr = #{record.tradeAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tradeExt != null">
+				trade_ext = #{record.tradeExt,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tradeFrom != null">
+				trade_from = #{record.tradeFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tradeMemo != null">
+				trade_memo = #{record.tradeMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tradeSource != null">
+				trade_source = #{record.tradeSource,jdbcType=VARCHAR},
+			</if>
+			<if test="record.type != null">
+				type = #{record.type,jdbcType=VARCHAR},
+			</if>
+			<if test="record.wsBankApplyNo != null">
+				ws_bank_apply_no = #{record.wsBankApplyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.yfxFee != null">
+				yfx_fee = #{record.yfxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="record.yfxId != null">
+				yfx_id = #{record.yfxId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.yfxType != null">
+				yfx_type = #{record.yfxType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update bi_trade_orders
+		set id = #{record.id,jdbcType=INTEGER},
+		adjust_fee = #{record.adjustFee,jdbcType=VARCHAR},
+		alipay_id = #{record.alipayId,jdbcType=VARCHAR},
+		alipay_no = #{record.alipayNo,jdbcType=VARCHAR},
+		alipay_point = #{record.alipayPoint,jdbcType=VARCHAR},
+		assembly = #{record.assembly,jdbcType=VARCHAR},
+		available_confirm_fee = #{record.availableConfirmFee,jdbcType=VARCHAR},
+		buyer_alipay_no = #{record.buyerAlipayNo,jdbcType=VARCHAR},
+		buyer_area = #{record.buyerArea,jdbcType=VARCHAR},
+		buyer_cod_fee = #{record.buyerCodFee,jdbcType=VARCHAR},
+		buyer_email = #{record.buyerEmail,jdbcType=VARCHAR},
+		buyer_flag = #{record.buyerFlag,jdbcType=VARCHAR},
+		buyer_ip = #{record.buyerIp,jdbcType=VARCHAR},
+		buyer_memo = #{record.buyerMemo,jdbcType=VARCHAR},
+		buyer_message = #{record.buyerMessage,jdbcType=VARCHAR},
+		buyer_nick = #{record.buyerNick,jdbcType=VARCHAR},
+		buyer_obtain_point_fee = #{record.buyerObtainPointFee,jdbcType=VARCHAR},
+		buyer_rate = #{record.buyerRate,jdbcType=VARCHAR},
+		buyerTaxNO = #{record.buyertaxno,jdbcType=VARCHAR},
+		car_store_code = #{record.carStoreCode,jdbcType=VARCHAR},
+		car_store_name = #{record.carStoreName,jdbcType=VARCHAR},
+		car_taker = #{record.carTaker,jdbcType=VARCHAR},
+		car_taker_id = #{record.carTakerId,jdbcType=VARCHAR},
+		car_taker_phone = #{record.carTakerPhone,jdbcType=VARCHAR},
+		cnAuto = #{record.cnauto,jdbcType=VARCHAR},
+		cnService = #{record.cnservice,jdbcType=VARCHAR},
+		cod_fee = #{record.codFee,jdbcType=VARCHAR},
+		cod_status = #{record.codStatus,jdbcType=VARCHAR},
+		commission_fee = #{record.commissionFee,jdbcType=VARCHAR},
+		consign_time = #{record.consignTime,jdbcType=VARCHAR},
+		coupon_fee = #{record.couponFee,jdbcType=VARCHAR},
+		created = #{record.created,jdbcType=VARCHAR},
+		credit_card_fee = #{record.creditCardFee,jdbcType=VARCHAR},
+		delay_create_delivery = #{record.delayCreateDelivery,jdbcType=VARCHAR},
+		discount_fee = #{record.discountFee,jdbcType=VARCHAR},
+		down_payment = #{record.downPayment,jdbcType=VARCHAR},
+		down_payment_ratio = #{record.downPaymentRatio,jdbcType=VARCHAR},
+		encrypt_alipay_id = #{record.encryptAlipayId,jdbcType=VARCHAR},
+		end_time = #{record.endTime,jdbcType=VARCHAR},
+		es_date = #{record.esDate,jdbcType=VARCHAR},
+		es_range = #{record.esRange,jdbcType=VARCHAR},
+		esDate = #{record.esdate,jdbcType=VARCHAR},
+		esRange = #{record.esrange,jdbcType=VARCHAR},
+		est_con_time = #{record.estConTime,jdbcType=VARCHAR},
+		et_shop_id = #{record.etShopId,jdbcType=VARCHAR},
+		et_shop_name = #{record.etShopName,jdbcType=VARCHAR},
+		eticket_service_addr = #{record.eticketServiceAddr,jdbcType=VARCHAR},
+		express_agency_fee = #{record.expressAgencyFee,jdbcType=VARCHAR},
+		forbid_consign = #{record.forbidConsign,jdbcType=VARCHAR},
+		has_post_fee = #{record.hasPostFee,jdbcType=VARCHAR},
+		has_yfx = #{record.hasYfx,jdbcType=VARCHAR},
+		installment_num = #{record.installmentNum,jdbcType=VARCHAR},
+		invoice_kind = #{record.invoiceKind,jdbcType=VARCHAR},
+		invoice_name = #{record.invoiceName,jdbcType=VARCHAR},
+		invoice_type = #{record.invoiceType,jdbcType=VARCHAR},
+		is_3D = #{record.is3d,jdbcType=VARCHAR},
+		is_brand_sale = #{record.isBrandSale,jdbcType=VARCHAR},
+		is_daixiao = #{record.isDaixiao,jdbcType=VARCHAR},
+		is_force_wlb = #{record.isForceWlb,jdbcType=VARCHAR},
+		is_lgtype = #{record.isLgtype,jdbcType=VARCHAR},
+		is_part_consign = #{record.isPartConsign,jdbcType=VARCHAR},
+		is_sh_ship = #{record.isShShip,jdbcType=VARCHAR},
+		is_wt = #{record.isWt,jdbcType=VARCHAR},
+		mark_desc = #{record.markDesc,jdbcType=VARCHAR},
+		market = #{record.market,jdbcType=VARCHAR},
+		modified = #{record.modified,jdbcType=VARCHAR},
+		month_payment = #{record.monthPayment,jdbcType=VARCHAR},
+		num = #{record.num,jdbcType=VARCHAR},
+		num_iid = #{record.numIid,jdbcType=VARCHAR},
+		o2o = #{record.o2o,jdbcType=VARCHAR},
+		o2o_delivery = #{record.o2oDelivery,jdbcType=VARCHAR},
+		o2o_et_order_id = #{record.o2oEtOrderId,jdbcType=VARCHAR},
+		o2o_guide_id = #{record.o2oGuideId,jdbcType=VARCHAR},
+		o2o_guide_name = #{record.o2oGuideName,jdbcType=VARCHAR},
+		o2o_out_trade_id = #{record.o2oOutTradeId,jdbcType=VARCHAR},
+		o2o_shop_id = #{record.o2oShopId,jdbcType=VARCHAR},
+		o2o_shop_name = #{record.o2oShopName,jdbcType=VARCHAR},
+		o2o_step_order_id = #{record.o2oStepOrderId,jdbcType=VARCHAR},
+		o2o_step_trade_detail = #{record.o2oStepTradeDetail,jdbcType=VARCHAR},
+		o2o_voucher_price = #{record.o2oVoucherPrice,jdbcType=VARCHAR},
+		ofp_hold = #{record.ofpHold,jdbcType=VARCHAR},
+		omni_attr = #{record.omniAttr,jdbcType=VARCHAR},
+		omni_param = #{record.omniParam,jdbcType=VARCHAR},
+		omnichannel_param = #{record.omnichannelParam,jdbcType=VARCHAR},
+		order_tax_fee = #{record.orderTaxFee,jdbcType=VARCHAR},
+		order_tax_promotion_fee = #{record.orderTaxPromotionFee,jdbcType=VARCHAR},
+		os_date = #{record.osDate,jdbcType=VARCHAR},
+		os_range = #{record.osRange,jdbcType=VARCHAR},
+		osDate = #{record.osdate,jdbcType=VARCHAR},
+		osRange = #{record.osrange,jdbcType=VARCHAR},
+		out_unique_id = #{record.outUniqueId,jdbcType=VARCHAR},
+		paid_coupon_fee = #{record.paidCouponFee,jdbcType=VARCHAR},
+		pay_time = #{record.payTime,jdbcType=VARCHAR},
+		payCurrency = #{record.paycurrency,jdbcType=VARCHAR},
+		payment = #{record.payment,jdbcType=VARCHAR},
+		pcc_af = #{record.pccAf,jdbcType=VARCHAR},
+		penalty = #{record.penalty,jdbcType=VARCHAR},
+		pic_path = #{record.picPath,jdbcType=VARCHAR},
+		point_fee = #{record.pointFee,jdbcType=VARCHAR},
+		post_fee = #{record.postFee,jdbcType=VARCHAR},
+		price = #{record.price,jdbcType=VARCHAR},
+		promotion_details = #{record.promotionDetails,jdbcType=VARCHAR},
+		pushTime = #{record.pushtime,jdbcType=VARCHAR},
+		real_point_fee = #{record.realPointFee,jdbcType=VARCHAR},
+		received_payment = #{record.receivedPayment,jdbcType=VARCHAR},
+		receiver_address = #{record.receiverAddress,jdbcType=VARCHAR},
+		receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+		receiver_country = #{record.receiverCountry,jdbcType=VARCHAR},
+		receiver_district = #{record.receiverDistrict,jdbcType=VARCHAR},
+		receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+		receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+		receiver_phone = #{record.receiverPhone,jdbcType=VARCHAR},
+		receiver_state = #{record.receiverState,jdbcType=VARCHAR},
+		receiver_town = #{record.receiverTown,jdbcType=VARCHAR},
+		receiver_zip = #{record.receiverZip,jdbcType=VARCHAR},
+		rx_audit_status = #{record.rxAuditStatus,jdbcType=VARCHAR},
+		seller_alipay_no = #{record.sellerAlipayNo,jdbcType=VARCHAR},
+		seller_can_rate = #{record.sellerCanRate,jdbcType=VARCHAR},
+		seller_cod_fee = #{record.sellerCodFee,jdbcType=VARCHAR},
+		seller_email = #{record.sellerEmail,jdbcType=VARCHAR},
+		seller_flag = #{record.sellerFlag,jdbcType=VARCHAR},
+		seller_memo = #{record.sellerMemo,jdbcType=VARCHAR},
+		seller_mobile = #{record.sellerMobile,jdbcType=VARCHAR},
+		seller_name = #{record.sellerName,jdbcType=VARCHAR},
+		seller_nick = #{record.sellerNick,jdbcType=VARCHAR},
+		seller_phone = #{record.sellerPhone,jdbcType=VARCHAR},
+		seller_rate = #{record.sellerRate,jdbcType=VARCHAR},
+		send_time = #{record.sendTime,jdbcType=VARCHAR},
+		service_fee = #{record.serviceFee,jdbcType=VARCHAR},
+		service_orders = #{record.serviceOrders,jdbcType=VARCHAR},
+		service_tags = #{record.serviceTags,jdbcType=VARCHAR},
+		service_type = #{record.serviceType,jdbcType=VARCHAR},
+		share_group_hold = #{record.shareGroupHold,jdbcType=VARCHAR},
+		shipping_type = #{record.shippingType,jdbcType=VARCHAR},
+		shop_code = #{record.shopCode,jdbcType=VARCHAR},
+		shop_pick = #{record.shopPick,jdbcType=VARCHAR},
+		sid = #{record.sid,jdbcType=VARCHAR},
+		snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+		status = #{record.status,jdbcType=VARCHAR},
+		step_paid_fee = #{record.stepPaidFee,jdbcType=VARCHAR},
+		step_trade_status = #{record.stepTradeStatus,jdbcType=VARCHAR},
+		store_code = #{record.storeCode,jdbcType=VARCHAR},
+		tail_payment = #{record.tailPayment,jdbcType=VARCHAR},
+		team_buy_hold = #{record.teamBuyHold,jdbcType=VARCHAR},
+		tid = #{record.tid,jdbcType=VARCHAR},
+		tid_str = #{record.tidStr,jdbcType=VARCHAR},
+		timeout_action_time = #{record.timeoutActionTime,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		top_hold = #{record.topHold,jdbcType=VARCHAR},
+		toptype = #{record.toptype,jdbcType=VARCHAR},
+		total_fee = #{record.totalFee,jdbcType=VARCHAR},
+		trade_attr = #{record.tradeAttr,jdbcType=VARCHAR},
+		trade_ext = #{record.tradeExt,jdbcType=VARCHAR},
+		trade_from = #{record.tradeFrom,jdbcType=VARCHAR},
+		trade_memo = #{record.tradeMemo,jdbcType=VARCHAR},
+		trade_source = #{record.tradeSource,jdbcType=VARCHAR},
+		type = #{record.type,jdbcType=VARCHAR},
+		ws_bank_apply_no = #{record.wsBankApplyNo,jdbcType=VARCHAR},
+		yfx_fee = #{record.yfxFee,jdbcType=VARCHAR},
+		yfx_id = #{record.yfxId,jdbcType=VARCHAR},
+		yfx_type = #{record.yfxType,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="bi.baiqiu.pojo.BiTradeOrders">
+		update bi_trade_orders
+		<set>
+			<if test="adjustFee != null">
+				adjust_fee = #{adjustFee,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayId != null">
+				alipay_id = #{alipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayNo != null">
+				alipay_no = #{alipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="alipayPoint != null">
+				alipay_point = #{alipayPoint,jdbcType=VARCHAR},
+			</if>
+			<if test="assembly != null">
+				assembly = #{assembly,jdbcType=VARCHAR},
+			</if>
+			<if test="availableConfirmFee != null">
+				available_confirm_fee = #{availableConfirmFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerAlipayNo != null">
+				buyer_alipay_no = #{buyerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerArea != null">
+				buyer_area = #{buyerArea,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerCodFee != null">
+				buyer_cod_fee = #{buyerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerEmail != null">
+				buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerFlag != null">
+				buyer_flag = #{buyerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerIp != null">
+				buyer_ip = #{buyerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerMemo != null">
+				buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerMessage != null">
+				buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerNick != null">
+				buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerObtainPointFee != null">
+				buyer_obtain_point_fee = #{buyerObtainPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="buyerRate != null">
+				buyer_rate = #{buyerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="buyertaxno != null">
+				buyerTaxNO = #{buyertaxno,jdbcType=VARCHAR},
+			</if>
+			<if test="carStoreCode != null">
+				car_store_code = #{carStoreCode,jdbcType=VARCHAR},
+			</if>
+			<if test="carStoreName != null">
+				car_store_name = #{carStoreName,jdbcType=VARCHAR},
+			</if>
+			<if test="carTaker != null">
+				car_taker = #{carTaker,jdbcType=VARCHAR},
+			</if>
+			<if test="carTakerId != null">
+				car_taker_id = #{carTakerId,jdbcType=VARCHAR},
+			</if>
+			<if test="carTakerPhone != null">
+				car_taker_phone = #{carTakerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="cnauto != null">
+				cnAuto = #{cnauto,jdbcType=VARCHAR},
+			</if>
+			<if test="cnservice != null">
+				cnService = #{cnservice,jdbcType=VARCHAR},
+			</if>
+			<if test="codFee != null">
+				cod_fee = #{codFee,jdbcType=VARCHAR},
+			</if>
+			<if test="codStatus != null">
+				cod_status = #{codStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="commissionFee != null">
+				commission_fee = #{commissionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="consignTime != null">
+				consign_time = #{consignTime,jdbcType=VARCHAR},
+			</if>
+			<if test="couponFee != null">
+				coupon_fee = #{couponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=VARCHAR},
+			</if>
+			<if test="creditCardFee != null">
+				credit_card_fee = #{creditCardFee,jdbcType=VARCHAR},
+			</if>
+			<if test="delayCreateDelivery != null">
+				delay_create_delivery = #{delayCreateDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="discountFee != null">
+				discount_fee = #{discountFee,jdbcType=VARCHAR},
+			</if>
+			<if test="downPayment != null">
+				down_payment = #{downPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="downPaymentRatio != null">
+				down_payment_ratio = #{downPaymentRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="encryptAlipayId != null">
+				encrypt_alipay_id = #{encryptAlipayId,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="esDate != null">
+				es_date = #{esDate,jdbcType=VARCHAR},
+			</if>
+			<if test="esRange != null">
+				es_range = #{esRange,jdbcType=VARCHAR},
+			</if>
+			<if test="esdate != null">
+				esDate = #{esdate,jdbcType=VARCHAR},
+			</if>
+			<if test="esrange != null">
+				esRange = #{esrange,jdbcType=VARCHAR},
+			</if>
+			<if test="estConTime != null">
+				est_con_time = #{estConTime,jdbcType=VARCHAR},
+			</if>
+			<if test="etShopId != null">
+				et_shop_id = #{etShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="etShopName != null">
+				et_shop_name = #{etShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="eticketServiceAddr != null">
+				eticket_service_addr = #{eticketServiceAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="expressAgencyFee != null">
+				express_agency_fee = #{expressAgencyFee,jdbcType=VARCHAR},
+			</if>
+			<if test="forbidConsign != null">
+				forbid_consign = #{forbidConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="hasPostFee != null">
+				has_post_fee = #{hasPostFee,jdbcType=VARCHAR},
+			</if>
+			<if test="hasYfx != null">
+				has_yfx = #{hasYfx,jdbcType=VARCHAR},
+			</if>
+			<if test="installmentNum != null">
+				installment_num = #{installmentNum,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceKind != null">
+				invoice_kind = #{invoiceKind,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceName != null">
+				invoice_name = #{invoiceName,jdbcType=VARCHAR},
+			</if>
+			<if test="invoiceType != null">
+				invoice_type = #{invoiceType,jdbcType=VARCHAR},
+			</if>
+			<if test="is3d != null">
+				is_3D = #{is3d,jdbcType=VARCHAR},
+			</if>
+			<if test="isBrandSale != null">
+				is_brand_sale = #{isBrandSale,jdbcType=VARCHAR},
+			</if>
+			<if test="isDaixiao != null">
+				is_daixiao = #{isDaixiao,jdbcType=VARCHAR},
+			</if>
+			<if test="isForceWlb != null">
+				is_force_wlb = #{isForceWlb,jdbcType=VARCHAR},
+			</if>
+			<if test="isLgtype != null">
+				is_lgtype = #{isLgtype,jdbcType=VARCHAR},
+			</if>
+			<if test="isPartConsign != null">
+				is_part_consign = #{isPartConsign,jdbcType=VARCHAR},
+			</if>
+			<if test="isShShip != null">
+				is_sh_ship = #{isShShip,jdbcType=VARCHAR},
+			</if>
+			<if test="isWt != null">
+				is_wt = #{isWt,jdbcType=VARCHAR},
+			</if>
+			<if test="markDesc != null">
+				mark_desc = #{markDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="market != null">
+				market = #{market,jdbcType=VARCHAR},
+			</if>
+			<if test="modified != null">
+				modified = #{modified,jdbcType=VARCHAR},
+			</if>
+			<if test="monthPayment != null">
+				month_payment = #{monthPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=VARCHAR},
+			</if>
+			<if test="numIid != null">
+				num_iid = #{numIid,jdbcType=VARCHAR},
+			</if>
+			<if test="o2o != null">
+				o2o = #{o2o,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oDelivery != null">
+				o2o_delivery = #{o2oDelivery,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oEtOrderId != null">
+				o2o_et_order_id = #{o2oEtOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oGuideId != null">
+				o2o_guide_id = #{o2oGuideId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oGuideName != null">
+				o2o_guide_name = #{o2oGuideName,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oOutTradeId != null">
+				o2o_out_trade_id = #{o2oOutTradeId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oShopId != null">
+				o2o_shop_id = #{o2oShopId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oShopName != null">
+				o2o_shop_name = #{o2oShopName,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oStepOrderId != null">
+				o2o_step_order_id = #{o2oStepOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oStepTradeDetail != null">
+				o2o_step_trade_detail = #{o2oStepTradeDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="o2oVoucherPrice != null">
+				o2o_voucher_price = #{o2oVoucherPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="ofpHold != null">
+				ofp_hold = #{ofpHold,jdbcType=VARCHAR},
+			</if>
+			<if test="omniAttr != null">
+				omni_attr = #{omniAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="omniParam != null">
+				omni_param = #{omniParam,jdbcType=VARCHAR},
+			</if>
+			<if test="omnichannelParam != null">
+				omnichannel_param = #{omnichannelParam,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTaxFee != null">
+				order_tax_fee = #{orderTaxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTaxPromotionFee != null">
+				order_tax_promotion_fee = #{orderTaxPromotionFee,jdbcType=VARCHAR},
+			</if>
+			<if test="osDate != null">
+				os_date = #{osDate,jdbcType=VARCHAR},
+			</if>
+			<if test="osRange != null">
+				os_range = #{osRange,jdbcType=VARCHAR},
+			</if>
+			<if test="osdate != null">
+				osDate = #{osdate,jdbcType=VARCHAR},
+			</if>
+			<if test="osrange != null">
+				osRange = #{osrange,jdbcType=VARCHAR},
+			</if>
+			<if test="outUniqueId != null">
+				out_unique_id = #{outUniqueId,jdbcType=VARCHAR},
+			</if>
+			<if test="paidCouponFee != null">
+				paid_coupon_fee = #{paidCouponFee,jdbcType=VARCHAR},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime,jdbcType=VARCHAR},
+			</if>
+			<if test="paycurrency != null">
+				payCurrency = #{paycurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="payment != null">
+				payment = #{payment,jdbcType=VARCHAR},
+			</if>
+			<if test="pccAf != null">
+				pcc_af = #{pccAf,jdbcType=VARCHAR},
+			</if>
+			<if test="penalty != null">
+				penalty = #{penalty,jdbcType=VARCHAR},
+			</if>
+			<if test="picPath != null">
+				pic_path = #{picPath,jdbcType=VARCHAR},
+			</if>
+			<if test="pointFee != null">
+				point_fee = #{pointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="postFee != null">
+				post_fee = #{postFee,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=VARCHAR},
+			</if>
+			<if test="promotionDetails != null">
+				promotion_details = #{promotionDetails,jdbcType=VARCHAR},
+			</if>
+			<if test="pushtime != null">
+				pushTime = #{pushtime,jdbcType=VARCHAR},
+			</if>
+			<if test="realPointFee != null">
+				real_point_fee = #{realPointFee,jdbcType=VARCHAR},
+			</if>
+			<if test="receivedPayment != null">
+				received_payment = #{receivedPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverAddress != null">
+				receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverCity != null">
+				receiver_city = #{receiverCity,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverCountry != null">
+				receiver_country = #{receiverCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverDistrict != null">
+				receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverMobile != null">
+				receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverName != null">
+				receiver_name = #{receiverName,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverPhone != null">
+				receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverState != null">
+				receiver_state = #{receiverState,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverTown != null">
+				receiver_town = #{receiverTown,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverZip != null">
+				receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+			</if>
+			<if test="rxAuditStatus != null">
+				rx_audit_status = #{rxAuditStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerAlipayNo != null">
+				seller_alipay_no = #{sellerAlipayNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerCanRate != null">
+				seller_can_rate = #{sellerCanRate,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerCodFee != null">
+				seller_cod_fee = #{sellerCodFee,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerEmail != null">
+				seller_email = #{sellerEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerFlag != null">
+				seller_flag = #{sellerFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerMemo != null">
+				seller_memo = #{sellerMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerMobile != null">
+				seller_mobile = #{sellerMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerName != null">
+				seller_name = #{sellerName,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerNick != null">
+				seller_nick = #{sellerNick,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerPhone != null">
+				seller_phone = #{sellerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="sellerRate != null">
+				seller_rate = #{sellerRate,jdbcType=VARCHAR},
+			</if>
+			<if test="sendTime != null">
+				send_time = #{sendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceFee != null">
+				service_fee = #{serviceFee,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceOrders != null">
+				service_orders = #{serviceOrders,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceTags != null">
+				service_tags = #{serviceTags,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceType != null">
+				service_type = #{serviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="shareGroupHold != null">
+				share_group_hold = #{shareGroupHold,jdbcType=VARCHAR},
+			</if>
+			<if test="shippingType != null">
+				shipping_type = #{shippingType,jdbcType=VARCHAR},
+			</if>
+			<if test="shopCode != null">
+				shop_code = #{shopCode,jdbcType=VARCHAR},
+			</if>
+			<if test="shopPick != null">
+				shop_pick = #{shopPick,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="snapshotUrl != null">
+				snapshot_url = #{snapshotUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="stepPaidFee != null">
+				step_paid_fee = #{stepPaidFee,jdbcType=VARCHAR},
+			</if>
+			<if test="stepTradeStatus != null">
+				step_trade_status = #{stepTradeStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="storeCode != null">
+				store_code = #{storeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="tailPayment != null">
+				tail_payment = #{tailPayment,jdbcType=VARCHAR},
+			</if>
+			<if test="teamBuyHold != null">
+				team_buy_hold = #{teamBuyHold,jdbcType=VARCHAR},
+			</if>
+			<if test="tid != null">
+				tid = #{tid,jdbcType=VARCHAR},
+			</if>
+			<if test="tidStr != null">
+				tid_str = #{tidStr,jdbcType=VARCHAR},
+			</if>
+			<if test="timeoutActionTime != null">
+				timeout_action_time = #{timeoutActionTime,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="topHold != null">
+				top_hold = #{topHold,jdbcType=VARCHAR},
+			</if>
+			<if test="toptype != null">
+				toptype = #{toptype,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFee != null">
+				total_fee = #{totalFee,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeAttr != null">
+				trade_attr = #{tradeAttr,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeExt != null">
+				trade_ext = #{tradeExt,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeFrom != null">
+				trade_from = #{tradeFrom,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeMemo != null">
+				trade_memo = #{tradeMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeSource != null">
+				trade_source = #{tradeSource,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="wsBankApplyNo != null">
+				ws_bank_apply_no = #{wsBankApplyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxFee != null">
+				yfx_fee = #{yfxFee,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxId != null">
+				yfx_id = #{yfxId,jdbcType=VARCHAR},
+			</if>
+			<if test="yfxType != null">
+				yfx_type = #{yfxType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="bi.baiqiu.pojo.BiTradeOrders">
+		update bi_trade_orders
+		set adjust_fee = #{adjustFee,jdbcType=VARCHAR},
+		alipay_id = #{alipayId,jdbcType=VARCHAR},
+		alipay_no = #{alipayNo,jdbcType=VARCHAR},
+		alipay_point = #{alipayPoint,jdbcType=VARCHAR},
+		assembly = #{assembly,jdbcType=VARCHAR},
+		available_confirm_fee = #{availableConfirmFee,jdbcType=VARCHAR},
+		buyer_alipay_no = #{buyerAlipayNo,jdbcType=VARCHAR},
+		buyer_area = #{buyerArea,jdbcType=VARCHAR},
+		buyer_cod_fee = #{buyerCodFee,jdbcType=VARCHAR},
+		buyer_email = #{buyerEmail,jdbcType=VARCHAR},
+		buyer_flag = #{buyerFlag,jdbcType=VARCHAR},
+		buyer_ip = #{buyerIp,jdbcType=VARCHAR},
+		buyer_memo = #{buyerMemo,jdbcType=VARCHAR},
+		buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+		buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+		buyer_obtain_point_fee = #{buyerObtainPointFee,jdbcType=VARCHAR},
+		buyer_rate = #{buyerRate,jdbcType=VARCHAR},
+		buyerTaxNO = #{buyertaxno,jdbcType=VARCHAR},
+		car_store_code = #{carStoreCode,jdbcType=VARCHAR},
+		car_store_name = #{carStoreName,jdbcType=VARCHAR},
+		car_taker = #{carTaker,jdbcType=VARCHAR},
+		car_taker_id = #{carTakerId,jdbcType=VARCHAR},
+		car_taker_phone = #{carTakerPhone,jdbcType=VARCHAR},
+		cnAuto = #{cnauto,jdbcType=VARCHAR},
+		cnService = #{cnservice,jdbcType=VARCHAR},
+		cod_fee = #{codFee,jdbcType=VARCHAR},
+		cod_status = #{codStatus,jdbcType=VARCHAR},
+		commission_fee = #{commissionFee,jdbcType=VARCHAR},
+		consign_time = #{consignTime,jdbcType=VARCHAR},
+		coupon_fee = #{couponFee,jdbcType=VARCHAR},
+		created = #{created,jdbcType=VARCHAR},
+		credit_card_fee = #{creditCardFee,jdbcType=VARCHAR},
+		delay_create_delivery = #{delayCreateDelivery,jdbcType=VARCHAR},
+		discount_fee = #{discountFee,jdbcType=VARCHAR},
+		down_payment = #{downPayment,jdbcType=VARCHAR},
+		down_payment_ratio = #{downPaymentRatio,jdbcType=VARCHAR},
+		encrypt_alipay_id = #{encryptAlipayId,jdbcType=VARCHAR},
+		end_time = #{endTime,jdbcType=VARCHAR},
+		es_date = #{esDate,jdbcType=VARCHAR},
+		es_range = #{esRange,jdbcType=VARCHAR},
+		esDate = #{esdate,jdbcType=VARCHAR},
+		esRange = #{esrange,jdbcType=VARCHAR},
+		est_con_time = #{estConTime,jdbcType=VARCHAR},
+		et_shop_id = #{etShopId,jdbcType=VARCHAR},
+		et_shop_name = #{etShopName,jdbcType=VARCHAR},
+		eticket_service_addr = #{eticketServiceAddr,jdbcType=VARCHAR},
+		express_agency_fee = #{expressAgencyFee,jdbcType=VARCHAR},
+		forbid_consign = #{forbidConsign,jdbcType=VARCHAR},
+		has_post_fee = #{hasPostFee,jdbcType=VARCHAR},
+		has_yfx = #{hasYfx,jdbcType=VARCHAR},
+		installment_num = #{installmentNum,jdbcType=VARCHAR},
+		invoice_kind = #{invoiceKind,jdbcType=VARCHAR},
+		invoice_name = #{invoiceName,jdbcType=VARCHAR},
+		invoice_type = #{invoiceType,jdbcType=VARCHAR},
+		is_3D = #{is3d,jdbcType=VARCHAR},
+		is_brand_sale = #{isBrandSale,jdbcType=VARCHAR},
+		is_daixiao = #{isDaixiao,jdbcType=VARCHAR},
+		is_force_wlb = #{isForceWlb,jdbcType=VARCHAR},
+		is_lgtype = #{isLgtype,jdbcType=VARCHAR},
+		is_part_consign = #{isPartConsign,jdbcType=VARCHAR},
+		is_sh_ship = #{isShShip,jdbcType=VARCHAR},
+		is_wt = #{isWt,jdbcType=VARCHAR},
+		mark_desc = #{markDesc,jdbcType=VARCHAR},
+		market = #{market,jdbcType=VARCHAR},
+		modified = #{modified,jdbcType=VARCHAR},
+		month_payment = #{monthPayment,jdbcType=VARCHAR},
+		num = #{num,jdbcType=VARCHAR},
+		num_iid = #{numIid,jdbcType=VARCHAR},
+		o2o = #{o2o,jdbcType=VARCHAR},
+		o2o_delivery = #{o2oDelivery,jdbcType=VARCHAR},
+		o2o_et_order_id = #{o2oEtOrderId,jdbcType=VARCHAR},
+		o2o_guide_id = #{o2oGuideId,jdbcType=VARCHAR},
+		o2o_guide_name = #{o2oGuideName,jdbcType=VARCHAR},
+		o2o_out_trade_id = #{o2oOutTradeId,jdbcType=VARCHAR},
+		o2o_shop_id = #{o2oShopId,jdbcType=VARCHAR},
+		o2o_shop_name = #{o2oShopName,jdbcType=VARCHAR},
+		o2o_step_order_id = #{o2oStepOrderId,jdbcType=VARCHAR},
+		o2o_step_trade_detail = #{o2oStepTradeDetail,jdbcType=VARCHAR},
+		o2o_voucher_price = #{o2oVoucherPrice,jdbcType=VARCHAR},
+		ofp_hold = #{ofpHold,jdbcType=VARCHAR},
+		omni_attr = #{omniAttr,jdbcType=VARCHAR},
+		omni_param = #{omniParam,jdbcType=VARCHAR},
+		omnichannel_param = #{omnichannelParam,jdbcType=VARCHAR},
+		order_tax_fee = #{orderTaxFee,jdbcType=VARCHAR},
+		order_tax_promotion_fee = #{orderTaxPromotionFee,jdbcType=VARCHAR},
+		os_date = #{osDate,jdbcType=VARCHAR},
+		os_range = #{osRange,jdbcType=VARCHAR},
+		osDate = #{osdate,jdbcType=VARCHAR},
+		osRange = #{osrange,jdbcType=VARCHAR},
+		out_unique_id = #{outUniqueId,jdbcType=VARCHAR},
+		paid_coupon_fee = #{paidCouponFee,jdbcType=VARCHAR},
+		pay_time = #{payTime,jdbcType=VARCHAR},
+		payCurrency = #{paycurrency,jdbcType=VARCHAR},
+		payment = #{payment,jdbcType=VARCHAR},
+		pcc_af = #{pccAf,jdbcType=VARCHAR},
+		penalty = #{penalty,jdbcType=VARCHAR},
+		pic_path = #{picPath,jdbcType=VARCHAR},
+		point_fee = #{pointFee,jdbcType=VARCHAR},
+		post_fee = #{postFee,jdbcType=VARCHAR},
+		price = #{price,jdbcType=VARCHAR},
+		promotion_details = #{promotionDetails,jdbcType=VARCHAR},
+		pushTime = #{pushtime,jdbcType=VARCHAR},
+		real_point_fee = #{realPointFee,jdbcType=VARCHAR},
+		received_payment = #{receivedPayment,jdbcType=VARCHAR},
+		receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+		receiver_city = #{receiverCity,jdbcType=VARCHAR},
+		receiver_country = #{receiverCountry,jdbcType=VARCHAR},
+		receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+		receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+		receiver_name = #{receiverName,jdbcType=VARCHAR},
+		receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+		receiver_state = #{receiverState,jdbcType=VARCHAR},
+		receiver_town = #{receiverTown,jdbcType=VARCHAR},
+		receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+		rx_audit_status = #{rxAuditStatus,jdbcType=VARCHAR},
+		seller_alipay_no = #{sellerAlipayNo,jdbcType=VARCHAR},
+		seller_can_rate = #{sellerCanRate,jdbcType=VARCHAR},
+		seller_cod_fee = #{sellerCodFee,jdbcType=VARCHAR},
+		seller_email = #{sellerEmail,jdbcType=VARCHAR},
+		seller_flag = #{sellerFlag,jdbcType=VARCHAR},
+		seller_memo = #{sellerMemo,jdbcType=VARCHAR},
+		seller_mobile = #{sellerMobile,jdbcType=VARCHAR},
+		seller_name = #{sellerName,jdbcType=VARCHAR},
+		seller_nick = #{sellerNick,jdbcType=VARCHAR},
+		seller_phone = #{sellerPhone,jdbcType=VARCHAR},
+		seller_rate = #{sellerRate,jdbcType=VARCHAR},
+		send_time = #{sendTime,jdbcType=VARCHAR},
+		service_fee = #{serviceFee,jdbcType=VARCHAR},
+		service_orders = #{serviceOrders,jdbcType=VARCHAR},
+		service_tags = #{serviceTags,jdbcType=VARCHAR},
+		service_type = #{serviceType,jdbcType=VARCHAR},
+		share_group_hold = #{shareGroupHold,jdbcType=VARCHAR},
+		shipping_type = #{shippingType,jdbcType=VARCHAR},
+		shop_code = #{shopCode,jdbcType=VARCHAR},
+		shop_pick = #{shopPick,jdbcType=VARCHAR},
+		sid = #{sid,jdbcType=VARCHAR},
+		snapshot_url = #{snapshotUrl,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		step_paid_fee = #{stepPaidFee,jdbcType=VARCHAR},
+		step_trade_status = #{stepTradeStatus,jdbcType=VARCHAR},
+		store_code = #{storeCode,jdbcType=VARCHAR},
+		tail_payment = #{tailPayment,jdbcType=VARCHAR},
+		team_buy_hold = #{teamBuyHold,jdbcType=VARCHAR},
+		tid = #{tid,jdbcType=VARCHAR},
+		tid_str = #{tidStr,jdbcType=VARCHAR},
+		timeout_action_time = #{timeoutActionTime,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		top_hold = #{topHold,jdbcType=VARCHAR},
+		toptype = #{toptype,jdbcType=VARCHAR},
+		total_fee = #{totalFee,jdbcType=VARCHAR},
+		trade_attr = #{tradeAttr,jdbcType=VARCHAR},
+		trade_ext = #{tradeExt,jdbcType=VARCHAR},
+		trade_from = #{tradeFrom,jdbcType=VARCHAR},
+		trade_memo = #{tradeMemo,jdbcType=VARCHAR},
+		trade_source = #{tradeSource,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		ws_bank_apply_no = #{wsBankApplyNo,jdbcType=VARCHAR},
+		yfx_fee = #{yfxFee,jdbcType=VARCHAR},
+		yfx_id = #{yfxId,jdbcType=VARCHAR},
+		yfx_type = #{yfxType,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="createTempTable">
+		CREATE TEMPORARY TABLE if not exists `temp_bi_trade_orders` (
+		`adjust_fee` varchar(30) DEFAULT NULL,
+		`alipay_id` varchar(30) DEFAULT NULL,
+		`alipay_no` varchar(30) DEFAULT NULL,
+		`alipay_point` varchar(30) DEFAULT NULL,
+		`assembly` varchar(30) DEFAULT NULL,
+		`available_confirm_fee` varchar(30) DEFAULT NULL,
+		`buyer_alipay_no` varchar(50) DEFAULT NULL,
+		`buyer_area` varchar(30) DEFAULT NULL,
+		`buyer_cod_fee` varchar(30) DEFAULT NULL,
+		`buyer_email` varchar(255) DEFAULT NULL,
+		`buyer_flag` varchar(30) DEFAULT NULL,
+		`buyer_ip` varchar(30) DEFAULT NULL,
+		`buyer_memo` varchar(255) DEFAULT NULL,
+		`buyer_message` varchar(255) DEFAULT NULL,
+		`buyer_nick` varchar(30) DEFAULT NULL,
+		`buyer_obtain_point_fee` varchar(30) DEFAULT NULL,
+		`buyer_rate` varchar(30) DEFAULT NULL,
+		`buyerTaxNO` varchar(30) DEFAULT NULL,
+		`car_store_code` varchar(30) DEFAULT NULL,
+		`car_store_name` varchar(30) DEFAULT NULL,
+		`car_taker` varchar(30) DEFAULT NULL,
+		`car_taker_id` varchar(30) DEFAULT NULL,
+		`car_taker_phone` varchar(30) DEFAULT NULL,
+		`cnAuto` varchar(30) DEFAULT NULL,
+		`cnService` varchar(30) DEFAULT NULL,
+		`cod_fee` varchar(30) DEFAULT NULL,
+		`cod_status` varchar(30) DEFAULT NULL,
+		`commission_fee` varchar(30) DEFAULT NULL,
+		`consign_time` varchar(30) DEFAULT NULL,
+		`coupon_fee` varchar(30) DEFAULT NULL,
+		`created` varchar(30) DEFAULT NULL,
+		`credit_card_fee` varchar(30) DEFAULT NULL,
+		`delay_create_delivery` varchar(30) DEFAULT NULL,
+		`discount_fee` varchar(30) DEFAULT NULL,
+		`down_payment` varchar(30) DEFAULT NULL,
+		`down_payment_ratio` varchar(30) DEFAULT NULL,
+		`encrypt_alipay_id` varchar(30) DEFAULT NULL,
+		`end_time` varchar(30) DEFAULT NULL,
+		`es_date` varchar(30) DEFAULT NULL,
+		`es_range` varchar(30) DEFAULT NULL,
+		`esDate` varchar(30) DEFAULT NULL,
+		`esRange` varchar(30) DEFAULT NULL,
+		`est_con_time` varchar(30) DEFAULT NULL,
+		`et_shop_id` varchar(30) DEFAULT NULL,
+		`et_shop_name` varchar(30) DEFAULT NULL,
+		`eticket_service_addr` varchar(30) DEFAULT NULL,
+		`express_agency_fee` varchar(30) DEFAULT NULL,
+		`forbid_consign` varchar(30) DEFAULT NULL,
+		`has_post_fee` varchar(30) DEFAULT NULL,
+		`has_yfx` varchar(30) DEFAULT NULL,
+		`installment_num` varchar(30) DEFAULT NULL,
+		`invoice_kind` varchar(30) DEFAULT NULL,
+		`invoice_name` varchar(30) DEFAULT NULL,
+		`invoice_type` varchar(30) DEFAULT NULL,
+		`is_3D` varchar(30) DEFAULT NULL,
+		`is_brand_sale` varchar(30) DEFAULT NULL,
+		`is_daixiao` varchar(30) DEFAULT NULL,
+		`is_force_wlb` varchar(30) DEFAULT NULL,
+		`is_lgtype` varchar(30) DEFAULT NULL,
+		`is_part_consign` varchar(30) DEFAULT NULL,
+		`is_sh_ship` varchar(30) DEFAULT NULL,
+		`is_wt` varchar(30) DEFAULT NULL,
+		`mark_desc` varchar(30) DEFAULT NULL,
+		`market` varchar(30) DEFAULT NULL,
+		`modified` varchar(30) DEFAULT NULL,
+		`month_payment` varchar(30) DEFAULT NULL,
+		`num` varchar(30) DEFAULT NULL,
+		`num_iid` varchar(30) DEFAULT NULL,
+		`o2o` varchar(30) DEFAULT NULL,
+		`o2o_delivery` varchar(30) DEFAULT NULL,
+		`o2o_et_order_id` varchar(30) DEFAULT NULL,
+		`o2o_guide_id` varchar(30) DEFAULT NULL,
+		`o2o_guide_name` varchar(30) DEFAULT NULL,
+		`o2o_out_trade_id` varchar(30) DEFAULT NULL,
+		`o2o_shop_id` varchar(30) DEFAULT NULL,
+		`o2o_shop_name` varchar(30) DEFAULT NULL,
+		`o2o_step_order_id` varchar(30) DEFAULT NULL,
+		`o2o_step_trade_detail` varchar(30) DEFAULT NULL,
+		`o2o_voucher_price` varchar(30) DEFAULT NULL,
+		`ofp_hold` varchar(30) DEFAULT NULL,
+		`omni_attr` varchar(30) DEFAULT NULL,
+		`omni_param` varchar(30) DEFAULT NULL,
+		`omnichannel_param` varchar(30) DEFAULT NULL,
+		`order_tax_fee` varchar(30) DEFAULT NULL,
+		`order_tax_promotion_fee` varchar(30) DEFAULT NULL,
+		`os_date` varchar(30) DEFAULT NULL,
+		`os_range` varchar(30) DEFAULT NULL,
+		`osDate` varchar(30) DEFAULT NULL,
+		`osRange` varchar(30) DEFAULT NULL,
+		`out_unique_id` varchar(30) DEFAULT NULL,
+		`paid_coupon_fee` varchar(30) DEFAULT NULL,
+		`pay_time` varchar(30) DEFAULT NULL,
+		`payCurrency` varchar(30) DEFAULT NULL,
+		`payment` varchar(30) DEFAULT NULL,
+		`pcc_af` varchar(30) DEFAULT NULL,
+		`penalty` varchar(30) DEFAULT NULL,
+		`pic_path` varchar(155) DEFAULT NULL,
+		`point_fee` varchar(30) DEFAULT NULL,
+		`post_fee` varchar(30) DEFAULT NULL,
+		`price` varchar(30) DEFAULT NULL,
+		`promotion_details` varchar(30) DEFAULT NULL,
+		`pushTime` varchar(30) DEFAULT NULL,
+		`real_point_fee` varchar(30) DEFAULT NULL,
+		`received_payment` varchar(30) DEFAULT NULL,
+		`receiver_address` varchar(255) DEFAULT NULL,
+		`receiver_city` varchar(30) DEFAULT NULL,
+		`receiver_country` varchar(30) DEFAULT NULL,
+		`receiver_district` varchar(30) DEFAULT NULL,
+		`receiver_mobile` varchar(30) DEFAULT NULL,
+		`receiver_name` varchar(30) DEFAULT NULL,
+		`receiver_phone` varchar(30) DEFAULT NULL,
+		`receiver_state` varchar(30) DEFAULT NULL,
+		`receiver_town` varchar(30) DEFAULT NULL,
+		`receiver_zip` varchar(30) DEFAULT NULL,
+		`rx_audit_status` varchar(30) DEFAULT NULL,
+		`seller_alipay_no` varchar(100) DEFAULT '',
+		`seller_can_rate` varchar(30) DEFAULT NULL,
+		`seller_cod_fee` varchar(30) DEFAULT NULL,
+		`seller_email` varchar(30) DEFAULT NULL,
+		`seller_flag` varchar(30) DEFAULT NULL,
+		`seller_memo` mediumtext,
+		`seller_mobile` varchar(30) DEFAULT NULL,
+		`seller_name` varchar(30) DEFAULT NULL,
+		`seller_nick` varchar(30) DEFAULT NULL,
+		`seller_phone` varchar(30) DEFAULT NULL,
+		`seller_rate` varchar(30) DEFAULT NULL,
+		`send_time` varchar(30) DEFAULT NULL,
+		`service_fee` varchar(30) DEFAULT NULL,
+		`service_orders` varchar(30) DEFAULT NULL,
+		`service_tags` varchar(30) DEFAULT NULL,
+		`service_type` varchar(30) DEFAULT NULL,
+		`share_group_hold` varchar(30) DEFAULT NULL,
+		`shipping_type` varchar(30) DEFAULT NULL,
+		`shop_code` varchar(30) DEFAULT NULL,
+		`shop_pick` varchar(30) DEFAULT NULL,
+		`sid` varchar(30) DEFAULT NULL,
+		`snapshot_url` varchar(255) DEFAULT NULL,
+		`status` varchar(30) DEFAULT NULL,
+		`step_paid_fee` varchar(30) DEFAULT NULL,
+		`step_trade_status` varchar(30) DEFAULT NULL,
+		`store_code` varchar(30) DEFAULT NULL,
+		`tail_payment` varchar(30) DEFAULT NULL,
+		`team_buy_hold` varchar(30) DEFAULT NULL,
+		`tid` varchar(30) DEFAULT NULL,
+		`tid_str` varchar(30) DEFAULT NULL,
+		`timeout_action_time` varchar(30) DEFAULT NULL,
+		`title` varchar(30) DEFAULT NULL,
+		`top_hold` varchar(30) DEFAULT NULL,
+		`toptype` varchar(30) DEFAULT NULL,
+		`total_fee` varchar(30) DEFAULT NULL,
+		`trade_attr` varchar(30) DEFAULT NULL,
+		`trade_ext` varchar(30) DEFAULT NULL,
+		`trade_from` varchar(30) DEFAULT NULL,
+		`trade_memo` varchar(30) DEFAULT NULL,
+		`trade_source` varchar(30) DEFAULT NULL,
+		`type` varchar(30) DEFAULT NULL,
+		`ws_bank_apply_no` varchar(30) DEFAULT NULL,
+		`yfx_fee` varchar(30) DEFAULT NULL,
+		`yfx_id` varchar(30) DEFAULT NULL,
+		`yfx_type` varchar(30) DEFAULT NULL
+		)
+	</insert>
+	<!-- 插入临时表 -->
+	<insert id="insertTempTableBys">
+		insert into temp_bi_trade_orders ( adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type)
+		values (#{adjustFee,jdbcType=VARCHAR}, #{alipayId,jdbcType=VARCHAR},
+		#{alipayNo,jdbcType=VARCHAR}, #{alipayPoint,jdbcType=VARCHAR},
+		#{assembly,jdbcType=VARCHAR},
+		#{availableConfirmFee,jdbcType=VARCHAR}, #{buyerAlipayNo,jdbcType=VARCHAR}, #{buyerArea,jdbcType=VARCHAR},
+		#{buyerCodFee,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR},
+		#{buyerFlag,jdbcType=VARCHAR},
+		#{buyerIp,jdbcType=VARCHAR}, #{buyerMemo,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR},
+		#{buyerNick,jdbcType=VARCHAR},
+		#{buyerObtainPointFee,jdbcType=VARCHAR},
+		#{buyerRate,jdbcType=VARCHAR},
+		#{codFee,jdbcType=VARCHAR},
+		#{codStatus,jdbcType=VARCHAR}, #{commissionFee,jdbcType=VARCHAR}, #{consignTime,jdbcType=VARCHAR},
+		#{couponFee,jdbcType=VARCHAR}, #{created,jdbcType=VARCHAR},
+		#{creditCardFee,jdbcType=VARCHAR},
+		#{delayCreateDelivery,jdbcType=VARCHAR},
+		#{discountFee,jdbcType=VARCHAR},
+		#{encryptAlipayId,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},
+		#{esRange,jdbcType=VARCHAR}, #{estConTime,jdbcType=VARCHAR}, #{etShopId,jdbcType=VARCHAR},
+		#{etShopName,jdbcType=VARCHAR},
+		#{eticketServiceAddr,jdbcType=VARCHAR},
+		#{expressAgencyFee,jdbcType=VARCHAR},
+		#{forbidConsign,jdbcType=VARCHAR}, #{hasPostFee,jdbcType=VARCHAR},
+		#{hasYfx,jdbcType=VARCHAR},
+		#{invoiceKind,jdbcType=VARCHAR}, #{invoiceName,jdbcType=VARCHAR},
+		#{invoiceType,jdbcType=VARCHAR}, #{is3D,jdbcType=VARCHAR}, #{isBrandSale,jdbcType=VARCHAR},
+		#{isDaixiao,jdbcType=VARCHAR}, #{isForceWlb,jdbcType=VARCHAR},
+		#{isLgtype,jdbcType=VARCHAR},
+		#{isPartConsign,jdbcType=VARCHAR}, #{isShShip,jdbcType=VARCHAR}, #{isWt,jdbcType=VARCHAR},
+		#{markDesc,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR},
+		#{modified,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{numIid,jdbcType=VARCHAR},
+		#{o2o,jdbcType=VARCHAR}, #{o2oDelivery,jdbcType=VARCHAR}, #{o2oEtOrderId,jdbcType=VARCHAR},
+		#{o2oGuideId,jdbcType=VARCHAR}, #{o2oGuideName,jdbcType=VARCHAR},
+		#{o2oOutTradeId,jdbcType=VARCHAR},
+		#{o2oShopId,jdbcType=VARCHAR}, #{o2oShopName,jdbcType=VARCHAR}, #{o2oStepOrderId,jdbcType=VARCHAR},
+		#{o2oStepTradeDetail,jdbcType=VARCHAR},
+		#{o2oVoucherPrice,jdbcType=VARCHAR}, #{ofpHold,jdbcType=VARCHAR},
+		#{omniAttr,jdbcType=VARCHAR}, #{omniParam,jdbcType=VARCHAR},
+		#{omnichannelParam,jdbcType=VARCHAR},
+		#{orderTaxFee,jdbcType=VARCHAR}, #{orderTaxPromotionFee,jdbcType=VARCHAR}, #{osDate,jdbcType=VARCHAR},
+		#{osRange,jdbcType=VARCHAR},
+		#{paidCouponFee,jdbcType=VARCHAR}, #{payTime,jdbcType=VARCHAR},
+		#{payment,jdbcType=VARCHAR}, #{pccAf,jdbcType=VARCHAR},
+		#{picPath,jdbcType=VARCHAR}, #{pointFee,jdbcType=VARCHAR},
+		#{postFee,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR},
+		#{realPointFee,jdbcType=VARCHAR}, #{receivedPayment,jdbcType=VARCHAR},
+		#{receiverAddress,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+		#{receiverCountry,jdbcType=VARCHAR},
+		#{receiverDistrict,jdbcType=VARCHAR},
+		#{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR},
+		#{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR},
+		#{receiverTown,jdbcType=VARCHAR},
+		#{receiverZip,jdbcType=VARCHAR}, #{rxAuditStatus,jdbcType=VARCHAR},
+		#{sellerAlipayNo,jdbcType=VARCHAR},
+		#{sellerCanRate,jdbcType=VARCHAR}, #{sellerCodFee,jdbcType=VARCHAR}, #{sellerEmail,jdbcType=VARCHAR},
+		#{sellerFlag,jdbcType=VARCHAR}, #{sellerMemo,jdbcType=VARCHAR},
+		#{sellerMobile,jdbcType=VARCHAR},
+		#{sellerName,jdbcType=VARCHAR}, #{sellerNick,jdbcType=VARCHAR}, #{sellerPhone,jdbcType=VARCHAR},
+		#{sellerRate,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+		#{serviceOrders,jdbcType=VARCHAR},
+		#{shareGroupHold,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR}, #{shopCode,jdbcType=VARCHAR},
+		#{shopPick,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR},
+		#{snapshotUrl,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{stepPaidFee,jdbcType=VARCHAR}, #{stepTradeStatus,jdbcType=VARCHAR},
+		#{teamBuyHold,jdbcType=VARCHAR},
+		#{tid,jdbcType=VARCHAR}, #{tidStr,jdbcType=VARCHAR}, #{timeoutActionTime,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{topHold,jdbcType=VARCHAR},
+		#{toptype,jdbcType=VARCHAR},
+		#{totalFee,jdbcType=VARCHAR}, #{tradeAttr,jdbcType=VARCHAR}, #{tradeExt,jdbcType=VARCHAR},
+		#{tradeFrom,jdbcType=VARCHAR}, #{tradeMemo,jdbcType=VARCHAR},
+		#{tradeSource,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{yfxFee,jdbcType=VARCHAR},
+		#{yfxId,jdbcType=VARCHAR}, #{yfxType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="getDateFromTempTable">
+		REPLACE INTO bi_trade_orders ( adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type) SELECT adjust_fee, alipay_id,
+		alipay_no, alipay_point, assembly,
+		available_confirm_fee, buyer_alipay_no, buyer_area,
+		buyer_cod_fee, buyer_email, buyer_flag,
+		buyer_ip, buyer_memo, buyer_message,
+		buyer_nick, buyer_obtain_point_fee, buyer_rate,
+		cod_fee,
+		cod_status, commission_fee, consign_time,
+		coupon_fee, created, credit_card_fee,
+		delay_create_delivery, discount_fee,
+		encrypt_alipay_id, end_time,
+		es_range, est_con_time, et_shop_id,
+		et_shop_name, eticket_service_addr, express_agency_fee,
+		forbid_consign, has_post_fee, has_yfx,
+		invoice_kind, invoice_name,
+		invoice_type, is_3D, is_brand_sale,
+		is_daixiao, is_force_wlb, is_lgtype,
+		is_part_consign, is_sh_ship, is_wt,
+		mark_desc, market, modified,
+		num, num_iid,
+		o2o, o2o_delivery, o2o_et_order_id,
+		o2o_guide_id, o2o_guide_name, o2o_out_trade_id,
+		o2o_shop_id, o2o_shop_name, o2o_step_order_id,
+		o2o_step_trade_detail, o2o_voucher_price, ofp_hold,
+		omni_attr, omni_param, omnichannel_param,
+		order_tax_fee, order_tax_promotion_fee, osDate, osRange,
+		paid_coupon_fee, pay_time,
+		payment, pcc_af,
+		pic_path, point_fee,
+		post_fee, price,
+		real_point_fee, received_payment,
+		receiver_address, receiver_city, receiver_country,
+		receiver_district, receiver_mobile, receiver_name,
+		receiver_phone, receiver_state, receiver_town,
+		receiver_zip, rx_audit_status, seller_alipay_no,
+		seller_can_rate, seller_cod_fee, seller_email,
+		seller_flag, seller_memo, seller_mobile,
+		seller_name, seller_nick, seller_phone,
+		seller_rate, send_time,
+		service_orders,
+		share_group_hold, shipping_type, shop_code,
+		shop_pick, sid, snapshot_url,
+		status, step_paid_fee, step_trade_status,
+		team_buy_hold,
+		tid, tid_str, timeout_action_time,
+		title, top_hold, toptype,
+		total_fee, trade_attr, trade_ext,
+		trade_from, trade_memo, trade_source,
+		type, yfx_fee,
+		yfx_id, yfx_type from temp_bi_trade_orders
+	</insert>
+	<select id="getTempCount" resultType="java.lang.Integer">
+	select count(*) from temp_bi_trade_orders
+	</select>
+</mapper>

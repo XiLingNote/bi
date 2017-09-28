@@ -1,0 +1,650 @@
+@CHARSET "UTF-8";
+/* 字体 */
+#cusTable {
+	background-color: #ffffff;
+	color: #5a5656;
+}
+
+.bootstrap-table {
+	color: black;
+}
+/* 表格表头可以自定义长度 */
+.table {
+	table-layout: fixed;
+}
+
+.pagination>li>a, .pagination>.disabled>a {
+	color: black;
+	background-color: #ffffff;
+}
+/*分页选择颜色  */
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus,
+	.pagination>li>span:focus {
+	background-color: #428bca;
+
+	color:white;
+	
+}
+/* 分页框线 */
+.fixed-table-pagination, .pagination>li>a, .pagination>li>span {
+		border: 0px solid #ffffff;
+}
+/*页脚部分的背景色  */
+.fixed-table-body, .fixed-table-loading, .fixed-table-pagination {
+	background-color: #ffffff;
+}
+/* 表格动态选择颜色 */
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #ffffff;
+}
+
+/*表格选中  */
+.fixed-table-container tbody .selected td {
+}
+/* 框线 */
+.fixed-table-container {
+	border: 0.1px solid #e8e8e8;
+	padding-bottom: 10%;
+}
+
+.pagination {
+	padding-right: 1px;
+}
+
+.modal-dialog {
+	right: auto;
+	left: 50%;
+	width: 500px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+/* 上传预览框 */
+.pagination-detail .page-list {
+	display: none;
+}
+/*过长的数据  */
+.table tbody td {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.targetTabel tbody tr td {
+	visible: visible;
+	text-overflow: clip;
+	white-space: nowrap;
+	border: 0.5px solid #e8e8e8;
+	
+}
+
+/* 右侧最大框 */
+.localRightpage {
+	background-color: #ffffff;
+	position: absolute;
+	top: 7%;
+	left: 15%;
+	width: 84%;
+	height: 88%;
+/* 	min-height: 598px;
+	min-width: 930px; */
+}
+/* 右侧中型框 */
+.localRightview {
+	position: absolute;
+	background-color: #ffffff;
+	width: 100%;
+	height: 90%;
+}
+
+#selectp{
+		position: relative;
+	top: 25%;
+	float: left;
+	width: 930px;
+	height: 50%;
+}
+/* 表格标题 */
+.th-inner {
+	color: #ffffff;
+	text-align: right;
+	padding: 6px;
+}
+/*表格内部字体样式 */
+#cusTable>tbody>tr>td {
+	padding: 5px;
+	font-size: 14px;
+	text-align: right;
+	border: 0.5px solid #e8e8e8;
+}
+/* 标题样式 */
+#cusTable>thead>tr>th {
+	background-color:#63a2d8;
+	padding-right: 6px;
+	font-size: 14px;
+	border: 0.5px solid #e8e8e8;
+}
+
+/* target页表格↓ */
+/* 目标界面特殊处理 */
+.localRightpageTarget {
+	background-color: #ffffff;
+	position: absolute;
+	top: 10%;
+	left:15%;
+	width: 84%;
+	height: 88%;
+/* 	min-height: 587px;
+ */}
+
+.localRightviewTarget {
+	position: absolute;
+	background-color: #f9f9f9;
+	width: 100%;
+	padding: 1px;
+/* 	min-width: 843px;
+ */}
+
+.btnT {
+	display: inline-block;
+	padding: 4px 4px;
+	margin-bottom: 0;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#gmvTarget {
+	background: pause;
+	width: 100%;
+	height: 73.5%;
+}
+
+#targetCountAndValue {
+	width: 15%;
+	position: absolute;
+	margin-top: 2%;
+}
+
+.dailyMainTitle {
+	float: right;
+	margin-right: 2px;
+	margin-top: 2px;
+}
+
+.tab-content {
+	float: right;
+	position: absolute;
+	margin-left: 18%;
+}
+
+.tableBorder {
+	height: 90%;
+}
+
+.dailyPayment {
+	width: 85px;
+}
+
+.targetInput {
+	height: 20px;
+	line-height: 10px;
+	padding: 2px;
+	border: 0px solid #d3d3d3;
+	width: 96px;
+	background: #ffffff;
+	margin-right: 1px;
+	float: right;
+	background: #ffffff;
+}
+
+.dailyTargetInput {
+	height: 20px;
+	line-height: 20px;
+	padding: 2px;
+	border: 1px solid #d3d3d3;
+	width: 110px;
+}
+/* 月目标集合输入框 */
+.targetAmountInput {
+	background-color: #ffffff;
+	color:#464646;
+	margin-top: 30%;
+	border: 0px solid #d3d3d3;
+	width: 125px;
+	float: right;
+	border: 0px solid #d3d3d3;
+}
+/* 收账销售总目标描述 */
+.gmvOrAlipay {
+	margin-top: 8%;
+	text-align: left;
+	font-size: 17px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.blueColor, .dailyPayment {
+	color: orange;
+}
+
+.fc-header-title {
+	margin-bottom: 2%;
+}
+
+.monthUnit {
+	height: 45px;
+	font-size: 14px;
+}
+
+.heithtBr {
+	height: 10px;
+}
+
+#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+	background-color: #fff
+}
+
+#main {
+	width: 700px;
+	min-height: 10px;
+	margin: 2% auto 0 auto;
+	border: 1px solid #e8e8e8;
+	background: #f9f9f9;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+/* ↑ */
+
+/* 表格foot分页部分字体 */
+.fixed-table-pagination, .pagination a {
+	font-size: 13px;
+}
+
+/*表头日期查询样式  */
+.queryStartDate {
+	position: relative;
+	height: 32px;
+	width: 130px;
+	padding-left: 8px;
+	padding-right:8px;
+	margin-left: 8px;
+	margin-right:8px;
+	min-height: 25px;
+	min-width: 87px;
+	text-align: center;
+}
+/*表头日期查询样式  */
+.kv-file-content {
+	display: none;
+}
+.queryEndDate {
+	position: relative;
+	height: 32px;
+	width: 130px;
+	padding-left:8px;
+	padding-right:8px;
+	margin-left: 8px;
+	min-height: 25px;
+	min-width: 87px;
+	text-align: center;
+}
+/* 日前控制不换行 */
+/* 查询条件div */
+.queryCondition {
+	padding-top: 0.1%;
+	margin-bottom: 1%;
+	padding-left: 1%;
+	color: black;
+/* 	min-width: 915px;
+ */}
+.queryConditions{
+	position: relative;
+	height: 32px;
+	width: 120px;
+	margin-right: 5px;
+	border-radius:5px;
+	background-color:white ;
+	text-align: center;
+	border: 1px solid #cccccc;
+}
+/* 查询删除导入按钮样式 */
+.queryBtn, .deleteBtn, .imputBtn {
+	margin-left: 5px;
+	margin-right: 5px;
+	background-color: #63a2d8;
+	color: white;
+	border: 0
+}
+/* 按钮分组 */
+.btn-group {
+	float: right;
+	top:25%;
+}
+.navbar-side .nav>li>a>i {
+    width: 1px;
+    text-align: center;
+}
+
+.navbar-side{
+	width: 14%;
+	margin-right: 1px;
+}
+.navbar {
+    min-height: 39px;
+    }
+    /* 商品行内编辑 */
+.btn-group-sm>.btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+@media ( min-height :1080px) {
+	.queryCondition {
+	}
+	#cusTable>tbody>tr>td {
+		padding: 8px;
+		padding-right: 8px;
+		font-size: 15px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 8px;
+		font-size: 15px;
+	}
+	#calendar {
+	width: 900px;
+	}
+	#main {
+	width: 920px;
+	margin: 20px auto 0 auto;
+}
+.fc-day-content{
+	height: 40px;
+}
+}
+@media ( min-height :950px) {
+
+	.fc-day-content{
+	height: 20px;
+}
+	.queryCondition {
+	}
+	#cusTable>tbody>tr>td {
+		padding: 6px;
+		padding-right: 6px;
+		font-size: 14px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 6px;
+		font-size: 14px;
+	}
+	
+}
+@media ( max-height :794px) {
+	
+	#cusTable>tbody>tr>td {
+		padding: 5px;
+	}
+}
+@media ( max-height :767px) {
+#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+}
+
+#main {
+		width: 700px;
+	margin: 8px auto 0 auto;
+}
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: black;
+	}
+	#cusTable>tbody>tr>td {
+		padding: 4px;
+		padding-right: 4px;
+		font-size: 14px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 4px;
+		font-size: 14px;
+	}
+}
+
+@media ( max-height :730px) {
+#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+}
+
+#main {
+		width: 700px;
+	margin: 8px auto 0 auto;
+}
+	.queryBtn, .deleteBtn, .imputBtn {
+	font-size: 13px;
+}
+	.sidebar-collapse>.nav>li>a {
+		padding: 10px 8px;
+		padding-left: 1px;
+	}
+	.sidebar-collapse .nav>li>a {
+		text-shadow: none;
+		font-size: 13px;
+	}
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: black;
+	}
+	#cusTable>tbody>tr>td {
+		padding: 3px;
+		padding-right: 4px;
+		font-size: 12px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 4px;
+		font-size: 12px;
+	}
+	.tabledit-delete-button,.tabledit-edit-button{
+	height: 19px;
+}
+.localRightviewTarget {
+font-size: 11px;
+}
+}
+
+@media ( max-height :654px) {
+#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+}
+
+#main {
+		width: 700px;
+	margin: 8px auto 0 auto;
+}
+	.queryBtn, .deleteBtn, .imputBtn {
+	font-size: 12px;
+}
+	.localRightview {
+	position: absolute;
+	width: 100%;
+	height: 90%;
+}
+
+	.sidebar-collapse>.nav>li>a {
+		padding: 12px 10px;
+	}
+	.sidebar-collapse .nav>li>a {
+		text-shadow: none;
+		font-size: 11px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: black;
+	}
+	.tableBorder{
+	height: 84%
+	}
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner
+		{
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	#cusTable>tbody>tr>td {
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-right: 6px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 3px;
+		font-size: 10px;
+	}
+	/* 商品界面 */
+	.btn-group-sm > .btn {
+    padding: 1px 6px;
+    font-size: 10px;
+    line-height: 1;
+    border-radius: 2px;
+}
+.tableBorder{
+	height: 90%
+	}
+.tabledit-delete-button,.tabledit-edit-button{
+	height: 18px;
+}
+.localRightviewTarget {
+font-size: 9px;
+}
+/* 商品界面 */
+	.btn-group-sm > .btn {
+    padding: 1px 6px;
+    font-size: 11px;
+    line-height: 1;
+    border-radius: 2px;
+}
+#main {
+	margin: 8px auto 0 auto;
+}
+}
+@media ( max-height :594px) {
+	#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+}
+
+#main {
+		width: 700px;
+	margin: 8px auto 0 auto;
+}
+.fc-event{
+	display: ;
+}
+	.queryBtn, .deleteBtn, .imputBtn {
+	font-size: 11px;
+}
+	.localRightview {
+	position: absolute;
+	width: 100%;
+	height: 90%;
+}
+.localRightpage {
+	background-color: #ffffff;
+	position: absolute;
+	left: 15%;
+	width: 84%;
+	height: 86%;
+}
+	.sidebar-collapse>.nav>li>a {
+		padding: 12px 10px;
+	}
+	.sidebar-collapse .nav>li>a {
+		text-shadow: none;
+		font-size: 11px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: black;
+	}
+
+	.tableBorder{
+	height:80%
+	}
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner
+		{
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	#cusTable>tbody>tr>td {
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-right: 3px;
+		font-size: 10px;
+	}
+	#cusTable>thead>tr>th {
+		padding-right: 3px;
+		font-size: 10px;
+	}
+	/* 商品界面 */
+	.btn-group-sm > .btn {
+    padding: 1px 6px;
+    font-size: 10px;
+    line-height: 1.2;
+    border-radius: 2px;
+}
+/* 目标 */
+.heithtBr {
+	height: 8px;
+}
+.localRightpageTarget {
+	position: absolute;
+	top: 8%;
+	left:15%;
+	width: 84%;
+	height: 86%;
+}
+
+.localRightviewTarget {
+font-size: 9px;
+}
+
+}

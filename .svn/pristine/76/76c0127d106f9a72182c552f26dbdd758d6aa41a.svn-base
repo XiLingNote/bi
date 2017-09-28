@@ -1,0 +1,76 @@
+.view {
+	position: absolute;
+	top: 20%;
+	left: 12%;
+	width: 100%;
+	height: 10%;
+	font-size: 16px;
+}
+
+.topStoreView {
+	position: absolute;
+	top: 20%;
+	left: 32%;
+	width: 100%;
+	height: 10%;
+	font-size: 16px;
+}
+
+.salesTrendDiv {
+	border-color: black;
+	float: left;
+	top: 20%;
+	left: 23%;
+	width: 20%;
+	height: 100%;
+	background-color: #615e5f;
+}
+
+.topStoreDiv {
+	border-color: black;
+	float: left;
+	top: 20%;
+	left: 23%;
+	width: 30%;
+	height: 100%;
+	background-color: #615e5f;
+}
+
+.span {
+	color: #FFF8DC;
+}
+
+body {
+	/* background: #f0f0f0; */
+	
+}
+
+.selectGMV {
+	background: #3e3e40;
+	width: 100%;
+	height: 50%;
+	position: absolute
+}
+
+.notselectGMV {
+	width: 100%;
+	height: 50%;
+	background: #898989;
+	position: absolute
+}
+
+.selectAlipay {
+	width: 100%;
+	height: 50%;
+	background: #3e3e40;
+	position: absolute;
+	top: 50%
+}
+
+.notselectAlipay {
+	width: 100%;
+	height: 50%;
+	background: #898989;
+	position: absolute;
+	top: 50%
+}

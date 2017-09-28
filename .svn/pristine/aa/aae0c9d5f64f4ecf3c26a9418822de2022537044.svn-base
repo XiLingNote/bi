@@ -1,0 +1,35 @@
+package bi.baiqiu.service.impl;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import bi.baiqiu.mapper.GoalMonthAlipMapper;
+import bi.baiqiu.pojo.GoalMonthAlip;
+@Transactional
+@Service
+public class GoalMonthAlipServiceImpl {
+		@Autowired
+		private GoalMonthAlipMapper alipMapper;
+	
+		/**批量删除
+		 * @param idarray
+		 * @return
+		 */
+		public int deleteGoalMonthAlipByBatch(int[]idarray){
+			return alipMapper.deleteGoalMonthAlipByBatch(idarray);
+			
+		}
+		/**批量增加
+		 * @param goals
+		 * @return
+		 */
+		public int insertByBatch(List<GoalMonthAlip> goals){
+			return alipMapper.insertByBatch(goals);
+		}
+		
+	
+}

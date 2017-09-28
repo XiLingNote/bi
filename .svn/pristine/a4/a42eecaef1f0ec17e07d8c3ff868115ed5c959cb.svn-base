@@ -1,0 +1,248 @@
+package bi.baiqiu.pojo;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Table(name = "user")
+public class User implements Serializable {
+
+	@Column(name = "id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
+	private Integer id;
+
+	/**
+	 * 用户名称
+	 */
+	@Column(name = "name")
+	private String name;
+
+	/**
+	 * 1：系统管理；2：经理及以上；3：店铺管理员；4：店铺子账号
+	 */
+	@Column(name = "user_sign")
+	private Integer userSign;
+
+	/**
+	 * 登录用户名
+	 */
+	@Column(name = "username")
+	private String username;
+
+	/**
+	 * 密码
+	 */
+	@Column(name = "password")
+	private String password;
+
+	/**
+	 * 多个店铺，用英文逗隔开
+	 */
+	@Column(name = "shop_id")
+	private Integer shopId;
+
+	private List<Shop> shopList;
+
+	/**
+	 * @return the shopList
+	 */
+	public List<Shop> getShopList() {
+		return shopList;
+	}
+
+	/**
+	 * @param shopList
+	 *            the shopList to set
+	 */
+	public void setShopList(List<Shop> shopList) {
+		this.shopList = shopList;
+	}
+
+	/**
+	 * 部门ids，对应多个店铺部门用英文逗隔开
+	 */
+	 private String scIds; 
+
+	/**
+	 * @return the scIds
+	 */
+	public String getScIds() {
+		return scIds;
+	}
+
+	/**
+	 * @param scIds the scIds to set
+	 */
+	public void setScIds(String scIds) {
+		this.scIds = scIds;
+	}
+
+	/**
+	 * 手机号码
+	 */
+	@Column(name = "phone")
+	private String phone;
+
+	/**
+	 * 1:允许登录，0：不允许登录，权限可以由店铺admin管理
+	 */
+	@Column(name = "allow_login")
+	private Byte allowLogin;
+
+	public Byte getAllowLogin() {
+		return allowLogin;
+	}
+
+	public void setAllowLogin(Byte allowLogin) {
+		this.allowLogin = allowLogin;
+	}
+
+	/**
+	 * 角色id,多个id用英文逗号隔开
+	 */
+	@Column(name = "role_ids")
+	private String roleIds;
+
+	/**
+	 * 附加功能id
+	 */
+	@Column(name = "function_ids")
+	private String functionIds;
+
+	/**
+	 * 店铺名称
+	 */
+	private String shopNamePlat;
+
+	/**
+	 * 店铺简称
+	 */
+	private String shopName;
+
+	@Transient
+	private boolean hasDeleteHistoryAuthority = false;
+
+	private static final long serialVersionUID = 1L;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getUserSign() {
+		return userSign;
+	}
+
+	public void setUserSign(Integer userSign) {
+		this.userSign = userSign;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	/*
+	 * public String getScIds() { return scIds; }
+	 * 
+	 * public void setScIds(String scIds) { this.scIds = scIds; }
+	 */
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds == null ? null : roleIds.trim();
+	}
+
+	public String getFunctionIds() {
+		return functionIds;
+	}
+
+	public void setFunctionIds(String functionIds) {
+		this.functionIds = functionIds;
+	}
+
+	public String getShopNamePlat() {
+		return shopNamePlat;
+	}
+
+	public void setShopNamePlat(String shopNamePlat) {
+		this.shopNamePlat = shopNamePlat;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public boolean isHasDeleteHistoryAuthority() {
+		return hasDeleteHistoryAuthority;
+	}
+
+	public void setHasDeleteHistoryAuthority(boolean hasDeleteHistoryAuthority) {
+		this.hasDeleteHistoryAuthority = hasDeleteHistoryAuthority;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", userSign=" + userSign
+				+ ", username=" + username + ", password=" + password
+				+ ", shopId=" + shopId + ", shopList=" + shopList + ", phone="
+				+ phone + ", allowLogin=" + allowLogin + ", roleIds=" + roleIds
+				+ ", functionIds=" + functionIds + ", shopNamePlat="
+				+ shopNamePlat + ", shopName=" + shopName
+				+ ", hasDeleteHistoryAuthority=" + hasDeleteHistoryAuthority
+				+ "]";
+	}
+
+}

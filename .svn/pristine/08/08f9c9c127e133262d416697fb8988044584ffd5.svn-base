@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.DrillShowMapper">
+
+	<select id="queryByPage" resultType="DrillShowBean">
+		select * from bi_drill_show where 1=1
+
+		<if test="date!=null and date!=''">
+			and date=#{date}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+			and date &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			and date &lt;= #{endDate}
+		</if>
+		<if test="shopId!=null and shopId!=''">
+			and shop_id=#{shopId}
+		</if>
+
+		<if test="sortName!=null and sortName!=''">
+			order by ${sortName}+0
+			<if test="sortOrder!=null and sortOrder!=''">
+				${sortOrder}
+			</if>
+		</if>
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		replace INTO `bi_drill_show` (
+		`date`,
+		`Show_amount`,
+		`click_quantity`,
+		`clickt_rate`,
+		`cost`,
+		`Cost_presenting_thousand`,
+		`Click_unit`,
+		`goods_shopping_cart_num`,
+		`Click_conversion_rate`,
+		`goods_collection`,
+		`Store_collection`,
+		`Visitor_num`,
+		`Depth_penetration_num`,
+		`access_time`,
+		`access_pages_num`,
+		`Order_num`,
+		`Order_Transaction_num`,
+		`order_Transaction_amount`,
+		`investment_return_rate`,
+		`order_amount`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.showAmount},
+			#{item.clickQuantity},
+			#{item.clicktRate},
+			#{item.cost},
+			#{item.costPresentingThousand},
+			#{item.clickUnit},
+			#{item.goodsShoppingCartNum},
+			#{item.clickConversionRate},
+			#{item.goodsCollection},
+			#{item.storeCollection},
+			#{item.visitorNum},
+			#{item.depthPenetrationNum},
+			#{item.accessTime},
+			#{item.accessPagesNum},
+			#{item.orderNum},
+			#{item.orderTransactionNum},
+			#{item.orderTransactionAmount},
+			#{item.investmentReturnRate},
+			#{item.orderAmount},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+<!-- 批量删除 -->
+	<delete id="deleteByBatch" parameterType="int">
+		delete from bi_drill_show where id in
+		<foreach collection="array" item="idItem" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,124 @@
+package bi.baiqiu.pojo;
+
+import java.util.Date;
+
+import javax.persistence.Table;
+
+
+/**
+ *访客特征月报
+ */
+@Table(name="bi_visitor_month_features")
+public  class VisitorMonthFeaturesBean  implements java.io.Serializable {
+
+
+    // Fields    
+
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
+     private Date month;
+     private String feature;
+     private String property;
+     private Float proportion;
+     private Integer shopId;
+     private Date createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public VisitorMonthFeaturesBean() {
+    }
+
+    
+    /** full constructor */
+    public VisitorMonthFeaturesBean(Date month, String feature, String property, Float proportion, Integer shopId, Date createTime, String remark) {
+        this.month = month;
+        this.feature = feature;
+        this.property = property;
+        this.proportion = proportion;
+        this.shopId = shopId;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getMonth() {
+        return this.month;
+    }
+    
+    public void setMonth(Date month) {
+        this.month = month;
+    }
+
+    public String getFeature() {
+        return this.feature;
+    }
+    
+    public void setFeature(String feature) {
+        this.feature = feature;
+    }
+
+    public String getProperty() {
+        return this.property;
+    }
+    
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    public Float getProportion() {
+        return this.proportion;
+    }
+    
+    public void setProportion(Float proportion) {
+        this.proportion = proportion;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}

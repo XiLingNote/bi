@@ -1,0 +1,33 @@
+package bi.baiqiu.mapper;
+
+import java.util.List;
+
+import com.github.abel533.mapper.Mapper;
+
+import bi.baiqiu.page.PageBean;
+import bi.baiqiu.pojo.ThrougTrainBean;
+
+/**
+ * 直通车
+ * 
+ * @author Administrator
+ *
+ */
+public interface ThrougTrainMapper extends Mapper<ThrougTrainBean> {
+	/**
+	 * 分页查询默认十条记录
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	public List<ThrougTrainBean> queryByPage(ThrougTrainBean bean, PageBean page);
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param pcFlowStructureBeans
+	 * @return
+	 */
+	public int insertByBatch(List<ThrougTrainBean> Beans);
+}

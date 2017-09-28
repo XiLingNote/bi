@@ -1,0 +1,97 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import bi.baiqiu.mapper.PcFlowStructureTreasureMapper;
+import bi.baiqiu.page.PageHelper;
+import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.PcFlowStructureBean;
+
+@Service
+@Transactional
+public class PcFlowStructureServiceImpl {
+	@Autowired
+	private PcFlowStructureTreasureMapper pcFlowStructureTreasureDao;
+
+	/**
+	 * 分页查询方法s
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<PcFlowStructureBean> queryByPage(PcFlowStructureBean bean, Integer pageNum, Integer pageSize)
+			throws Exception {
+		PageHelper.startPage(pageNum, pageSize);
+		pcFlowStructureTreasureDao.queryByPage(bean);
+		return PageHelper.endPage();
+
+	}
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public int insertByBatch(List<PcFlowStructureBean> list) {
+
+		return pcFlowStructureTreasureDao.insertByBatch(list);
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int insertPcFlowStructure(PcFlowStructureBean bean) {
+
+		return pcFlowStructureTreasureDao.insert(bean);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int updatePcFlowStructure(PcFlowStructureBean bean) {
+
+		return pcFlowStructureTreasureDao.updateByPrimaryKey(bean);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int deletePcFlowStructure(PcFlowStructureBean bean) {
+
+		return pcFlowStructureTreasureDao.deleteByPrimaryKey(bean);
+	}
+
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deletePcFlowStructureByBatch(int[] idArray) {
+		return pcFlowStructureTreasureDao.deleteByBatch(idArray);
+	}
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deletePcFlowStructureByBatchList(PcFlowStructureBean bean) {
+		return pcFlowStructureTreasureDao.deleteByBatchList(bean);
+	}
+}

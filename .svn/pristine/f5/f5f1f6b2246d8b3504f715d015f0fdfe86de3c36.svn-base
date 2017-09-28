@@ -1,0 +1,94 @@
+package bi.baiqiu.pojo;
+
+public class ShopBean {
+    private Integer id;
+
+    private Byte ex;
+
+    private String erpSessionKey;
+
+    private String crmSessionKey;
+
+    private Byte isSearchAlipay;
+
+    private String name;
+
+    private String namePlat;
+
+    private Integer scId;
+    
+    private Integer sort;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Byte getEx() {
+        return ex;
+    }
+
+    public void setEx(Byte ex) {
+        this.ex = ex;
+    }
+
+    public String getErpSessionKey() {
+        return erpSessionKey;
+    }
+
+    public void setErpSessionKey(String erpSessionKey) {
+        this.erpSessionKey = erpSessionKey == null ? null : erpSessionKey.trim();
+    }
+
+    public String getCrmSessionKey() {
+        return crmSessionKey;
+    }
+
+    public void setCrmSessionKey(String crmSessionKey) {
+        this.crmSessionKey = crmSessionKey == null ? null : crmSessionKey.trim();
+    }
+
+    public Byte getIsSearchAlipay() {
+        return isSearchAlipay;
+    }
+
+    public void setIsSearchAlipay(Byte isSearchAlipay) {
+        this.isSearchAlipay = isSearchAlipay;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getNamePlat() {
+        return namePlat;
+    }
+
+    public void setNamePlat(String namePlat) {
+        this.namePlat = namePlat == null ? null : namePlat.trim();
+    }
+
+    public Integer getScId() {
+        return scId;
+    }
+
+    public void setScId(Integer scId) {
+        this.scId = scId;
+    }
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+}

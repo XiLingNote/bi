@@ -1,0 +1,290 @@
+package bi.baiqiu.pojo;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Table;
+
+
+/**
+ * 品销宝
+ */
+@Table(name="bi_sale_products_treasure")
+public  class SaleProductsTreasureBean  implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
+     private Date date;
+     private String showAmount;
+     private String clickQuantity;
+     private Float clicktRate;
+     private BigDecimal cost;
+     private BigDecimal costPresentingThousand;
+     private BigDecimal clickUnit;
+     private String showTransactions;
+     private BigDecimal transactionAmount;
+     private String goodsCollection;
+     private String storeCollection;
+     private String goodsShoppingCartNum;
+     private Float displayReturnRate;
+     private Float clickReturnRate;
+     private String clickTransactions;
+     private BigDecimal clickTransactionAmount;
+     private String visitorNum;
+     private String newVisitorsNum;
+     private String clickVisitorsNum;
+     private Float showConversionRate;
+     private Float clickConversionRate;
+     private Integer shopId;
+     private Date createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public SaleProductsTreasureBean() {
+    }
+
+    
+    /** full constructor */
+    public SaleProductsTreasureBean(Date date, String showAmount, String clickQuantity, Float clicktRate, BigDecimal cost, BigDecimal costPresentingThousand, BigDecimal clickUnit, String showTransactions, BigDecimal transactionAmount, String goodsCollection, String storeCollection, String goodsShoppingCartNum, Float displayReturnRate, Float clickReturnRate, String clickTransactions, BigDecimal clickTransactionAmount, String visitorNum, String newVisitorsNum, String clickVisitorsNum, Float showConversionRate, Float clickConversionRate, Integer shopId, Date createTime, String remark) {
+        this.date = date;
+        this.showAmount = showAmount;
+        this.clickQuantity = clickQuantity;
+        this.clicktRate = clicktRate;
+        this.cost = cost;
+        this.costPresentingThousand = costPresentingThousand;
+        this.clickUnit = clickUnit;
+        this.showTransactions = showTransactions;
+        this.transactionAmount = transactionAmount;
+        this.goodsCollection = goodsCollection;
+        this.storeCollection = storeCollection;
+        this.goodsShoppingCartNum = goodsShoppingCartNum;
+        this.displayReturnRate = displayReturnRate;
+        this.clickReturnRate = clickReturnRate;
+        this.clickTransactions = clickTransactions;
+        this.clickTransactionAmount = clickTransactionAmount;
+        this.visitorNum = visitorNum;
+        this.newVisitorsNum = newVisitorsNum;
+        this.clickVisitorsNum = clickVisitorsNum;
+        this.showConversionRate = showConversionRate;
+        this.clickConversionRate = clickConversionRate;
+        this.shopId = shopId;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getShowAmount() {
+        return this.showAmount;
+    }
+    
+    public void setShowAmount(String showAmount) {
+        this.showAmount = showAmount;
+    }
+
+    public String getClickQuantity() {
+        return this.clickQuantity;
+    }
+    
+    public void setClickQuantity(String clickQuantity) {
+        this.clickQuantity = clickQuantity;
+    }
+
+    public Float getClicktRate() {
+        return this.clicktRate;
+    }
+    
+    public void setClicktRate(Float clicktRate) {
+        this.clicktRate = clicktRate;
+    }
+
+    public BigDecimal getCost() {
+        return this.cost;
+    }
+    
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getCostPresentingThousand() {
+        return this.costPresentingThousand;
+    }
+    
+    public void setCostPresentingThousand(BigDecimal costPresentingThousand) {
+        this.costPresentingThousand = costPresentingThousand;
+    }
+
+    public BigDecimal getClickUnit() {
+        return this.clickUnit;
+    }
+    
+    public void setClickUnit(BigDecimal clickUnit) {
+        this.clickUnit = clickUnit;
+    }
+
+    public String getShowTransactions() {
+        return this.showTransactions;
+    }
+    
+    public void setShowTransactions(String showTransactions) {
+        this.showTransactions = showTransactions;
+    }
+
+    public BigDecimal getTransactionAmount() {
+        return this.transactionAmount;
+    }
+    
+    public void setTransactionAmount(BigDecimal transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
+
+    public String getGoodsCollection() {
+        return this.goodsCollection;
+    }
+    
+    public void setGoodsCollection(String goodsCollection) {
+        this.goodsCollection = goodsCollection;
+    }
+
+    public String getStoreCollection() {
+        return this.storeCollection;
+    }
+    
+    public void setStoreCollection(String storeCollection) {
+        this.storeCollection = storeCollection;
+    }
+
+    public String getGoodsShoppingCartNum() {
+        return this.goodsShoppingCartNum;
+    }
+    
+    public void setGoodsShoppingCartNum(String goodsShoppingCartNum) {
+        this.goodsShoppingCartNum = goodsShoppingCartNum;
+    }
+
+    public Float getDisplayReturnRate() {
+        return this.displayReturnRate;
+    }
+    
+    public void setDisplayReturnRate(Float displayReturnRate) {
+        this.displayReturnRate = displayReturnRate;
+    }
+
+    public Float getClickReturnRate() {
+        return this.clickReturnRate;
+    }
+    
+    public void setClickReturnRate(Float clickReturnRate) {
+        this.clickReturnRate = clickReturnRate;
+    }
+
+    public String getClickTransactions() {
+        return this.clickTransactions;
+    }
+    
+    public void setClickTransactions(String clickTransactions) {
+        this.clickTransactions = clickTransactions;
+    }
+
+    public BigDecimal getClickTransactionAmount() {
+        return this.clickTransactionAmount;
+    }
+    
+    public void setClickTransactionAmount(BigDecimal clickTransactionAmount) {
+        this.clickTransactionAmount = clickTransactionAmount;
+    }
+
+    public String getVisitorNum() {
+        return this.visitorNum;
+    }
+    
+    public void setVisitorNum(String visitorNum) {
+        this.visitorNum = visitorNum;
+    }
+
+    public String getNewVisitorsNum() {
+        return this.newVisitorsNum;
+    }
+    
+    public void setNewVisitorsNum(String newVisitorsNum) {
+        this.newVisitorsNum = newVisitorsNum;
+    }
+
+    public String getClickVisitorsNum() {
+        return this.clickVisitorsNum;
+    }
+    
+    public void setClickVisitorsNum(String clickVisitorsNum) {
+        this.clickVisitorsNum = clickVisitorsNum;
+    }
+
+    public Float getShowConversionRate() {
+        return this.showConversionRate;
+    }
+    
+    public void setShowConversionRate(Float showConversionRate) {
+        this.showConversionRate = showConversionRate;
+    }
+
+    public Float getClickConversionRate() {
+        return this.clickConversionRate;
+    }
+    
+    public void setClickConversionRate(Float clickConversionRate) {
+        this.clickConversionRate = clickConversionRate;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}

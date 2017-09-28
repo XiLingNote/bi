@@ -1,0 +1,411 @@
+@CHARSET "UTF-8";
+
+/* 字体 */
+#cusTable {
+	background-color: #A9A9A9;
+	color: black;
+}
+
+.bootstrap-table {
+	color: black;
+}
+/* 表格表头可以自定义长度 */
+.table {
+	table-layout: fixed;
+}
+
+.pagination>li>a, .pagination>.disabled>a {
+	color:black;
+	background-color: #A9A9A9;
+}
+/*分页选择颜色  */
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus,
+	.pagination>li>span:focus {
+	background-color: #333333
+}
+/* 分页框线 */
+.fixed-table-pagination, .pagination>li>a, .pagination>li>span {
+	border: 0px solid #615252;
+} 
+/*页脚部分的背景色  */
+.fixed-table-body, .fixed-table-loading, .fixed-table-pagination {
+	background-color: #A9A9A9;
+}
+/* 表格动态选择颜色 */
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #808080;
+}
+
+/*表格选中  */
+.fixed-table-container tbody .selected td {
+	background-color: #808080;
+}
+/* 框线 */
+
+ .fixed-table-container {
+	border: 0.1px solid #615252;
+	padding-bottom: 10%;
+}
+.pagination {
+	padding-right: 1px;
+}
+
+.modal-dialog {
+	right: auto;
+	left: 50%;
+	width: 500px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+/* 上传预览框 */
+.pagination-detail .page-list {
+	display: none;
+}
+/*过长的数据  */
+.table tbody td {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.targetTabel tbody td{
+	visible:visible;
+	text-overflow:clip;
+	white-space: nowrap;
+}
+/* 右侧最大框 */
+.localRightpage {
+	background-color: #A9A9A9;
+	position: absolute;
+	top: 10%;
+	left: 15%;
+	width: 84%;
+	height: 88%;
+	min-height: 518px;
+}
+/* 右侧中型框 */
+.localRightview {
+	position: absolute;
+	background-color: #A9A9A9;
+	top: 5%;
+	width: 100%;
+	height: 90%;
+}
+
+/* 表格标题 */
+.th-inner {
+	color: black;
+	text-align: right;
+	padding: 6px;
+}
+/*表格内部字体样式 */
+#cusTable>tbody>tr>td{
+	padding: 5px;
+	font-size: 14px;
+	text-align: right;
+	border: 0.5px solid #615252;
+}
+/* 标题样式 */
+#cusTable>thead>tr>th{
+	padding-right: 6px;
+	font-size: 14px;
+	border: 0.5px solid #615252;
+}
+
+
+/* target页表格↓ */
+/* 目标界面特殊处理 */
+.localRightpageTarget {
+	background-color: #A9A9A9;
+	position: absolute;
+	top: 10%;
+	left: 15%;
+	width: 84%;
+	height: 88%;
+	min-height: 587px;
+}
+.localRightviewTarget {
+	position: absolute;
+	background-color: #A9A9A9;
+	width: 100%;
+	padding: 1px;
+	min-width: 843px;
+}
+.btnT{
+	display: inline-block;
+	padding: 4px 4px;
+	margin-bottom: 0;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+#gmvTarget {
+	background: pause;
+	width: 100%;
+	height: 73.5%;
+}
+
+#targetCountAndValue {
+	width: 30%;
+	position: absolute;
+	margin-left: 2%;
+	margin-top: 2%;
+}
+
+.dailyMainTitle {
+	float: right;
+	margin-right: 2px;
+	margin-top: 1px;
+}
+
+.tab-content {
+	float: right;
+	position: absolute;
+	margin-left: 18%;
+}
+
+.tableBorder {
+	height: 90%;
+}
+
+.dailyPayment {
+	width: 85px;
+}
+
+.targetInput {
+	height: 20px;
+	line-height: 10px;
+	padding: 2px;
+	border: 0px solid #d3d3d3;
+	width: 96px;
+	background: #A9A9A9;
+	margin-right: 1px;
+	float: right;
+	background: #A9A9A9;
+}
+
+.dailyTargetInput {
+	height: 20px;
+	line-height: 20px;
+	padding: 2px;
+	border: 1px solid #d3d3d3;
+	width: 30%;
+}
+/* 月目标集合输入框 */
+.targetAmountInput {
+	background-color: #A9A9A9;
+	margin-top: 30%;
+	border: 0px solid #d3d3d3;
+	width: 110px;
+	float: right;
+	border: 0px solid #d3d3d3;
+}
+/* 收账销售总目标描述 */
+.gmvOrAlipay {
+	margin-top: 8%;
+	text-align: left;
+	font-size: 17px;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.blueColor, .dailyPayment {
+	color: blue;
+}
+
+.fc-header-title {
+	margin-bottom: 2%;
+}
+
+.monthUnit {
+	height: 45px;
+	font-size: 14px;
+}
+
+.heithtBr {
+	height: 10px;
+}
+
+#calendar {
+	width: 680px;
+	margin: 5px auto 5px auto;
+}
+
+#main {
+	width: 690px;
+	min-height: 10px;
+	margin: 2px auto 0 auto;
+	border: 1px solid #615252;
+	background: #fff;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#targetCountAndValue {
+}
+/* ↑ */
+
+/* 表格foot分页部分字体 */
+.fixed-table-pagination, .pagination a {
+	font-size: 13px;
+}
+
+/*表头日期查询样式  */
+.queryStartDate {
+	position: relative;
+	height: 5%;
+	width: 8%;
+	margin-left: 21px;
+}
+/*表头日期查询样式  */
+
+.kv-file-content {
+	display: none;
+}
+
+.queryEndDate {
+	position: relative;
+	height: 5%;
+	width: 8%;
+	margin-left: 21px;
+}
+/* 日前控制不换行 */
+.form-control {
+	display: inline-block;
+	padding: 6px 6px;
+}
+/* 查询条件div */
+.queryCondition {
+	padding-top: 0.1%;
+	margin-bottom: 1%;
+	padding-left:1%;
+	color: black;
+}
+/* 查询删除导入按钮样式 */
+.queryBtn, .deleteBtn, .imputBtn {
+	margin-left: 2px;
+	margin-right: 3px;
+	background-color: #ffffff;
+	color: black;
+	border: 0
+}
+/* 按钮分组 */
+.btn-group {
+	float: right;
+}
+
+@media ( max-height :740px) {
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 4px;
+		margin-bottom: 4px;
+	}
+	#cusTable>tbody>tr>td{
+		padding: 9px;
+		font-size: 12px;
+		padding-right: 9px;
+	}
+	#cusTable>thead>tr>th{
+	padding-right: 9px;
+	font-size: 12px;
+}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: green;
+	}
+}
+
+@media ( max-height :767px) {
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: blue;
+	}
+	#cusTable>tbody>tr>td{
+		padding: 4px;
+		padding-right: 4px;
+		font-size: 14px;
+	}
+	#cusTable>thead>tr>th{
+	padding-right: 4px;
+	font-size: 14px;
+}
+}
+@media ( max-height :730px) {
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: #8000ff;
+	}
+	#cusTable>tbody>tr>td{
+		padding: 3px;
+		padding-right: 4px;
+		font-size: 12px;
+		
+	}
+	
+	#cusTable>thead>tr>th{
+	padding-right: 4px;
+	font-size: 12px;
+}
+}
+
+@media ( max-height :630px) {
+	.sidebar-collapse>.nav>li>a {
+		padding: 12px 10px;
+	}
+	.sidebar-collapse .nav>li>a {
+		color: #B8B8B8;
+		background: #273c55;
+		text-shadow: none;
+		font-size: 10px;
+	}
+	.queryCondition {
+		padding-top: 0.1%;
+		margin-bottom: 1%;
+		color: red;
+	}
+	.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail
+		{
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+	.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner
+		{
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	#cusTable>tbody>tr>td{
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-right: 6px;
+	}
+	#cusTable>thead>tr>th{
+	padding-right: 3px;
+	font-size: 10px;
+}
+	
+}

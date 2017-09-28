@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.WirelessFlowStructureTreasureMapper">
+
+	<select id="queryByPage" resultType="WirelessFlowStructureBean">
+		select * from
+		bi_wireless_flow_structure
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO `bi_wireless_flow_structure` (
+		`date`,
+		`flow_source`,
+		`flow_Source_details`,
+		`visitors_num`,
+		`visitor_change`,
+		`order_amount`,
+		`order_amount_change`,
+		`order_buyers`,
+		`order_buyers_change`,
+		`order_conversion_rate`,
+		`order_conversion_rate_change`,
+		`payment_amount`,
+		`payment_amount_change`,
+		`buyers_paid`,
+		`buyers_paid_change`,
+		`payment_conversion_rate`,
+		`payment_conversion_rate_change`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.flowSource},
+			#{item.flowSourceDetails},
+			#{item.visitorsNum},
+			#{item.visitorChange},
+			#{item.orderAmount},
+			#{item.orderAmountChange},
+			#{item.orderBuyers},
+			#{item.orderBuyersChange},
+			#{item.orderConversionRate},
+			#{item.orderConversionRateChange},
+			#{item.paymentAmount},
+			#{item.paymentAmountChange},
+			#{item.buyersPaid},
+			#{item.buyersPaidChange},
+			#{item.paymentConversionRate},
+			#{item.paymentConversionRateChange},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

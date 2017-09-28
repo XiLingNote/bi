@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.ThrougTrainMapper">
+
+	<select id="queryByPage" resultType="ThrougTrainBean">
+		select * from
+		bi_throug_train
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO `bi_throug_train` (
+		`date`,
+		`cost`,
+		`click_quantity`,
+		`Click_unit`,
+		`clickt_rate`,
+		`transaction_amount`,
+		`input_output_ratio`,
+		`goods_collection`,
+		`Store_collection`,
+		`transactions_num`,
+		`Click_conversion_rate`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.cost},
+			#{item.clickQuantity},
+			#{item.clickUnit},
+			#{item.clicktRate},
+			#{item.transactionAmount},
+			#{item.inputOutputRatio},
+			#{item.goodsCollection},
+			#{item.storeCollection},
+			#{item.transactionsNum},
+			#{item.clickConversionRate},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

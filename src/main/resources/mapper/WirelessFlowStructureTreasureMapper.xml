@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.WirelessFlowStructureTreasureMapper">
+
+	<select id="queryByPage" resultType="WirelessFlowStructureBean">
+			select * from bi_wireless_flow_structure where 1=1
+	
+			<if test="date!=null and date!=''">
+				and date=#{date}
+			</if>
+			<if test="startDate!=null and startDate!=''">
+				and date &gt;= #{startDate}
+			</if>
+			<if test="endDate!=null and endDate!=''">
+				and date &lt;= #{endDate}
+			</if>
+			<if test="shopId!=null and shopId!=''">
+				and shop_id=#{shopId}
+			</if>
+	
+			<if test="sortName!=null and sortName!=''">
+				order by ${sortName}+0
+				<if test="sortOrder!=null and sortOrder!=''">
+					${sortOrder}
+				</if>
+			</if>
+		</select>
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertOne" parameterType="WirelessFlowStructureBean"
+		useGeneratedKeys="true">
+		replace INTO `bi_wireless_flow_structure` (
+		`date`,
+		`flow_source`,
+		`flow_Source_details`,
+		`visitors_num`,
+		`visitor_change`,
+		`order_amount`,
+		`order_amount_change`,
+		`order_buyers`,
+		`order_buyers_change`,
+		`order_conversion_rate`,
+		`order_conversion_rate_change`,
+		`payment_amount`,
+		`payment_amount_change`,
+		`buyers_paid`,
+		`buyers_paid_change`,
+		`payment_conversion_rate`,
+		`payment_conversion_rate_change`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+			(
+			#{date},
+			#{flowSource},
+			#{flowSourceDetails},
+			#{visitorsNum},
+			#{visitorChange},
+			#{orderAmount},
+			#{orderAmountChange},
+			#{orderBuyers},
+			#{orderBuyersChange},
+			#{orderConversionRate},
+			#{orderConversionRateChange},
+			#{paymentAmount},
+			#{paymentAmountChange},
+			#{buyersPaid},
+			#{buyersPaidChange},
+			#{paymentConversionRate},
+			#{paymentConversionRateChange},
+			#{shopId},
+			now(),
+			#{remark}
+			)
+	</insert>
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		replace INTO `bi_wireless_flow_structure` (
+		`date`,
+		`flow_source`,
+		`flow_Source_details`,
+		`visitors_num`,
+		`visitor_change`,
+		`order_amount`,
+		`order_amount_change`,
+		`order_buyers`,
+		`order_buyers_change`,
+		`order_conversion_rate`,
+		`order_conversion_rate_change`,
+		`payment_amount`,
+		`payment_amount_change`,
+		`buyers_paid`,
+		`buyers_paid_change`,
+		`payment_conversion_rate`,
+		`payment_conversion_rate_change`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.flowSource},
+			#{item.flowSourceDetails},
+			#{item.visitorsNum},
+			#{item.visitorChange},
+			#{item.orderAmount},
+			#{item.orderAmountChange},
+			#{item.orderBuyers},
+			#{item.orderBuyersChange},
+			#{item.orderConversionRate},
+			#{item.orderConversionRateChange},
+			#{item.paymentAmount},
+			#{item.paymentAmountChange},
+			#{item.buyersPaid},
+			#{item.buyersPaidChange},
+			#{item.paymentConversionRate},
+			#{item.paymentConversionRateChange},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+<!-- 批量删除 -->
+	<delete id="deleteByBatch" parameterType="int">
+		delete from bi_wireless_flow_structure where flow_id in
+		<foreach collection="array" item="idItem" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteByBatchList" parameterType="WirelessFlowStructureBean">
+		delete from bi_wireless_flow_structure where
+		<choose>
+			<when test="!deleteHistory">
+				<foreach collection="idArray" item="flow" open=""
+					separator="or" close="">
+				 	flow_id=#{flow} and date>= date_sub(now(),interval 2 month)
+				</foreach>
+			</when>
+			<otherwise>
+			 		flow_id in
+				<foreach collection="idArray" item="flow" open="("
+					separator="," close=")">
+					#{flow}
+				</foreach>
+			</otherwise>
+		</choose>
+
+	</delete>
+</mapper>

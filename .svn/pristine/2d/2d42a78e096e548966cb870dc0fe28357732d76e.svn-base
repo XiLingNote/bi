@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.DrillShowMapper">
+
+	<select id="queryByPage" resultType="DrillShowBean">
+		select * from
+		bi_drill_show
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		INSERT INTO `bi_drill_show` (
+		`date`,
+		`Show_amount`,
+		`click_quantity`,
+		`clickt_rate`,
+		`cost`,
+		`Cost_presenting_thousand`,
+		`Click_unit`,
+		`goods_shopping_cart_num`,
+		`Click_conversion_rate`,
+		`goods_collection`,
+		`Store_collection`,
+		`Visitor_num`,
+		`Depth_penetration_num`,
+		`access_time`,
+		`access_pages_num`,
+		`Order_num`,
+		`Order_Transaction_num`,
+		`order_Transaction_amount`,
+		`investment_return_rate`,
+		`order_amount`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.showAmount},
+			#{item.clickQuantity},
+			#{item.clicktRate},
+			#{item.cost},
+			#{item.costPresentingThousand},
+			#{item.clickUnit},
+			#{item.goodsShoppingCartNum},
+			#{item.clickConversionRate},
+			#{item.goodsCollection},
+			#{item.storeCollection},
+			#{item.visitorNum},
+			#{item.depthPenetrationNum},
+			#{item.accessTime},
+			#{item.accessPagesNum},
+			#{item.orderNum},
+			#{item.orderTransactionNum},
+			#{item.orderTransactionAmount},
+			#{item.investmentReturnRate},
+			#{item.orderAmount},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

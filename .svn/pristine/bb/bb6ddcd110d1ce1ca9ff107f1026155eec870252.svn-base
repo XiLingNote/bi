@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	<bean id="shiroSecurityFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- shiro 的核心安全接口 -->
+		<property name="securityManager" ref="securityManager"></property>
+		<!-- 登录页面 /user/showlogin.do /jsp/showlogin.jsp -->
+		<property name="loginUrl" value="/page/showlogin.do"></property>
+		<!-- 登陆成功 -->
+		<!-- <property name="successUrl" value="/user/index.do"></property> -->
+		<!-- 权限不足 -->
+		<property name="unauthorizedUrl" value="/unauthorized.jsp"></property>
+		<property name="filterChainDefinitions">
+			<value>
+				/page/showlogin.do = anon
+				/page/target.do = authc
+				/page/pcFlowStructure.do = authc
+				/page/wirelessFlowStructure.do = authc
+				/page/fansDaily.do = authc
+				/page/fansMonthFeatures.do = authc
+				/page/visitorMonthFeatures.do = authc
+				/page/saleProductsTreasure.do = authc
+				/page/drillShow.do = authc
+				/page/commodityProperty.do = authc
+				
+				/page/monthlySales.do=authc
+				/page/dailySales.do=authc
+				/page/salesTrend.do=authc
+				/page/storeSalesDemonstrate.do=authc
+				/page/page/saleContribution.do=authc
+				/page/page/topStore.do=authc
+				/page/page/topBrand.do=authc
+				/page/index.do=authc
+				/page/left.do=authc
+			</value>
+		</property>
+	</bean>
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="userRealm"></property>
+	</bean>
+	<bean id="userRealm" class="bi.baiqiu.shiro.UserRealm"></bean>
+</beans>
+
+
+

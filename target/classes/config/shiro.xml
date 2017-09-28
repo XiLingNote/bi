@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    ">
+	<!-- -->
+	<bean id="roleOrFilter" class="bi.baiqiu.shiro.CustomRolesAuthorizationFilter" />
+
+	<!-- 安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="userRealm"></property>
+	</bean>
+	<bean id="userRealm" class="bi.baiqiu.shiro.UserRealm"></bean>
+
+	<bean id="shiroSecurityFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- shiro 的核心安全接口 -->
+		<property name="securityManager" ref="securityManager"></property>
+		<!-- 登录页面 /user/showlogin.do /jsp/showlogin.jsp -->
+		<property name="loginUrl" value="/page/showlogin.do"></property>
+		<!-- 登陆成功 -->
+		<!-- <property name="successUrl" value="/user/index.do"></property> -->
+		<!-- 权限不足 -->
+		<property name="unauthorizedUrl" value="/page/unauthorized.do"></property>
+		<!-- 添加各种验证过滤器 -->
+		<property name="filters">
+			<map>
+				<entry key="roleOrFilter" value-ref="roleOrFilter" />
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+			<!-- 第一阶段 -->
+				/page/showlogin.do = anon
+				/page/left.do=authc
+				/page/index.do=authc,roleOrFilter["admin,director"]
+				/page/monthlySales.do=authc,roleOrFilter["admin,director"]
+				/page/dailySales.do=authc,roleOrFilter["admin,director"]
+				/page/salesTrend.do=authc,roleOrFilter["admin,director"]
+				/page/saleContribution.do=authc,roleOrFilter["admin,director"]
+				/page/topStore.do=authc,roleOrFilter["admin,director"]
+				/page/topBrand.do=authc,roleOrFilter["admin,director"]
+				<!-- 权限 分配页面访问权限-->
+				/user/shopadmin.do = roleOrFilter["store_admin,admin"]
+				/user/admin.do = roles["admin"]
+				
+				/page/storeSalesDemonstrate.do=authc,roleOrFilter["admin,director"]
+				/page/target.do = authc,perms["target"]
+				/page/pcFlowStructure.do = authc,perms["flow"]
+				/page/wirelessFlowStructure.do=authc,perms["flow"]
+				/page/fansDaily.do = authc,perms["fans_data"]
+				/page/fansMonthFeatures.do = authc,perms["fans_data"]
+				/page/visitorMonthFeatures.do=authc,perms["fans_data"]
+				/page/saleProductsTreasure.do=authc,perms["pay_data"]
+				/page/drillShow.do = authc,perms["pay_data"]
+				/page/througTrain.do = authc,perms["pay_data"]
+				/page/commodityProperty.do = authc,perms["commodity_property"]
+			</value>
+		</property>
+	</bean>
+
+</beans>
+
+
+

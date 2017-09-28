@@ -1,0 +1,13 @@
+package bi;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import bi.baiqiu.utils.DateUtils;
+
+public class Test {
+	public static void main(String[] args) throws ParseException {
+		System.out.println(Integer.valueOf("2147483649"));
+	}
+}

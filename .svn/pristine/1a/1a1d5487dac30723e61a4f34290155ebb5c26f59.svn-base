@@ -1,0 +1,112 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+<title>template</title>
+<link rel="stylesheet" href="/css/bootstrap/bootstrap.css">
+<link rel="stylesheet"
+	href="/css/bootstrap/bootstrap-datetimepicker.min.css">
+<script src="/js/jquery-1.12.3.js"></script>
+<script src="/js/highcharts.js"></script>
+<script src="/js/scientific.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/js/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="/js/Highchartstheme.js"></script>
+<script>
+	$(function() {
+		$("#date").click(function() {
+			$("#s1").attr("class", "hidden");
+		});
+		$("#bb").click(function() {
+			$("#s1").removeAttr("class");
+			$("#s1").attr("class", "form-group");
+		});
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var day = date.getDate();
+		//		alert(year);
+		//		alert(month);
+		//		alert(day);
+		var begin = new Date(year, month, day - 29);
+		//alert(begin);
+		var ss = new Date(year, month - 5);
+		var a = 1;
+		alert(a - 2);
+		for (var i = 1; i < 7; i++) {
+
+		}
+	});
+</script>
+</head>
+<body>
+	<!-- <form class="form-horizontal" style="width: 100%">
+		<div class="control-group"
+			style="position: relative; width: 20%; height: 100%">
+			<label class="control-label" for="inputEmail"
+				style="width: 70%; position: relative; float: left;">Email</label>
+			<div class="controls"
+				style="width: 70%; position: relative; float: left;">
+				<input type="text" id="inputEmail" placeholder="Email">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="inputPassword">Password</label>
+			<div class="controls">
+				<input type="password" id="inputPassword" placeholder="Password">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<label class="checkbox"> <input type="checkbox">
+					Remember me
+				</label>
+				<button type="submit" class="btn">Sign in</button>
+			</div>
+		</div>
+	</form> -->
+
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<label class="sr-only" for="name">名称</label> <input type="text"
+				class="form-control" id="name" placeholder="请输入名称">
+		</div>
+		<div class="form-group">
+			<input type="radio" name="datetype">请打勾 <input type="radio"
+				name="datetype">请打勾 <input type="radio" name="datetype">请打勾
+		</div>
+		<div class="form-group" id="s1" style="width: 5%">
+			<input class="begin form-control" name="begin" readonly="readonly" />
+		</div>
+		<div class="form-group">
+			<span>&nbsp;&nbsp;to&nbsp;&nbsp;</span>
+		</div>
+		<div class="form-group" id="s1" style="width: 5%">
+			<input class="end form-control" name="end" readonly="readonly"
+				style="text-align: center" />
+		</div>
+		<div class="form-group">
+			<select>
+				<option>11</option>
+				<option>22</option>
+				<option>33</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select>
+				<option>11</option>
+				<option>22</option>
+				<option>33</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-default">提交</button>
+	</form>
+	<input id="date" type="button" class="btn btn-default" value="aa">
+	<input id="bb" type="button" class="btn btn-default" value="bb">
+</body>
+</html>

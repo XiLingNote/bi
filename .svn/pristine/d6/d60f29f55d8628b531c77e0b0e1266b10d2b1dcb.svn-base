@@ -1,0 +1,28 @@
+
+/**obj转换string
+ * @param obj
+ */
+function objToString(obj){
+	var txt='';
+for (x in obj)  
+ 
+  {  
+
+   txt=txt + obj[x];  
+
+  }
+	return txt
+}
+/**array 转String
+ * @returns {String}
+ * JSON.parse(jsonstr)字符串转json
+ */
+function arrayToString(arr){
+	var text='';
+	jQuery.each(arr, function(i, val) {  
+
+	    text = text + " Index:" + i + ":" + JSON.stringify(val);  
+
+	});  
+	return text;
+}

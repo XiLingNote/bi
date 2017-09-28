@@ -1,0 +1,148 @@
+package bi.baiqiu.pojo;
+
+import java.util.Date;
+
+import javax.persistence.Table;
+
+
+/**
+ *
+ */
+@Table(name="bi_fans_daliy")
+public class FansDaliyBean  implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private Integer id;
+     private Date date;
+     private String fansTotal;
+     private String newFans;
+     private String newMembership;
+     private String activeFans;
+     private String fansTurnover;
+     private String cancelFans;
+     private Integer shopId;
+     private Date createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public FansDaliyBean() {
+    }
+
+    
+    /** full constructor */
+    public FansDaliyBean(Date date, String fansTotal, String newFans, String newMembership, String activeFans, String fansTurnover, String cancelFans, Integer shopId, Date createTime, String remark) {
+        this.date = date;
+        this.fansTotal = fansTotal;
+        this.newFans = newFans;
+        this.newMembership = newMembership;
+        this.activeFans = activeFans;
+        this.fansTurnover = fansTurnover;
+        this.cancelFans = cancelFans;
+        this.shopId = shopId;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getFansTotal() {
+        return this.fansTotal;
+    }
+    
+    public void setFansTotal(String fansTotal) {
+        this.fansTotal = fansTotal;
+    }
+
+    public String getNewFans() {
+        return this.newFans;
+    }
+    
+    public void setNewFans(String newFans) {
+        this.newFans = newFans;
+    }
+
+    public String getNewMembership() {
+        return this.newMembership;
+    }
+    
+    public void setNewMembership(String newMembership) {
+        this.newMembership = newMembership;
+    }
+
+    public String getActiveFans() {
+        return this.activeFans;
+    }
+    
+    public void setActiveFans(String activeFans) {
+        this.activeFans = activeFans;
+    }
+
+    public String getFansTurnover() {
+        return this.fansTurnover;
+    }
+    
+    public void setFansTurnover(String fansTurnover) {
+        this.fansTurnover = fansTurnover;
+    }
+
+    public String getCancelFans() {
+        return this.cancelFans;
+    }
+    
+    public void setCancelFans(String cancelFans) {
+        this.cancelFans = cancelFans;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}

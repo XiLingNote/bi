@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.UserMapper">
+	<select id="login" resultType="User">
+		SELECT
+		user.id,
+		user.name,
+		user.username,
+		user.password,
+		user.shop_id,
+		user.phone,
+		user.role_ids,
+		user.sc_ids as scIds,
+		shop.name as shopName,
+		shop.name_plat as
+		shopNamePlat
+		FROM
+		user
+		LEFT OUTER JOIN
+		shop ON user.shop_id =
+		shop.id
+		WHERE
+		user.username = #{username};
+	</select>
+
+	<select id="queryRoles" resultType="UserRole">
+		SELECT
+		id,role_name,function_ids FROM user_role WHERE id IN (${value});
+	</select>
+
+	<select id="queryUserRoleFunctions" resultType="UserRoleFunction">
+		SELECT
+		id,function_name,u_explain FROM user_role_function WHERE id IN
+		(${value});
+	</select>
+
+	<select id="queryDepartmentShop" resultType="Shop">
+		SELECT
+		id,name,name_plat FROM shop WHERE sc_id in (${value});
+	</select>
+
+	<select id="queryShopUser" resultType="User">
+		SELECT
+		user.id,
+		user.name,
+		user.username,
+		user.password,
+		user.shop_id,
+		user.phone,
+		user.role_ids,
+		user.sc_ids as scIds,
+		shop.name as shopName,
+		shop.name_plat as
+		shopNamePlat
+		FROM
+		user
+		LEFT OUTER JOIN
+		shop ON user.shop_id =
+		shop.id
+		WHERE
+		user.shop_id = ${value};
+	</select>
+
+	<select id="queryAllShopManger" resultType="Shop">
+		SELECT
+		user.name,
+		user.username,
+		user.phone,
+		user.user_sign,
+		shop.name,
+		shop.name_plat
+		FROM user LEFT OUTER JOIN shop on `user`.shop_id = shop.id;
+	</select>
+	
+	<select id="queryShop" resultType="Shop">
+		SELECT id,ex,name,name_plat,sc_id  FROM shop ;
+	</select>
+</mapper>

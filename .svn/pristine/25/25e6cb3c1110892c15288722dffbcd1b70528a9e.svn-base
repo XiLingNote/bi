@@ -1,0 +1,131 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<%=basePath%>css/style.css">
+
+<script type="text/javascript">
+	window.onload = function() {
+		$('.list ul li p').clickdown();
+		$('.list-se p[class=title]').clickup();
+		$('.list>ul>li').ad();
+	}
+</script>
+<style type="text/css">
+.title_1 {
+	color: #ffffff;
+}
+</style>
+</head>
+<body>
+	<div class="list">
+		<ul>
+			<li>
+				<p class="title" style="background: #c12e2a;">
+					<a href="/page/index.do" style="color: #ffffff"> <img
+						src="/img/index.png"> Sales Overall
+					</a>
+				</p>
+			</li>
+
+			<li class="list-see">
+				<p class="title">
+					<a href="/page/monthlySales.do" class='title_1'> <img
+						src="/img/shopsale.png"> Shop Sales
+					</a><span style="color: #ffffff; z-index: 10">+</span>
+				</p>
+
+				<ul class='list-se' style="padding-top: 10px;">
+					<p class="title" style="color: #e9f2ff">
+						<a href="/page/monthlySales.do">Shop Sales</a><span
+							style="color: #2a6496; z-index: 10">-</span>
+					</p>
+					<li><p>
+							<a href="/page/monthlySales.do" class='title_1'>Monthly sales</a>
+						</p></li>
+					<li><p>
+							<a href="/page/dailySales.do" class='title_1'>Daily sales</a>
+						</p></li>
+					<li><p>
+							<a href="/page/salesTrend.do" class='title_1'>Storesales
+								Trend</a>
+						</p></li>
+				</ul>
+			</li>
+
+			<li class="list-see">
+
+				<p class="title">
+					<!-- /page/industry.do -->
+					<a href="/page/topStore.do" class='title_1'> <img
+						src="/img/marketcondition.png"> IndustryData
+					</a><span style="color: #ffffff; z-index: 10">+</span>
+				</p>
+				<ul class='list-se' style="padding-top: 10px;">
+					<p class="title" style="color: #e9f2ff">
+						<a href="行业大盘.html" class='title_1'>市场行情</a><span
+							style="color: #2a6496; z-index: 10">-</span>
+					</p>
+					<li><p>
+							<a href="行业大盘.html" class='title_1'>行业大盘</a>
+						</p></li>
+					<li><p>
+							<a href="/page/topStore.do" class='title_1'>TOP Store</a>
+						</p></li>
+					<li><p>
+							<a href="/page/topBrand.do" class='title_1'>TOP Brand</a>
+						</p></li>
+				</ul>
+			</li>
+			<li>
+				<p class="title">
+					<a href="店铺分析（运营）.html" class='title_1'> <img
+						src="/img/shopAnalysis.png"> 店铺分析
+					</a><span style="color: #ffffff; z-index: 10">+</span>
+				</p>
+				<ul class='list-se'>
+					<p class="title" style="color: #e9f2ff">
+						<a href="店铺分析（运营）.html" class='title_1'>店铺分析</a><span
+							style="color: #2a6496; z-index: 10">-</span>
+					</p>
+					<li><p>
+							<a href="店铺分析（运营）.html" class='title_1'>运营</a>
+						</p></li>
+					<li><p>
+							<a href="粉丝.html" class='title_1'>粉丝</a>
+						</p></li>
+				</ul>
+			</li>
+			<li>
+				<p class="title">
+					<a href="商品分析.html" class='title_1'> <img
+						src="/img/commercialAnalysis.png"> 商品分析
+					</a>
+				</p>
+			</li>
+			<li>
+				<p class="title">
+					<a href="#" class='title_1'> <img src="/img/dataFilling.png">
+						数据填报
+					</a>
+				</p>
+			</li>
+			<li>
+				<p class="title">
+					<a href="/page/inputExcel.do" class='title_1'> <img
+						src="/img/dataFilling.png"> 数据导入导出
+					</a>
+				</p>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

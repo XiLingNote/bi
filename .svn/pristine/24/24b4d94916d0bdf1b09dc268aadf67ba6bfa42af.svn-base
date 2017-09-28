@@ -1,0 +1,702 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<html>
+<head>
+<base href="<%=basePath%>">
+
+</head>
+<jsp:include page="/page/top.do"></jsp:include>
+<jsp:include page="/page/left.do"></jsp:include>
+<link rel="stylesheet" href="<%=basePath%>/css/bootstrap/bootstrap.css">
+<link rel='stylesheet'
+	href="<%=basePath%>/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="<%=basePath%>/css/fullcalendar.css">
+<link rel="stylesheet" href="<%=basePath%>/css/fancybox.css">
+<link rel="stylesheet" href="<%=basePath%>/css/jquery-ui.css">
+
+
+
+<style type="text/css">
+.dailyPayment {
+	border: 0.1px;
+}
+
+#calendar {
+	width: 690px;
+	margin: 20px auto 10px auto
+}
+
+#main {
+	width: 700px;
+	min-height: 300px;
+	margin: 30px auto 0 auto;
+	border: 1px solid #d3d3d3;
+	background: #fff;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.fancy {
+	width: 450px;
+	height: auto
+}
+
+.fancy h3 {
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #d3d3d3;
+	font-size: 14px
+}
+
+.fancy form {
+	padding: 10px
+}
+
+.fancy p {
+	height: 28px;
+	line-height: 28px;
+	padding: 4px;
+	color: #999
+}
+
+.input {
+	height: 20px;
+	line-height: 20px;
+	padding: 2px;
+	border: 1px solid #d3d3d3;
+	width: 100px
+}
+
+.btn {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 5px 12px;
+	cursor: pointer
+}
+
+.btn_ok {
+	background: #360;
+	border: 1px solid #390;
+	color: #fff
+}
+
+.btn_cancel {
+	background: #f0f0f0;
+	border: 1px solid #d3d3d3;
+	color: #666
+}
+
+.btn_del {
+	background: #f90;
+	border: 1px solid #f80;
+	color: #fff
+}
+
+.sub_btn {
+	height: 32px;
+	line-height: 32px;
+	padding-top: 6px;
+	border-top: 1px solid #f0f0f0;
+	text-align: right;
+	position: relative
+}
+
+.sub_btn .del {
+	position: absolute;
+	left: 2px
+}
+
+.targetInput {
+	height: 20px;
+	line-height: 20px;
+	padding: 2px;
+	border: 0px solid #d3d3d3;
+	width: 130px
+}
+.dailyTargetInput{
+	height: 20px;
+	line-height: 20px;
+	padding: 2px;
+	border: 1px solid #d3d3d3;
+	width: 130px
+}
+</style>
+
+</head>
+<script src="<%=basePath%>/js/jquery-1.8.3.min.js"></script>
+<script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+<script src='<%=basePath%>/js/fullcalendar.min.js'></script>
+<script src="<%=basePath%>/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript">
+var shopId=13;
+var selected = new Date().getFullYear();
+	$(function() {
+	
+		//年份初始化
+		var nowYear=Number(new Date().getFullYear());
+		for(var i=2013;i<=nowYear+1;i++){
+			if(i==nowYear){
+				$("#year").append("<option selected='true' value='"+i+"'>"+i+"</option>"); //为Select追加一个Option(下拉项) 
+			}	else{
+				$("#year").append("<option value='"+i+"'>"+i+"</option>"); 
+		}
+		}
+		//月份绑定事件
+		
+
+		$('#calendar').fullCalendar({
+			header : {
+				left : '',
+				center : 'title',
+				right : '',
+			},
+			contentHeight : 500,
+			aspectRatio : 0.5,
+			defaultView : 'month',
+			editable : true,
+		    events: function(start, end, timezone, callback) {
+			            $.ajax({
+			                url: '',
+			                dataType: 'xml',
+			                data: {
+			                    // our hypothetical feed requires UNIX timestamps
+			                    start: start,
+			                    end: end
+			                },
+			                success: function(doc) {
+			                    var events = [];
+			                    $(doc).find('event').each(function() {
+			                        events.push({
+			                            title: $(this).attr('title'),
+			                            start: $(this).attr('start') // will be parsed
+			                        });
+			                    });
+			                    callback(events);
+			                }
+			            });
+			        },
+			events: [
+
+			            {
+			                id: 1,
+			                title: '1000',
+			                allDay: true,
+			                start: '2017-06-11'
+			            },
+			            {
+			                id: 7,
+			                title: '双十一',
+			                start: '2017-06-12',
+			                className: 'done'
+			            }
+
+			        ],
+		});
+		//gmv查询
+		$('#first').click(function() {
+			$('#targetyTab a:first').tab('show');
+			$("#gmvTarget").attr("style", "display:show();");
+
+
+			var json = {
+				"shopId" : shopId,
+				"y" : selected
+			};
+			var url = "/target/queryGoalMonthSale.do";
+			getDate(url, json)
+		})
+		//alipay查询
+		$('#last').click(
+
+		function() {
+
+			$('#targetyTab a:last').tab('show');
+			$("#gmvTarget").attr("style", "display:none;");
+			var row = {
+				"shopId" : shopId,
+				"y" : selected
+			};
+			var url = "/target/queryGoalMonthAlip.do";
+			getDate(url, row);
+		});
+		//月份滑动效果
+		$(".monthUnit").mouseover(function(e) {
+			$(e.target).addClass('active')
+		});
+		$(".monthUnit").mouseout(function(e) {
+
+			$(e.target).removeClass('active')
+
+		});
+		//月份点击效果
+		$(".monthUnit")
+				.click(
+						function(e) {
+							var startDate = selected
+									+ "-" + $(e.target).attr('value') + "-01";
+							var endDate = selected
+									+ "-" + $(e.target).attr('value') + "-31";
+							if ($(e.target).attr("class") == "monthUnit active"
+									&& $("#gmvTarget").css("display") != "none") {
+								$('#calendar').fullCalendar("gotoDate",
+										new Date(startDate));
+								var json = {
+									"shopId" : shopId,
+									"startDate" : startDate,
+									"endDate" : endDate,
+									"storename" : "lesportsac旗舰店"
+								}
+								getDailyDate(json);
+								//获取最后一个子节点
+								$("#monthTarget").val(
+										$(e.target)
+												.children("input:last-child")
+												.val());
+							}
+						});
+		
+		//年份变
+		$("#year").change(
+				function() {
+					selected = $('#year option:selected').val();
+
+					if ($("#gmvTarget").css("display") == "none") {
+						//跳转月份
+						var row = {
+							"shopId" : shopId,
+							"y" : selected
+						};
+						var url = "/target/queryGoalMonthAlip.do";
+						getDate(url, row);
+					} else {
+						var jsonMonth = {
+							"shopId" : shopId,
+							"y" : selected
+						};
+						var url = "/target/queryGoalMonthSale.do";
+						getDate(url, jsonMonth)
+						$('#calendar').fullCalendar("gotoDate",
+								new Date(selected + "-01-01"));
+
+						var jsonDaily = {
+							"shopId" : shopId,
+							"startDate" : selected + "-01-01",
+							"endDate" : selected + "01-31",
+							"storename" : "lesportsac旗舰店"
+						}
+						getDailyDate(jsonDaily)
+					}
+				});
+
+		//gmv计划初始化
+		//月
+	
+
+		var json = {
+			"shopId" : shopId,
+			"y" : selected
+		};
+		var url = "/target/queryGoalMonthSale.do";
+		getDate(url, json)
+		//日
+		var json = {
+			"shopId" : shopId,
+			"startDate" : selected + "-01-01",
+			"endDate" : selected + "01-31",
+			"storename" : "lesportsac旗舰店"
+		};
+		$('#calendar').fullCalendar("gotoDate", new Date(json.startDate));
+		getDailyDate(json);
+		/*初始化↑ */
+	});
+
+	//请求月计划数据
+	function getDate(url, json) {
+		alert(JSON.stringify(json))
+		$.ajax({
+			url : url,
+			data : json,
+			dataType : 'JSON',
+			success : function(data, status) {
+				/* 请求数据不空 */
+				alert(JSON.stringify(data))
+				if (data.data != null && data.data != "") {
+					monthTarget = data.data[0];
+
+					$("#monthTargetId").val(monthTarget.id);
+					if ($("#monthTarget").val() == null
+							|| $("#monthTarget").val() == "") {
+						$("#monthTarget").val(monthTarget.m01);
+					}
+					$("#JanuaryTarget").val(monthTarget.m01);
+					$("#FebruaryTarget").val(monthTarget.m02);
+					$("#MarchTarget").val(monthTarget.m03);
+					$("#AprilTarget").val(monthTarget.m04);
+					$("#MayTarget").val(monthTarget.m05);
+					$("#JuneTarget").val(monthTarget.m06);
+					$("#JulyTarget").val(monthTarget.m07);
+					$("#AugustTarget").val(monthTarget.m08);
+					$("#SeptemberTarget").val(monthTarget.m09);
+					$("#OctoberTarget").val(monthTarget.m10);
+					$("#NovemberTarget").val(monthTarget.m11);
+					$("#DecemberTarget").val(monthTarget.m12);
+					var amount = Number(monthTarget.m01)
+							+ Number(monthTarget.m02) + Number(monthTarget.m03)
+							+ Number(monthTarget.m04) + Number(monthTarget.m05)
+							+ Number(monthTarget.m06) + Number(monthTarget.m07)
+							+ Number(monthTarget.m08) + Number(monthTarget.m09)
+							+ Number(monthTarget.m10) + Number(monthTarget.m11)
+							+ Number(monthTarget.m12);
+					$("#targetAmount").val(amount);
+
+				} else {
+					$(".monthUnit input").val("");
+					$("#targetAmount").val("");
+					$("#monthTargetId").val("");
+					$("#differencValue").val("");
+					$("#monthTarget").val("");
+				}
+			},
+			error : function() {
+				alert('查询失败');
+			}
+		});
+	}
+	//日目标
+	function getDailyDate(json) {
+		$.ajax({
+			url : "/target/queryDailyTargetNopage.do",
+			type : "POST",
+			data : json,
+			dataType : 'JSON',
+			success : function(data, status) {
+				/* 请求数据不空 */
+				if (data != null && data != "") {
+					monthTarget = data.data;
+					$.each(monthTarget, function(idx, obj) {
+						$("#" + obj.date + " .dailyPayment").val(obj.payment);
+						$("#" + obj.date + " .dailyId").val(obj.id);
+
+					});
+
+				}
+				$("#dailyTargerCount").val(dailysummate());
+				dailySummateAddChange();
+				differenc();
+			},
+			error : function() {
+				alert('查询失败');
+			}
+		});
+		//编辑
+		$('#editMonthTarget').click(
+				function() {
+					$(".monthUnit").each(function (){
+			
+						$(this).children("input:last-child").bind("change",function(){								
+							$("#targetAmount").val(monthTargerAmount());
+						});
+					});
+					$(".targetInput").removeAttr("readonly");
+					$(".targetInput").css("border","1px solid #d3d3d3")
+					$("#saveMonthTarget").removeClass("hidden");
+					$("#cancelMonthTarget").removeClass("hidden");
+					$("#editMonthTarget").addClass("hidden");
+				});
+		//取消
+		$('#cancelMonthTarget').click(
+				function() {
+			
+					cancleEditMonthTarget();
+				
+					var jsonMonth = {
+							"shopId" : shopId,
+							"y" : selected
+						};
+						var url = "/target/queryGoalMonthSale.do";
+						if ($("#gmvTarget").css("display") == "none") {
+							url = "/target/queryGoalMonthAlip.do";
+						}
+						getDate(url, jsonMonth)
+				});
+		//保存
+		$('#saveMonthTarget').click(
+				function() {
+					saveMonthTarget();
+					cancleEditMonthTarget();
+				});
+		
+	}
+	
+	function cancleEditMonthTarget(){
+		$(".targetInput").attr("readonly","readonly")
+		$(".targetInput").css("border","none")
+		$("#editMonthTarget").removeClass("hidden");
+		$("#saveMonthTarget").addClass("hidden");
+		$("#cancelMonthTarget").addClass("hidden");
+	}
+	
+	
+	/* 保存月计划 */
+	function saveMonthTarget() {
+		var url;
+		var target = {
+
+			id : $("#monthTargetId").val(),
+			m01 : $("#JanuaryTarget").val(),
+			m02 : $("#FebruaryTarget").val(),
+			m03 : $("#MarchTarget").val(),
+			m04 : $("#AprilTarget").val(),
+			m05 : $("#MayTarget").val(),
+			m06 : $("#JuneTarget").val(),
+			m07 : $("#JulyTarget").val(),
+			m08 : $("#AugustTarget").val(),
+			m09 : $("#SeptemberTarget").val(),
+			m10 : $("#OctoberTarget").val(),
+			m11 : $("#NovemberTarget").val(),
+			m12 : $("#DecemberTarget").val()
+		};
+		if ($("#gmvTarget").css("display") == "none") {
+			url = "/target/insertOrUpdateGoalMonthAlip.do";
+		} else {
+			url = "/target/insertOrupdateGoalMonthSale.do";
+		}
+		$.ajax({
+			url : url,
+			type : "POST",
+			data : target,
+			dataType : 'JSON',
+			success : function(data, status) {
+				alert(JSON.stringify(data))
+				var jsonMonth = {
+					"shopId" : shopId,
+					"y" : selected
+				};
+				var url = "/target/queryGoalMonthSale.do";
+				if ($("#gmvTarget").css("display") == "none") {
+					url = "/target/queryGoalMonthAlip.do";
+				}
+				getDate(url, jsonMonth)
+
+			},
+			error : function() {
+				alert('保存失败');
+			}
+		});
+	}
+
+	Date.prototype.format = function(format) {
+		var o = {
+			"M+" : this.getMonth() + 1, //month 
+			"d+" : this.getDate(), //day 
+			"h+" : this.getHours(), //hour 
+			"m+" : this.getMinutes(), //minute 
+			"s+" : this.getSeconds(), //second 
+			"q+" : Math.floor((this.getMonth() + 3) / 3), //quarter 
+			"S" : this.getMilliseconds()
+		//millisecond 
+		}
+
+		if (/(y+)/.test(format)) {
+			format = format.replace(RegExp.$1, (this.getFullYear() + "")
+					.substr(4 - RegExp.$1.length));
+		}
+
+		for ( var k in o) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+						: ("00" + o[k]).substr(("" + o[k]).length));
+			}
+		}
+		return format;
+	}
+
+	//日目标事件
+	function dailySummateAddChange() {
+		var moment = $('#calendar').fullCalendar('getDate');
+		var daily = moment.format("yyyy-MM");
+		var a = 0;
+		//绑定事件
+		$("div[id^='" + daily + "']").each(function(e, t) {
+			$(this).children("input:last-child").bind("change", function() {
+				differenc();
+			});
+		})
+	}
+	//日目标合计
+	function dailysummate() {
+		var moment = $('#calendar').fullCalendar('getDate');
+		var daily = moment.format("yyyy-MM");
+		var a = 0;
+		//合计总数，移除隐藏
+		$("div[id^='" + daily + "']").each(function(e, t) {
+			$(this).children("input:last-child").css("display", "block");
+			a = Number($(this).children("input:last-child").val()) + a;
+		})
+		return a;
+	}
+	//差值计算日目标合计和月目标
+	function differenc() {
+		$("#dailyTargerCount").val(dailysummate());
+		$("#differencValue").val(
+				Number(Number($("#monthTarget").val())
+						- Number($("#dailyTargerCount").val())));
+	}
+	//保存日目标
+	function saveDailyTarget(){
+		var dailyTargets=[];
+		var moment = $('#calendar').fullCalendar('getDate');
+		var daily = moment.format("yyyy-MM");
+		var dailyTarget={};
+		$("div[id^='" + daily + "']").each(function(e, t) {
+			dailyTarget={
+					id:$(this).children("input:first-child").val()==""?null:$(this).children("input:first-child").val(),
+					date:$(this).attr("id"),
+					payment:Number($(this).children("input:last-child").val()),
+					shopId:null,
+					storename:"lesportsac旗舰店",
+					startDate:"",
+					endDate:""
+			};
+			dailyTargets.push(dailyTarget);
+		})
+		alert(JSON.stringify(dailyTargets));
+		var url="/target/insertOrUpdateDailyTargetByBatch.do";
+		json={"dailyTargets":JSON.stringify(dailyTargets)};
+	 	$.ajax({
+			url : url,
+			type : "POST",
+			data :json,
+			dataType : 'JSON',
+			success : function(data, status) {
+				alert(JSON.stringify(data));
+			},
+			error : function() {
+				alert('保存失败');
+			}
+		}); 
+		
+	}
+	function monthTargerAmount(){
+		//年目标	
+		var a=0;	
+		$(".monthUnit").each(function (){
+		a=a+Number($(this).children("input:last-child").val());
+		});
+		return a;
+	}
+</script>
+</head>
+
+<body>
+	<div style="height: 50; margin-left: 20%"></div>
+	<div style="margin-left: 13%">
+
+		<ul class="nav nav-tabs" id="targetyTab">
+			<li class="active" id=first><a href="javascript:void(0)"
+				data-toggle="tab">gmv</a></li>
+			<li>
+			<li id="last"><a href="javascript:void(0)" data-toggle="tab">alpay</a>
+			</li>
+		</ul>
+		<table class="table table-bordered  ">
+			<tbody>
+				<tr>
+					<td rowspan="3"
+						style="text-align: center; font-size: 20px; padding-top: 3%;">
+						<select class="form-control" name="year" id="year">
+					</select> 销售目标 <br> <input class="targetAmountInput" id="targetAmount"
+						style="margin-top: 9%; border: 0px solid #d3d3d3; width: 140px " readonly="true"
+						type="text" class="targetAmount">￥
+					</td>
+					<td colspan="5">销售目标</td>
+					<td>
+						<button  id="editMonthTarget" class="btn btn-default">编辑</button>
+						<button   id="cancelMonthTarget"class="btn btn-default hidden">取消</button>
+						<button  id="saveMonthTarget" class="btn btn-default hidden">保存</button> 
+					</td>
+				</tr>
+				<tr>
+
+					<td class="monthUnit" value="01">一月 <br>January<br>
+						<input class="targetInput" hidden="true" id="monthTargetId" type="text">
+						<input class="targetInput" readonly="readonly" id="JanuaryTarget" type="text">
+					<td id="month2" class="monthUnit" value="02">二月 <br>February<br>
+						<input class="targetInput" readonly="readonly" id="FebruaryTarget" type="text">
+					</td>
+					<td class="monthUnit" value="03">三月 <br>March<br> <input
+						class="targetInput" readonly="readonly" id="MarchTarget" type="text">
+
+					</td>
+					<td class="monthUnit" value="04">四月 <br>April <br> <input
+						class="targetInput" readonly="readonly" id="AprilTarget" type="text">
+					</td>
+					<td class="monthUnit" value="05">五月 <br>May <br> <input
+						class="targetInput" readonly="readonly" id="MayTarget" type="text">
+					</td>
+					<td class="monthUnit" value="06">六月 <br>June <br> <input
+						class="targetInput"  readonly="readonly" id="JuneTarget" type="text">
+					</td>
+
+				</tr>
+				<tr>
+					<td class="monthUnit" value="07">七月 <br>July <br> <input
+						class="targetInput"  readonly="readonly" id="JulyTarget" type="text">
+					</td>
+					<td class="monthUnit" value="08">八月 <br>August <br>
+						<input class="targetInput" readonly="readonly" id="AugustTarget" type="text">
+					</td>
+					<td class="monthUnit" value="09">九月 <br>September <br>
+						<input class="targetInput" readonly="readonly" id="SeptemberTarget" type="text">
+					</td>
+					<td class="monthUnit" value="10">十月 <br>October <br>
+						<input class="targetInput" readonly="readonly" id="OctoberTarget" type="text">
+					</td>
+					<td class="monthUnit" value="11">十一月 <br>November <br>
+						<input class="targetInput" readonly="readonly" id="NovemberTarget" type="text">
+					</td>
+					<td class="monthUnit" value="12">十二月<br> December <br>
+						<input class="targetInput" readonly="readonly" id="DecemberTarget" type="text">
+					</td>
+				</tr>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+		<div id="gmvTarget">
+			<div class="tab-content" style="float: right; margin-right: 10%">
+
+				<div class="tab-pane active">
+					<div id="header"></div>
+					<div id="main">
+					<button onclick="saveDailyTarget()" class="btn btn-default " style="margin-left: 91%;margin-top: 2%"> 保存</button>
+						<form id='calendar'></form>
+					</div>
+
+				</div>
+			</div>
+			<div>
+				月目标 <br>
+				<input class="dailyTargetInput" id="monthTarget" readonly="readonly"
+					type="text"> <br> 日目标合计<br> <input
+					class="dailyTargetInput" readonly="readonly" id="dailyTargerCount"
+					type="text"> <br> 差值 <br> <input
+					readonly="readonly" class="dailyTargetInput" id="differencValue"
+					type="text">
+			</div>
+		</div>
+	</div>
+</body>
+
+
+</html>
+
+
+</html>

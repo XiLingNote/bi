@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.DailyTargetMapper">
+
+	<!-- 查询-->
+	<select id="queryDailyTarget"  resultType="DailyTarget">
+		SELECT * FROM bi_daily_target 
+		where 1=1
+		<if test="id!=null and id!=''">
+		and id =#{id}
+		</if>
+		<if test="storename!=null and storename!=''">
+		and storename like concat('%',#{storename},'%')
+		</if>
+		<if test="payment!=null and payment!=''">
+		and payment =#{payment}
+		</if>
+		<if test="date!=null and date!=''">
+		and date =#{date}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		and date &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+		and date &lt;= #{endDate}
+		</if>
+	</select>
+	<!-- 批量增加 -->
+	<insert id="insertByBatch" parameterType="java.util.List"  useGeneratedKeys="true" >
+        insert into bi_daily_target (storename, date,payment,shopId)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.storename}, date_format(#{item.date},'%y-%m-%d'),#{item.payment},#{item.shopId})
+        </foreach>
+    </insert>
+    <!-- 批量删除 -->
+    <delete id="batchDeleteDailyTarget" parameterType="int" >
+        delete from bi_daily_target where id in
+        <foreach collection="array" item="idItem"  open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+    <!--更新  -->
+    <update id="updateDaliypTarget" parameterType="DailyTarget">
+    update bi_daily_target set date=#{date},payment=#{payment} ,shopId=#{shopId} where id =#{id}  
+    </update>
+    <!-- 批量更新 -->
+    <update id="updateDaliypTargetByBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"  separator=";">
+			update bi_daily_target
+		<set>
+			date=date_format(#{item.date},'%y-%m-%d')
+			,payment=#{item.payment} 
+			<if test="item.shopId!=null and item.shopId!=''">
+			,shopId=#{item.shopId}  
+			</if>
+		</set>
+		where id =#{item.id}
+		</foreach>
+		
+	</update>
+</mapper>

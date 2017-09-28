@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.QueryCommodityPropertyMapper">
+
+		<select id="queryFeatureAndProperty" resultType="java.util.HashMap">
+		select  DISTINCT c.feature as featuerKey ,  
+		(select   group_concat(property) from bi_commodity_property   s   where  s.feature=c.feature ) as propertyArray 
+		from  bi_commodity_property  c where shop_id=#{shopId} 
+		</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertOne" parameterType="CommodityPropertyBean"
+		useGeneratedKeys="true">
+			replace  INTO `bi_commodity_query_feature` (
+		`feature`,
+		`shop_id`,
+		`property`
+		)
+		VALUES
+			(
+			#{feature},
+			#{shopId},
+			#{property}
+			)
+	</insert>
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.DailyTargetMapper">
+
+	<!-- 查询-->
+	<select id="queryDailyTarget"  resultType="bi.baiqiu.pojo.DailyTarget">
+		SELECT * FROM dailytarget 
+		where 1=1
+		<if test="id!=null">
+		and id =#{id}
+		</if>
+		<if test="storename!=null">
+		and storename like concat('%',#{storename},'%')
+		</if>
+		<if test="payment!=null">
+		and payment =#{payment}
+		</if>
+		<if test="date!=null">
+		and date =#{date}
+		</if>
+		<if test="startDate!=null">
+		and date &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null">
+		and date &lt;= #{endDate}
+		</if>
+	</select>
+	<!-- 批量增加 -->
+	<insert id="insertByBatch" parameterType="java.util.List"  useGeneratedKeys="true" >
+        insert into dailytarget (storename, date,payment)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.storename}, date_format(#{item.date},'%y-%m-%d'),#{item.payment})
+        </foreach>
+    </insert>
+    <!-- 批量删除 -->
+    <delete id="batchDeleteDailyTarget" parameterType="java.util.List" >
+        delete from dailytarget where id in
+        <foreach collection="array" item="idItem"  open="(" separator="," close=")">
+            #{idItem.id}
+        </foreach>
+    </delete>
+    <update id="updateDaliypTarget" parameterType="bi.baiqiu.pojo.DailyTarget">
+    update dailytarget set date=#{date},payment=#{payment} where id =#{id};  
+    </update>
+</mapper>

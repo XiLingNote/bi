@@ -1,0 +1,26 @@
+package bi;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import bi.baiqiu.pojo.DrillShowBean;
+import bi.baiqiu.pojo.User;
+import bi.baiqiu.utils.DateUtils;
+public class Test {
+	public static void main(String[] args) throws ParseException {
+		/*	Date date = new Date();//当前日期
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");//格式化对象
+		  Calendar calendar = Calendar.getInstance();//日历对象
+		  calendar.setTime(date);//设置当前日期
+		  calendar.add(Calendar.MONTH, -2);//月份减一
+		  System.out.println(sdf.format(calendar.getTime()));//输出格式化的日期	
+*/		
+		SimpleDateFormat ss = new SimpleDateFormat("yyyy/MM/dd");
+		System.out.println(ss.format(new Date()));
+		User user=new User();
+		user.setHasDeleteHistoryAuthority(false);
+		System.out.println(user.isHasDeleteHistoryAuthority());
+	}
+}

@@ -1,0 +1,218 @@
+package bi.baiqiu.service.impl;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import bi.baiqiu.pojo.DailyTarget;
+import bi.baiqiu.pojo.GoalMonthAlip;
+import bi.baiqiu.pojo.GoalMonthsale;
+import bi.baiqiu.pojo.RedisPojo;
+import bi.baiqiu.pojo.User;
+import bi.baiqiu.utils.GsonUtils;
+
+public class RedisServiceImpl {
+	@Autowired
+	JedisPool pool;
+
+	private static final String all = "All";
+
+	private static final String DAY = "DAY";
+
+	private static final String MONTH = "MONTH";
+
+	private static final String YEAR = "YEAR";
+
+	/**
+	 * @param user
+	 *            用户
+	 * @param list
+	 */
+	public void saveDailyTargetToRedis(User user, List<DailyTarget> list) {
+		Jedis jedis = pool.getResource();
+		String name = user.getShopName();
+		// 获取部门
+		String department = jedis.get(name);
+		// 公司总计
+		for (DailyTarget dailyTarget : list) {
+			String ymd = dailyTarget.getDate().replaceAll("-", "")
+					.replaceAll("/", "");
+			// 店铺
+			RedisPojo pojo = null;
+			String dateString = jedis.hget(name + DAY, ymd);
+			if (StringUtils.isNotBlank(dateString)) {
+				pojo = GsonUtils.gson.fromJson(dateString, RedisPojo.class);
+
+			} else {
+				pojo = new RedisPojo();
+				pojo.setDatetime(ymd);
+			}
+			pojo.setTarget(new BigDecimal(dailyTarget.getPayment()));
+			jedis.hset(name + DAY, ymd, GsonUtils.gson.toJson(pojo));
+			// 部门
+			RedisPojo departPojo = null;
+			String departString = jedis.hget(department + DAY, ymd);
+			if (StringUtils.isNotBlank(departString)) {
+				departPojo = GsonUtils.gson.fromJson(departString,
+						RedisPojo.class);
+
+			} else {
+				departPojo = new RedisPojo();
+				departPojo.setDatetime(ymd);
+			}
+			departPojo.setTarget(new BigDecimal(dailyTarget.getPayment()));
+			jedis.hset(department + DAY, ymd, GsonUtils.gson.toJson(departPojo));
+			// 总计
+			RedisPojo allPojo = null;
+			String allString = jedis.hget(all + DAY, ymd);
+			if (StringUtils.isNotBlank(allString)) {
+				allPojo = GsonUtils.gson.fromJson(allString, RedisPojo.class);
+
+			} else {
+				allPojo = new RedisPojo();
+				allPojo.setDatetime(ymd);
+			}
+			allPojo.setTarget(new BigDecimal(dailyTarget.getPayment()));
+			jedis.hset(all + DAY, ymd, GsonUtils.gson.toJson(allPojo));
+
+		}
+
+		pool.returnResource(jedis);
+	}
+
+	public void saveGmvMonthTargetToRedis(User user, GoalMonthsale gmv) {
+
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM01(), "01", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM02(), "02", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM03(), "03", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM04(), "04", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM05(), "05", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM06(), "06", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM07(), "07", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM08(), "08", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM09(), "09", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM10(), "10", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM11(), "11", gmv.getY());
+		saveGmvTargetToRedis(user.getShopName(), gmv.getM12(), "12", gmv.getY());
+	}
+
+	private void saveGmvTargetToRedis(String name, String amount, String m,
+			String y) {
+		Jedis jedis = pool.getResource();
+
+		String string = jedis.hget(name + MONTH, y + m);
+		BigDecimal target = null;
+		if (StringUtils.isNotBlank(string)) {
+			target = GsonUtils.gson.fromJson(string, RedisPojo.class)
+					.getAlipayTarget();
+
+		} else {
+			target = new BigDecimal(0);
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		// 店铺
+		map.put(name + MONTH, y + m);
+		map.put(name + YEAR, y);
+		// 部门
+		String department = jedis.get(name);
+		map.put(department + MONTH, y + m);
+		map.put(department + YEAR, y);
+		// 公司总计
+		map.put(all + MONTH, y + m);
+		map.put(all + YEAR, y);
+		for (String key : map.keySet()) {
+			String field = map.get(key);
+
+			RedisPojo pojo = null;
+			String dateString = jedis.hget(key, field);
+			if (StringUtils.isNotBlank(dateString)) {
+				pojo = GsonUtils.gson.fromJson(dateString, RedisPojo.class);
+
+			} else {
+				pojo = new RedisPojo();
+				pojo.setDatetime(field);
+			}
+			pojo.setTarget(new BigDecimal(amount).subtract(target));
+			jedis.hset(key, field, GsonUtils.gson.toJson(pojo));
+		}
+		pool.returnResource(jedis);
+	}
+
+	public void saveAlipayMonthTargetToRedis(User user, GoalMonthAlip alipay) {
+
+		saveAliTargetToRedis(user.getShopName(), alipay.getM01(), "01",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM02(), "02",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM03(), "03",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM04(), "04",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM05(), "05",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM06(), "06",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM07(), "07",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM08(), "08",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM09(), "09",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM10(), "10",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM11(), "11",
+				alipay.getY());
+		saveAliTargetToRedis(user.getShopName(), alipay.getM12(), "12",
+				alipay.getY());
+	}
+
+	private void saveAliTargetToRedis(String name, String amount, String m,
+			String y) {
+
+		Jedis jedis = pool.getResource();
+		String string = jedis.hget(name + MONTH, y + m);
+		BigDecimal target = null;
+		if (StringUtils.isNotBlank(string)) {
+			target = GsonUtils.gson.fromJson(string, RedisPojo.class)
+					.getAlipayTarget();
+
+		} else {
+			target = new BigDecimal(0);
+		}
+
+		Map<String, String> map = new HashMap<String, String>();
+		// 店铺
+		map.put(name + MONTH, y + m);
+		map.put(name + YEAR, y);
+		// 部门
+		String department = jedis.get(name);
+		map.put(department + MONTH, y + m);
+		map.put(department + YEAR, y);
+		// 公司总计
+		map.put(all + MONTH, y + m);
+		map.put(all + YEAR, y);
+		for (String key : map.keySet()) {
+			String field = map.get(key);
+
+			RedisPojo pojo = null;
+			String dateString = jedis.hget(key, field);
+			if (StringUtils.isNotBlank(dateString)) {
+				pojo = GsonUtils.gson.fromJson(dateString, RedisPojo.class);
+
+			} else {
+				pojo = new RedisPojo();
+				pojo.setDatetime(field);
+			}
+			pojo.setAlipayTarget(new BigDecimal(amount).subtract(target));
+			jedis.hset(key, field, GsonUtils.gson.toJson(pojo));
+		}
+		pool.returnResource(jedis);
+	}
+
+}

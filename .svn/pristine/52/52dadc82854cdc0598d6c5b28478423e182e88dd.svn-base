@@ -1,0 +1,90 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import bi.baiqiu.mapper.ThrougTrainMapper;
+import bi.baiqiu.page.PageHelper;
+import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.ThrougTrainBean;
+
+@Service
+@Transactional
+public class ThrougTrainServiceImpl {
+	@Autowired
+	private ThrougTrainMapper througTrainDao;
+
+	/**
+	 * 分页查询方法s
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<ThrougTrainBean> queryByPage(ThrougTrainBean bean, Integer pageNum, Integer pageSize)
+			throws Exception {
+		PageHelper.startPage(pageNum, pageSize);
+		througTrainDao.queryByPage(bean);
+		return PageHelper.endPage();
+
+	}
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public int insertByBatch(List<ThrougTrainBean> list) {
+
+		return througTrainDao.insertByBatch(list);
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int insertThrougTrain(ThrougTrainBean bean) {
+
+		return througTrainDao.insert(bean);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int updateThrougTrain(ThrougTrainBean bean) {
+
+		return througTrainDao.updateByPrimaryKey(bean);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int deleteThrougTrain(ThrougTrainBean bean) {
+
+		return througTrainDao.deleteByPrimaryKey(bean);
+	}
+
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deleteThrougTrainByBatch(ThrougTrainBean bean) {
+
+		return througTrainDao.deleteByBatchList(bean);
+	}
+
+}

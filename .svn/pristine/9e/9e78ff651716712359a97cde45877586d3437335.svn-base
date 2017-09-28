@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.UserMapper">
+
+	<select id="login" resultType="User">
+		SELECT
+		user.id,
+		user.name,
+		user.username,
+		user.password,
+		user.shop_id,
+		user.phone,
+		user.role_ids,
+		shop.name as shopName,
+		shop.name_plat as shopNamePlat
+		FROM
+		user
+		INNER JOIN
+		shop ON user.shop_id =
+		shop.id
+		WHERE user.username = #{username}
+	</select>
+
+	<select id="getRoles" resultType="UserRole">
+		SELECT id,role_name,function_ids FROM user_role WHERE id IN (${value})
+	</select>
+
+	<select id="getUserRoleFunctions" resultType="UserRoleFunction">
+		SELECT id,function_name,u_explain FROM user_role_function WHERE id IN (${value})
+	</select>
+
+</mapper>

@@ -1,0 +1,4 @@
+driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://rm-vy1l0kd8nnxkc3t66.mysql.rds.aliyuncs.com:3306/bi?characterEncoding=utf8
+username=biroot
+password=BQPassword-bi-309

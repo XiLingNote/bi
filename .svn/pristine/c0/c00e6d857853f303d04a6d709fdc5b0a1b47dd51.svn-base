@@ -1,0 +1,133 @@
+package bi.baiqiu.pojo;
+
+import java.util.Date;
+
+import javax.persistence.Table;
+
+/**
+ *商品属性表
+ */
+@Table(name="bi_commodity_property")
+public  class CommodityPropertyBean  implements java.io.Serializable {
+
+
+    // Fields    
+
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
+     private String feature;
+     private String sku;
+     private String spu;
+     private Integer goodsId;
+     private Integer shopId;
+     private String property;
+     private Date createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public CommodityPropertyBean() {
+    }
+
+    
+    /** full constructor */
+    public CommodityPropertyBean(String feature, String sku, String spu, Integer goodsId, Integer shopId, String property, Date createTime, String remark) {
+        this.feature = feature;
+        this.sku = sku;
+        this.spu = spu;
+        this.goodsId = goodsId;
+        this.shopId = shopId;
+        this.property = property;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFeature() {
+        return this.feature;
+    }
+    
+    public void setFeature(String feature) {
+        this.feature = feature;
+    }
+
+    public String getSku() {
+        return this.sku;
+    }
+    
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getSpu() {
+        return this.spu;
+    }
+    
+    public void setSpu(String spu) {
+        this.spu = spu;
+    }
+
+    public Integer getGoodsId() {
+        return this.goodsId;
+    }
+    
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getProperty() {
+        return this.property;
+    }
+    
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+
+.table {
+	table-layout: fixed;
+	
+}
+
+#cusTable{
+background-color:DarkSlateBlue; 
+color:white;
+
+}
+.bootstrap-table{
+color:white;
+}
+.th-inner{
+color:white;
+}
+.pagination>li>a,.pagination>.disabled>a{
+background-color:DarkSlateBlue; 
+}
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus,
+	.pagination>li>span:focus {
+	background-color: #333333
+}
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #333333
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus,
+	.pagination>li>span:focus {
+	background-color: #333333;
+}
+/*表格选中  */
+.fixed-table-container tbody .selected td {
+   background-color: #333333;
+}
+.fixed-table-container tbody td {
+    border: 0.1px solid #615252;
+}
+
+.fixed-table-container {
+    border: 0.1px solid #615252;
+    padding-bottom: 10%;
+     
+}
+.bootstrap-table .table thead > tr > th {
+border: 0.5px solid #615252;
+}
+
+.fixed-table-pagination,.pagination>li>a,.pagination>li>span{
+    border: 0px solid #615252;
+
+}
+.fixed-table-footer{
+}
+.table{
+		border: 0.5px solid #615252;
+	
+}
+.pagination{
+	padding-right: 1px
+}
+.table tbody{
+	border: 0.5px solid #615252;
+}
+/*过长的数据  */
+ .table tbody td{  
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}

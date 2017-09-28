@@ -1,0 +1,91 @@
+package bi.baiqiu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import bi.baiqiu.mapper.VisitorMonthFeaturesMapper;
+import bi.baiqiu.page.PageHelper;
+import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.VisitorMonthFeaturesBean;
+
+@Service
+@Transactional
+public class VisitorMonthFeathersServiceImpl {
+	@Autowired
+	private VisitorMonthFeaturesMapper visitorMonthFeaturesDao;
+
+	/**
+	 * 分页查询方法s
+	 * 
+	 * @param bean
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<VisitorMonthFeaturesBean> queryByPage(VisitorMonthFeaturesBean bean, Integer pageNum, Integer pageSize)
+			throws Exception {
+		PageHelper.startPage(pageNum, pageSize);
+		visitorMonthFeaturesDao.queryByPage(bean);
+		return PageHelper.endPage();
+
+	}
+
+	/**
+	 * 批量增加
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public int insertByBatch(List<VisitorMonthFeaturesBean> list) {
+
+		return visitorMonthFeaturesDao.insertByBatch(list);
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int insertVisitorMonthFeatures(VisitorMonthFeaturesBean bean) {
+
+		return visitorMonthFeaturesDao.insert(bean);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int updateVisitorMonthFeatures(VisitorMonthFeaturesBean bean) {
+
+		return visitorMonthFeaturesDao.updateByPrimaryKey(bean);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	public int deleteVisitorMonthFeatures(VisitorMonthFeaturesBean bean) {
+
+		return visitorMonthFeaturesDao.deleteByPrimaryKey(bean);
+	}
+
+	/**
+	 * 批量删除
+	 * 
+	 * @param idArray
+	 * @return
+	 */
+	public int deleteVisitorMonthFeaturesByBatch(VisitorMonthFeaturesBean bean) {
+
+		return visitorMonthFeaturesDao.deleteByBatchList(bean);
+	}
+
+}

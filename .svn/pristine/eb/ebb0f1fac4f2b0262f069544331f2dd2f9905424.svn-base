@@ -1,0 +1,217 @@
+package bi.baiqiu.pojo;
+
+import java.util.Date;
+
+public class WareHouse {
+    private Integer id;
+
+    private Integer shopId;
+
+    private String shopName;
+
+    private String showName;
+
+    private Boolean visible;
+
+    private Boolean facet;
+
+    private Integer sort;
+
+    private String repertoryName;
+
+    private Integer notTurnAmount;
+
+    private Integer trunAmount;
+
+    private Integer notPrintAmount;
+
+    private Integer distributionAmount;
+
+    private Integer totalSingleAmount;
+
+    private Integer todayShippedAmount;
+
+    private Integer todayShippedGeneralAmount;
+
+    private Integer todayShippedPresellAmount;
+
+    private Integer lastMonthShippedAmount;
+
+    private Integer presentMonthShippedAmount;
+
+    private Date modifyTime;
+
+    
+    
+    public WareHouse() {
+		super();
+	}
+
+	public WareHouse(Integer notTurnAmount, Integer trunAmount, Integer notPrintAmount, Integer distributionAmount,
+			Integer totalSingleAmount, Integer todayShippedAmount, Integer todayShippedGeneralAmount,
+			Integer todayShippedPresellAmount, Integer lastMonthShippedAmount, Integer presentMonthShippedAmount) {
+		super();
+		this.notTurnAmount = notTurnAmount;
+		this.trunAmount = trunAmount;
+		this.notPrintAmount = notPrintAmount;
+		this.distributionAmount = distributionAmount;
+		this.totalSingleAmount = totalSingleAmount;
+		this.todayShippedAmount = todayShippedAmount;
+		this.todayShippedGeneralAmount = todayShippedGeneralAmount;
+		this.todayShippedPresellAmount = todayShippedPresellAmount;
+		this.lastMonthShippedAmount = lastMonthShippedAmount;
+		this.presentMonthShippedAmount = presentMonthShippedAmount;
+	}
+
+	public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName == null ? null : shopName.trim();
+    }
+
+    public String getShowName() {
+        return showName;
+    }
+
+    public void setShowName(String showName) {
+        this.showName = showName == null ? null : showName.trim();
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
+    public Boolean getFacet() {
+        return facet;
+    }
+
+    public void setFacet(Boolean facet) {
+        this.facet = facet;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public String getRepertoryName() {
+        return repertoryName;
+    }
+
+    public void setRepertoryName(String repertoryName) {
+        this.repertoryName = repertoryName == null ? null : repertoryName.trim();
+    }
+
+    public Integer getNotTurnAmount() {
+        return notTurnAmount;
+    }
+
+    public void setNotTurnAmount(Integer notTurnAmount) {
+        this.notTurnAmount = notTurnAmount;
+    }
+
+    public Integer getTrunAmount() {
+        return trunAmount;
+    }
+
+    public void setTrunAmount(Integer trunAmount) {
+        this.trunAmount = trunAmount;
+    }
+
+    public Integer getNotPrintAmount() {
+        return notPrintAmount;
+    }
+
+    public void setNotPrintAmount(Integer notPrintAmount) {
+        this.notPrintAmount = notPrintAmount;
+    }
+
+    public Integer getDistributionAmount() {
+        return distributionAmount;
+    }
+
+    public void setDistributionAmount(Integer distributionAmount) {
+        this.distributionAmount = distributionAmount;
+    }
+
+    public Integer getTotalSingleAmount() {
+        return totalSingleAmount;
+    }
+
+    public void setTotalSingleAmount(Integer totalSingleAmount) {
+        this.totalSingleAmount = totalSingleAmount;
+    }
+
+    public Integer getTodayShippedAmount() {
+        return todayShippedAmount;
+    }
+
+    public void setTodayShippedAmount(Integer todayShippedAmount) {
+        this.todayShippedAmount = todayShippedAmount;
+    }
+
+    public Integer getTodayShippedGeneralAmount() {
+        return todayShippedGeneralAmount;
+    }
+
+    public void setTodayShippedGeneralAmount(Integer todayShippedGeneralAmount) {
+        this.todayShippedGeneralAmount = todayShippedGeneralAmount;
+    }
+
+    public Integer getTodayShippedPresellAmount() {
+        return todayShippedPresellAmount;
+    }
+
+    public void setTodayShippedPresellAmount(Integer todayShippedPresellAmount) {
+        this.todayShippedPresellAmount = todayShippedPresellAmount;
+    }
+
+    public Integer getLastMonthShippedAmount() {
+        return lastMonthShippedAmount;
+    }
+
+    public void setLastMonthShippedAmount(Integer lastMonthShippedAmount) {
+        this.lastMonthShippedAmount = lastMonthShippedAmount;
+    }
+
+    public Integer getPresentMonthShippedAmount() {
+        return presentMonthShippedAmount;
+    }
+
+    public void setPresentMonthShippedAmount(Integer presentMonthShippedAmount) {
+        this.presentMonthShippedAmount = presentMonthShippedAmount;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+}

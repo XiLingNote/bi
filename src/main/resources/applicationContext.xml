@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"   
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
+   	<!-- 读取Property -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<set>
+				<!-- 测试61bi数据库    拉数据到bi数据库 -->
+				<!-- <value>classpath:jdbc.properties</value> -->
+				<!-- 正式环境ecs 拉数据到java正式库bi2 -->
+				<!-- <value>classpath:jdbc2.properties</value>-->
+				<!-- 62ecs测试连接  拉数据到61 bi -->
+				<value>classpath:jdbc3.properties</value> 
+			</set>
+		</property>
+	</bean>
+	<!-- 载入 config文件夹下的所有xml配置  -->
+	<import resource="config/*.xml" />
+</beans>

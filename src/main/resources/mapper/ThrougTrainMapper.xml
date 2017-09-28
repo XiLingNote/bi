@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bi.baiqiu.mapper.ThrougTrainMapper">
+
+	<select id="queryByPage" resultType="ThrougTrainBean">
+		select * from bi_throug_train where 1=1
+		<if test="date!=null and date!=''">
+			and date=#{date}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+			and date &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			and date &lt;= #{endDate}
+		</if>
+		<if test="shopId!=null and shopId!=''">
+			and shop_id=#{shopId}
+		</if>
+
+		<if test="sortName!=null and sortName!=''">
+			order by ${sortName}+0
+			<if test="sortOrder!=null and sortOrder!=''">
+				${sortOrder}
+			</if>
+		</if>
+	</select>
+
+	<!-- 批量增加 ，存在约束时替换该数据 -->
+	<insert id="insertByBatch" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		replace INTO `bi_throug_train` (
+		`date`,
+		`cost`,
+		`click_quantity`,
+		`Click_unit`,
+		`clickt_rate`,
+		`transaction_amount`,
+		`input_output_ratio`,
+		`goods_collection`,
+		`Store_collection`,
+		`transactions_num`,
+		`Click_conversion_rate`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.date},
+			#{item.cost},
+			#{item.clickQuantity},
+			#{item.clickUnit},
+			#{item.clicktRate},
+			#{item.transactionAmount},
+			#{item.inputOutputRatio},
+			#{item.goodsCollection},
+			#{item.storeCollection},
+			#{item.transactionsNum},
+			#{item.clickConversionRate},
+			#{item.shopId},
+			now(),
+			#{item.remark}
+			)
+		</foreach>
+	</insert>
+	<!-- 批量单条插入 ，存在约束时替换该数据 -->
+	<insert id="insertOne" parameterType="java.util.List"
+		useGeneratedKeys="true">
+		replace INTO `bi_throug_train` (
+		`date`,
+		`cost`,
+		`click_quantity`,
+		`Click_unit`,
+		`clickt_rate`,
+		`transaction_amount`,
+		`input_output_ratio`,
+		`goods_collection`,
+		`Store_collection`,
+		`transactions_num`,
+		`Click_conversion_rate`,
+		`shop_id`,
+		`create_time`,
+		`remark`
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{date},
+			#{cost},
+			#{clickQuantity},
+			#{clickUnit},
+			#{clicktRate},
+			#{transactionAmount},
+			#{inputOutputRatio},
+			#{goodsCollection},
+			#{storeCollection},
+			#{transactionsNum},
+			#{clickConversionRate},
+			#{shopId},
+			now(),
+			#{remark}
+			)
+		</foreach>
+	</insert>
+	<!-- 批量删除 -->
+	<delete id="deleteByBatch" parameterType="int">
+		delete from bi_throug_train where id in
+		<foreach collection="array" item="idItem" open="(" separator=","
+			close=")">
+			#{idItem}
+		</foreach>
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteByBatchList" parameterType="ThrougTrainBean">
+		delete from bi_throug_train where
+		<choose>
+			<when test="!deleteHistory">
+				<foreach collection="idArray" item="id" open=""
+					separator="or" close="">
+				 	id=#{id} and date>= date_sub(now(),interval 2 month)
+				</foreach>
+			</when>
+			<otherwise>
+			 		id in
+				<foreach collection="idArray" item="id" open="("
+					separator="," close=")">
+					#{id}
+				</foreach>
+			</otherwise>
+		</choose>
+	</delete>
+</mapper>

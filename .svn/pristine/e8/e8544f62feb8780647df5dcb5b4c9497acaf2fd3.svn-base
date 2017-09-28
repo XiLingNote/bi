@@ -1,0 +1,273 @@
+package bi.baiqiu.pojo;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+
+public  class DrillShowBean  implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private Integer id;
+     private Date date;
+     private String showAmount;
+     private String clickQuantity;
+     private Float clicktRate;
+     private Long cost;
+     private Long costPresentingThousand;
+     private Long clickUnit;
+     private String goodsShoppingCartNum;
+     private Float clickConversionRate;
+     private String goodsCollection;
+     private String storeCollection;
+     private String visitorNum;
+     private String depthPenetrationNum;
+     private String accessTime;
+     private String accessPagesNum;
+     private String orderNum;
+     private String orderTransactionNum;
+     private Long orderTransactionAmount;
+     private Float investmentReturnRate;
+     private Long orderAmount;
+     private Integer shopId;
+     private Timestamp createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public DrillShowBean() {
+    }
+
+    
+    /** full constructor */
+    public DrillShowBean(Date date, String showAmount, String clickQuantity, Float clicktRate, Long cost, Long costPresentingThousand, Long clickUnit, String goodsShoppingCartNum, Float clickConversionRate, String goodsCollection, String storeCollection, String visitorNum, String depthPenetrationNum, String accessTime, String accessPagesNum, String orderNum, String orderTransactionNum, Long orderTransactionAmount, Float investmentReturnRate, Long orderAmount, Integer shopId, Timestamp createTime, String remark) {
+        this.date = date;
+        this.showAmount = showAmount;
+        this.clickQuantity = clickQuantity;
+        this.clicktRate = clicktRate;
+        this.cost = cost;
+        this.costPresentingThousand = costPresentingThousand;
+        this.clickUnit = clickUnit;
+        this.goodsShoppingCartNum = goodsShoppingCartNum;
+        this.clickConversionRate = clickConversionRate;
+        this.goodsCollection = goodsCollection;
+        this.storeCollection = storeCollection;
+        this.visitorNum = visitorNum;
+        this.depthPenetrationNum = depthPenetrationNum;
+        this.accessTime = accessTime;
+        this.accessPagesNum = accessPagesNum;
+        this.orderNum = orderNum;
+        this.orderTransactionNum = orderTransactionNum;
+        this.orderTransactionAmount = orderTransactionAmount;
+        this.investmentReturnRate = investmentReturnRate;
+        this.orderAmount = orderAmount;
+        this.shopId = shopId;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getShowAmount() {
+        return this.showAmount;
+    }
+    
+    public void setShowAmount(String showAmount) {
+        this.showAmount = showAmount;
+    }
+
+    public String getClickQuantity() {
+        return this.clickQuantity;
+    }
+    
+    public void setClickQuantity(String clickQuantity) {
+        this.clickQuantity = clickQuantity;
+    }
+
+    public Float getClicktRate() {
+        return this.clicktRate;
+    }
+    
+    public void setClicktRate(Float clicktRate) {
+        this.clicktRate = clicktRate;
+    }
+
+    public Long getCost() {
+        return this.cost;
+    }
+    
+    public void setCost(Long cost) {
+        this.cost = cost;
+    }
+
+    public Long getCostPresentingThousand() {
+        return this.costPresentingThousand;
+    }
+    
+    public void setCostPresentingThousand(Long costPresentingThousand) {
+        this.costPresentingThousand = costPresentingThousand;
+    }
+
+    public Long getClickUnit() {
+        return this.clickUnit;
+    }
+    
+    public void setClickUnit(Long clickUnit) {
+        this.clickUnit = clickUnit;
+    }
+
+    public String getGoodsShoppingCartNum() {
+        return this.goodsShoppingCartNum;
+    }
+    
+    public void setGoodsShoppingCartNum(String goodsShoppingCartNum) {
+        this.goodsShoppingCartNum = goodsShoppingCartNum;
+    }
+
+    public Float getClickConversionRate() {
+        return this.clickConversionRate;
+    }
+    
+    public void setClickConversionRate(Float clickConversionRate) {
+        this.clickConversionRate = clickConversionRate;
+    }
+
+    public String getGoodsCollection() {
+        return this.goodsCollection;
+    }
+    
+    public void setGoodsCollection(String goodsCollection) {
+        this.goodsCollection = goodsCollection;
+    }
+
+    public String getStoreCollection() {
+        return this.storeCollection;
+    }
+    
+    public void setStoreCollection(String storeCollection) {
+        this.storeCollection = storeCollection;
+    }
+
+    public String getVisitorNum() {
+        return this.visitorNum;
+    }
+    
+    public void setVisitorNum(String visitorNum) {
+        this.visitorNum = visitorNum;
+    }
+
+    public String getDepthPenetrationNum() {
+        return this.depthPenetrationNum;
+    }
+    
+    public void setDepthPenetrationNum(String depthPenetrationNum) {
+        this.depthPenetrationNum = depthPenetrationNum;
+    }
+
+    public String getAccessTime() {
+        return this.accessTime;
+    }
+    
+    public void setAccessTime(String accessTime) {
+        this.accessTime = accessTime;
+    }
+
+    public String getAccessPagesNum() {
+        return this.accessPagesNum;
+    }
+    
+    public void setAccessPagesNum(String accessPagesNum) {
+        this.accessPagesNum = accessPagesNum;
+    }
+
+    public String getOrderNum() {
+        return this.orderNum;
+    }
+    
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public String getOrderTransactionNum() {
+        return this.orderTransactionNum;
+    }
+    
+    public void setOrderTransactionNum(String orderTransactionNum) {
+        this.orderTransactionNum = orderTransactionNum;
+    }
+
+    public Long getOrderTransactionAmount() {
+        return this.orderTransactionAmount;
+    }
+    
+    public void setOrderTransactionAmount(Long orderTransactionAmount) {
+        this.orderTransactionAmount = orderTransactionAmount;
+    }
+
+    public Float getInvestmentReturnRate() {
+        return this.investmentReturnRate;
+    }
+    
+    public void setInvestmentReturnRate(Float investmentReturnRate) {
+        this.investmentReturnRate = investmentReturnRate;
+    }
+
+    public Long getOrderAmount() {
+        return this.orderAmount;
+    }
+    
+    public void setOrderAmount(Long orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Timestamp getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}

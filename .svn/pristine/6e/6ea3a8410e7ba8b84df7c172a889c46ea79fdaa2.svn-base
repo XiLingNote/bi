@@ -1,0 +1,42 @@
+package bi.baiqiu.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import bi.baiqiu.pojo.DailyScheduleBean;
+import bi.baiqiu.service.impl.DailyScheduleServiceImpl;
+
+@Controller
+@RequestMapping("dailySchedule")
+public class DailyScheduleController extends BaseController {
+	/**
+	 * 模板下载
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	@Autowired
+	private DailyScheduleServiceImpl scheduleDao;
+	@RequestMapping(value = "/queryDailySchedule.do")
+	public void queryDailySchedule(HttpServletRequest request, DailyScheduleBean bean, HttpServletResponse response)
+			 {
+		try {
+			WriteObject(response, scheduleDao.queryDailyschedule(bean));
+		} catch (Exception e) {
+			WriteMsg(response, "查询失败");
+			e.printStackTrace();
+		};
+	}
+	@RequestMapping(value = "/insertDailySchedule.do")
+	public void insertDailySchedule(HttpServletRequest request, DailyScheduleBean bean, HttpServletResponse response){
+		try {
+			WriteObject(response, "保存成功"+scheduleDao.insertDailyschedule(bean));
+		} catch (Exception e) {
+			WriteMsg(response, "保存失败");
+			e.printStackTrace();
+		};
+	}
+}

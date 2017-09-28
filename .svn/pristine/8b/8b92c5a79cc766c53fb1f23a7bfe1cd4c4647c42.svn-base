@@ -1,0 +1,253 @@
+package bi.baiqiu.pojo;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+/**
+ *无线流量结构表
+ */
+
+public  class WirelessFlowStructureBean  implements java.io.Serializable {
+
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// Fields    
+
+     private Integer flowId;
+     private Date date;
+     private String flowSource;
+     private String flowSourceDetails;
+     private String visitorsNum;
+     private Float visitorChange;
+     private BigDecimal orderAmount;
+     private Float orderAmountChange;
+     private String orderBuyers;
+     private Float orderBuyersChange;
+     private Float orderConversionRate;
+     private Float orderConversionRateChange;
+     private BigDecimal paymentAmount;
+     private Float paymentAmountChange;
+     private String buyersPaid;
+     private Float buyersPaidChange;
+     private Float paymentConversionRate;
+     private Float paymentConversionRateChange;
+     private Integer shopId;
+     private Date createTime;
+     private String remark;
+
+
+    // Constructors
+
+    /** default constructor */
+    public WirelessFlowStructureBean() {
+    }
+
+    
+    /** full constructor */
+    public WirelessFlowStructureBean(Date date, String flowSource, String flowSourceDetails, String visitorsNum, Float visitorChange, BigDecimal orderAmount, Float orderAmountChange, String orderBuyers, Float orderBuyersChange, Float orderConversionRate, Float orderConversionRateChange, BigDecimal paymentAmount, Float paymentAmountChange, String buyersPaid, Float buyersPaidChange, Float paymentConversionRate, Float paymentConversionRateChange, Integer shopId, Date createTime, String remark) {
+        this.date = date;
+        this.flowSource = flowSource;
+        this.flowSourceDetails = flowSourceDetails;
+        this.visitorsNum = visitorsNum;
+        this.visitorChange = visitorChange;
+        this.orderAmount = orderAmount;
+        this.orderAmountChange = orderAmountChange;
+        this.orderBuyers = orderBuyers;
+        this.orderBuyersChange = orderBuyersChange;
+        this.orderConversionRate = orderConversionRate;
+        this.orderConversionRateChange = orderConversionRateChange;
+        this.paymentAmount = paymentAmount;
+        this.paymentAmountChange = paymentAmountChange;
+        this.buyersPaid = buyersPaid;
+        this.buyersPaidChange = buyersPaidChange;
+        this.paymentConversionRate = paymentConversionRate;
+        this.paymentConversionRateChange = paymentConversionRateChange;
+        this.shopId = shopId;
+        this.createTime = createTime;
+        this.remark = remark;
+    }
+
+   
+    // Property accessors
+
+    public Integer getFlowId() {
+        return this.flowId;
+    }
+    
+    public void setFlowId(Integer flowId) {
+        this.flowId = flowId;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+    
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getFlowSource() {
+        return this.flowSource;
+    }
+    
+    public void setFlowSource(String flowSource) {
+        this.flowSource = flowSource;
+    }
+
+    public String getFlowSourceDetails() {
+        return this.flowSourceDetails;
+    }
+    
+    public void setFlowSourceDetails(String flowSourceDetails) {
+        this.flowSourceDetails = flowSourceDetails;
+    }
+
+    public String getVisitorsNum() {
+        return this.visitorsNum;
+    }
+    
+    public void setVisitorsNum(String visitorsNum) {
+        this.visitorsNum = visitorsNum;
+    }
+
+    public Float getVisitorChange() {
+        return this.visitorChange;
+    }
+    
+    public void setVisitorChange(Float visitorChange) {
+        this.visitorChange = visitorChange;
+    }
+
+    public BigDecimal getOrderAmount() {
+        return this.orderAmount;
+    }
+    
+    public void setOrderAmount(BigDecimal orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public Float getOrderAmountChange() {
+        return this.orderAmountChange;
+    }
+    
+    public void setOrderAmountChange(Float orderAmountChange) {
+        this.orderAmountChange = orderAmountChange;
+    }
+
+    public String getOrderBuyers() {
+        return this.orderBuyers;
+    }
+    
+    public void setOrderBuyers(String orderBuyers) {
+        this.orderBuyers = orderBuyers;
+    }
+
+    public Float getOrderBuyersChange() {
+        return this.orderBuyersChange;
+    }
+    
+    public void setOrderBuyersChange(Float orderBuyersChange) {
+        this.orderBuyersChange = orderBuyersChange;
+    }
+
+    public Float getOrderConversionRate() {
+        return this.orderConversionRate;
+    }
+    
+    public void setOrderConversionRate(Float orderConversionRate) {
+        this.orderConversionRate = orderConversionRate;
+    }
+
+    public Float getOrderConversionRateChange() {
+        return this.orderConversionRateChange;
+    }
+    
+    public void setOrderConversionRateChange(Float orderConversionRateChange) {
+        this.orderConversionRateChange = orderConversionRateChange;
+    }
+
+    public BigDecimal getPaymentAmount() {
+        return this.paymentAmount;
+    }
+    
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public Float getPaymentAmountChange() {
+        return this.paymentAmountChange;
+    }
+    
+    public void setPaymentAmountChange(Float paymentAmountChange) {
+        this.paymentAmountChange = paymentAmountChange;
+    }
+
+    public String getBuyersPaid() {
+        return this.buyersPaid;
+    }
+    
+    public void setBuyersPaid(String buyersPaid) {
+        this.buyersPaid = buyersPaid;
+    }
+
+    public Float getBuyersPaidChange() {
+        return this.buyersPaidChange;
+    }
+    
+    public void setBuyersPaidChange(Float buyersPaidChange) {
+        this.buyersPaidChange = buyersPaidChange;
+    }
+
+    public Float getPaymentConversionRate() {
+        return this.paymentConversionRate;
+    }
+    
+    public void setPaymentConversionRate(Float paymentConversionRate) {
+        this.paymentConversionRate = paymentConversionRate;
+    }
+
+    public Float getPaymentConversionRateChange() {
+        return this.paymentConversionRateChange;
+    }
+    
+    public void setPaymentConversionRateChange(Float paymentConversionRateChange) {
+        this.paymentConversionRateChange = paymentConversionRateChange;
+    }
+
+    public Integer getShopId() {
+        return this.shopId;
+    }
+    
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Date getCreateTime() {
+        return this.createTime;
+    }
+    
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+   
+
+
+
+
+
+
+
+
+}
