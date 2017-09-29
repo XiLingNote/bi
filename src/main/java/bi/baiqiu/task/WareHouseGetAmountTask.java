@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
+
+import bi.baiqiu.mapper.FirstStartMapper;
 import bi.baiqiu.mapper.WareHouseMapper;
+import bi.baiqiu.pojo.FirstStart;
 import bi.baiqiu.pojo.WareHouse;
 import bi.baiqiu.pojo.WareHouseExample;
 import bi.baiqiu.task.GetDateTread.RunGetDateTread;
@@ -32,6 +35,8 @@ public class WareHouseGetAmountTask {
 	private SqlSessionTemplate sqlSessionTemplate;
 	@Autowired
 	private ThreadPoolTaskExecutor taskExecutor;
+	@Autowired
+	private FirstStartMapper firstStartDao;
 
 	/**   
 	* @Function: WareHouseGetAmountTask.java
@@ -51,20 +56,23 @@ public class WareHouseGetAmountTask {
 	* 2017年9月20日     Administrator           v1.0.0               修改原因
 	*/
 	
-	//@Scheduled(fixedDelay = 30 * 1000)
+	@Scheduled(fixedDelay = 30 * 1000)
 	public void getDate() {
 		try {
-			WareHouseExample wareHouseExample = new WareHouseExample();
-			wareHouseExample.setOrderByClause("sort");
-			wareHouseExample.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
-
-//			获取需要拉取的数据按照sort排序		
-			List<WareHouse> list = wareHouse.selectByExample(wareHouseExample);
-//			每个店铺一个线程拉取该店铺的发货数据
-			for (WareHouse w : list) {
-				GetDateTread get = new GetDateTread(sqlSessionTemplateSys, sqlSessionTemplate, w);
-				RunGetDateTread run = get.new RunGetDateTread();
-				taskExecutor.execute(run);
+			//id为5的数据决定定时器是否执行，状态为1时执行
+			FirstStart first=firstStartDao.selectByPrimaryKey(new Byte("5"));
+			if(first.getStatus()==1){
+				WareHouseExample wareHouseExample = new WareHouseExample();
+				wareHouseExample.setOrderByClause("sort");
+				wareHouseExample.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
+//				获取需要拉取的数据按照sort排序		
+				List<WareHouse> list = wareHouse.selectByExample(wareHouseExample);
+//				每个店铺一个线程拉取该店铺的发货数据
+				for (WareHouse w : list) {
+					GetDateTread get = new GetDateTread(sqlSessionTemplateSys, sqlSessionTemplate, w);
+					RunGetDateTread run = get.new RunGetDateTread();
+					taskExecutor.execute(run);
+				}	
 			}
 		} catch (Exception e) {
 			taskExecutor.destroy();

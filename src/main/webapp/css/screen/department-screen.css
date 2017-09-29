@@ -15,8 +15,11 @@ body {
 	margin: 0;
 	width: 100%;
 	height: 100%;
-	background: #1c2b36;
-	color: #D5D6E2;
+	background-image: url("/img/technology_safely.jpg");
+	background-repeat:no-repeat;
+	background-size:100% 1080px;
+	color:#ffffff;
+	
 }
 
 .screen {
@@ -31,7 +34,6 @@ body {
 	position: relative;
 	width: 100%;
 	height: 25%;
-	background-color: aliceblue;
 }
 
 .screen-top-data {
@@ -40,7 +42,6 @@ body {
 	width: 10%;
 	height: 80%;
 	top: 20%;
-	background-color: #bab4bf;
 }
 
 .screen-top-chart {
@@ -49,7 +50,6 @@ body {
 	width: 25%;
 	height: 80%;
 	top: 20%;
-	background-color: #b394d1;
 }
 
 .screen-top-title {
@@ -57,7 +57,6 @@ body {
 	float: left;
 	width: 30%;
 	height: 100%;
-	background-color: #000000;
 }
 
 .screen-top-liquid {
@@ -66,15 +65,15 @@ body {
 	width: 35%;
 	height: 80%;
 	top: 20%;
-	background-color: #b394d1;
 }
 
 .screen-left {
 	position: relative;
 	float: left;
-	width: 50%;
+	width: 49.90%;
 	height: 75%;
-	background-color: #4a647b;
+	border-top: 0.1px solid #a9c6c9;
+	background-color: rgba(70, 100, 123, 0.8);
 }
 
 .slide-title {
@@ -95,6 +94,7 @@ body {
 	height: 100%;
 	left: 0;
 	top: 0;
+	/* 表格的背景色 */
 	color: #ffffff;
 	margin: 0;
 	padding: 0;
@@ -108,10 +108,7 @@ body {
 	line-height: 68.4px;
 	list-style: none;
 	font-size: 25px;
-	border-width: 1px;
 	white-space: nowrap;
-	border-style: solid;
-	border-color: #3d4c57;
 }
 
 .slide-list li {
@@ -119,19 +116,12 @@ body {
 	line-height: 68.4px;
 	list-style: none;
 	padding: 0 0px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #a9c6c9;
-	color: #ffffff;
 }
 
 .slide-list li span {
 	margin: 0;
 	overflow: hidden;
 	height: 68.4px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #a9c6c9;
 	white-space: nowrap;
 	display: inline-block;
 	text-overflow: ellipsis;
@@ -146,37 +136,54 @@ body {
 	width: 20%;
 	text-align: center;
 	float: left;
+	border-bottom: 0.1px solid #a9c6c9;
+	border-left: 0.1px solid #a9c6c9;
 }
 
 .slide-list li span:nth-child(2) {
-		position: relative;
+	position: relative;
 	width: 16%;
 	text-align: center;
 	float: left;
+	border-left: 0.1px solid #a9c6c9;
+	border-bottom: 0.1px solid #a9c6c9;
 }
+
 .slide-list li span:nth-child(3) {
-		position: relative;
+	position: relative;
 	width: 16%;
 	text-align: center;
 	float: left;
+	border-left: 0.1px solid #a9c6c9;
+	border-bottom: 0.1px solid #a9c6c9;
 }
+
 .slide-list li span:nth-child(4) {
-		position: relative;
+	position: relative;
 	width: 16%;
 	text-align: center;
 	float: left;
+	border-left: 0.1px solid #a9c6c9;
+	border-bottom: 0.1px solid #a9c6c9;
 }
+
 .slide-list li span:nth-child(5) {
-		position: relative;
+	position: relative;
 	width: 16%;
 	text-align: center;
 	float: left;
+	border-left: 0.1px solid #a9c6c9;
+	border-bottom: 0.1px solid #a9c6c9;
+	border-right: 0.1px solid #a9c6c9;
 }
+
 .slide-list li span:nth-child(6) {
-		position: relative;
+	position: relative;
 	width: 16%;
 	text-align: center;
 	float: left;
+	border-bottom: 0.1px solid #a9c6c9;
+	border-right: 0.1px solid #a9c6c9;
 }
 
 .screen-right {
@@ -184,7 +191,7 @@ body {
 	float: right;
 	width: 50%;
 	height: 75%;
-	/* 	background-color: #eceaee; */
+	background-color: rgba(70, 100, 123, 0.8);
 }
 
 .screen-right-brand {
@@ -192,7 +199,6 @@ body {
 	float: right;
 	width: 100%;
 	height: 15%;
-	background-color: #dacce8;
 }
 
 .brand-list {

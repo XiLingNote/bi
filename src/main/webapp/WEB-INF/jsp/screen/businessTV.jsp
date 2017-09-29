@@ -44,30 +44,53 @@
 	};
 	var charts = {
 		chart : {
-			type : 'spline'
+			type : 'spline',
+			//背景色background-color: rgba(70, 100, 123, 0.8);
+			backgroundColor: 'rgba(70, 100, 123, 0.6)',
 		},
 		xAxis : {
 			categories : [ '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00',
 							'10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00',
 							'20:00', '21:00', '22:00', '23:00' ],
-							tickInterval : 3
+							/* 隔几个显示一个 */
+							tickInterval : 3,
+							labels : {
+								style:{
+									/* 横坐标字体颜色 */
+									color:"#ffffff"
+								}
+							}
+							
+						
 		},
 		yAxis : {
 			title : {
-				text : 'amount'
+				text : 'amount',
 			},
 			labels : {
 				formatter : function() {
 					return this.value + '';
-				}
+				},
+			style:{
+				/* 纵坐标字体颜色 */
+				color:"#ffffff"
+			}
 			}
 		},
 		tooltip : {
 			crosshairs : true,
-			shared : true
+			shared : true,
+			//数据提示框样式
+			/* style:{
+				color:"red"
+			} */
 		},
 		legend : { layout : 'vertical', align : 'left', x : 350, verticalAlign :
-			  'top', floating : true, y : 0, floating : true },
+			  'top', floating : true, y : 0, floating : true, 
+			  /* 图例文字样式 */
+			  itemStyle:{
+					color:"#ffffff"
+			  } },
 		plotOptions : {
 			spline : {
 				marker : {
@@ -78,22 +101,32 @@
 			}
 		},
 		series : [
-				{
-					name : 'Today',
-					data : []
-				},
-				{
-					name : 'Yesterday',
-					data : [],
-					dashStyle: 'longdash'
-				} ]
+						{
+							name : 'Today',
+							data : [],
+							lineColor:'rgb(215, 255, 0)'
+						},
+						{
+							name : 'Yesterday',
+							data : [],
+							dashStyle: 'longdash',
+							lineColor : 'rgba(0, 243, 255, 1)'
+						} 
+							]
 	};
 	var chartsShop = {
 			chart : {
-				type : 'spline'
+				type : 'spline',
+				//背景色
+				backgroundColor: 'rgba(70, 100, 123, 0.6)',
+
 			},
 			title : {
-				text : '店铺销售对比'
+				text : '店铺销售对比',
+				style:{
+					/* 横坐标字体颜色 */
+					
+				}
 			},
 			xAxis : {
 				/* categories : [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -102,7 +135,13 @@
 			categories : [ '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00',
 							'10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00',
 							'20:00', '21:00', '22:00', '23:00' ],
-							tickInterval : 3
+							tickInterval : 3,
+							labels : {
+								style:{
+									/* 横坐标字体颜色 */
+									color:"#ffffff"
+								}
+							}
 			},
 			yAxis : {
 				title : {
@@ -111,6 +150,10 @@
 				labels : {
 					formatter : function() {
 						return this.value + '';
+					},
+					style:{
+						/* 纵坐标字体颜色 */
+						color:"#ffffff"
 					}
 				}
 			},
@@ -119,7 +162,13 @@
 				shared : true
 			},
 			legend : { layout : 'vertical', align : 'left', x : 800, verticalAlign :
-				  'top', floating : true, y : 0, floating : true },
+				  'top', floating : true, y : 0, floating : true ,
+				  /* 图例文字样式 */
+				  itemStyle:{
+						color:"#ffffff"
+				  }},
+				            
+
 			plotOptions : {
 				spline : {
 					marker : {
@@ -132,12 +181,14 @@
 			series : [
 					{
 						name : 'Today',
-						data : []
+						data : [],
+						lineColor:'rgb(215, 255, 0)'
 					},
 					{
 						name : 'Yesterday',
 						data : [],
-						dashStyle: 'longdash'
+						dashStyle: 'longdash',
+						lineColor : 'rgba(0, 243, 255, 1)'
 					} 
 					]
 		};
@@ -183,7 +234,11 @@
 			infinite : true
 		});
 		charts.title={
-				text : '部门销售对比'
+				text : '部门销售对比',
+				/* 部门标题样式 */
+				style:{
+			        color:"#ffffff"
+			    }
 			}
 
 		//获取数据
@@ -276,7 +331,11 @@
 		 chartsShop.series[0].data =businessShopData[$(".vmc_active img").attr("alt")];
 		 chartsShop.series[1].data=businessShopData[$(".vmc_active img").attr("alt")+"Yesterday"];
 		 chartsShop.title={
-					text :shopName+'销售对比'
+					text :shopName+'销售对比',
+					/* 标题样式 */
+					style:{
+				        color:"#ffffff"
+				    }
 			};
 		$('#store-chart').highcharts(chartsShop);
 		var total=businessShopData[$(".vmc_active img").attr("alt")+"Total"];
@@ -387,12 +446,12 @@
 		</div>
 		<div class="screen-right">
 			<div class="screen-right-brand">
-				<div class="brand-list" style="position: relative; width: 100%">
+				<div class="brand-list" style="position: relative; width: 100%;">
 					<ul class="vmcarousel-centered-infitine vmc-centered"
 						style="position: relative; width: 100%">
 							<c:forEach items="${shopBeans}" var="shop">
-						<li style="position: relative; color:#fff;width: 20% ;text-align: center;" ><img 
-							src="${shop.url}" alt="${shop.name}"></li>
+						<li style="position: relative; color:#fff;width: 20% ;text-align: center; top:30%" ><img 
+							src="${shop.url}" alt="${shop.name}" style="background-color:#ffffff;width: 80%"></li>
 					</c:forEach> 
 					</ul>
 				</div>

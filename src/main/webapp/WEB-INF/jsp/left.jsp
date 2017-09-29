@@ -118,6 +118,11 @@
 					<shiro:hasAnyRoles name="admin,store_admin">
 							<li><a href="#"><i class="fa   fa-upload"></i> business TV<span
 							class="fa arrow"></span></a>
+						
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>/wareHouse/screen.do" id="leftTarget"><i
+										class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
+						</ul>
 						<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>/overall/Bag.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Bag</a></li>
