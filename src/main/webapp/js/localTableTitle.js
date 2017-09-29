@@ -1,4 +1,4 @@
-    //动态表头
+    //动态表头舍去小数位四舍五入
     function   getTitle(tableName,role){
     	var date ={"tableName":tableName}
     	$.ajax({

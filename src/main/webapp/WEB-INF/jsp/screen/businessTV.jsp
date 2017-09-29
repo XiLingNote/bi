@@ -178,7 +178,7 @@
 	$(function() {
 		$('.vmcarousel-centered-infitine').vmcarousel({
 			centered : true,
-			start_item : 1,
+			start_item : 0,
 			autoplay : false,
 			infinite : true
 		});
@@ -192,7 +192,7 @@
 		//店铺展示数据
 		showShopHour();
 		//logo图片轮播
-		//setInterval("change()", 4000);
+		setInterval("change()", 4000);
 		//时间展示的刷新
 		setInterval(function() {
 		    var now = (new Date()).toLocaleString();
@@ -202,7 +202,7 @@
 		getBusinessWaterPolo($("#businessName").val())
 		getBusinessHourData($("#businessName").val());
 		//滚动表格
-		//setInterval(doscroll, 2000); 
+		setInterval(doscroll, 4000); 
 		
 	});
 	//店铺分时数据
@@ -242,9 +242,10 @@
 				var aliTarget=json.businessAlipayTarget;
 				var gmv=json.businessGmv;
 				var gmvTarget=json.businessGmvTarget;
-				var ali=alipay/aliTarget;
-				var gm=gmv/gmvTarget;
-				shuiqiu(Number(gm)*100,Number(ali)*100);
+				var ali=Number(alipay/aliTarget)*100;
+				var gm=Number(gmv/gmvTarget)*100;
+				
+				shuiqiu((gm-gm%0.1),(ali-ali%0.1));
 			}
 		});
 	}
@@ -279,17 +280,18 @@
 			};
 		$('#store-chart').highcharts(chartsShop);
 		var total=businessShopData[$(".vmc_active img").attr("alt")+"Total"];
-		$("#total").text(formatNum(Number(total)));
+		//舍去小数位
+		$("#total").text(formatNum(parseInt(total)));
 		var yesterdayTotal=businessShopData[$(".vmc_active img").attr("alt")+"YesterdayTotal"];
-		$("#yesterdayTotal").text(formatNum(Number(yesterdayTotal).toFixed(0)));
-		var shopMonthGmv=Number(businessShopData[$(".vmc_active img").attr("alt")+"Gmv"]).toFixed(0);
+		$("#yesterdayTotal").text(formatNum(parseInt(yesterdayTotal)));
+		var shopMonthGmv=parseInt(businessShopData[$(".vmc_active img").attr("alt")+"Gmv"]);
 		$("#shopMonthGmv").text(formatNum(shopMonthGmv));
 		var gmvTarget=businessShopData[$(".vmc_active img").attr("alt")+"GmvTarget"]
-		var gmvTargetRate=(Number(shopMonthGmv)/gmvTarget);
+		var gmvTargetRate=(Number(shopMonthGmv)/gmvTarget)*100;
 		if(gmvTargetRate=="Infinity"){
 			$("#gmvTargetRate").text("-%");
 		}else{
-			$("#gmvTargetRate").text((Number(gmvTargetRate) * 100).toFixed(1) + "%");
+			$("#gmvTargetRate").text((gmvTargetRate-gmvTargetRate%0.1).toFixed(1) + "%");
 		}
 	}		
 </script>
@@ -306,7 +308,7 @@
 					</tr>
 					<tr style="font-size: 30px;">
 						<td style="right: 5px; text-align: right;">
-						<fmt:formatNumber  type="number" value="${businessYesterday.gmv}"  maxFractionDigits="0"/>
+						<fmt:formatNumber   type="number" value="${businessYesterday.gmv-businessYesterday.gmv%1}" maxFractionDigits="0" />
 						</td>
 					</tr>
 					<tr style="font-size: 20px; text-align: left;">
@@ -314,7 +316,7 @@
 					</tr>
 					<tr style="font-size: 30px;">
 						<td style="right: 5px; text-align: right;">
-						<fmt:formatNumber  type="number" value="${businessToday.gmv}"  maxFractionDigits="0"/>
+						<fmt:formatNumber  type="number" value="${businessToday.gmv-businessToday.gmv%1}"  maxFractionDigits="0"/>
 						</td>
 					</tr>
 				</table>
@@ -365,16 +367,17 @@
 						<c:forEach items="${shopBeans}" var="shop">
 							<li class="title"><span class="store">${shop.name}</span> <span
 						class="mtd">
-						<fmt:formatNumber  type="number" value="${shop.shopTvShowTablePojo.gmv}"  maxFractionDigits="0"/>
+						<fmt:formatNumber  type="number" value="${shop.shopTvShowTablePojo.gmv-shop.shopTvShowTablePojo.gmv%1}"  maxFractionDigits="0"/>
 						</span> <span class="gmv-rate">
-						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.gmvRate}"  maxFractionDigits="1"/> 
+						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.gmvRate-shop.shopTvShowTablePojo.gmvRate%0.001}"  maxFractionDigits="1"/> 
 						</span> <span class="ali-rate">
-						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.alipayRate}"  maxFractionDigits="1"/> 
+						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.alipayRate-shop.shopTvShowTablePojo.alipayRate%0.001}"  maxFractionDigits="1"/> 
+						
 						</span> <span class="yesterday-gmv">
-						<fmt:formatNumber type="number" value="${shop.shopTvShowTablePojo.yesterdaySale}"  maxFractionDigits="0"/>
+						<fmt:formatNumber type="number" value="${shop.shopTvShowTablePojo.yesterdaySale-shop.shopTvShowTablePojo.yesterdaySale%1}"  maxFractionDigits="0"/>
 						</span>
 						<span class="dtd">		
-					<fmt:formatNumber type="number" value="${shop.shopTvShowTablePojo.todaySale}"  maxFractionDigits="0"/>
+					<fmt:formatNumber type="number" value="${shop.shopTvShowTablePojo.todaySale-shop.shopTvShowTablePojo.todaySale%1}"  maxFractionDigits="0"/>
 										
 						
 						</span></li>

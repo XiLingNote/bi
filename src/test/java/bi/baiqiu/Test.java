@@ -12,6 +12,8 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 
 import bi.baiqiu.pojo.WareHouse;
+import bi.baiqiu.pojo.test.OrderTemplate;
+import bi.baiqiu.pojo.test.TradeTemplate;
 import bi.baiqiu.utils.DateUtils;
 import bi.baiqiu.utils.KeyUtils;
 import bi.baiqiu.utils.UtilTool;
@@ -20,7 +22,31 @@ import redis.clients.jedis.Jedis;
 public class Test {
 
 	public static void main(String[] args) throws Exception {
-	    int []a={1,3,4};
+		int INSERTSIZE=200;
+		List<TradeTemplate> tradeList=new ArrayList<TradeTemplate>(800);
+		List<OrderTemplate> goodsList=new ArrayList<OrderTemplate>(800);
+		for(int i=0;i<1005;i++){
+			tradeList.add(new TradeTemplate());
+			goodsList.add(new OrderTemplate());
+		}
+		System.out.println(goodsList.size());
+		System.out.println(tradeList.size());
+
+		int goodsSize=0;
+		for(int i=0;i<goodsList.size();i=i+INSERTSIZE){
+			goodsSize=(i+INSERTSIZE)>=goodsList.size()?goodsList.size():(i+INSERTSIZE);
+			System.out.println(i+"-"+goodsSize);
+		}
+		int tradeSize=0;
+		for(int i=0;i<tradeList.size();i=i+INSERTSIZE){
+			tradeSize=(i+INSERTSIZE)>=tradeList.size()?tradeList.size():(i+INSERTSIZE);
+			System.out.println(i+"-"+tradeSize);
+
+		}
+			
+	}
+public void redisTest() throws ParseException{
+	  int []a={1,3,4};
 	    int []b={1,3,4};
 	   int []c =ArrayUtils.addAll(a,b);
 	    for(int i:c){
@@ -34,8 +60,6 @@ public class Test {
 		    	System.out.println(i);
 		    }
 		
-	}
-public void redisTest() throws ParseException{
 	Calendar instance = Calendar.getInstance();
 	instance.setTime(DateUtils.stringToDate("2017-04-04"));
 	instance.get(Calendar.YEAR);

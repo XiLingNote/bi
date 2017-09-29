@@ -30,6 +30,7 @@ import bi.baiqiu.service.OverAllService;
 import bi.baiqiu.utils.DateUtils;
 import bi.baiqiu.utils.GsonUtils;
 import bi.baiqiu.utils.KeyUtils;
+import bi.baiqiu.utils.ShopBeanCompare;
 import bi.baiqiu.utils.UtilTool;
 
 @Service("redisService")
@@ -275,9 +276,6 @@ public class OverAllServiceImpl implements OverAllService {
 		canlendarYesterday.setTime(nowDate);
 		canlendarYesterday.set(Calendar.HOUR_OF_DAY, 0);
 		canlendarYesterday.set(Calendar.DAY_OF_MONTH, (canlendarYesterday.get(Calendar.DAY_OF_MONTH) - 1));
-		// 测试的时间今日.昨日零点
-		canlendarYesterday.set(Calendar.HOUR_OF_DAY, 0);
-		canlendarYesterday.set(Calendar.DAY_OF_MONTH, (canlendarYesterday.get(Calendar.DAY_OF_MONTH) - 1));
 		// 当前的小时数,查询从零点到当前小时的数据
 		int endHour = canlendarEnd.get(Calendar.HOUR_OF_DAY);
 		// 分计算
@@ -388,6 +386,7 @@ public class OverAllServiceImpl implements OverAllService {
 		for (ShopBean shop : shopBeans) {
 			getBusinessHour(shop, map);
 		}
+		Collections.sort(shopBeans,new ShopBeanCompare());
 		return map;
 	}
 	/** 
@@ -407,11 +406,11 @@ public class OverAllServiceImpl implements OverAllService {
 	@Override
 	public List<ShopBean> getTableshow(String business) throws Exception{
 		List<ShopBean> shopBeans = getShopBeans(business);
-		Collections.sort(shopBeans,new ShopBean());
 		Map<String, BigDecimal[]> map = new HashMap<String, BigDecimal[]>();
 		for (ShopBean shop : shopBeans) {
 			getBusinessHour(shop, map);
 		}
+		Collections.sort(shopBeans,new ShopBeanCompare());
 		return shopBeans;
 	}
 	/**

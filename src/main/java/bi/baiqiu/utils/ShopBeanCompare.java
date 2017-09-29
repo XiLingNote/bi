@@ -1,0 +1,26 @@
+package bi.baiqiu.utils;
+
+import java.util.Comparator;
+
+import bi.baiqiu.pojo.ShopBean;
+
+/**@version: v1.0.0
+ * @author Jared
+ *@date  Creat Time : 2017年9月28日 上午11:33:56
+ * @Description: shopBean根据表格显示的gmv进行排序
+ */
+public class ShopBeanCompare implements Comparator<ShopBean>{
+
+	@Override
+	public int compare(ShopBean o1, ShopBean o2) {
+		ShopBean shop0=(ShopBean) o1;
+		ShopBean shop1=(ShopBean) o2;
+		//倒叙
+		if(shop0.getShopTvShowTablePojo().getTodaySale().compareTo(shop1.getShopTvShowTablePojo().getTodaySale())>0){
+			return -1;
+		}else{
+			return 1;
+		}
+	}
+
+}

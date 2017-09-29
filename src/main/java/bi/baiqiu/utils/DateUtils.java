@@ -290,6 +290,6 @@ public class DateUtils {
 	 * 2017年9月27日      Jared           v1.0.0              
 	*/
 	public static Date getTestNow() throws ParseException{
-		return yyyyMMddHHmmss.parse("2017-04-04 23:10:10");
+		return yyyyMMddHHmmss.parse("2017-06-04 23:59:59");
 	}
 }

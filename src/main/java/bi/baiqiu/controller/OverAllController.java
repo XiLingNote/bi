@@ -169,7 +169,7 @@ public class OverAllController extends BaseController {
 	 */
 	@RequestMapping("{business}")
 	public String department(Model model, HttpServletResponse response, @PathVariable String business)
-			throws Exception {
+			 {
 		if (StringUtils.isBlank(business)) {
 			model.addAttribute("msg", ERR_URL);
 			return "forward:/page/showlogin.do";
@@ -179,21 +179,24 @@ public class OverAllController extends BaseController {
 			// 1.1获取店铺销售数据昨日今日分开
 			// 1.2获取店铺总的数据。gmvAlipay完成率实时销售
 			// 2.获取事业部信息
-			map = overAllService.getShopHourData(business);
-			shopBeanTable = overAllService.getTableshow(business);
-			// 分店铺
-			model.addAttribute("shopBeans", shopBeanTable);
-			model.addAttribute("shopHourData", map);
-			model.addAttribute("businessName", business);
-			model.addAttribute("businessName", business);
-
-			// 总事业部
-			RedisPojo businessMonth = redisService.getBusinessMonth(business);
-			RedisPojo businessToday = redisService.getBusinessToday(business);
-			RedisPojo businessYesterday = redisService.getBusinessYesterday(business);
-			model.addAttribute("businessMonth", businessMonth);
-			model.addAttribute("businessToday", businessToday);
-			model.addAttribute("businessYesterday", businessYesterday);
+			try {
+				map = overAllService.getShopHourData(business);
+				shopBeanTable = overAllService.getTableshow(business);
+				// 总事业部
+				RedisPojo businessMonth = redisService.getBusinessMonth(business);
+				RedisPojo businessToday = redisService.getBusinessToday(business);
+				RedisPojo businessYesterday = redisService.getBusinessYesterday(business);
+				model.addAttribute("businessMonth", businessMonth);
+				// 分店铺
+				model.addAttribute("shopBeans", shopBeanTable);
+				model.addAttribute("shopHourData", map);
+				model.addAttribute("businessName", business);
+				model.addAttribute("businessName", business);
+				model.addAttribute("businessToday", businessToday);
+				model.addAttribute("businessYesterday", businessYesterday);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			// 事业部分时数据
 
 			return "/screen/businessTV";
@@ -216,13 +219,20 @@ public class OverAllController extends BaseController {
 	 *             2017年9月26日 Jared v1.0.0
 	 */
 	@RequestMapping("/getShopData")
-	public void getShop(Model model, HttpServletResponse response, String business) throws Exception {
+	public void getShop(Model model, HttpServletResponse response, String business) {
 		if (StringUtils.isBlank(business)) {
 			WriteObject(response, ERR_URL);
 		} else {
 			business = business.trim();
-			Map<String, BigDecimal[]> map = overAllService.getShopHourData(business);
-			WriteObject(response, map);
+			Map<String, BigDecimal[]> map;
+			try {
+				map = overAllService.getShopHourData(business);
+				WriteObject(response, map);
+			} catch (Exception e) {
+				WriteObject(response, ERR_PARA);
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -241,13 +251,20 @@ public class OverAllController extends BaseController {
 	 *             2017年9月27日 Jared v1.0.0
 	 */
 	@RequestMapping("/getBusinessWaterPolo")
-	public void getBusinessWaterPolo(HttpServletResponse response, String business) throws Exception {
+	public void getBusinessWaterPolo(HttpServletResponse response, String business){
 		if (StringUtils.isBlank(business)) {
 			WriteObject(response, ERR_URL);
 		} else {
 			business = business.trim();
-			Map<String, BigDecimal> map = overAllService.getBusinessMonthAndTarget(business);
-			WriteObject(response, map);
+			Map<String, BigDecimal> map;
+			try {
+				map = overAllService.getBusinessMonthAndTarget(business);
+				WriteObject(response, map);
+			} catch (Exception e) {
+				e.printStackTrace();
+				WriteObject(response, ERR_PARA);
+			}
+			
 		}
 	}
 
@@ -273,19 +290,25 @@ public class OverAllController extends BaseController {
 				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 				BigDecimal.ZERO, BigDecimal.ZERO };
-		if (shopBeanTable != null && map != null && shopBeanTable.size() > 0 && map.size() > 0) {
-			for (int i = 0; i < shopBeanTable.size(); i++) {
-				BigDecimal[] today = map.get(shopBeanTable.get(i).getName());
-				BigDecimal[] yesterday = map.get(shopBeanTable.get(i).getName()+KeyUtils.YESTERDAY);
-				for (int j = 0; j < 24; j++) {
-					businesssHourArray[j] = today[j].add(businesssHourArray[j]);
-					businesssHourYesterday[j]=yesterday[j].add(businesssHourYesterday[j]);
+		try {
+			if (shopBeanTable != null && map != null && shopBeanTable.size() > 0 && map.size() > 0) {
+				for (int i = 0; i < shopBeanTable.size(); i++) {
+					BigDecimal[] today = map.get(shopBeanTable.get(i).getName());
+					BigDecimal[] yesterday = map.get(shopBeanTable.get(i).getName()+KeyUtils.YESTERDAY);
+					for (int j = 0; j < 24; j++) {
+						businesssHourArray[j] = today[j].add(businesssHourArray[j]);
+						businesssHourYesterday[j]=yesterday[j].add(businesssHourYesterday[j]);
+					}
 				}
 			}
+			Map<String, BigDecimal[]>hourMap=new HashMap<String, BigDecimal[]>();
+			hourMap.put("today", businesssHourArray);
+			hourMap.put("yesterday", businesssHourYesterday);
+			WriteObject(response, hourMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			WriteObject(response, ERR_PARA);
+
 		}
-		Map<String, BigDecimal[]>hourMap=new HashMap<String, BigDecimal[]>();
-		hourMap.put("today", businesssHourArray);
-		hourMap.put("yesterday", businesssHourYesterday);
-		WriteObject(response, hourMap);
 	}
 }
