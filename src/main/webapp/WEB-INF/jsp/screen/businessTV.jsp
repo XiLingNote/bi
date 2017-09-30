@@ -12,6 +12,8 @@
 <head>
 <title>事业部图表</title>
 <meta charset="UTF-8">
+<!-- 二十秒刷新一次 -->
+<meta http-equiv="refresh" content="20">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -39,14 +41,14 @@
 		$first.animate({
 			height : 0
 		}, 500, function() {
-			$first.css('height', 68.4).appendTo($parent);
+				$first.css('height', 68.4).appendTo($parent);
 		});
 	};
 	var charts = {
 		chart : {
 			type : 'spline',
 			//背景色background-color: rgba(70, 100, 123, 0.8);
-			backgroundColor: 'rgba(70, 100, 123, 0.6)',
+			backgroundColor: 'rgba(70, 100, 123, 0.3)',
 		},
 		xAxis : {
 			categories : [ '0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00',
@@ -85,12 +87,19 @@
 				color:"red"
 			} */
 		},
-		legend : { layout : 'vertical', align : 'left', x : 350, verticalAlign :
-			  'top', floating : true, y : 0, floating : true, 
-			  /* 图例文字样式 */
-			  itemStyle:{
+		legend : { 
+			layout : 'horizontal', 
+			align : 'right', 
+			x : 0, 
+			verticalAlign :'top', 
+			floating : true, 
+			y : 0, 
+			floating : true, 
+			itemStyle:{
+				  /* 图例文字样式 */
 					color:"#ffffff"
-			  } },
+			  },
+		},
 		plotOptions : {
 			spline : {
 				marker : {
@@ -102,23 +111,24 @@
 		},
 		series : [
 						{
-							name : 'Today',
-							data : [],
-							lineColor:'rgb(215, 255, 0)'
-						},
-						{
 							name : 'Yesterday',
 							data : [],
 							dashStyle: 'longdash',
 							lineColor : 'rgba(0, 243, 255, 1)'
-						} 
+						} ,
+						{
+							name : 'Today',
+							data : [],
+							lineColor:'rgb(215, 255, 0)'
+						},
+						
 							]
 	};
 	var chartsShop = {
 			chart : {
 				type : 'spline',
 				//背景色
-				backgroundColor: 'rgba(70, 100, 123, 0.6)',
+				backgroundColor: 'rgba(70, 100, 123, 0.3)',
 
 			},
 			title : {
@@ -126,7 +136,8 @@
 				style:{
 					/* 横坐标字体颜色 */
 					
-				}
+				},
+			
 			},
 			xAxis : {
 				/* categories : [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -161,14 +172,6 @@
 				crosshairs : true,
 				shared : true
 			},
-			legend : { layout : 'vertical', align : 'left', x : 800, verticalAlign :
-				  'top', floating : true, y : 0, floating : true ,
-				  /* 图例文字样式 */
-				  itemStyle:{
-						color:"#ffffff"
-				  }},
-				            
-
 			plotOptions : {
 				spline : {
 					marker : {
@@ -180,17 +183,26 @@
 			},
 			series : [
 					{
-						name : 'Today',
-						data : [],
-						lineColor:'rgb(215, 255, 0)'
-					},
-					{
 						name : 'Yesterday',
 						data : [],
 						dashStyle: 'longdash',
 						lineColor : 'rgba(0, 243, 255, 1)'
-					} 
-					]
+					} ,
+					{
+						name : 'Today',
+						data : [],
+						lineColor:'rgb(215, 255, 0)'
+					},
+					
+					],
+			legend : { layout : 'horizontal', align : 'right', x : 0, verticalAlign :
+						  'top', floating : true, y : 0, floating : true ,
+						  /* 图例文字样式 */
+						  itemStyle:{
+								color:"#ffffff"
+						  }
+			}
+			,
 		};
 	//图片轮播时更改内容
 	var change = function() {
@@ -204,26 +216,22 @@
 	};
 
 	function shuiqiu(a, b) {
-
-		var gauge1 = loadLiquidFillGauge("fillgauge1", a);
 		var config1 = liquidFillGaugeDefaultSettings();
+		config1.textColor = "#FFFFFF";
+		var gauge1 = loadLiquidFillGauge("fillgauge1", a,config1);
+		var gauge2 = loadLiquidFillGauge("fillgauge2", b,config1);
+
 		config1.circleColor = "#FF7777";
 		config1.textColor = "#FF4444";
 		config1.waveTextColor = "#FFAAAA";
-		config1.waveColor = "#FFDDDD";
+		config1.waveColor = "red";
 		config1.circleThickness = 0.2;
 		config1.textVertPosition = 0.2;
 		config1.waveAnimateTime = 1000;
-
-		var gauge2 = loadLiquidFillGauge("fillgauge2", b);
 		var config2 = liquidFillGaugeDefaultSettings();
-		config2.circleColor = "#FF7777";
-		config2.textColor = "#FF4444";
-		config2.waveTextColor = "#FFAAAA";
-		config2.waveColor = "#FFDDDD";
-		config2.circleThickness = 0.2;
-		config2.textVertPosition = 0.2;
-		config2.waveAnimateTime = 1000;
+		config2.textColor = "#FFFFFF";
+
+
 	};
 
 	$(function() {
@@ -238,7 +246,8 @@
 				/* 部门标题样式 */
 				style:{
 			        color:"#ffffff"
-			    }
+			    },
+			    align: "left"
 			}
 
 		//获取数据
@@ -274,9 +283,9 @@
 			dataType : 'JSON',
 			success : function(data, status) {
 				data1 = data.data;
+				console.log(data);
 			}
 		});
-		console.log(data1);
 		return data1;
 	}
 	//水球数据
@@ -299,8 +308,8 @@
 				var gmvTarget=json.businessGmvTarget;
 				var ali=Number(alipay/aliTarget)*100;
 				var gm=Number(gmv/gmvTarget)*100;
-				
 				shuiqiu((gm-gm%0.1),(ali-ali%0.1));
+				//shuiqiu((gm-gm%0.1),49.1);
 			}
 		});
 	}
@@ -318,8 +327,8 @@
 			dataType : 'JSON',
 			success : function(data, status) {
 				var  business=data.data;
-				charts.series[0].data=business.today;
-				charts.series[1].data=business.yesterday;
+				charts.series[1].data=business.today;
+				charts.series[0].data=business.yesterday;
 				$('#depart-chart').highcharts(charts);
 			}
 		});
@@ -328,14 +337,15 @@
 	//展示shopHour数据数据少于5个时有问题
 	function showShopHour(){
 		 var shopName=$(".vmc_active img").attr("alt");
-		 chartsShop.series[0].data =businessShopData[$(".vmc_active img").attr("alt")];
-		 chartsShop.series[1].data=businessShopData[$(".vmc_active img").attr("alt")+"Yesterday"];
+		 chartsShop.series[1].data =businessShopData[$(".vmc_active img").attr("alt")];
+		 chartsShop.series[0].data=businessShopData[$(".vmc_active img").attr("alt")+"Yesterday"];
 		 chartsShop.title={
 					text :shopName+'销售对比',
 					/* 标题样式 */
 					style:{
 				        color:"#ffffff"
-				    }
+				    },
+				    align: "left"
 			};
 		$('#store-chart').highcharts(chartsShop);
 		var total=businessShopData[$(".vmc_active img").attr("alt")+"Total"];
@@ -428,10 +438,17 @@
 						class="mtd">
 						<fmt:formatNumber  type="number" value="${shop.shopTvShowTablePojo.gmv-shop.shopTvShowTablePojo.gmv%1}"  maxFractionDigits="0"/>
 						</span> <span class="gmv-rate">
+						<div class="rateBackground" style="width: ${((shop.shopTvShowTablePojo.gmvRate-shop.shopTvShowTablePojo.gmvRate%0.001)>=1?1:(shop.shopTvShowTablePojo.gmvRate-shop.shopTvShowTablePojo.gmvRate%0.001))*100}%">
+						</div>
+						<div class="rateFont">
 						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.gmvRate-shop.shopTvShowTablePojo.gmvRate%0.001}"  maxFractionDigits="1"/> 
+						</div>
 						</span> <span class="ali-rate">
+						<div  class="rateBackground" style="width: ${((shop.shopTvShowTablePojo.alipayRate-shop.shopTvShowTablePojo.alipayRate%0.001)>=1?1:(shop.shopTvShowTablePojo.alipayRate-shop.shopTvShowTablePojo.alipayRate%0.001))*100}%">
+						</div>
+						<div class="rateFont">
 						<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.alipayRate-shop.shopTvShowTablePojo.alipayRate%0.001}"  maxFractionDigits="1"/> 
-						
+						</div>
 						</span> <span class="yesterday-gmv">
 						<fmt:formatNumber type="number" value="${shop.shopTvShowTablePojo.yesterdaySale-shop.shopTvShowTablePojo.yesterdaySale%1}"  maxFractionDigits="0"/>
 						</span>
@@ -451,7 +468,7 @@
 						style="position: relative; width: 100%">
 							<c:forEach items="${shopBeans}" var="shop">
 						<li style="position: relative; color:#fff;width: 20% ;text-align: center; top:30%" ><img 
-							src="${shop.url}" alt="${shop.name}" style="background-color:#ffffff;width: 80%"></li>
+							src="${shop.url}" alt="${shop.name}" style="background-color:rgba(255, 255, 255, 0.8);width: 80%"></li>
 					</c:forEach> 
 					</ul>
 				</div>

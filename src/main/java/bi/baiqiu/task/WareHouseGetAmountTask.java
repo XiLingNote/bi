@@ -1,6 +1,9 @@
 package bi.baiqiu.task;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,6 +40,7 @@ public class WareHouseGetAmountTask {
 	private ThreadPoolTaskExecutor taskExecutor;
 	@Autowired
 	private FirstStartMapper firstStartDao;
+	Logger logger=Logger.getLogger(this.getClass());
 
 	/**   
 	* @Function: WareHouseGetAmountTask.java
@@ -58,10 +62,18 @@ public class WareHouseGetAmountTask {
 	
 	@Scheduled(fixedDelay = 30 * 1000)
 	public void getDate() {
+		Date d1=new Date();
 		try {
+
+			int status =0;
 			//id为5的数据决定定时器是否执行，状态为1时执行
 			FirstStart first=firstStartDao.selectByPrimaryKey(new Byte("5"));
-			if(first.getStatus()==1){
+			if(first!=null&&first.getStatus()==1){
+				logger.info("WareHouseGetAmountTask --getDate--start--");
+				//记录数据初始状态,更改状态防止重复启动
+				status=first.getStatus();
+				first.setStatus(-1);
+				firstStartDao.updateByPrimaryKey(first);
 				WareHouseExample wareHouseExample = new WareHouseExample();
 				wareHouseExample.setOrderByClause("sort");
 				wareHouseExample.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
@@ -73,10 +85,25 @@ public class WareHouseGetAmountTask {
 					RunGetDateTread run = get.new RunGetDateTread();
 					taskExecutor.execute(run);
 				}	
+				Date d2=new Date();
+				while(taskExecutor.getActiveCount()>0){
+					Thread.sleep(10);
+				}
+				//定时器结束时归还状态
+				FirstStart firstCentre=firstStartDao.selectByPrimaryKey(new Byte("5"));
+				if(firstCentre!=null&&firstCentre.getStatus()==-1){
+					first.setStatus(status);
+				}
+				first.setJdpModify(new Date());
+				firstStartDao.updateByPrimaryKey(first);
+				logger.info("WareHouseGetAmountTask --getDate--end--useTime:"+(d2.getTime()-d1.getTime())+"ms");
+
 			}
 		} catch (Exception e) {
 			taskExecutor.destroy();
 			e.printStackTrace();
+			logger.error(e.getMessage());
+
 		}
 	}
 }

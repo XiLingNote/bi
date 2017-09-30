@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import bi.baiqiu.mapper.FirstStartMapper;
 import bi.baiqiu.mapper.ShopBeanMapper;
+import bi.baiqiu.pojo.FirstStart;
 import bi.baiqiu.pojo.RedisPojo;
 import bi.baiqiu.pojo.ShopBean;
 import bi.baiqiu.service.OverAllService;
@@ -45,6 +47,8 @@ public class OverAllController extends BaseController {
 	private OverAllService overAllService;
 	@Autowired
 	private RedisServiceImpl redisService;
+	@Autowired
+	private FirstStartMapper firstStartDao;
 	Map<String, BigDecimal[]> map = null;
 	List<ShopBean> shopBeanTable = null;
 
@@ -180,6 +184,11 @@ public class OverAllController extends BaseController {
 			// 1.2获取店铺总的数据。gmvAlipay完成率实时销售
 			// 2.获取事业部信息
 			try {
+				//事业部电视机数据库显示的时间
+				FirstStart first=firstStartDao.selectByPrimaryKey(new Byte("6"));
+				if(first!=null&&first.getStatus()==0){
+					DateUtils.setTestNow(first.getJdpModify());
+				}
 				map = overAllService.getShopHourData(business);
 				shopBeanTable = overAllService.getTableshow(business);
 				// 总事业部
@@ -296,15 +305,15 @@ public class OverAllController extends BaseController {
 					BigDecimal[] today = map.get(shopBeanTable.get(i).getName());
 					BigDecimal[] yesterday = map.get(shopBeanTable.get(i).getName()+KeyUtils.YESTERDAY);
 					for (int j = 0; j < 24; j++) {
-						businesssHourArray[j] = today[j].add(businesssHourArray[j]);
-						businesssHourYesterday[j]=yesterday[j].add(businesssHourYesterday[j]);
+						businesssHourArray[j] = (today[j]==null?BigDecimal.ZERO:today[j]).add(businesssHourArray[j]);
+						businesssHourYesterday[j]=(yesterday[j]==null?BigDecimal.ZERO:yesterday[j]).add(businesssHourYesterday[j]);
 					}
 				}
+				Map<String, BigDecimal[]>hourMap=new HashMap<String, BigDecimal[]>();
+				hourMap.put("today", businesssHourArray);
+				hourMap.put("yesterday", businesssHourYesterday);
+				WriteObject(response, hourMap,shopBeanTable.size());
 			}
-			Map<String, BigDecimal[]>hourMap=new HashMap<String, BigDecimal[]>();
-			hourMap.put("today", businesssHourArray);
-			hourMap.put("yesterday", businesssHourYesterday);
-			WriteObject(response, hourMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 			WriteObject(response, ERR_PARA);

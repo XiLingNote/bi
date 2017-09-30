@@ -20,6 +20,7 @@ public class DateUtils {
 	public static SimpleDateFormat YMDSin1 = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat YMDSin2 = new SimpleDateFormat("yyyy/MM/dd");
 	public static SimpleDateFormat MMYsin = new SimpleDateFormat("mmm-yy");
+	public static Date businessTvTestDate=new Date();
 
 	private static Calendar calendar = Calendar.getInstance();
 	// @Fields today : 不可以直接取，设定private
@@ -290,6 +291,9 @@ public class DateUtils {
 	 * 2017年9月27日      Jared           v1.0.0              
 	*/
 	public static Date getTestNow() throws ParseException{
-		return yyyyMMddHHmmss.parse("2017-06-04 23:59:59");
+		return businessTvTestDate;
+	}
+	public static  void setTestNow(Date date) throws ParseException {
+		businessTvTestDate=date;
 	}
 }
