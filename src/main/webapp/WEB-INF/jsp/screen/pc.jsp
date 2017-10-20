@@ -47,7 +47,7 @@
 
 	$(function() {
 		/* 页面定时刷新 */
-		setTimeout("location.reload();", 1000000);
+		setTimeout("location.reload();", 10*1000);
 
 		/* 可视化窗口大小 */
 		/* 		_windowHeight = $(window).height();
@@ -62,7 +62,7 @@
 		}); */
 
 		/*屏幕滚动  */
-		/* setInterval(doscroll, 2000); */
+		setInterval(doscroll, 2000);
 
 		/* pc 为 true */
 		/* alert(IsPC());  */
@@ -108,6 +108,28 @@
 	});
 </script>
 </head>
+<style>
+body{
+ background: url("/img/beijing.jpg");
+}
+.collect{
+background:none;
+border:1px solid #ffffff;
+margin-left:2.3%;
+margin-right:2.3%;
+}
+.screenTop{
+width:85%;
+margin:0 auto;
+}
+.slide-list li{
+border-top:0;
+}
+.date{
+margin-top:-3%;
+}
+
+</style>
 <body>
 	<div class="screenHeader">
 
@@ -123,7 +145,7 @@
 	</div>
 
 	<div class="screenTop">
-		<div class="collect">
+		<div class="collect" >
 			<div class="explain">今日总单量</div>
 			<div class="num">${total.totalSingleAmount}</div>
 		</div>

@@ -60,10 +60,11 @@ public class WareHouseGetAmountTask {
 	* 2017年9月20日     Administrator           v1.0.0               修改原因
 	*/
 	
-	@Scheduled(fixedDelay = 30 * 1000)
+	//@Scheduled(fixedDelay = 30 * 1000)
 	public void getDate() {
 		Date d1=new Date();
 		try {
+			logger.info("WareHouseGetAmountTask --getDate--start--");
 
 			int status =0;
 			//id为5的数据决定定时器是否执行，状态为1时执行

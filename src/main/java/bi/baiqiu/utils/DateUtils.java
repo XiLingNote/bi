@@ -20,6 +20,10 @@ public class DateUtils {
 	public static SimpleDateFormat YMDSin1 = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat YMDSin2 = new SimpleDateFormat("yyyy/MM/dd");
 	public static SimpleDateFormat MMYsin = new SimpleDateFormat("mmm-yy");
+	//月初转换日初转换
+	public static final SimpleDateFormat FIRSTDAYOFMONTH = new SimpleDateFormat("yyyy-MM-01 00:00:00 000");
+	public static final SimpleDateFormat FIRSTIMEOFDAY = new SimpleDateFormat("yyyy-MM-dd 00:00:00 000");
+
 	public static Date businessTvTestDate=new Date();
 
 	private static Calendar calendar = Calendar.getInstance();
@@ -160,14 +164,23 @@ public class DateUtils {
 
 	@SuppressWarnings("deprecation")
 	public static String getLastyyyyMM(Date date) {
-		int y = date.getYear() + 1900;
-
-		int m = date.getMonth();
-		String mm = (m > 9) ? "" + m : "0" + m;
-		int d = date.getDate();
-		return "" + y + mm;
+		Calendar instance = Calendar.getInstance();
+		instance.setTime(date);
+		instance.add(Calendar.MONTH, -1);
+		Date time = instance.getTime();
+		String yM = getyyyyMM(time); 
+		return yM;
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	public static String getLastyyyyMMdd(Date date) {
+		Calendar instance = Calendar.getInstance();
+		instance.setTime(date);
+		instance.add(Calendar.DATE, -1);
+		Date time = instance.getTime();
+		String yM = getyyyyMMdd(time); 
+		return yM;
+	}
 	/**
 	 * 验证字符串是否是正确的日期格式;严格验证
 	 * 
@@ -291,9 +304,29 @@ public class DateUtils {
 	 * 2017年9月27日      Jared           v1.0.0              
 	*/
 	public static Date getTestNow() throws ParseException{
-		return businessTvTestDate;
+		return new Date();
 	}
 	public static  void setTestNow(Date date) throws ParseException {
 		businessTvTestDate=date;
+	}
+	/** 
+	 * @Function: zeroSetting 
+	 * @Description:将日期设值为00:00:00
+	 * @param date
+	 * @return    
+	 * @return Date 
+	 * @throws ParseException 
+	 * @throws 
+	 *
+	 * Modification History:
+	 * Date         Author          Version            Description
+	 *---------------------------------------------------------
+	 * 2017年10月12日      Jared           v1.0.0              
+	*/
+	public static  Date firstTimeOfDay(Date date) throws ParseException{
+		return FIRSTIMEOFDAY.parse(FIRSTIMEOFDAY.format(date));
+	}
+	public static Date firstDayOfMonth(Date date) throws ParseException{
+		return FIRSTIMEOFDAY.parse(FIRSTDAYOFMONTH.format(date));
 	}
 }

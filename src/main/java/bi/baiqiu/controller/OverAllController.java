@@ -1,10 +1,12 @@
 package bi.baiqiu.controller;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +25,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import bi.baiqiu.mapper.FirstStartMapper;
-import bi.baiqiu.mapper.ShopBeanMapper;
+import bi.baiqiu.mapper.SaleCateMapper;
 import bi.baiqiu.pojo.FirstStart;
 import bi.baiqiu.pojo.RedisPojo;
+import bi.baiqiu.pojo.SaleCate;
+import bi.baiqiu.pojo.SaleCateExample;
 import bi.baiqiu.pojo.ShopBean;
+import bi.baiqiu.pojo.ShopTvShowTablePojo;
 import bi.baiqiu.service.OverAllService;
 import bi.baiqiu.service.impl.RedisServiceImpl;
 import bi.baiqiu.utils.DateUtils;
 import bi.baiqiu.utils.GsonUtils;
 import bi.baiqiu.utils.KeyUtils;
+import bi.baiqiu.utils.ShopBeanCompare;
 
 /**
  * @comment
@@ -49,6 +55,9 @@ public class OverAllController extends BaseController {
 	private RedisServiceImpl redisService;
 	@Autowired
 	private FirstStartMapper firstStartDao;
+	@Autowired
+	private SaleCateMapper saleCateDao;
+
 	Map<String, BigDecimal[]> map = null;
 	List<ShopBean> shopBeanTable = null;
 
@@ -172,8 +181,7 @@ public class OverAllController extends BaseController {
 	 *             2017年9月25日 Jared v1.0.0
 	 */
 	@RequestMapping("{business}")
-	public String department(Model model, HttpServletResponse response, @PathVariable String business)
-			 {
+	public String department(Model model, HttpServletResponse response, @PathVariable String business) {
 		if (StringUtils.isBlank(business)) {
 			model.addAttribute("msg", ERR_URL);
 			return "forward:/page/showlogin.do";
@@ -184,10 +192,12 @@ public class OverAllController extends BaseController {
 			// 1.2获取店铺总的数据。gmvAlipay完成率实时销售
 			// 2.获取事业部信息
 			try {
-				//事业部电视机数据库显示的时间
-				FirstStart first=firstStartDao.selectByPrimaryKey(new Byte("6"));
-				if(first!=null&&first.getStatus()==0){
+				// 事业部电视机数据库显示的时间
+				FirstStart first = firstStartDao.selectByPrimaryKey(new Byte("6"));
+				if (first != null && first.getStatus() == 0) {
 					DateUtils.setTestNow(first.getJdpModify());
+				}else{
+					DateUtils.setTestNow(new Date());
 				}
 				map = overAllService.getShopHourData(business);
 				shopBeanTable = overAllService.getTableshow(business);
@@ -260,7 +270,7 @@ public class OverAllController extends BaseController {
 	 *             2017年9月27日 Jared v1.0.0
 	 */
 	@RequestMapping("/getBusinessWaterPolo")
-	public void getBusinessWaterPolo(HttpServletResponse response, String business){
+	public void getBusinessWaterPolo(HttpServletResponse response, String business) {
 		if (StringUtils.isBlank(business)) {
 			WriteObject(response, ERR_URL);
 		} else {
@@ -273,7 +283,7 @@ public class OverAllController extends BaseController {
 				e.printStackTrace();
 				WriteObject(response, ERR_PARA);
 			}
-			
+
 		}
 	}
 
@@ -303,21 +313,201 @@ public class OverAllController extends BaseController {
 			if (shopBeanTable != null && map != null && shopBeanTable.size() > 0 && map.size() > 0) {
 				for (int i = 0; i < shopBeanTable.size(); i++) {
 					BigDecimal[] today = map.get(shopBeanTable.get(i).getName());
-					BigDecimal[] yesterday = map.get(shopBeanTable.get(i).getName()+KeyUtils.YESTERDAY);
+					BigDecimal[] yesterday = map.get(shopBeanTable.get(i).getName() + KeyUtils.YESTERDAY);
 					for (int j = 0; j < 24; j++) {
-						businesssHourArray[j] = (today[j]==null?BigDecimal.ZERO:today[j]).add(businesssHourArray[j]);
-						businesssHourYesterday[j]=(yesterday[j]==null?BigDecimal.ZERO:yesterday[j]).add(businesssHourYesterday[j]);
+						businesssHourArray[j] = (today[j] == null ? BigDecimal.ZERO : today[j])
+								.add(businesssHourArray[j]);
+						businesssHourYesterday[j] = (yesterday[j] == null ? BigDecimal.ZERO : yesterday[j])
+								.add(businesssHourYesterday[j]);
 					}
 				}
-				Map<String, BigDecimal[]>hourMap=new HashMap<String, BigDecimal[]>();
+				Map<String, BigDecimal[]> hourMap = new HashMap<String, BigDecimal[]>();
 				hourMap.put("today", businesssHourArray);
 				hourMap.put("yesterday", businesssHourYesterday);
-				WriteObject(response, hourMap,shopBeanTable.size());
+				WriteObject(response, hourMap, shopBeanTable.size());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			WriteObject(response, ERR_PARA);
 
+		}
+	}
+
+	/**
+	 * @Function: department
+	 * @Description:事业部大屏幕Data以日为显示额度的简易版本
+	 * @param model
+	 * @param value
+	 * @return
+	 * @return String
+	 * @throws Exception
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年9月25日 Jared v1.0.0
+	 */
+	@RequestMapping("/department/{business}")
+	public String getDepartmentByDay(Model model, HttpServletResponse response, @PathVariable String business) {
+		if (StringUtils.isBlank(business)) {
+			model.addAttribute("msg", ERR_URL);
+			return "forward:/page/showlogin.do";
+		} else {
+			business = business.trim();
+			try {
+				SaleCateExample ex = new SaleCateExample();
+				ex.createCriteria().andExEqualTo(new Byte("1"));
+				List<SaleCate> saleBeans = saleCateDao.selectByExample(ex);
+				// 事业部电视机数据库显示的时间
+				FirstStart first = firstStartDao.selectByPrimaryKey(new Byte("7"));
+				if (first != null && first.getStatus() == 0) {
+					DateUtils.setTestNow(first.getJdpModify());
+				} else {
+					DateUtils.setTestNow(new Date());
+				}
+				// 总事业部
+				ShopTvShowTablePojo allShopTvShow = new ShopTvShowTablePojo();
+				if (saleBeans == null) {
+					model.addAttribute("msg", ERR_URL);
+					return ERR_URL;
+				}
+				// 根据事业部累计
+				for (SaleCate sale : saleBeans) {
+					List<ShopBean> list = overAllService.getShopBeans(sale.getNameEn());
+					ShopTvShowTablePojo departmentData = overAllService.getShopDayData(list);
+					if (sale.getNameEn().equals(business)) {
+						departmentData.setShowName(sale.getName());
+						// 排除以及合并不需要显示的店铺,计算完成率
+						for (int i = 0; i < list.size(); i++) {
+							// 不显示的店铺数据删除
+							if (!list.get(i).getDisplayState().equals(new Byte("1"))) {
+								list.remove(i);
+								i--;
+							} else {
+								// 显示的店铺，同显示名只显示一个,其他删除并合并
+								for (int j = 0; j < list.size(); j++) {
+									ShopTvShowTablePojo pojoI = list.get(i).getShopTvShowTablePojo();
+									ShopTvShowTablePojo pojoJ = list.get(j).getShopTvShowTablePojo();
+									if (list.get(i).getDisplayName().equals(list.get(j).getDisplayName())
+											&& list.get(i).getId() != list.get(j).getId()) {
+										pojoI.addGmv(pojoJ.getGmv());
+										pojoI.addGmvTarget(pojoJ.getGmvTarget());
+										pojoI.addAliPay(pojoJ.getAlipay());
+										pojoI.addAliPayTarget(pojoJ.getAlipayTarget());
+										pojoI.addTodaySale(pojoJ.getTodaySale());
+										pojoI.addYesterdaySale(pojoJ.getYesterdaySale());
+										list.remove(j);
+										j--;
+									}
+									if (pojoI.getGmvTarget().compareTo(BigDecimal.ZERO) != 0) {
+										pojoI.setGmvRate(pojoI.getGmv()
+												.divide(pojoI.getGmvTarget(), 5, RoundingMode.HALF_DOWN).doubleValue());
+									} else {
+										pojoI.setGmvRate(Double.valueOf(0.0d));
+									}
+								}
+							}
+						}
+						// 排序
+						Collections.sort(list, new ShopBeanCompare());
+						model.addAttribute("shopBeans", list);
+						model.addAttribute("departmentData", departmentData);
+					}
+					allShopTvShow.addAllSaleAndTarget(departmentData);
+				}
+				model.addAttribute("allDepartmentData", allShopTvShow);
+				model.addAttribute("departmentName", business);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "/screen/departmentTV";
+		}
+	}
+
+	/**
+	 * @Function: getDayDataByBusiness
+	 * @Description:
+	 * @param response
+	 * @param business
+	 * @return void
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年10月11日 Jared v1.0.0
+	 */
+	@RequestMapping("/department/getDayDataByBusiness")
+	public void getDayDataByBusiness(HttpServletResponse response, String business) {
+		if (StringUtils.isBlank(business)) {
+		} else {
+			business = business.trim();
+		}
+		try {
+			SaleCateExample ex = new SaleCateExample();
+			ex.createCriteria().andExEqualTo(new Byte("1"));
+			List<SaleCate> saleBeans = saleCateDao.selectByExample(ex);
+			// 事业部电视机数据库显示的时间
+			FirstStart first = firstStartDao.selectByPrimaryKey(new Byte("7"));
+			if (first != null && first.getStatus() == 0) {
+				DateUtils.setTestNow(first.getJdpModify());
+			} else {
+				DateUtils.setTestNow(new Date());
+			}
+			/*
+			 * List<ShopBean>list=overAllService.getShopBeans(business);
+			 * ShopTvShowTablePojo departmentData
+			 * =overAllService.getShopDayData(list);
+			 */
+			// 总事业部
+			Map<String, Object> map = new HashMap<>();
+			ShopTvShowTablePojo allShopTvShow = new ShopTvShowTablePojo();
+			for (SaleCate sale : saleBeans) {
+				List<ShopBean> list = overAllService.getShopBeans(sale.getNameEn());
+				ShopTvShowTablePojo departmentData = overAllService.getShopDayData(list);
+				Collections.sort(list, new ShopBeanCompare());
+				for (int i = 0; i < list.size(); i++) {
+					// 不显示的店铺数据删除
+					if (!list.get(i).getDisplayState().equals(new Byte("1"))) {
+						list.remove(i);
+						i--;
+					} else {
+						// 显示的店铺，同显示名只显示一个,其他删除并合并
+						for (int j = 0; j < list.size(); j++) {
+							ShopTvShowTablePojo pojoI = list.get(i).getShopTvShowTablePojo();
+							ShopTvShowTablePojo pojoJ = list.get(j).getShopTvShowTablePojo();
+
+							if (list.get(i).getDisplayName().equals(list.get(j).getDisplayName())
+									&& list.get(i).getId() != list.get(j).getId()) {
+
+								pojoI.addGmv(pojoJ.getGmv());
+								pojoI.addGmvTarget(pojoJ.getGmvTarget());
+								pojoI.addAliPay(pojoJ.getAlipay());
+								pojoI.addAliPayTarget(pojoJ.getAlipayTarget());
+								pojoI.addTodaySale(pojoJ.getTodaySale());
+								pojoI.addYesterdaySale(pojoJ.getYesterdaySale());
+								list.remove(j);
+								j--;
+								if (pojoI.getGmvTarget().compareTo(BigDecimal.ZERO) != 0) {
+									pojoI.setAlipayRate(pojoI.getGmv()
+											.divide(pojoI.getGmvTarget(), 5, RoundingMode.HALF_DOWN).doubleValue());
+								} else {
+									pojoI.setAlipayRate(Double.valueOf(0.0d));
+								}
+							}
+						}
+					}
+					map.put(sale.getNameEn() + "shopBeans", list);
+					map.put(sale.getNameEn() + "departmentData", departmentData);
+					allShopTvShow.addAllSaleAndTarget(departmentData);
+				}
+			}
+			map.put("allDepartmentData", allShopTvShow);
+			WriteObject(response, map);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

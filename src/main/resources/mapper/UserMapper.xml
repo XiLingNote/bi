@@ -35,7 +35,7 @@
 		(${value});
 	</select>
 
-	<select id="queryDepartmentShop" resultType="Shop">
+	<select id="queryDepartmentShop" resultType="User">
 		SELECT
 		id,name,name_plat FROM shop WHERE sc_id in (${value});
 	</select>
@@ -49,6 +49,7 @@
 		user.shop_id,
 		user.phone,
 		user.role_ids,
+		user.function_ids as functionIds,
 		user.sc_ids as scIds,
 		shop.name as shopName,
 		shop.name_plat as
@@ -62,18 +63,22 @@
 		user.shop_id = ${value};
 	</select>
 
-	<select id="queryAllShopManger" resultType="Shop">
+	<select id="queryAllShopManger" resultType="User">
 		SELECT
 		user.name,
 		user.username,
 		user.phone,
 		user.user_sign,
-		shop.name,
-		shop.name_plat
-		FROM user LEFT OUTER JOIN shop on `user`.shop_id = shop.id;
+		shop.name as shopName,
+		shop.name_plat as shopNamePlat,
+		user.role_ids as roleIds
+		FROM user LEFT
+		OUTER JOIN shop on user.shop_id = shop.id where user.user_sign = 2 or
+		user.user_sign = 3;
 	</select>
-	
+
 	<select id="queryShop" resultType="Shop">
-		SELECT id,ex,name,name_plat,sc_id  FROM shop ;
+		SELECT
+		id,ex,name,name_plat,sc_id FROM shop ;
 	</select>
 </mapper>

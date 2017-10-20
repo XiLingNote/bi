@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    ">
+	<!-- 京东数据拉取默认设置 -->
+	<bean id="orderSearchRequest" class="com.jd.open.api.sdk.request.order.OrderSearchRequest">
+		<property name="page" value="1"></property>
+		<property name="pageSize" value="100"></property>
+		<property name="orderState"
+			value="WAIT_SELLER_STOCK_OUT,WAIT_GOODS_RECEIVE_CONFIRM,FINISHED_L,TRADE_CANCELED,LOCKED"></property>
+			<property name="optionalFields"
+			value="order_id,pay_type,order_total_price,order_payment,freight_price,seller_discount,order_state,order_remark,order_start_time,order_end_time,consignee_info,item_info_list,vender_remark,pin,modified,payment_confirm_time,coupon_detail_list"></property>
+	</bean>
+	<!-- ecs中clarksjd库里  -->
+	<bean id="clarksJD" class="com.jd.open.api.sdk.DefaultJdClient">
+	<!--https://api.jd.com/routerjson  -->
+		<constructor-arg name="serverUrl"
+			value="https://api.jd.com/routerjson"></constructor-arg>
+			<!-- token变更后使用数据中AppKey和appSecret -->
+				<constructor-arg name="accessToken"
+			value="87ee28ed-1f06-45ac-94f0-bfeb22a1ddda"></constructor-arg>
+		<constructor-arg name="appKey"
+			value="1DCE541099905A7EFDB0FF2922572DDA"></constructor-arg>
+		<constructor-arg name="appSecret"
+			value="6b4f0eab6f4549d581ffb5f7619e6567"></constructor-arg>
+	</bean>
+	<!-- ecs中 clarksMan库中-->
+	<bean id="clarksMan" class="com.jd.open.api.sdk.DefaultJdClient">
+		<constructor-arg name="serverUrl"
+			value="https://api.jd.com/routerjson"></constructor-arg>
+						<!-- token变更后使用数据中 -->
+				<constructor-arg name="accessToken"
+			value="574c609b-9231-4dfa-afca-c3a1c0b7cdc5"></constructor-arg>
+		<constructor-arg name="appKey"
+			value="1DCE541099905A7EFDB0FF2922572DDA"></constructor-arg>
+		<constructor-arg name="appSecret"
+			value="6b4f0eab6f4549d581ffb5f7619e6567"></constructor-arg>
+	</bean>
+							<!-- token变更后使用数据中 -->
+	<bean id="jdToken" class="bi.baiqiu.pojo.jd.JdToken">
+		<constructor-arg index="0"
+			value="https://api.jd.com/routerjson"></constructor-arg>
+				<constructor-arg index="1"
+			value="574c609b-9231-4dfa-afca-c3a1c0b7cdc5"></constructor-arg>
+		<constructor-arg index="2"
+			value="1DCE541099905A7EFDB0FF2922572DDA"></constructor-arg>
+		<constructor-arg index="3"
+			value="6b4f0eab6f4549d581ffb5f7619e6567"></constructor-arg>
+	</bean>
+</beans>

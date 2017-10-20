@@ -1,6 +1,9 @@
 package bi.baiqiu.mapper2;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 import bi.baiqiu.pojo.WareHouse;
@@ -81,5 +84,20 @@ public interface OrderInfoMapper {
      */
     int queryTodayShippedAmount(WareHouse wareHouse);
    
-    
+    /** 
+     * @Function: queryOaShopSaleData 
+     * @Description:京东数据未完成使用oa数据库数据
+     * @param startDate
+     * @param endDate
+     * @param sellerNick
+     * @return    
+     * @return Map<String,BigDecimal> 
+     * @throws 
+     *
+     * Modification History:
+     * Date         Author          Version            Description
+     *---------------------------------------------------------
+     * 2017年10月12日      Jared           v1.0.0              
+    */
+    Map<String, Object>queryOaShopSaleData(@Param("startDate")Date startDate,@Param("endDate")Date endDate,@Param("sellerNick")Integer sellerNick);
 }

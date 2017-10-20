@@ -34,7 +34,7 @@
 		<property name="password" value="${password1}" />
 		<property name="maxActive"  value="50"/>
 	</bean>
-	<bean id="bi2" class="com.alibaba.druid.pool.DruidDataSource">
+	<!-- <bean id="bi2" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="driverClassName" value="${driverClassName3}" />
 		<property name="url" value="${url3}" />
 		<property name="username" value="${username3}" />
@@ -46,5 +46,5 @@
 		<property name="url" value="${url2}" />
 		<property name="username" value="${username2}" />
 		<property name="password" value="${password2}" />
-	</bean>
+	</bean> -->
 </beans>

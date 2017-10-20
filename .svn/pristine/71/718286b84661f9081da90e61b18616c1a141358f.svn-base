@@ -1,0 +1,154 @@
+package bi.baiqiu.pojo;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+/**
+ * @version: v1.0.0
+ * @author Jared
+ * @date  Creat Time : 2017年9月27日 上午9:54:56
+ * @Description:事业部电视机大屏幕table显示pojo
+ */
+public class ShopTvShowTablePojo {
+		//当月销售
+		private BigDecimal gmv = BigDecimal.ZERO;
+		// gmv当月目标
+		private BigDecimal gmvTarget =BigDecimal.ZERO;
+		// gmv当月销售完成率
+		private Double gmvRate;
+		//当月收账
+		private BigDecimal alipay = BigDecimal.ZERO;
+		// alipay月目标
+		private BigDecimal alipayTarget = BigDecimal.ZERO;
+		// alipap月收账完成率
+		private Double alipayRate;
+		//昨日销售
+		private BigDecimal yesterdaySale= BigDecimal.ZERO;
+		//今日销售
+		private BigDecimal todaySale= BigDecimal.ZERO;
+		//订单量
+		private  Integer orderNum=0;
+		//展示名称
+		private  String showName;
+		
+		public Integer getOrderNum() {
+			return orderNum;
+		}
+
+		public void setOrderNum(Integer orderNum) {
+			this.orderNum = orderNum;
+		}
+		
+		public BigDecimal getGmv() {
+			return gmv;
+		}
+		public void setGmv(BigDecimal gmv) {
+			this.gmv = gmv;
+		}
+		public BigDecimal getGmvTarget() {
+			return gmvTarget;
+		}
+		public void setGmvTarget(BigDecimal gmvTarget) {
+			this.gmvTarget = gmvTarget;
+		}
+		public Double getGmvRate() {
+			return gmvRate;
+		}
+		public void setGmvRate(Double gmvRate) {
+			this.gmvRate = gmvRate;
+		}
+		public BigDecimal getAlipay() {
+			return alipay;
+		}
+		public void setAlipay(BigDecimal alipay) {
+			this.alipay = alipay;
+		}
+		public BigDecimal getAlipayTarget() {
+			return alipayTarget;
+		}
+		public void setAlipayTarget(BigDecimal alipayTarget) {
+			this.alipayTarget = alipayTarget;
+		}
+		public Double getAlipayRate() {
+			return alipayRate;
+		}
+		public void setAlipayRate(Double alipayRate) {
+			this.alipayRate = alipayRate;
+		}
+		public BigDecimal getYesterdaySale() {
+			return yesterdaySale;
+		}
+		public void setYesterdaySale(BigDecimal yesterdaySale) {
+			this.yesterdaySale = yesterdaySale;
+		}
+		public BigDecimal getTodaySale() {
+			return todaySale;
+		}
+		public void setTodaySale(BigDecimal todaySale) {
+			this.todaySale = todaySale;
+		}
+//		递增方法总计
+		public BigDecimal addGmv(BigDecimal gmv){
+			this.gmv=gmv.add(this.gmv);
+			return gmv.add(this.gmv);
+		}
+		public BigDecimal addGmvTarget(BigDecimal target){
+			this.gmvTarget=target.add(this.gmvTarget);
+			return target.add(this.gmvTarget);
+		}
+		public BigDecimal addAliPay(BigDecimal alipay){
+			this.alipay=alipay.add(this.alipay);
+			return alipay.add(this.alipay);
+		}
+		public BigDecimal addAliPayTarget(BigDecimal alipayTarget){
+			this.alipayTarget=alipayTarget.add(this.alipayTarget);
+			return alipayTarget.add(this.alipayTarget);
+		}
+		public BigDecimal addTodaySale(BigDecimal todaySale){
+			this.todaySale=todaySale.add(this.todaySale);
+			return todaySale.add(this.todaySale);
+		}
+		public BigDecimal addYesterdaySale(BigDecimal yesterdaySale){
+			this.yesterdaySale=yesterdaySale.add(this.yesterdaySale);
+			return yesterdaySale.add(this.yesterdaySale);
+		}
+		public Integer addOrderNumer(Integer orderNumber){
+			this.orderNum=orderNumber+this.orderNum;
+			return orderNumber+this.orderNum;
+		}
+		/** 
+		 * @Function: addAllSaleAndTarget 
+		 * @Description:当前实体作为累加，加上pojo的所有销售数据和目标数据当月昨日今日
+		 * @param pojo
+		 * @return    
+		 * @return ShopTvShowTablePojo 
+		 * @throws 
+		 *
+		 * Modification History:
+		 * Date         Author          Version            Description
+		 *---------------------------------------------------------
+		 * 2017年10月11日      Jared           v1.0.0              
+		*/
+		public ShopTvShowTablePojo addAllSaleAndTarget(ShopTvShowTablePojo pojo){
+			this.gmv=pojo.getGmv().add(this.gmv);
+			this.gmvTarget=pojo.getGmvTarget().add(this.gmvTarget);
+			this.alipay=pojo.getAlipay().add(this.alipay);
+			this.alipayTarget=pojo.getAlipayTarget().add(this.alipayTarget);
+			this.todaySale=pojo.getTodaySale().add(this.todaySale);
+			this.yesterdaySale=pojo.getYesterdaySale().add(this.yesterdaySale);
+			this.orderNum=this.orderNum+pojo.getOrderNum();
+			if(this.gmvTarget.compareTo(BigDecimal.ZERO)==0){
+				this.gmvRate=Double.valueOf(0.0d);
+			}else{
+				this.gmvRate=this.gmv.divide(this.gmvTarget,5,RoundingMode.HALF_DOWN).doubleValue();
+			}
+			return this;
+		}
+
+		public String getShowName() {
+			return showName;
+		}
+
+		public void setShowName(String showName) {
+			this.showName = showName;
+		}
+}

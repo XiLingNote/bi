@@ -120,23 +120,39 @@
 							class="fa arrow"></span></a>
 						
 							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>/wareHouse/screen.do" id="leftTarget"><i
+								<li><a href="<%=basePath%>wareHouse/screen.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
 						</ul>
 						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>/overall/Bag.do" id="leftTarget"><i
+								<li><a href="<%=basePath%>overall/Bag.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Bag</a></li>
 						</ul>
 						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>/overall/Shoes.do" id="leftTarget"><i
+								<li><a href="<%=basePath%>overall/Shoes.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Shoes</a></li>
 						</ul>
 						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>/overall/Dress.do" id="leftTarget"><i
+								<li><a href="<%=basePath%>overall/Dress.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Dress</a></li>
 						</ul>
 						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>/overall/ACC.do" id="leftTarget"><i
+								<li><a href="<%=basePath%>overall/ACC.do" id="leftTarget"><i
+										class="fa fa-crosshairs"></i>ACC</a></li>
+						</ul>
+						<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Bag.do" id="leftTarget"><i
+										class="fa fa-crosshairs"></i>Bag</a></li>
+						</ul>
+						<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Shoes.do" id="leftTarget"><i
+										class="fa fa-crosshairs"></i>Shoes</a></li>
+						</ul>
+						<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Dress.do" id="leftTarget"><i
+										class="fa fa-crosshairs"></i>Dress</a></li>
+						</ul>
+						<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/ACC.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>ACC</a></li>
 						</ul>
 						</li>
@@ -182,18 +198,18 @@
 								<li><a href="#"><i class="fa  fa-jpy"></i> Pay data<span
 										class="fa arrow"></span></a>
 									<ul class="nav nav-third-level" id="leftPayData">
-										<li><a href="<%=basePath%>/page/saleProductsTreasure.do"
+										<li><a href="<%=basePath%>page/saleProductsTreasure.do"
 											id="leftSaleProductsTreasure">Sale Products Treasure</a></li>
-										<li><a href="<%=basePath%>/page/drillShow.do"
+										<li><a href="<%=basePath%>page/drillShow.do"
 											id="leftDrillShow">Drill Show </a></li>
-										<li><a href="<%=basePath%>/page/througTrain.do"
+										<li><a href="<%=basePath%>page/througTrain.do"
 											id="leftThrougTrain">Throug Train</a></li>
 									</ul></li>
 							</shiro:hasPermission>
 
 							<!-- pay_data权限可以看 -->
 							<shiro:hasPermission name="commodity_property">
-								<li><a href="<%=basePath%>/page/commodityProperty.do"
+								<li><a href="<%=basePath%>page/commodityProperty.do"
 									id="leftCommodityProperty"><i class="fa  fa-suitcase"></i>Commodity
 										Property</a></li>
 							</shiro:hasPermission>

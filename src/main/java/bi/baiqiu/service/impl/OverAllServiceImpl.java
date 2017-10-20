@@ -13,16 +13,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.config.event.InstantiatedBeanEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import sun.security.util.KeyUtil;
+import bi.baiqiu.mapper.JdOrderInfoMapper;
 import bi.baiqiu.mapper.ShopBeanMapper;
+import bi.baiqiu.mapper2.OrderInfoMapper;
+import bi.baiqiu.pojo.JdOrderInfoExample;
 import bi.baiqiu.pojo.RedisPojo;
 import bi.baiqiu.pojo.ShopBean;
 import bi.baiqiu.pojo.ShopTvShowTablePojo;
@@ -39,7 +38,10 @@ public class OverAllServiceImpl implements OverAllService {
 	JedisPool jedisPool;
 	@Autowired
 	private ShopBeanMapper shopDao;
-
+	@Autowired
+	private OrderInfoMapper orderDao;
+	@Autowired
+	private JdOrderInfoMapper jdOrderDao;
 	// @Autowired
 	// private Jedis jedisService;
 
@@ -263,8 +265,8 @@ public class OverAllServiceImpl implements OverAllService {
 		String shopName = shop.getName();
 		Jedis jedis = jedisPool.getResource();
 		Date nowDate = new Date();
-		//测试当日期
-		nowDate=DateUtils.getTestNow();
+		// 测试当日期
+		nowDate = DateUtils.getTestNow();
 		Calendar canlendar = Calendar.getInstance();
 		Calendar canlendarEnd = Calendar.getInstance();
 		// 当前时间小时数设0
@@ -286,7 +288,7 @@ public class OverAllServiceImpl implements OverAllService {
 		BigDecimal yesterdayTotal = BigDecimal.ZERO;
 		// 24小时的数据
 		for (int i = 0; i <= 23; i++) {
-			if(i<=endHour){
+			if (i <= endHour) {
 				// 今天数据
 				canlendarEnd.setTime(canlendar.getTime());
 				String jedisHgetData = jedis.hget(shopName + KeyUtils.HOUR,
@@ -307,8 +309,7 @@ public class OverAllServiceImpl implements OverAllService {
 			// 昨日数据
 			canlendarYesterday.setTime(canlendarYesterday.getTime());
 			String jedisHgetDataYesterday = jedis.hget(shopName + KeyUtils.HOUR,
-					canlendarEnd.get(Calendar.YEAR)
-							+ UtilTool.monthAddZero(canlendarYesterday.get(Calendar.MONTH) + 1)
+					canlendarEnd.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendarYesterday.get(Calendar.MONTH) + 1)
 							+ UtilTool.monthAddZero(canlendarYesterday.get(Calendar.DAY_OF_MONTH))
 							+ UtilTool.monthAddZero(canlendarYesterday.get(Calendar.HOUR_OF_DAY)));
 			if (StringUtils.isNotEmpty(jedisHgetDataYesterday)) {
@@ -332,9 +333,9 @@ public class OverAllServiceImpl implements OverAllService {
 		// 目标销售额
 		String shopMonth = jedis.hget(shopName + KeyUtils.MONTH,
 				canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
-		RedisPojo redisMonth=new RedisPojo();
-		if(!StringUtils.isEmpty(shopMonth)){
-			redisMonth= GsonUtils.gson.fromJson(shopMonth, RedisPojo.class);
+		RedisPojo redisMonth = new RedisPojo();
+		if (!StringUtils.isEmpty(shopMonth)) {
+			redisMonth = GsonUtils.gson.fromJson(shopMonth, RedisPojo.class);
 		}
 		// 大屏幕table显示实体
 		ShopTvShowTablePojo showTablePojo = new ShopTvShowTablePojo();
@@ -342,19 +343,20 @@ public class OverAllServiceImpl implements OverAllService {
 		BigDecimal gmvTarget = redisMonth.getTarget();
 		BigDecimal alipay = redisMonth.getAlipay();
 		BigDecimal alipayTarget = redisMonth.getAlipayTarget();
-		//gmv四舍五入，保留两位
+		// gmv四舍五入，保留两位
 		showTablePojo.setGmv(gmv);
+
 		showTablePojo.setGmvTarget(gmvTarget);
 		if (gmvTarget.compareTo(BigDecimal.ZERO) == 0) {
 			showTablePojo.setGmvRate(0d);
 		} else {
-			showTablePojo.setGmvRate(gmv.divide(gmvTarget,5, RoundingMode.HALF_DOWN).doubleValue());
+			showTablePojo.setGmvRate(gmv.divide(gmvTarget, 5, RoundingMode.HALF_DOWN).doubleValue());
 		}
-		//alipay
+		// alipay
 		if (alipayTarget.compareTo(BigDecimal.ZERO) == 0) {
 			showTablePojo.setAlipayRate(0d);
 		} else {
-			showTablePojo.setAlipayRate(alipay.divide(alipayTarget,5, RoundingMode.HALF_DOWN).doubleValue());
+			showTablePojo.setAlipayRate(alipay.divide(alipayTarget, 5, RoundingMode.HALF_DOWN).doubleValue());
 		}
 		showTablePojo.setAlipayTarget(alipayTarget);
 		showTablePojo.setAlipay(alipay);
@@ -367,6 +369,7 @@ public class OverAllServiceImpl implements OverAllService {
 		jedis.close();
 		return map;
 	}
+
 	/**
 	 * @Function: getShopHourData
 	 * @Description:根据部门名称查询店铺循环查询返回map
@@ -386,33 +389,35 @@ public class OverAllServiceImpl implements OverAllService {
 		for (ShopBean shop : shopBeans) {
 			getBusinessHour(shop, map);
 		}
-		Collections.sort(shopBeans,new ShopBeanCompare());
+		Collections.sort(shopBeans, new ShopBeanCompare());
 		return map;
 	}
-	/** 
-	 * @Function: getTableshow 
+
+	/**
+	 * @Function: getTableshow
 	 * @Description:查询shopbean的table显示
 	 * @param business
 	 * @return
-	 * @throws Exception    
-	 * @return List<ShopBean> 
-	 * @throws 
+	 * @throws Exception
+	 * @return List<ShopBean>
+	 * @throws
 	 *
-	 * Modification History:
-	 * Date         Author          Version            Description
-	 *---------------------------------------------------------
-	 * 2017年9月27日      Jared           v1.0.0              
-	*/
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年9月27日 Jared v1.0.0
+	 */
 	@Override
-	public List<ShopBean> getTableshow(String business) throws Exception{
+	public List<ShopBean> getTableshow(String business) throws Exception {
 		List<ShopBean> shopBeans = getShopBeans(business);
 		Map<String, BigDecimal[]> map = new HashMap<String, BigDecimal[]>();
 		for (ShopBean shop : shopBeans) {
 			getBusinessHour(shop, map);
 		}
-		Collections.sort(shopBeans,new ShopBeanCompare());
+		Collections.sort(shopBeans, new ShopBeanCompare());
 		return shopBeans;
 	}
+
 	/**
 	 * @Function: getShopMonthAndTarget
 	 * @Description 本月数据显示
@@ -428,25 +433,25 @@ public class OverAllServiceImpl implements OverAllService {
 	 *             2017年9月26日 Jared v1.0.0
 	 */
 	@Override
-	public Map<String, BigDecimal> getBusinessMonthAndTarget(String business ) throws Exception {
-			Jedis jedis = jedisPool.getResource();
-			Map<String, BigDecimal> businessMap=new HashMap<String, BigDecimal>();
-			// 目标销售额
-				Calendar canlendar = Calendar.getInstance();
-				canlendar.setTime(DateUtils.getTestNow());
-				//测试时间
-				String businessMonth = jedis.hget(business + KeyUtils.MONTH,
-						canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
-				RedisPojo redisBusinessMonth;
-				if(!StringUtils.isEmpty(businessMonth)){
-					redisBusinessMonth= GsonUtils.gson.fromJson(businessMonth, RedisPojo.class);
-				}else{
-					redisBusinessMonth=new RedisPojo();
-				}
-				businessMap.put("business"+KeyUtils.GMV+KeyUtils.TARGET, redisBusinessMonth.getTarget());
-				businessMap.put("business"+KeyUtils.GMV,redisBusinessMonth.getGmv());
-				businessMap.put("business"+KeyUtils.ALIPAY, redisBusinessMonth.getAlipay());
-				businessMap.put("business"+KeyUtils.ALIPAY+KeyUtils.TARGET,redisBusinessMonth.getAlipayTarget());
+	public Map<String, BigDecimal> getBusinessMonthAndTarget(String business) throws Exception {
+		Jedis jedis = jedisPool.getResource();
+		Map<String, BigDecimal> businessMap = new HashMap<String, BigDecimal>();
+		// 目标销售额
+		Calendar canlendar = Calendar.getInstance();
+		canlendar.setTime(DateUtils.getTestNow());
+		// 测试时间
+		String businessMonth = jedis.hget(business + KeyUtils.MONTH,
+				canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
+		RedisPojo redisBusinessMonth;
+		if (!StringUtils.isEmpty(businessMonth)) {
+			redisBusinessMonth = GsonUtils.gson.fromJson(businessMonth, RedisPojo.class);
+		} else {
+			redisBusinessMonth = new RedisPojo();
+		}
+		businessMap.put("business" + KeyUtils.GMV + KeyUtils.TARGET, redisBusinessMonth.getTarget());
+		businessMap.put("business" + KeyUtils.GMV, redisBusinessMonth.getGmv());
+		businessMap.put("business" + KeyUtils.ALIPAY, redisBusinessMonth.getAlipay());
+		businessMap.put("business" + KeyUtils.ALIPAY + KeyUtils.TARGET, redisBusinessMonth.getAlipayTarget());
 		jedis.close();
 		return businessMap;
 	}
@@ -464,8 +469,111 @@ public class OverAllServiceImpl implements OverAllService {
 	 *             ---------------------------------------------------------
 	 *             2017年9月26日 Jared v1.0.0
 	 */
+	@Override
 	public List<ShopBean> getShopBeans(String business) {
 		List<ShopBean> list = shopDao.queryShopByscShort(business);
 		return list;
+	}
+
+	/**
+	 * @Function: getShopDayData
+	 * @Description:根据部门遍历店铺查询店铺详细数据，返回部门累计的数据
+	 * @param list 统计的店铺集合
+	 * @throws ParseException
+	 * @return ShopTvShowTablePojo
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年10月10日 Jared v1.0.0
+	 */
+	@Override
+	public ShopTvShowTablePojo getShopDayData(List<ShopBean> list) {
+		Jedis jedis = jedisPool.getResource();
+		Date nowDate = new Date();
+		// 测试当日期
+		ShopTvShowTablePojo showPojoBusiness = new ShopTvShowTablePojo();
+		try {
+			nowDate = DateUtils.getTestNow();
+			Calendar canlendar = Calendar.getInstance();
+			canlendar.setTime(nowDate);
+			Calendar canlendarYesterday = Calendar.getInstance();
+			canlendarYesterday.setTime(canlendar.getTime());
+			canlendarYesterday.set(Calendar.DAY_OF_MONTH, (canlendar.get(Calendar.DAY_OF_MONTH) - 1));
+			// 获取并按照今日销售额排序
+			for (ShopBean shop : list) {
+				ShopTvShowTablePojo showPojo = new ShopTvShowTablePojo();
+				// 店铺总的数据本月为了获取它的目标放到前面
+				//2代表是京东的数据
+				if(shop.getPlatId().equals(2)){
+				 //今日数据
+					Map<String, Object> jdMapToday=jdOrderDao.getSaleByShopIdAndStartEndDate(String.valueOf(shop.getId()), DateUtils.firstTimeOfDay(canlendar.getTime()), canlendar.getTime());
+						showPojo.setTodaySale(new BigDecimal(String.valueOf(jdMapToday.get("saleGmv"))));
+					showPojoBusiness.addTodaySale(new BigDecimal(String.valueOf(jdMapToday.get("saleGmv"))));
+					showPojo.setOrderNum(Integer.valueOf(String.valueOf(jdMapToday.get("orderNumber"))));
+					showPojoBusiness.addOrderNumer(Integer.valueOf(String.valueOf(jdMapToday.get("orderNumber"))));
+					//昨日数据
+					Map<String, Object> jdMapYesterday=jdOrderDao.getSaleByShopIdAndStartEndDate(String.valueOf(shop.getId()),DateUtils.firstTimeOfDay(canlendarYesterday.getTime()),DateUtils.firstTimeOfDay(nowDate));
+					showPojo.addYesterdaySale(new BigDecimal(String.valueOf(jdMapYesterday.get("saleGmv"))));
+					showPojoBusiness.addYesterdaySale(new BigDecimal(String.valueOf(jdMapYesterday.get("saleGmv"))));
+					//本月数据
+					Map<String, Object> jdMapThisMonth=jdOrderDao.getSaleByShopIdAndStartEndDate(String.valueOf(shop.getId()),DateUtils.firstDayOfMonth(canlendar.getTime()),DateUtils.firstTimeOfDay(nowDate));
+					showPojo.setGmv(new BigDecimal(String.valueOf(jdMapThisMonth.get("saleGmv"))));
+					showPojoBusiness.addGmv(new BigDecimal(String.valueOf(jdMapThisMonth.get("saleGmv"))));
+				}else{
+					// 店铺总的数据今日
+					String jedisTodayData = jedis.hget(shop.getName() + KeyUtils.DAY,
+							canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1)
+									+ UtilTool.monthAddZero(canlendar.get(Calendar.DAY_OF_MONTH)));
+					// 空不设值
+					if (StringUtils.isNotEmpty(jedisTodayData)) {
+						RedisPojo jedisPojo = GsonUtils.gson.fromJson(jedisTodayData, RedisPojo.class);
+						// 今日销售
+						showPojo.setTodaySale(jedisPojo.getGmv());
+						showPojoBusiness.addTodaySale(jedisPojo.getGmv());
+						// 今日订单量
+						showPojo.setOrderNum(jedisPojo.getOrderNum());
+						showPojoBusiness.addOrderNumer(jedisPojo.getOrderNum());
+					}
+					// 店铺总的数据昨日
+					String jedisYesterdayData = jedis.hget(shop.getName() + KeyUtils.DAY,
+							canlendarYesterday.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendarYesterday.get(Calendar.MONTH) + 1)
+									+ UtilTool.monthAddZero(canlendarYesterday.get(Calendar.DAY_OF_MONTH)));
+					if (StringUtils.isNotEmpty(jedisYesterdayData)) {
+						RedisPojo jedisPojo = GsonUtils.gson.fromJson(jedisYesterdayData, RedisPojo.class);
+						// 昨日销售
+						showPojo.setYesterdaySale(jedisPojo.getGmv());
+						//部门昨日累计
+						showPojoBusiness.addYesterdaySale(jedisPojo.getGmv());
+					}
+					String jedisMonthData = jedis.hget(shop.getName() + KeyUtils.MONTH,
+							canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
+					RedisPojo jedisMonthPojo=new RedisPojo();
+					if (StringUtils.isNotEmpty(jedisMonthData)) {
+						jedisMonthPojo = GsonUtils.gson.fromJson(jedisMonthData, RedisPojo.class);
+						showPojo.setGmvTarget(jedisMonthPojo.getTarget());
+						showPojoBusiness.addGmvTarget(jedisMonthPojo.getTarget());
+					}	
+					//月数据
+					showPojo.setGmv(jedisMonthPojo.getGmv());
+					//部门本月累计
+					showPojoBusiness.addGmv(jedisMonthPojo.getGmv());
+				}
+				shop.setShopTvShowTablePojo(showPojo);
+			}
+			//目标不为0执行保存
+				if(showPojoBusiness.getGmvTarget().compareTo(BigDecimal.ZERO)==0){
+					showPojoBusiness.setGmvRate(Double.valueOf(0.0d));
+				}else{
+					showPojoBusiness.setGmvRate(showPojoBusiness.getGmv().divide(showPojoBusiness.getGmvTarget(),5,RoundingMode.HALF_DOWN).doubleValue());
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			jedis.close();
+		}
+		
+		return showPojoBusiness;
 	}
 }

@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import bi.baiqiu.pojo.WareHouse;
 import bi.baiqiu.pojo.test.OrderTemplate;
 import bi.baiqiu.pojo.test.TradeTemplate;
 import bi.baiqiu.utils.DateUtils;
@@ -22,6 +20,15 @@ import redis.clients.jedis.Jedis;
 public class Test {
 
 	public static void main(String[] args) throws Exception {
+		
+		Calendar c=Calendar.getInstance();
+		
+
+	}
+	
+	
+	public void testForeach(){
+
 		int INSERTSIZE=200;
 		List<TradeTemplate> tradeList=new ArrayList<TradeTemplate>(800);
 		List<OrderTemplate> goodsList=new ArrayList<OrderTemplate>(800);
@@ -44,6 +51,7 @@ public class Test {
 
 		}
 			
+	
 	}
 public void redisTest() throws ParseException{
 	  int []a={1,3,4};

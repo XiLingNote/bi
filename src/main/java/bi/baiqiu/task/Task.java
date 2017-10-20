@@ -2,7 +2,12 @@ package bi.baiqiu.task;
 
 import java.util.Date;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.jd.open.api.sdk.DefaultJdClient;
+import com.jd.open.api.sdk.JdClient;
+import com.jd.open.api.sdk.request.order.OrderSearchRequest;
 
 /**
  * @author bqhome
@@ -13,15 +18,11 @@ import org.springframework.stereotype.Component;
 public class Task {
 	private Date begin;
 	// 5秒更新一次
-//	 @Scheduled(fixedDelay = 5000)
+	//@Scheduled(fixedDelay = 5000)
 	// 一分钟更新一次
 //	@Scheduled(cron = "0 0/1 * * * ?")
 	public void doUpdateIndexData() {
-		 if (begin==null) {
-			 begin = new Date();
-		}
-		 System.out.println(begin);
-		
+		System.out.println();
 	}
 
 }
