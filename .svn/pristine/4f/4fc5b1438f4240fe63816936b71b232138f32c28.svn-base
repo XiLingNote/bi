@@ -506,15 +506,6 @@ public class OverAllServiceImpl implements OverAllService {
 				ShopTvShowTablePojo showPojo = new ShopTvShowTablePojo();
 				// 店铺总的数据本月为了获取它的目标放到前面
 				//2代表是京东的数据
-				String jedisMonthData = jedis.hget(shop.getName() + KeyUtils.MONTH,
-						canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
-				RedisPojo jedisMonthPojo=new RedisPojo();
-				//目标
-				if (StringUtils.isNotEmpty(jedisMonthData)) {
-					jedisMonthPojo = GsonUtils.gson.fromJson(jedisMonthData, RedisPojo.class);
-					showPojo.setGmvTarget(jedisMonthPojo.getTarget());
-					showPojoBusiness.addGmvTarget(jedisMonthPojo.getTarget());
-				}	
 				if(shop.getPlatId().equals(2)){
 				 //今日数据
 					Map<String, Object> jdMapToday=jdOrderDao.getSaleByShopIdAndStartEndDate(String.valueOf(shop.getId()), DateUtils.firstTimeOfDay(canlendar.getTime()), canlendar.getTime());
@@ -556,6 +547,14 @@ public class OverAllServiceImpl implements OverAllService {
 						//部门昨日累计
 						showPojoBusiness.addYesterdaySale(jedisPojo.getGmv());
 					}
+					String jedisMonthData = jedis.hget(shop.getName() + KeyUtils.MONTH,
+							canlendar.get(Calendar.YEAR) + UtilTool.monthAddZero(canlendar.get(Calendar.MONTH) + 1));
+					RedisPojo jedisMonthPojo=new RedisPojo();
+					if (StringUtils.isNotEmpty(jedisMonthData)) {
+						jedisMonthPojo = GsonUtils.gson.fromJson(jedisMonthData, RedisPojo.class);
+						showPojo.setGmvTarget(jedisMonthPojo.getTarget());
+						showPojoBusiness.addGmvTarget(jedisMonthPojo.getTarget());
+					}	
 					//月数据
 					showPojo.setGmv(jedisMonthPojo.getGmv());
 					//部门本月累计

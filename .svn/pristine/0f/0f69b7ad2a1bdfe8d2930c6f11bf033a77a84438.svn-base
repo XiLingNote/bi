@@ -397,7 +397,6 @@ public class OverAllController extends BaseController {
 										pojoI.addAliPayTarget(pojoJ.getAlipayTarget());
 										pojoI.addTodaySale(pojoJ.getTodaySale());
 										pojoI.addYesterdaySale(pojoJ.getYesterdaySale());
-										pojoI.addOrderNumer(pojoJ.getOrderNum());
 										list.remove(j);
 										j--;
 									}

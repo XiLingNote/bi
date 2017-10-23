@@ -273,7 +273,7 @@ background: green;
 							<fmt:formatNumber  type="number" value="${shop.shopTvShowTablePojo.yesterdaySale-shop.shopTvShowTablePojo.yesterdaySale%1}"  maxFractionDigits="0"/>
 							</span>
 							<div class="c_g_c_b"></div>
-							<span class="c_span_list_tm">本月(<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.gmvRate-shop.shopTvShowTablePojo.gmvRate%0.001}"  maxFractionDigits="1"/>):</span> <span
+							<span class="c_span_list_tm">本月(<fmt:formatNumber type="percent" value="${shop.shopTvShowTablePojo.gmvRate}"  maxFractionDigits="0"/>):</span> <span
 								class="c_span_list_tm_in">
 								<fmt:formatNumber  type="number" value="${shop.shopTvShowTablePojo.gmv-shop.shopTvShowTablePojo.gmv%1}"  maxFractionDigits="0"/>
 								</span>
@@ -512,22 +512,23 @@ background: green;
 						return unescape(r[2]);
 					return null;
 				}
-				vScid = GetQueryString('scid');
+				vScid = 2;
 
 				switch (vScid) {
-				case '1':
+				case 1:
 					vLHUrl = '/overall/department/Bag.do';
 					break;
-				case '2':
+				case 2:
 					vLHUrl = '/overall/department/Shoes.do';
 					break;
-				case '3':
+				case 3:
 					vLHUrl = '/overall/department/Dress.do';
 					break;
-				case '5':
+				case 4:
 					vLHUrl = '/overall/department/ACC.do';
 					break;
 				default:
+						
 				}
 				setTimeout(function() {
 					location.href = vLHUrl

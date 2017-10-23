@@ -1,0 +1,217 @@
+package bi.baiqiu.controller;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import bi.baiqiu.pojo.RedisPojo;
+import bi.baiqiu.pojo.ShopTvShowTablePojo;
+import bi.baiqiu.utils.DateUtils;
+import bi.baiqiu.utils.GsonUtils;
+import bi.baiqiu.utils.KeyUtils;
+import bi.baiqiu.utils.StoreCheckAvailable;
+
+/**
+ * @comment
+ * @author Jim
+ * @date 2017年10月11日 下午4:20:36
+ * @version 1.0.0
+ * @see
+ */
+@Controller
+@RequestMapping("alipay")
+@SuppressWarnings("unused")
+public class AlipayController extends BaseController {
+
+	@Autowired
+	JedisPool pool;
+
+	@RequestMapping(value = "inAmount")
+	public String inAmount() {
+		return "/screen/inAmount";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "inAmountJson", produces = "application/json; charset=UTF-8",method = RequestMethod.POST)
+	public Map<String, Object> inAmount(
+			@RequestParam(value = "field", required = false) String var) {
+		Jedis jedis = pool.getResource();
+		Map<String, Object> map = new HashMap<String, Object>();
+		Calendar instance = Calendar.getInstance();
+//		instance.setTime(new Date(117, 9, 12));
+		Date date = instance.getTime();
+		String thisYm = DateUtils.getyyyyMM(date);
+		String thisYmd = DateUtils.getyyyyMMdd(date);
+		String lastYm = DateUtils.getLastyyyyMM(date);
+		String lastYmd = DateUtils.getLastyyyyMMdd(date);
+		TreeSet<ShopTvShowTablePojo> departOrAllSet = new TreeSet<ShopTvShowTablePojo>(
+				new Comparator<ShopTvShowTablePojo>() {
+					@Override
+					public int compare(ShopTvShowTablePojo o1,
+							ShopTvShowTablePojo o2) {
+						// 按照当日到账金额排序
+						if (o1.getTodaySale().doubleValue() > o2.getTodaySale()
+								.doubleValue()) {
+							return -1;
+						} else {
+							return 1;
+						}
+					}
+				});
+		// 部门 公司总计数据获取
+		for (String key : KeyUtils.departOrAll) {
+			String thisYmStr = jedis.hget(key + KeyUtils.MONTH, thisYm);
+			String thisYmdStr = jedis.hget(key + KeyUtils.DAY, thisYmd);
+			String lastYmStr = jedis.hget(key + KeyUtils.MONTH, lastYm);
+			String lastYmdStr = jedis.hget(key + KeyUtils.DAY, lastYmd);
+			ShopTvShowTablePojo all = new ShopTvShowTablePojo();
+			departOrAllSet.add(all);
+			all.setShowName(key);
+			if (StringUtils.isNotBlank(thisYmStr)) {
+				RedisPojo thisYmPojo = GsonUtils.gson.fromJson(thisYmStr,
+						RedisPojo.class);
+				BigDecimal alipay = thisYmPojo.getAlipay();
+				BigDecimal alipayTarget = thisYmPojo.getAlipayTarget();
+				all.setGmv(alipay);
+				all.setGmvTarget(alipayTarget);
+				if (alipayTarget != null && alipayTarget.intValue() > 0) {
+					all.setGmvRate(alipay.divide(alipayTarget, 3,RoundingMode.HALF_UP).doubleValue()*100);
+				} else{
+					all.setGmvRate(0.000);
+				}
+			}
+
+			if (StringUtils.isNotBlank(thisYmdStr)) {
+				RedisPojo thisYmdPojo = GsonUtils.gson.fromJson(thisYmdStr,
+						RedisPojo.class);
+				all.setTodaySale(thisYmdPojo.getAlipay());
+			}
+
+			if (StringUtils.isNotBlank(lastYmStr)) {
+				RedisPojo lastYmPojo = GsonUtils.gson.fromJson(lastYmStr,
+						RedisPojo.class);
+				all.setLastMonthGmv(lastYmPojo.getAlipay());
+			}
+
+			if (StringUtils.isNotBlank(lastYmdStr)) {
+				RedisPojo lastYmdPojo = GsonUtils.gson.fromJson(lastYmdStr,
+						RedisPojo.class);
+				all.setYesterdaySale(lastYmdPojo.getAlipay());
+			}
+
+		}
+		 map.put("depart", departOrAllSet);
+		// 根据传入参数判定排序属性
+		final String attr = var;
+		TreeSet<ShopTvShowTablePojo> shopSet = new TreeSet<ShopTvShowTablePojo>(
+				new Comparator<ShopTvShowTablePojo>() {
+					@Override
+					public int compare(ShopTvShowTablePojo o1,
+							ShopTvShowTablePojo o2) {
+						// 按照本月完成率排序
+						if ("alipayRate".equals(attr)) {
+							if (o1.getGmvRate() > o2.getGmvRate()) {
+								return -1;
+							} else {
+								return 1;
+							}
+							// 按照本月销售额排序
+						} else if ("gmv".equals(attr)) {
+							if (o1.getGmv().doubleValue()
+									- o2.getGmv().doubleValue() > 0) {
+								return -1;
+							} else {
+								return 1;
+							}
+						} else {
+							if (o1.getTodaySale().doubleValue() > o2
+									.getTodaySale().doubleValue()) {
+								return -1;
+							} else {
+								return 1;
+							}
+						}
+					}
+				});
+
+		for (String key : KeyUtils.depart) {
+			Set<String> departSet = jedis.smembers(key);
+			for (String shopNamePlat : departSet) {
+				String shopName = jedis.get(shopNamePlat);
+				boolean sign = StoreCheckAvailable.vailableTime(shopName, date);
+				if (!sign) {
+					continue;
+				} else {
+					String thisYmdStr = jedis.hget(shopName + KeyUtils.DAY,
+							thisYmd);
+					String thisYmStr = jedis.hget(shopName + KeyUtils.MONTH,
+							thisYm);
+					String lastYmdStr = jedis.hget(shopName + KeyUtils.DAY,
+							lastYmd);
+					String lastYmStr = jedis.hget(shopName + KeyUtils.MONTH,
+							lastYm);
+
+					ShopTvShowTablePojo shopPojo = new ShopTvShowTablePojo();
+					shopPojo.setShowName(shopNamePlat);
+					
+					if (StringUtils.isNotBlank(thisYmStr)) {
+						RedisPojo thisYmPojo = GsonUtils.gson.fromJson(
+								thisYmStr, RedisPojo.class);
+						BigDecimal alipay = thisYmPojo.getAlipay();
+						BigDecimal alipayTarget = thisYmPojo.getAlipayTarget();
+						shopPojo.setGmv(alipay);
+						shopPojo.setGmvTarget(alipayTarget);
+						if (alipayTarget != null && alipayTarget.intValue() > 0) {
+							shopPojo.setGmvRate(alipay.divide(alipayTarget, 3,RoundingMode.HALF_UP).doubleValue()*100);
+						}else{
+							shopPojo.setGmvRate(0.000);
+						}
+					} else {
+						shopPojo.setGmv(BigDecimal.ZERO);
+						shopPojo.setGmvTarget(BigDecimal.ZERO);
+						shopPojo.setGmvRate(0.000);
+					}
+
+					if (StringUtils.isNotBlank(thisYmdStr)) {
+						RedisPojo thisYmdPojo = GsonUtils.gson.fromJson(
+								thisYmdStr, RedisPojo.class);
+						shopPojo.setTodaySale(thisYmdPojo.getAlipay());
+					}
+
+					if (StringUtils.isNotBlank(lastYmStr)) {
+						RedisPojo lastYmPojo = GsonUtils.gson.fromJson(
+								lastYmStr, RedisPojo.class);
+						shopPojo.setLastMonthGmv(lastYmPojo.getAlipay());
+					}
+
+					if (StringUtils.isNotBlank(lastYmdStr)) {
+						RedisPojo lastYmdPojo = GsonUtils.gson.fromJson(
+								lastYmdStr, RedisPojo.class);
+						shopPojo.setYesterdaySale(lastYmdPojo.getAlipay());
+					}
+					
+					shopSet.add(shopPojo);
+				}
+			}
+		}
+		map.put("shopSet", shopSet);
+		jedis.close();
+		return map;
+	}
+}
