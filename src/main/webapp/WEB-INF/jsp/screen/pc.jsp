@@ -12,6 +12,7 @@
 <script src="/js/jquery-1.8.3.min.js"></script>
 <!-- <script src="/js/jquery.fliptimer.js"></script> -->
 <script src="/js/jquery.flipcountdown.js"></script>
+<script src="/js/scientific.js"></script>
 <script type="text/javascript">
 	/* 全局参数 */
 	var _windowHeight;
@@ -23,12 +24,17 @@
 	var doscroll = function() {
 		var $parent = $('.js-slide-list');
 		var $first = $parent.find('li:first');
-		var height = $first.height();
-		$first.animate({
-			height : 0
-		}, 500, function() {
-			$first.css('height', height).appendTo($parent);
-		});
+		$next=$first;
+		for(var i=0;i<4;i++){
+			$next=$next.next();
+			$first=$next
+			$first.animate({
+				height : 0
+			}, 100, function() {
+				$first.css('height', height).appendTo($parent);
+			});
+		}
+		
 	};
 
 	function IsPC() {
@@ -47,7 +53,7 @@
 
 	$(function() {
 		/* 页面定时刷新 */
-		setTimeout("location.reload();", 10*1000);
+		setTimeout("location.reload();", 1000);
 
 		/* 可视化窗口大小 */
 		/* 		_windowHeight = $(window).height();
@@ -82,7 +88,7 @@
 
 		var _titleDivHeight = $(".slide-title").css("height");
 		_titleDivHeight = parseInt(_titleDivHeight.substring(0,
-				_titleDivHeight.length - 2));
+				_titleDivHeight.length - 2))/2;
 
 		$(".slide-title li").css("line-height", _titleDivHeight - 2 + _unit);
 
@@ -105,6 +111,12 @@
 				.css("line-height", _titleDivHeight - 2 + _unit);
 		$(".slide-container li").css("font-size",
 				(_titleDivHeight - 2) * _percent + _unit);
+		
+		/* 数据汇总 科学计数法 */
+		$(".todayNum").text(formatNum("${total.totalSingleAmount}"));
+		$(".todaySend").text(formatNum("${total.todayShippedAmount}"));
+		$(".thisMonth").text(formatNum("${total.presentMonthShippedAmount}"));
+		$(".lastMonth").text(formatNum("${total.lastMonthShippedAmount}"));
 	});
 </script>
 </head>
@@ -133,7 +145,7 @@ margin-top:-3%;
 <body>
 	<div class="screenHeader">
 
-		<div class="headline">仓库作业统计</div>
+		<div class="headline">百秋物流作业统计</div>
 
 		<!-- 翻牌计时插件 -->
 		<div class="date"></div>
@@ -147,48 +159,63 @@ margin-top:-3%;
 	<div class="screenTop">
 		<div class="collect" >
 			<div class="explain">今日总单量</div>
-			<div class="num">${total.totalSingleAmount}</div>
+			<div class="num todayNum">formatNum(${total.totalSingleAmount})</div>
 		</div>
 
 		<div class="collect">
 			<div class="explain">今日发货</div>
-			<div class="num">${total.todayShippedAmount}</div>
+			<div class="num todaySend">${total.todayShippedAmount}</div>
 		</div>
 		<div class="collect">
 			<div class="explain">本月发货</div>
-			<div class="num">${total.presentMonthShippedAmount}</div>
+			<div class="num thisMonth">
+			${total.presentMonthShippedAmount}</div>
 		</div>
 		<div class="collect">
 			<div class="explain">上月发货</div>
-			<div class="num">${total.lastMonthShippedAmount}</div>
+			<div class="num lastMonth">${total.lastMonthShippedAmount}</div>
 		</div>
 	</div>
 
 	<div class="slide-title">
 		<ul class="slide-list">
-			<li class="title"><span class="brand">品牌</span> <span
-				class="transfer">未转单</span> <span class="print">待打印</span> <span
-				class="distribution">配货中</span> <span class="send">已发货</span> <span
-				class="preSend">预售发货</span> <span class="totalSend">总计发货</span></li>
+			<li class="title">
+				<span >品牌</span>
+				<span >未转单</span>
+				<span >待打印</span> 
+				<span >配货中</span> 
+				<span >已发货</span>
+				<span >预单量</span>
+				<span >预发货</span> 
+				<span >总发货</span>
+			</li>
+			
+			<li class="title">
+				<span >统计</span>
+				<span >${total.notTurnAmount}</span>
+				<span >${total.notPrintAmount}</span> 
+				<span >${total.distributionAmount}</span> 
+				<span >${total.todayShippedGeneralAmount}</span>
+				<span >${total.preOrderQuantity}</span>
+				<span >${total.todayShippedPresellAmount}</span> 
+				<span >${total.todayShippedGeneralAmount+item.todayShippedPresellAmount}</span>
+			</li>
 		</ul>
 	</div>
 
 	<div class="slide-container">
 		<ul class="slide-list js-slide-list">
 			<c:forEach items="${list}" var="item" varStatus="status">
-				<c:if test="${status.index%2==0}">
-					<li class="odd">
-				</c:if>
-				<c:if test="${status.index%2==1}">
-					<li class="even">
-				</c:if>
-				<span class="brand">${item.showName}</span>
-				<span class="transfer">${item.notTurnAmount}</span>
-				<span class="print">${item.notPrintAmount}</span>
-				<span class="distribution">${item.distributionAmount}</span>
-				<span class="send">${item.todayShippedGeneralAmount}</span>
-				<span class="preSend">${item.todayShippedPresellAmount}</span>
-				<span class="totalSend">${item.todayShippedGeneralAmount+item.todayShippedPresellAmount}</span>
+				<li >
+					<span >${item.showName}</span>
+					<span >${item.notTurnAmount}</span>
+					<span >${item.notPrintAmount}</span>
+					<span >${item.distributionAmount}</span>
+					<span >${item.todayShippedGeneralAmount}</span>
+					<!-- 预售单量  -->
+					<span >${item.preOrderQuantity}</span>
+					<span >${item.todayShippedPresellAmount}</span>
+					<span >${item.todayShippedGeneralAmount+item.todayShippedPresellAmount}</span>
 				</li>
 			</c:forEach>
 		</ul>

@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Store Mangement</title>
+<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+<jsp:include page="/page/left.do"></jsp:include>
+<link rel="stylesheet"
+	href="/css/bootstrap/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="/css/bi.css">
+<link rel="stylesheet" href="/css/localRightTable.css" />
+<link rel="stylesheet" href="/css/bootstrap/bootstrap-editable.css" />
+<link rel="stylesheet" href="/css/bootstrap/bootstrap-table.css" />
+<script src="/js/jquery-1.12.3.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/bootstrap/bootstrap-table.js"></script>
+<script src="/js/localTableTitle.js"></script>
+<script>
+	$(function() {
+
+	});
+</script>
+</head>
+<body>
+	<div class="page" style="height: 90%">
+		<!-- 查询列表 -->
+		<form class="queryCriteria" action="" method="post">
+			<div class="queryCriteriaDiv"></div>
+		</form>
+
+		<!-- view列表 -->
+		<div class="view">
+			<table id="table" data-toggle="table">
+				<thead>
+					<tr>
+						<th>Item ID</th>
+						<th>Item Name</th>
+						<th>Item Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Item 1</td>
+						<td>$1</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Item 2</td>
+						<td>$2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -23,7 +23,7 @@ public class JdTest {
 	private JdClient clarksMan;
 	@Autowired
 	private JdToken clarksJd;
-	@org.junit.Test
+	//@org.junit.Test
 	public void test2(){
 		System.out.println(clarksJd.getAppkey());
 	}

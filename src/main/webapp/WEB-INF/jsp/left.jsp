@@ -8,9 +8,8 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	request.setAttribute("basePath", basePath);
 %>
-
-
 <!-- shiro标签库 -->
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,7 +17,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
 <link rel="stylesheet"
 	href="<%=basePath%>/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="<%=basePath%>/css/top.css">
@@ -77,12 +75,18 @@
 								admin </a></li>
 					</shiro:hasAnyRoles>
 					<shiro:hasRole name="admin">
-						<li><a href="<%=basePath%>user/admin.do"
-							id="leftAdmin"><i class="fa fa-tachometer"></i> admin
+						<li><a href="<%=basePath%>user/admin.do" id="leftAdmin"><i
+								class="fa fa-tachometer"></i> admin </a></li>
+
+						<li><a href="<%=basePath%>storeManage/storeView.do"
+							id="storeManage"><i class="fa fa-tachometer"></i> storeManage
 						</a></li>
 					</shiro:hasRole>
 					<!-- bi第一阶段功能 经理及以上能看 -->
 					<shiro:hasAnyRoles name="admin,director">
+						<%-- <li><a href="<%=basePath%>alipay/inAmount.do"
+							id="leftAdmin"><i class="fa fa-tachometer"></i> alipay
+						</a></li> --%>
 						<li><a href="<%=basePath%>page/index.do"
 							id="leftSalesOverall"><i class="fa fa-home"></i> Sales
 								Overall</a></li>
@@ -96,126 +100,183 @@
 								<li><a href="<%=basePath%>page/salesTrend.do"
 									id="leftStoresales">Storesales</a></li>
 							</ul></li>
-						<li><a href="#" class=""><i class="fa fa-sitemap"></i>
+						<%-- 	<li><a href="#" class=""><i class="fa fa-sitemap"></i>
 								Industry Data<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>page/saleContribution.do">Sale
 										Contribution</a></li>
 								<li><a href="<%=basePath%>page/topStore.do">TOP Store</a></li>
 								<li><a href="<%=basePath%>page/topBrand.do">TOP Brand</a></li>
-							</ul></li>
-					<li><a href="#" class=""><i class="fa fa-sitemap"></i>
+							</ul></li> --%>
+						<%-- 	<li><a href="#" class=""><i class="fa fa-sitemap"></i>
 							Store Analysis<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="<%=basePath%>page/storeSalesDemonstrate.do">Store
 									Overall</a></li>
-							<%-- <li><a href="<%=basePath%>page/dailySales.do">Real Time</a>
+							<li><a href="<%=basePath%>page/dailySales.do">Real Time</a>
 							</li>
 							<li><a href="<%=basePath%>page/salesTrend.do">Storesales</a>
-							</li> --%>
-						</ul></li>
+							</li>
+						</ul></li> --%>
 					</shiro:hasAnyRoles>
+
 					<shiro:hasAnyRoles name="admin,store_admin">
-							<li><a href="#"><i class="fa   fa-upload"></i> business TV<span
-							class="fa arrow"></span></a>
-						
+						<li><a href="#"><i class="fa   fa-upload"></i> upload
+								Data<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level" id="importData">
+
+								<!-- target权限可以看 -->
+								<shiro:hasPermission name="target">
+									<li><a href="<%=basePath%>/page/target.do" id="leftTarget"><i
+											class="fa fa-crosshairs"></i> Target </a></li>
+								</shiro:hasPermission>
+
+								<!-- flow权限可以看 -->
+								<shiro:hasPermission name="flow">
+									<li><a href="#"><i class="fa  fa-signal"></i> Flow
+											Structure<span class="fa arrow"></span></a>
+										<ul class="nav nav-third-level" id="leftFlowStructure">
+											<li><a href="<%=basePath%>/page/pcFlowStructure.do"
+												id="leftPc">pc</a></li>
+											<li><a
+												href="<%=basePath%>/page/wirelessFlowStructure.do"
+												id="leftwirless">wireless</a></li>
+										</ul></li>
+								</shiro:hasPermission>
+
+								<!-- fans_data权限可以看-->
+								<shiro:hasPermission name="fans_data">
+									<li><a href="#"><i class="fa fa-users"></i> Fan data<span
+											class="fa arrow"></span></a>
+										<ul class="nav nav-third-level" id="leftfansData">
+											<li><a href="<%=basePath%>/page/fansDaily.do"
+												id="leftfansDaily">fansDaily</a></li>
+											<li><a href="<%=basePath%>/page/fansMonthFeatures.do"
+												id="leftfansMonthFeatures">fans Month Features</a></li>
+											<li><a href="<%=basePath%>/page/visitorMonthFeatures.do"
+												id="leftvisitorMonthFeatures">visitor Month Features</a></li>
+										</ul></li>
+								</shiro:hasPermission>
+
+								<!-- pay_data权限可以看 -->
+								<shiro:hasPermission name="pay_data">
+									<li><a href="#"><i class="fa  fa-jpy"></i> Pay data<span
+											class="fa arrow"></span></a>
+										<ul class="nav nav-third-level" id="leftPayData">
+											<li><a href="<%=basePath%>/page/saleProductsTreasure.do"
+												id="leftSaleProductsTreasure">Sale Products Treasure</a></li>
+											<li><a href="<%=basePath%>/page/drillShow.do"
+												id="leftDrillShow">Drill Show </a></li>
+											<li><a href="<%=basePath%>/page/througTrain.do"
+												id="leftThrougTrain">Throug Train</a></li>
+										</ul></li>
+								</shiro:hasPermission>
+
+								<!-- pay_data权限可以看 -->
+								<shiro:hasPermission name="commodity_property">
+									<li><a href="<%=basePath%>/page/commodityProperty.do"
+										id="leftCommodityProperty"><i class="fa  fa-suitcase"></i>Commodity
+											Property</a></li>
+								</shiro:hasPermission>
+
+							</ul></li>
+					</shiro:hasAnyRoles>
+					<shiro:hasAnyRoles name="admin">
+						<li><a href="#"><i class="fa   fa-upload"></i> business
+								TV<span class="fa arrow"></span></a>
+
 							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>wareHouse/screen.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>wareHouse/screen.do"
+									id="leftTarget"><i class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
+							</ul>
+							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>overall/Bag.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Bag</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
+							</ul>
+							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>overall/Shoes.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Shoes</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
+							</ul>
+							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>overall/Dress.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>Dress</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
+							</ul>
+							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>overall/ACC.do" id="leftTarget"><i
 										class="fa fa-crosshairs"></i>ACC</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Bag.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Bag</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Shoes.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Shoes</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Dress.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Dress</a></li>
-						</ul>
-						<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/ACC.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>ACC</a></li>
-						</ul>
-						</li>
-						</shiro:hasAnyRoles>
-					<li><a href="#"><i class="fa   fa-upload"></i> upload Data<span
-							class="fa arrow"></span></a>
-						<ul class="nav nav-second-level" id="importData">
+							</ul>
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Bag.do"
+									id="leftTarget"><i class="fa fa-crosshairs"></i>Bag</a></li>
+							</ul>
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Shoes.do"
+									id="leftTarget"><i class="fa fa-crosshairs"></i>Shoes</a></li>
+							</ul>
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/Dress.do"
+									id="leftTarget"><i class="fa fa-crosshairs"></i>Dress</a></li>
+							</ul>
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>overall/department/ACC.do"
+									id="leftTarget"><i class="fa fa-crosshairs"></i>ACC</a></li>
+							</ul></li>
+					</shiro:hasAnyRoles>
+					<shiro:hasRole name="store_sub_role">
 
-							<!-- target权限可以看 -->
-							<shiro:hasPermission name="target">
-								<li><a href="<%=basePath%>/page/target.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i> Target </a></li>
-							</shiro:hasPermission>
+						<!-- target权限可以看 -->
+						<shiro:hasPermission name="target">
+							<li><a href="<%=basePath%>/page/target.do" id="leftTarget"><i
+									class="fa fa-crosshairs"></i> Target </a></li>
+						</shiro:hasPermission>
 
-							<!-- flow权限可以看 -->
-							<shiro:hasPermission name="flow">
-								<li><a href="#"><i class="fa  fa-signal"></i> Flow
-										Structure<span class="fa arrow"></span></a>
-									<ul class="nav nav-third-level" id="leftFlowStructure">
-										<li><a href="<%=basePath%>/page/pcFlowStructure.do"
-											id="leftPc">pc</a></li>
-										<li><a href="<%=basePath%>/page/wirelessFlowStructure.do"
-											id="leftwirless">wireless</a></li>
-									</ul></li>
-							</shiro:hasPermission>
+						<!-- flow权限可以看 -->
+						<shiro:hasPermission name="flow">
+							<li><a href="#"><i class="fa  fa-signal"></i> Flow
+									Structure<span class="fa arrow"></span></a>
+								<ul class="nav nav-third-level" id="leftFlowStructure">
+									<li><a href="<%=basePath%>/page/pcFlowStructure.do"
+										id="leftPc">pc</a></li>
+									<li><a href="<%=basePath%>/page/wirelessFlowStructure.do"
+										id="leftwirless">wireless</a></li>
+								</ul></li>
+						</shiro:hasPermission>
 
-							<!-- fans_data权限可以看-->
-							<shiro:hasPermission name="fans_data">
-								<li><a href="#"><i class="fa fa-users"></i> Fan data<span
-										class="fa arrow"></span></a>
-									<ul class="nav nav-third-level" id="leftfansData">
-										<li><a href="<%=basePath%>/page/fansDaily.do"
-											id="leftfansDaily">fansDaily</a></li>
-										<li><a href="<%=basePath%>/page/fansMonthFeatures.do"
-											id="leftfansMonthFeatures">fans Month Features</a></li>
-										<li><a href="<%=basePath%>/page/visitorMonthFeatures.do"
-											id="leftvisitorMonthFeatures">visitor Month Features</a></li>
-									</ul></li>
-							</shiro:hasPermission>
+						<!-- fans_data权限可以看-->
+						<shiro:hasPermission name="fans_data">
+							<li><a href="#"><i class="fa fa-users"></i> Fan data<span
+									class="fa arrow"></span></a>
+								<ul class="nav nav-third-level" id="leftfansData">
+									<li><a href="<%=basePath%>/page/fansDaily.do"
+										id="leftfansDaily">fansDaily</a></li>
+									<li><a href="<%=basePath%>/page/fansMonthFeatures.do"
+										id="leftfansMonthFeatures">fans Month Features</a></li>
+									<li><a href="<%=basePath%>/page/visitorMonthFeatures.do"
+										id="leftvisitorMonthFeatures">visitor Month Features</a></li>
+								</ul></li>
+						</shiro:hasPermission>
 
-							<!-- pay_data权限可以看 -->
-							<shiro:hasPermission name="pay_data">
-								<li><a href="#"><i class="fa  fa-jpy"></i> Pay data<span
-										class="fa arrow"></span></a>
-									<ul class="nav nav-third-level" id="leftPayData">
-										<li><a href="<%=basePath%>page/saleProductsTreasure.do"
-											id="leftSaleProductsTreasure">Sale Products Treasure</a></li>
-										<li><a href="<%=basePath%>page/drillShow.do"
-											id="leftDrillShow">Drill Show </a></li>
-										<li><a href="<%=basePath%>page/througTrain.do"
-											id="leftThrougTrain">Throug Train</a></li>
-									</ul></li>
-							</shiro:hasPermission>
+						<!-- pay_data权限可以看 -->
+						<shiro:hasPermission name="pay_data">
+							<li><a href="#"><i class="fa  fa-jpy"></i> Pay data<span
+									class="fa arrow"></span></a>
+								<ul class="nav nav-third-level" id="leftPayData">
+									<li><a href="<%=basePath%>/page/saleProductsTreasure.do"
+										id="leftSaleProductsTreasure">Sale Products Treasure</a></li>
+									<li><a href="<%=basePath%>/page/drillShow.do"
+										id="leftDrillShow">Drill Show </a></li>
+									<li><a href="<%=basePath%>/page/througTrain.do"
+										id="leftThrougTrain">Throug Train</a></li>
+								</ul></li>
+						</shiro:hasPermission>
 
-							<!-- pay_data权限可以看 -->
-							<shiro:hasPermission name="commodity_property">
-								<li><a href="<%=basePath%>page/commodityProperty.do"
-									id="leftCommodityProperty"><i class="fa  fa-suitcase"></i>Commodity
-										Property</a></li>
-							</shiro:hasPermission>
-
-
-						</ul></li>
+						<!-- pay_data权限可以看 -->
+						<shiro:hasPermission name="commodity_property">
+							<li><a href="<%=basePath%>/page/commodityProperty.do"
+								id="leftCommodityProperty"><i class="fa  fa-suitcase"></i>Commodity
+									Property</a></li>
+						</shiro:hasPermission>
+					</shiro:hasRole>
 				</ul>
 			</div>
 

@@ -58,7 +58,10 @@ public class KeyUtils {
 	 * 取jedis.smembers("departments");
 	 */
 	public static final String departments = "departments";
-
+	/**
+	 * hget 店铺简称+优惠信息+DAY+,对应日期
+	 */
+	public static final String PROMOTIONDETAIL="PromotionDetail";
 	/**
 	 * 系统所用map集合中的标记
 	 */
@@ -72,5 +75,7 @@ public class KeyUtils {
 	public static String EN = "EN";
 
 	public static String SHOPNOTFOUND = "shop not found";
+	
+	public static String PRESALE = "PRESALE";
 
 }

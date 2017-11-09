@@ -1,23 +1,27 @@
 package bi.baiqiu.controller;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import bi.baiqiu.mapper.WareHouseMapper;
+import bi.baiqiu.pojo.ShopTvShowTablePojo;
+import bi.baiqiu.pojo.User;
 import bi.baiqiu.pojo.WareHouse;
 import bi.baiqiu.pojo.WareHouseExample;
+import bi.baiqiu.request.GetMacAddress;
 
 @Controller
 @RequestMapping("wareHouse")
@@ -30,6 +34,10 @@ public class WareHouseController extends BaseController {
 	@RequestMapping(value = "queryWareHourse.do")
 	public void queryWareHourse(HttpServletRequest request,
 			HttpServletResponse response) {
+
+		Subject sub = SecurityUtils.getSubject();
+		User user = (User) sub.getPrincipal();
+
 		try {
 			// Gson gson = new GsonBuilder().serializeNulls().create();
 			WareHouseExample example = new WareHouseExample();
@@ -37,8 +45,7 @@ public class WareHouseController extends BaseController {
 					.andVisibleEqualTo(true);
 			example.setOrderByClause("sort");
 			List<WareHouse> list = wareHouseDao.selectByExample(example);
-			WareHouse totalWareHouse = new WareHouse(0, 0, 0, 0, 0, 0, 0, 0, 0,
-					0);
+			WareHouse totalWareHouse = new WareHouse();
 			for (WareHouse war : list) {
 				totalWareHouse.setNotTurnAmount(war.getNotTurnAmount()
 						+ totalWareHouse.getNotTurnAmount());
@@ -78,30 +85,31 @@ public class WareHouseController extends BaseController {
 	}
 
 	/**
-	 *@Function WareHouseController.java
-	 *@Description: 仓库大屏幕页面
-	 *@param 
-	 *@return：String返回结果描述
-	 *@throws：异常描述
-	 *@author:Jim
-	 *@date 2017年9月20日
-	 *Modification History:
-	 *Date			Author	Version	Description
-	 *---------------------------------------------------------*
-	 2017年9月20日	Jim		 1.0.0	描述
+	 * @Function WareHouseController.java
+	 * @Description: 仓库大屏幕页面
+	 * @param
+	 * @return：String返回结果描述
+	 * @throws：异常描述
+	 * @author:Jim
+	 * @throws Exception
+	 * @date 2017年9月20日 Modification History: Date Author Version Description
+	 *       ---------------------------------------------------------*
+	 *       2017年9月20日 Jim 1.0.0 描述
 	 */
 	@RequestMapping(value = "screen")
 	public String screen(Model model, HttpServletRequest requset) {
-		// 未转单，总单量，分开
+		
+		System.out.println("-------------------------------+"+GetMacAddress.getIpAddressByRequest(requset));
+
 		WareHouseExample example = new WareHouseExample();
 		example.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
 		example.setOrderByClause("sort");
 		List<WareHouse> list = wareHouseDao.selectByExample(example);
-		WareHouse total = new WareHouse(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		WareHouse total = new WareHouse();
 
-//		2次遍历需要开2个迭代器
+		// 2次遍历需要开2个迭代器
 		Iterator<WareHouse> iter = list.iterator();
-		
+
 		// smcp 数据汇总显示 list 中只留一个对象，数据合并
 		WareHouse smcp = null;
 		// 数据 分显示、统计 合计4种情况
@@ -111,44 +119,44 @@ public class WareHouseController extends BaseController {
 			if (next.getId() == 13) {
 				smcp = next;
 			}
-//			maje
+			// maje
 			if (next.getId() == 14) {
 				smcp.setNotTurnAmount(next.getNotTurnAmount()
 						+ smcp.getNotTurnAmount());
-
+				smcp.setPreOrderQuantity(smcp.getPreOrderQuantity()+next.getPreOrderQuantity());
 				smcp.setTotalSingleAmount(next.getTotalSingleAmount()
 						+ smcp.getTotalSingleAmount());
 				iter.remove();
 			}
-//cp
-//			if (next.getId() == 15) {
-//				smcp.setNotTurnAmount(next.getNotTurnAmount()
-//						+ smcp.getNotTurnAmount());
-//				smcp.setTrunAmount(next.getTrunAmount() + smcp.getTrunAmount());
-//				smcp.setNotPrintAmount(next.getNotPrintAmount()
-//						+ smcp.getNotPrintAmount());
-//				smcp.setDistributionAmount(next.getDistributionAmount()
-//						+ smcp.getDistributionAmount());
-//				smcp.setTotalSingleAmount(next.getTotalSingleAmount()
-//						+ smcp.getTotalSingleAmount());
-//				smcp.setTodayShippedAmount(next.getTodayShippedAmount()
-//						+ smcp.getTodayShippedAmount());
-//				smcp.setTodayShippedGeneralAmount(next
-//						.getTodayShippedGeneralAmount()
-//						+ smcp.getTodayShippedGeneralAmount());
-//				smcp.setTodayShippedPresellAmount(next
-//						.getTodayShippedPresellAmount()
-//						+ smcp.getTodayShippedPresellAmount());
-//				smcp.setLastMonthShippedAmount(next.getLastMonthShippedAmount()
-//						+ smcp.getLastMonthShippedAmount());
-//				smcp.setPresentMonthShippedAmount(next
-//						.getPresentMonthShippedAmount()
-//						+ smcp.getPresentMonthShippedAmount());
-//				iter.remove();
-//			}
+			// cp
+			// if (next.getId() == 15) {
+			// smcp.setNotTurnAmount(next.getNotTurnAmount()
+			// + smcp.getNotTurnAmount());
+			// smcp.setTrunAmount(next.getTrunAmount() + smcp.getTrunAmount());
+			// smcp.setNotPrintAmount(next.getNotPrintAmount()
+			// + smcp.getNotPrintAmount());
+			// smcp.setDistributionAmount(next.getDistributionAmount()
+			// + smcp.getDistributionAmount());
+			// smcp.setTotalSingleAmount(next.getTotalSingleAmount()
+			// + smcp.getTotalSingleAmount());
+			// smcp.setTodayShippedAmount(next.getTodayShippedAmount()
+			// + smcp.getTodayShippedAmount());
+			// smcp.setTodayShippedGeneralAmount(next
+			// .getTodayShippedGeneralAmount()
+			// + smcp.getTodayShippedGeneralAmount());
+			// smcp.setTodayShippedPresellAmount(next
+			// .getTodayShippedPresellAmount()
+			// + smcp.getTodayShippedPresellAmount());
+			// smcp.setLastMonthShippedAmount(next.getLastMonthShippedAmount()
+			// + smcp.getLastMonthShippedAmount());
+			// smcp.setPresentMonthShippedAmount(next
+			// .getPresentMonthShippedAmount()
+			// + smcp.getPresentMonthShippedAmount());
+			// iter.remove();
+			// }
 		}
-		
-		Iterator<WareHouse> iter2 = list.iterator();	
+
+		Iterator<WareHouse> iter2 = list.iterator();
 		while (iter2.hasNext()) {
 			WareHouse next = (WareHouse) iter2.next();
 			// 统计
@@ -165,13 +173,12 @@ public class WareHouseController extends BaseController {
 						+ total.getTrunAmount());
 				total.setNotPrintAmount(next.getNotPrintAmount()
 						+ total.getNotPrintAmount());
-				total.setDistributionAmount(next
-						.getDistributionAmount()
+				total.setDistributionAmount(next.getDistributionAmount()
 						+ total.getDistributionAmount());
+				total.setPreOrderQuantity(total.getPreOrderQuantity()+next.getPreOrderQuantity());
 				total.setTotalSingleAmount(next.getTotalSingleAmount()
 						+ total.getTotalSingleAmount());
-				total.setTodayShippedAmount(next
-						.getTodayShippedAmount()
+				total.setTodayShippedAmount(next.getTodayShippedAmount()
 						+ total.getTodayShippedAmount());
 				total.setTodayShippedGeneralAmount(next
 						.getTodayShippedGeneralAmount()
@@ -187,7 +194,7 @@ public class WareHouseController extends BaseController {
 						+ total.getPresentMonthShippedAmount());
 				// 显示，不统计
 			} else if (facet && !visible) {
-	
+
 				// 不显示，统计
 			} else if (!facet && visible) {
 				total.setNotTurnAmount(next.getNotTurnAmount()
@@ -196,13 +203,14 @@ public class WareHouseController extends BaseController {
 						+ total.getTrunAmount());
 				total.setNotPrintAmount(next.getNotPrintAmount()
 						+ total.getNotPrintAmount());
-				total.setDistributionAmount(next
-						.getDistributionAmount()
+				total.setDistributionAmount(next.getDistributionAmount()
 						+ total.getDistributionAmount());
+				
+				total.setPreOrderQuantity(total.getPreOrderQuantity()+next.getPreOrderQuantity());
+				
 				total.setTotalSingleAmount(next.getTotalSingleAmount()
 						+ total.getTotalSingleAmount());
-				total.setTodayShippedAmount(next
-						.getTodayShippedAmount()
+				total.setTodayShippedAmount(next.getTodayShippedAmount()
 						+ total.getTodayShippedAmount());
 				total.setTodayShippedGeneralAmount(next
 						.getTodayShippedGeneralAmount()
@@ -243,6 +251,166 @@ public class WareHouseController extends BaseController {
 			// pc端
 			return "/screen/pc";
 		}
+
+	}
+
+	/**
+	 * @Function WareHouseController.java
+	 * @Description: 仓库大屏幕页面
+	 * @param
+	 * @return：String返回结果描述
+	 * @throws：异常描述
+	 * @author:Jim
+	 * @throws Exception
+	 * @date 2017年9月20日 Modification History: Date Author Version Description
+	 *       ---------------------------------------------------------*
+	 *       2017年9月20日 Jim 1.0.0 描述
+	 */
+	@RequestMapping(value = "mobile")
+	public String screen2(Model model, HttpServletRequest requset) {
+		System.out.println("-------------------------------+"+GetMacAddress.getIpAddressByRequest(requset));
+		// 未转单，总单量，分开
+		WareHouseExample example = new WareHouseExample();
+		example.createCriteria().andFacetEqualTo(true).andVisibleEqualTo(true);
+		example.setOrderByClause("sort");
+		List<WareHouse> list = wareHouseDao.selectByExample(example);
+		WareHouse total = new WareHouse();
+		TreeSet<WareHouse> treeSet = new TreeSet<WareHouse>(
+				new Comparator<WareHouse>() {
+					@Override
+					public int compare(WareHouse o1, WareHouse o2) {
+						if (o1.getShopName().equals(o2.getShowName())){
+							o1.setNotTurnAmount(o1.getNotTurnAmount()+o2.getNotTurnAmount());
+							o1.setPreOrderQuantity(o1.getPreOrderQuantity()+o2.getPreOrderQuantity());
+							o1.setTotalSingleAmount(o1.getTotalSingleAmount()+o2.getTotalSingleAmount());
+							return 0;
+						}
+						
+						return o1.getSort()-o2.getSort();
+					}
+				});
+		// 2次遍历需要开2个迭代器
+		Iterator<WareHouse> iter = list.iterator();
+		
+		// smcp 数据汇总显示 list 中只留一个对象，数据合并
+		WareHouse smcp = null;
+		// 数据 分显示、统计 合计4种情况
+		while (iter.hasNext()) {
+			WareHouse next = (WareHouse) iter.next();
+			// sandro官方旗舰店
+			if (next.getId() == 13) {
+				smcp = next;
+			}
+			// maje
+			if (next.getId() == 14) {
+				smcp.setNotTurnAmount(next.getNotTurnAmount()
+						+ smcp.getNotTurnAmount());
+				smcp.setPreOrderQuantity(smcp.getPreOrderQuantity()+next.getPreOrderQuantity());
+				smcp.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ smcp.getTotalSingleAmount());
+				iter.remove();
+			}
+			// cp
+			// if (next.getId() == 15) {
+			// smcp.setNotTurnAmount(next.getNotTurnAmount()
+			// + smcp.getNotTurnAmount());
+			// smcp.setTrunAmount(next.getTrunAmount() + smcp.getTrunAmount());
+			// smcp.setNotPrintAmount(next.getNotPrintAmount()
+			// + smcp.getNotPrintAmount());
+			// smcp.setDistributionAmount(next.getDistributionAmount()
+			// + smcp.getDistributionAmount());
+			// smcp.setTotalSingleAmount(next.getTotalSingleAmount()
+			// + smcp.getTotalSingleAmount());
+			// smcp.setTodayShippedAmount(next.getTodayShippedAmount()
+			// + smcp.getTodayShippedAmount());
+			// smcp.setTodayShippedGeneralAmount(next
+			// .getTodayShippedGeneralAmount()
+			// + smcp.getTodayShippedGeneralAmount());
+			// smcp.setTodayShippedPresellAmount(next
+			// .getTodayShippedPresellAmount()
+			// + smcp.getTodayShippedPresellAmount());
+			// smcp.setLastMonthShippedAmount(next.getLastMonthShippedAmount()
+			// + smcp.getLastMonthShippedAmount());
+			// smcp.setPresentMonthShippedAmount(next
+			// .getPresentMonthShippedAmount()
+			// + smcp.getPresentMonthShippedAmount());
+			// iter.remove();
+			// }
+		}
+
+		Iterator<WareHouse> iter2 = list.iterator();
+		while (iter2.hasNext()) {
+			WareHouse next = (WareHouse) iter2.next();
+			// 统计
+			Boolean facet = next.getFacet();
+			// 显示
+			Boolean visible = next.getVisible();
+
+			// 显示，统计
+			if (facet && visible) {
+				total.setModifyTime(next.getModifyTime());
+				total.setNotTurnAmount(next.getNotTurnAmount()
+						+ total.getNotTurnAmount());
+				total.setTrunAmount(next.getTrunAmount()
+						+ total.getTrunAmount());
+				total.setNotPrintAmount(next.getNotPrintAmount()
+						+ total.getNotPrintAmount());
+				total.setDistributionAmount(next.getDistributionAmount()
+						+ total.getDistributionAmount());
+				total.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ total.getTotalSingleAmount());
+				total.setTodayShippedAmount(next.getTodayShippedAmount()
+						+ total.getTodayShippedAmount());
+				total.setTodayShippedGeneralAmount(next
+						.getTodayShippedGeneralAmount()
+						+ total.getTodayShippedGeneralAmount());
+				total.setTodayShippedPresellAmount(next
+						.getTodayShippedPresellAmount()
+						+ total.getTodayShippedPresellAmount());
+				total.setLastMonthShippedAmount(next
+						.getLastMonthShippedAmount()
+						+ total.getLastMonthShippedAmount());
+				total.setPresentMonthShippedAmount(next
+						.getPresentMonthShippedAmount()
+						+ total.getPresentMonthShippedAmount());
+				// 显示，不统计
+			} else if (facet && !visible) {
+
+				// 不显示，统计
+			} else if (!facet && visible) {
+				total.setNotTurnAmount(next.getNotTurnAmount()
+						+ total.getNotTurnAmount());
+				total.setTrunAmount(next.getTrunAmount()
+						+ total.getTrunAmount());
+				total.setNotPrintAmount(next.getNotPrintAmount()
+						+ total.getNotPrintAmount());
+				total.setDistributionAmount(next.getDistributionAmount()
+						+ total.getDistributionAmount());
+				total.setTotalSingleAmount(next.getTotalSingleAmount()
+						+ total.getTotalSingleAmount());
+				total.setTodayShippedAmount(next.getTodayShippedAmount()
+						+ total.getTodayShippedAmount());
+				total.setTodayShippedGeneralAmount(next
+						.getTodayShippedGeneralAmount()
+						+ total.getTodayShippedGeneralAmount());
+				total.setTodayShippedPresellAmount(next
+						.getTodayShippedPresellAmount()
+						+ total.getTodayShippedPresellAmount());
+				total.setLastMonthShippedAmount(next
+						.getLastMonthShippedAmount()
+						+ total.getLastMonthShippedAmount());
+				total.setPresentMonthShippedAmount(next
+						.getPresentMonthShippedAmount()
+						+ total.getPresentMonthShippedAmount());
+				iter.remove();
+				// 不显示，不统计
+			} else {
+				iter.remove();
+			}
+		}
+		model.addAttribute("total", total);
+		model.addAttribute("list", list);
+		return "/screen/mobile";
 
 	}
 }

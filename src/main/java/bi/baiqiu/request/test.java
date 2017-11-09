@@ -41,17 +41,40 @@ public class test {
 	public static Logger log = Logger.getLogger(test.class);
 
 	public static void main(String[] args) throws Exception {
-			System.out.println(DateUtils.YMDSin1.parse("0000-00-00 00:00:00"));
+		Date startDate = DateUtils.stringToDate("2017-1-1");
+		Date nowDate = new Date();
+		
+		int EVERTIME=1;
+		//中间状态
+		Date endDate = DateUtils.dateAddDay(startDate,EVERTIME);
+		endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
+		do {
+			System.out.println(DateUtils.YMDSin1.format(startDate));
+			startDate = endDate;
+			endDate = DateUtils.dateAddDay(startDate,EVERTIME);
+			endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
+		} while (startDate.compareTo(nowDate) < 0);
+		
+		
 	}
+	public void testInsert(){
+		int INSERTSIZE=200;
+		int goodsSize=0;
+		int size =10001;
+		for(int i=0;i<size;i=i+INSERTSIZE){
+			goodsSize=(i+INSERTSIZE)>=size?size:(i+INSERTSIZE);
+			System.out.println("插入次数>="+i+"到<"+goodsSize);
 
-	private void getResponse() {
-		String parameter = JSON.toJSONString("");
-		List<NameValuePair> param = new ArrayList<NameValuePair>();
-		param.add(new BasicNameValuePair("data", parameter));
-		String result = RestServiceUtil.restService(param, "http://111.202.120.126/downOrderJD_Java.php");
-		System.out.println(result);
+			if(goodsSize%(INSERTSIZE*4)==0||goodsSize==size){
+				Date d2 = new Date();
+				Date d6 = new Date();
+				System.out.println("提交 次数"+"1");
+			}
+
+		}
+	
+	
 	}
-
 	private void getJDDataFrom() throws JsonParseException, JsonMappingException, IOException, ParseException {
 		SearchOrdersPojo searchOrdersPojo = new SearchOrdersPojo();
 		//man
@@ -72,13 +95,6 @@ public class test {
 		System.out.println(parameter);
 		List<NameValuePair> param = new ArrayList<NameValuePair>();
 		param.add(new BasicNameValuePair("data", parameter));
-		String result = RestServiceUtil.restService(param, "http://111.202.120.126/downOrderJD_Java.php");
-		System.out.println(result);
-		JdBorderPojo jdBorderPojo2 = JSON.parseObject(result, JdBorderPojo.class);
-		log.info("-+-" + jdBorderPojo2.getOrder_search_response().getOrder_search().getOrder_total());
-		log.info("-+-" + jdBorderPojo2.getOrder_search_response().getOrder_search().getOrder_info_list().size());
-		log.info("-+-" + jdBorderPojo2.getOrder_search_response().getOrder_search().getOrder_info_list().get(0)
-				.getOrderPayment());
 
 		/*
 		 * //log.info(orr.getOrderTotal()); ObjectMapper mapper = new
@@ -131,7 +147,6 @@ public class test {
 		System.out.println(parameter);
 		List<NameValuePair> param = new ArrayList<NameValuePair>();
 		param.add(new BasicNameValuePair("data", parameter));
-		String result = RestServiceUtil.restService(param, "http://111.202.120.126/downOrderJD_Java.php");
 		return null;
 	}
 

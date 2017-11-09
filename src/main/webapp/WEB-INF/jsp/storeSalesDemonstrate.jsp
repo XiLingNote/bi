@@ -125,7 +125,7 @@ position: relative;
 
 							myChart
 									.setOption({
-										color : colors,
+										color : "red",
 										backgroundColor : '#2c343c',
 
 										tooltip : {

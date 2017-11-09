@@ -1,0 +1,35 @@
+/*
+ * general
+ */
+.c_g_c_b{
+clear: both;
+}
+.c_g_left{
+text-align: left;
+}
+.c_g_center{
+text-align: center;
+}
+.c_g_right{
+text-align: right;
+}
+
+/*
+ * bootstrap
+ */
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+background-color: #f0ad4e;
+border-color: #f0ad4e;
+}
+.table-striped1 tbody tr:nth-child(3n+1){
+	background: #f9f9f9!important;
+}
+
+
+/*
+ * adminlte
+ */
+.modal-content{
+border-radius: 6px;
+}
+

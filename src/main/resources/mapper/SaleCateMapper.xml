@@ -269,4 +269,8 @@
       name_en = #{nameEn,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryplat" resultType="map">
+  select * from plat
+  </select>
 </mapper>

@@ -62,6 +62,8 @@
 				/page/drillShow.do = authc,perms["pay_data"]
 				/page/througTrain.do = authc,perms["pay_data"]
 				/page/commodityProperty.do = authc,perms["commodity_property"]
+				/page/wareHouse/screen.do = authc
+				
 			</value>
 		</property>
 	</bean>

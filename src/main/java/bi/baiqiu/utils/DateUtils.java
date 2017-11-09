@@ -329,4 +329,15 @@ public class DateUtils {
 	public static Date firstDayOfMonth(Date date) throws ParseException{
 		return FIRSTIMEOFDAY.parse(FIRSTDAYOFMONTH.format(date));
 	}
+	/**日期加day
+	 * @param date
+	 * @param day
+	 * @return
+	 */
+	public static Date dateAddDay(Date date,int day){
+		calendar.setTime(date);
+		calendar.add(calendar.DATE, day);
+		return calendar.getTime();
+	}
 }
+

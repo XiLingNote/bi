@@ -63,7 +63,7 @@ public class VisitorMonthFeathersServiceImpl {
 	 * @param page
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public Page<VisitorMonthFeaturesBean> queryByPage(VisitorMonthFeaturesBean bean, Integer pageNum, Integer pageSize)
 			throws Exception {
 		PageHelper.startPage(pageNum, pageSize);

@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.jd.open.api.sdk.internal.JSON.JSON;
+
 import bi.baiqiu.pojo.test.OrderTemplate;
 import bi.baiqiu.pojo.test.TradeTemplate;
 import bi.baiqiu.utils.DateUtils;
@@ -21,12 +23,25 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
-		Calendar c=Calendar.getInstance();
+		String [][]aa=new String [3][2];
 		
-
+		
 	}
 	
-	
+	public void testForeachDay(){
+		Date startDate = DateUtils.stringToDate("2017-1-1");
+		Date endDate = new Date();
+		int EVERTIME=1;
+		//中间状态
+		Date midDate = DateUtils.dateAddDay(startDate,EVERTIME);
+		midDate = endDate.compareTo(midDate) > 0 ? midDate : endDate;
+		do {
+			System.out.println(DateUtils.YMDSin1.format(startDate));
+			startDate = midDate;
+			midDate = DateUtils.dateAddDay(startDate,EVERTIME);
+			midDate = endDate.compareTo(midDate) > 0 ? midDate : endDate;
+		} while (startDate.compareTo(endDate) < 0);
+	}
 	public void testForeach(){
 
 		int INSERTSIZE=200;

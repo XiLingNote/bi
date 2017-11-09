@@ -1,0 +1,98 @@
+.view{
+	background-color: #1d2c37;
+	top:8%;
+	height: 92%;
+}
+.queryCriteria{
+		position: fixed;
+		z-index: 10;
+	    height: 8%;
+}
+.queryDateFont {
+	position: relative;
+	width: 36px;
+	top: 20%;
+	float: left;
+	text-align: center;
+}
+.viewHeader {
+	height: 4%;
+}
+
+.viewHeaderFont {
+	padding-left: 0.3%;
+	padding-top: 0.3%;
+	padding-bottom: 0.3%;
+	width: 6rem;
+	color: #ffffff;
+	display: inline-block;
+	width: 100%
+}
+
+.viewHeaderFontBorder{
+		padding-left: 0.3%;
+	padding-top: 0.3%;
+	padding-bottom: 0.3%;
+	width: 6rem;
+	border-bottom: 2px solid #a49494;
+	color: #ffffff;
+	display: inline-block;
+	width: 8%
+}
+.viewTop {
+	height: 20%;
+	width: 100%;
+	color:#ffffff;
+}
+
+.viewTopFont {
+	height: 100%;
+	width: 33%;
+	display: inline-table;
+	padding: 1%;
+}
+
+.viewBottom {
+	height:70%;
+	width: 100%;
+}
+
+.viewTopFontTop {
+	height: 20%;
+}
+
+.viewTopFontBottom {
+	height: 80%;
+	font-size: 30px;
+	float: right;
+}
+
+.viewBottomLeft {
+	height: 80%;
+	width: 47%;
+	float: left;
+	position: relative;
+}
+
+.viewBottomRight {
+	float: right;
+	height: 80%;
+	width: 47%;
+}
+.firstView{
+	width: 100%;
+}
+.secondView{
+	height: 60%;
+}
+/* 左侧导航条 */
+#fullPage-nav .active span{
+	background: white;
+}
+#fullPage-nav li span {
+    border: 1px solid #fcf8f8;
+	}
+	.viewBottomBottom{
+	height: 80%;
+	width: 100%;
+	}

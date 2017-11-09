@@ -1,0 +1,21 @@
+label {
+	width: 50%;
+}
+.modal-dialog {
+    right: auto;
+    left: 50%;
+    width: 500px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.onOneLine{
+	display: block;
+}
+.form-control{
+		width: 180px;
+	display: inline;
+}
+a {
+    color: #428bca;
+    text-decoration: none;
+}

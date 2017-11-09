@@ -2540,7 +2540,7 @@
 		checkPickNew.order_id and
 		(
 		psendlk.check_two = 1 OR
-		orderInfo.shipping_status &gt;0
+		orderInfo.shipping_status =1
 		)
 		WHERE checkPickNew.scan_time
 		BETWEEN
@@ -2565,7 +2565,7 @@
 		checkPickNew.order_id and
 		(
 		psendlk.check_two = 1 OR
-		orderInfo.shipping_status &gt;0
+		orderInfo.shipping_status =1
 		)
 		WHERE
 		PERIOD_DIFF(
@@ -2590,6 +2590,24 @@
 		CONCAT('%"pay_time":"',DATE_FORMAT(NOW(),"%Y-%m-%d"),'%')
 		and
 		STATUS!='WAIT_BUYER_PAY'and type='step')
+	</select>
+	<!-- #预售付定金单量 无 -->
+	<select id="queryTotalStepNotPayAmount" resultType="java.lang.Integer">
+		SELECT 
+		COUNT(*)
+		from
+		sys_info.jdp_tb_trade where seller_nick=#{shopName} and
+		jdp_modified>=DATE_FORMAT('2017-10-20',"%Y-%m-%d") and (
+		(jdp_response like
+		CONCAT('%"pay_time":"',DATE_FORMAT('2017-10-11',"%Y-%m"),'%')
+		)OR(jdp_response like
+		CONCAT('%"pay_time":"',DATE_FORMAT('2017-11-11',"%Y-%m"),'%')
+		)
+		)
+		AND jdp_response like
+		CONCAT('%"step_trade_status":"FRONT_PAID_FINAL_NOPAID"%')
+		and
+		STATUS='WAIT_BUYER_PAY' and type='step'
 	</select>
 	<!-- #未转单数目 无all -->
 	<select id="queryNotTurnAmount" resultType="java.lang.Integer">
@@ -2726,6 +2744,7 @@
 		UNIX_TIMESTAMP(date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 1
 		day))
 	</select>
+	
 <!-- oa数据库 -->
 	<select id="queryOaShopSaleData" resultType="map">
 		SELECT SUM(payment) as saleGmv,COUNT(*) as orderNumber from oa.jd_syn_order

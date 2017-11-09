@@ -40,7 +40,7 @@ public class JdGetDataTask {
 	private ShopBeanMapper shopDao;
 	@Autowired
 	private JdToken jdToken;
-	@Scheduled(fixedDelay = 30* 1000)
+	//@Scheduled(fixedDelay = 30* 1000)
 	public void getData() {
 		log.info("JdGetDataTask--getDate--start--");
 		Date taskStartTime = new Date();
@@ -179,7 +179,6 @@ public class JdGetDataTask {
 		List<OrderSearchInfo> list = new ArrayList<OrderSearchInfo>();
 			OrderSearchResponse response = client.execute(request);
 			list = response.getOrderInfoResult().getOrderInfoList();
-			log.info(response.getMsg());
 		return list;
 	}
 }
