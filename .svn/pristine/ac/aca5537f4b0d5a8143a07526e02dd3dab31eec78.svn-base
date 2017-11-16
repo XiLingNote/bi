@@ -44,29 +44,24 @@ public class JdGetDataTask {
 		Date taskStartTime = new Date();
 		FirstStart first = firstStartDao.selectByPrimaryKey(new Byte("8"));
 		// id为5的数据决定定时器是否执行，状态为1时执行
-		if (first != null && first.getStatus() == 1) {
-			Date startDate = first.getJdpModify();
-			try {
+		try {
+			if (first != null && first.getStatus() == 1) {
+				Date startDate = first.getJdpModify();
 				// 记录数据初始状态,更改状态防止重复启动
 				first.setStatus(-1);
 				firstStartDao.updateByPrimaryKey(first);
 				getDataBystartDate(DateUtils.dateToString(startDate), taskStartTime);
-				//已经执行
-				first.setJdpModify(taskStartTime);
-			} catch (JdException e) {
-				//执行出错
-				first.setJdpModify(startDate);
-				e.printStackTrace();
-				log.error(e.getMessage());
-			} catch (ParseException e) {
-				e.printStackTrace();
-				log.error(e.getMessage());
-
 			}
-			first.setStatus(1);
-			firstStartDao.updateByPrimaryKey(first);
+		} catch (JdException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+		first.setStatus(1);
 		// 定时器结束时归还状态
+		first.setJdpModify(taskStartTime);
+		firstStartDao.updateByPrimaryKey(first);
 		Date taskEndTime = new Date();
 		log.info("JdGetDataTask --getDate--end--useTime:" + (taskEndTime.getTime() - taskStartTime.getTime()) + "ms");
 	}
@@ -102,7 +97,7 @@ public class JdGetDataTask {
 			calendar.setTime(taskStartDate);
 			// xml中注入京东key和appSecret 表中获取token,超时时间
 			JdClient clarksJd = new JdClientDefault(jdToken.getServerUrl(), shop.getToken(), jdToken.getAppkey(),
-					jdToken.getSecretkey(), 5*60*1000,5*60*1000);
+					jdToken.getSecretkey(), 5*60*1000, 5*60*1000);
 			do {
 				// 数据拉取的间隔秒数
 				nextEndCalendar.add(Calendar.SECOND, 24 * 60 * 60);

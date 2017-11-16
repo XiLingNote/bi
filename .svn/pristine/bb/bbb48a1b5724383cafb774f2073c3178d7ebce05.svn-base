@@ -309,8 +309,8 @@ public class StoreSalesController extends BaseController {
 			// map=jedis.hgetAll("achettePromotionDetailDAY");
 			Date startDate = DateUtils.stringToDate(beginStr);
 			Date endDate = DateUtils.stringToDate(endStr);
-			startDate = DateUtils.stringToDate("2017-01-10");
-			endDate = DateUtils.stringToDate("2017-01-12");
+			startDate = DateUtils.stringToDate("2016-01-10");
+			endDate = DateUtils.stringToDate("2016-01-12");
 			int EVERTIME = 1;
 			// 中间状态
 			Date midDate = DateUtils.dateAddDay(startDate, EVERTIME);
@@ -371,9 +371,6 @@ public class StoreSalesController extends BaseController {
 					midDetailSumDiscountFee = UtilTool.stringNumSubtract(midDetailSumDiscountFee,
 							list.get(i).getValue());
 					pojoTotal.getDetailDiscountFeeSection()[i + 2][1] = new BigDecimal(midDetailSumDiscountFee);
-					if((i+1)==list.size()){
-						pojoTotal.getDetailDiscountFeeSection()[i + 2][1] =BigDecimal.ZERO;
-					}
 				}
 			}
 			return GsonUtils.gson.toJson(pojoTotal);

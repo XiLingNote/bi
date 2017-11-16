@@ -82,7 +82,7 @@ public class RedisTest {
 	      list1.addAll(tempMap.entrySet()); 
 	      pojoTotal.setPromotionName(new String[list1.size()+1]);
 	      pojoTotal.setDetailDiscountFee(new String[list1.size()+1]);
-	      pojoTotal.setDetailDiscountFeeSection(new String[list1.size()+1][2]);
+	    /*  pojoTotal.setDetailDiscountFeeSection(new String[list1.size()+1][2]);
 	      String midDetailSumDiscountFee=pojoTotal.getDetailSumDiscountFee();
 	      pojoTotal.getDetailDiscountFeeSection()[0][0]=midDetailSumDiscountFee;
 	      pojoTotal.getDetailDiscountFeeSection()[0][1]="0";
@@ -94,7 +94,7 @@ public class RedisTest {
 	    	  pojoTotal.getDetailDiscountFeeSection()[i+1][0]=midDetailSumDiscountFee;//优惠金额
 	    	  midDetailSumDiscountFee=UtilTool.stringNumSubtract(midDetailSumDiscountFee, list1.get(i).getValue());
 	    	  pojoTotal.getDetailDiscountFeeSection()[i+1][1]=midDetailSumDiscountFee;
-	      }
+	      }*/
 		logger.info(JSON.toJSONString(pojoTotal));
 		jedis.close();
 	}

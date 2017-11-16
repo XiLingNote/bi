@@ -96,6 +96,3 @@
 	height: 80%;
 	width: 100%;
 	}
-	.skills-sunburst,svg ,.skills-chart,#skills-chart-breadcrumb {
-	    display: inline;
-	}

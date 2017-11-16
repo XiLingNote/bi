@@ -1,5 +1,6 @@
 package bi.baiqiu.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -10,23 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 
+import bi.baiqiu.page.PageHelper.Page;
 import bi.baiqiu.pojo.PromotionDetailShowPojo;
 import bi.baiqiu.pojo.User;
+import bi.baiqiu.pojo.management.StoreManagerPojo;
 import bi.baiqiu.service.StoreSaleService;
 import bi.baiqiu.utils.DateUtils;
 import bi.baiqiu.utils.GsonUtils;
@@ -36,170 +38,13 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 @Controller
-@RequestMapping("store")
-public class StoreSalesController extends BaseController {
-	Logger logger = Logger.getLogger(StoreSalesController.class);
+@RequestMapping("salesAnalysis")
+public class SalesAnalysisController extends BaseController {
+	Logger logger = Logger.getLogger(SalesAnalysisController.class);
 	@Autowired
 	private StoreSaleService storeSaleService;
 	@Autowired
 	private JedisPool jedisPool;
-
-	@ResponseBody
-	@RequestMapping(value = "month", produces = "text/html;charset=UTF-8")
-	public String monthSales(Model model, HttpServletRequest request) {
-		String amountType = request.getParameter("amountType");
-		String department = request.getParameter("department");
-		Map<String, Object> map = storeSaleService.queryThisMonth(amountType, department);
-		String json = GsonUtils.gson.toJson(map);
-		return json;
-	}
-
-	/**
-	 * @Function: StoreSalesController.java
-	 * @Description: 该函数的功能描述
-	 *
-	 * @param:参数描述
-	 * @return：返回结果描述
-	 * @throws：异常描述
-	 *
-	 * @version: v1.0.0
-	 * @author: FengCheng
-	 * @date: 2017年7月21日 上午9:56:39
-	 *
-	 *        Modification History: Date Author Version Description
-	 *        ---------------------------------------------------------*
-	 *        2017年7月21日 FengCheng v1.0.0 修改原因
-	 */
-
-	@ResponseBody
-	@RequestMapping("storeSalesDemonstrate")
-	public String storeSalesDemonstrate(Model model, HttpServletRequest request) {
-		// String amountType = request.getParameter("amountType");
-		// String department = request.getParameter("department");
-		// cpuqijian
-		String storeName = request.getParameter("storeName");
-		Map<String, Object> map = storeSaleService.storeSalesDemonstrate(storeName);
-		String json = GsonUtils.gson.toJson(map);
-		return json;
-	}
-
-	/**
-	 * @param date
-	 *            日期
-	 * @param type
-	 *            Gmv、Alipay
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("daily")
-	public String daliySales(@RequestParam(value = "amountType", required = false) String amountType,
-			@RequestParam(value = "endStr", required = false) String endStr,
-			@RequestParam(value = "dateType", required = false) String dateType) {
-		Map<String, Object> map = null;
-
-		Date date = null;
-		if (StringUtils.isBlank(amountType)) {
-			amountType = "GMV";
-		}
-
-		if (StringUtils.isNotBlank(endStr)) {
-			try {
-				date = DateUtils.YMDSin2.parse(endStr);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
-
-		map = storeSaleService.queryByThisDay(dateType, date, amountType);
-		String json = GsonUtils.gson.toJson(map);
-		return json;
-	}
-
-	/**
-	 * @Function StoreSalesController.java
-	 * @Description: 该函数的功能描述
-	 * @param datetype
-	 *            ：y m d, beginStr,endStr: 日期, store 店铺名称
-	 * @return：String返回结果描述
-	 * @throws：异常描述
-	 * @author:Jim
-	 * @date 2017年9月12日 Modification History: Date Author Version Description
-	 *       ---------------------------------------------------------*
-	 *       2017年9月12日 Jim 1.0.0 描述
-	 */
-	@ResponseBody
-	@RequestMapping(value = "salesTrend", produces = "text/html;charset=UTF-8")
-	public String salesTrend(@RequestParam(value = "dateType", required = false) String dateType,
-			@RequestParam(value = "beginStr", required = false) String beginStr,
-			@RequestParam(value = "endStr", required = false) String endStr,
-			@RequestParam(value = "store", required = false) String store) {
-		Map<String, Object> map = null;
-
-		if (StringUtils.isBlank(store)) {
-			return "store cannot be empty!";
-		}
-
-		Date begin = null;
-		Date end = null;
-
-		Integer beginYear = null;
-		Integer endYear = null;
-
-		if (StringUtils.isNotBlank(beginStr)) {
-			try {
-				begin = DateUtils.YMDSin2.parse(beginStr);
-				beginYear = begin.getYear();
-			} catch (ParseException e) {
-				logger.info("beginStr:" + beginStr + " error");
-				return "begin date error";
-			}
-		}
-
-		if (StringUtils.isNotBlank(endStr)) {
-			try {
-				end = DateUtils.YMDSin2.parse(endStr);
-				endYear = end.getYear();
-			} catch (ParseException e) {
-				logger.info("endStr:" + endStr + " error");
-				return "end date error";
-			}
-		}
-
-		if (begin != null && end != null) {
-			// 按日期查找
-			if ("DAY".equals(dateType)) {
-
-				map = storeSaleService.getDayOfMonth(store, begin, end);
-				// 以月为单位进行查询
-			} else if ("MONTH".equals(dateType)) {
-
-				map = storeSaleService.getMonthofYear(store, begin, end);
-			} else if ("YEAR".equals(dateType)) {
-
-				map = storeSaleService.getYear(store, beginYear + 1900, endYear + 1900);
-			} else {
-				return null;
-			}
-
-		} else {// 缺少时间参数
-			logger.info("begin or end date error");
-			return "begin or end date error";
-		}
-
-		String s = GsonUtils.gson.toJson(map);
-		return GsonUtils.gson.toJson(map);
-
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "name", produces = "text/html;charset=UTF-8")
-	public String name(Model model, HttpServletRequest request) {
-
-		Set<String> set = storeSaleService.queryStoreName();
-		String json = GsonUtils.gson.toJson(set);
-		return json;
-	}
-
 	/**
 	 * @Function: storeSale
 	 * @Description:店铺销售业绩
@@ -275,7 +120,6 @@ public class StoreSalesController extends BaseController {
 		return GsonUtils.gson.toJson(map);
 
 	}
-
 	/**
 	 * @Function: storePromotion
 	 * @Description:商品优惠
@@ -384,5 +228,14 @@ public class StoreSalesController extends BaseController {
 			jedis.close();
 		}
 
+	}
+	@ResponseBody
+	@RequestMapping(value = "getStroeList",method=RequestMethod.POST)
+	public void getStroeList(StoreManagerPojo storeManagerPojo,Integer pageNum, Integer pageSize,HttpServletRequest request,HttpServletResponse response){
+		try {
+			//WriteGson(response, page.getResult(),page.getTotal());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

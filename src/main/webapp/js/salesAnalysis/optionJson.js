@@ -1,7 +1,8 @@
 	var b = true;
 	var time = 10000;
+	//第一屏幕overAll
 //左侧销售量
-	var OjGmvJson = {
+	var json = {
 		chart : {
 			zoomType : 'xy'
 		},
@@ -130,7 +131,7 @@
 		}]
 	};
 	//客单量曲线
-	var OjAtvJson = {
+	var atvjson = {
 			chart : {
 				zoomType : 'xy'
 			},
@@ -242,7 +243,7 @@
 				}
 			}]
 		};
-	
+	//第五屏幕Discount
 	var discount={
 		        chart: {
 		            type: 'columnrange',
@@ -254,22 +255,21 @@
 		            text: ''
 		        },
 		        xAxis: {
-		            categories: ['一月', '二月', '三月', '四月', '五月', '六月']
+		            categories: []
 		        },
 		        yAxis: {
+		        	floor: 0,
 		            title: {
-		                text: '温度 ( °C )'
+		                text: ''
 		            }
 		        },
-		        tooltip: {
-		            valueSuffix: '°C'
-		        },
+		   
 		        plotOptions: {
 		            columnrange: {
 		                dataLabels: {
 		                    enabled: true,
 		                    formatter: function () {
-		                        return this.y + '°C';
+		                        return Number(this.y).toFixed(0);
 		                    }
 		                }
 		            }
@@ -277,16 +277,18 @@
 		        legend: {
 		            enabled: false
 		        },
+		        tooltip: {
+		        	formatter : function() {
+						var s = '<b>' +this.x+ '</b>';
+						s+='<br>' 
+						s+='<b>' +(Number(this.point.options.low).toFixed(0)- Number(this.point.options.high).toFixed(0)) + '</b>'
+						return s;
+					} 
+		        },
 		        series: [{
-		            name: '温度',
+		        	color:'#FF9933',
+		            name: '金额',
 		            data: [
-		                [-9.7, 9.4],
-		                [-8.7, 6.5],
-		                [-3.5, 9.4],
-		                [-1.4, 19.9],
-		                [0.0, 22.6],
-		                [2.9, 29.5]
-		               
 		            ]
 		        }]
 		    }

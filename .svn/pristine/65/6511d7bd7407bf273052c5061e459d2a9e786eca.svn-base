@@ -95,7 +95,6 @@
 						<div class="viewBottomRight" id="viewBottomRight"></div>
 					</div>
 				</div>
-				<!-- 第二屏幕 -->
 				<div class="section">
 					<div class="viewHeader">
 						<span class="viewHeaderFont"></span> <span
@@ -103,7 +102,6 @@
 					</div>
 					<div id="container" style="height: 450px;"></div>
 				</div>
-				<!-- 第三屏幕 -->
 				<div class="section">
 					<div class="viewHeader">
 						<span class="viewHeaderFont"></span> <span
@@ -120,7 +118,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- 第四屏幕 -->
 				<div class="section">
 					<div class="viewHeader">
 						<span class="viewHeaderFont"></span> <span
@@ -137,11 +134,11 @@
 						</div>
 					</div>
 				</div>
-				<!-- 第五屏幕 -->
 				<div class="section">
 					<div class="viewHeader">
 						<span class="viewHeaderFont"></span> <span
 							class="viewHeaderFontBorder">Discount</span>
+
 					</div>
 					<div class="viewTop">
 						<div class="viewTopFont">
@@ -161,19 +158,12 @@
 						<div class="viewBottomBottom" id="viewBottomDiscount"></div>
 					</div>
 				</div>
-				<!-- 第六屏幕 -->
 				<div class="section">
-				<div class="viewHeader">
-						<span class="viewHeaderFont"></span> <span
-							class="viewHeaderFontBorder">Price Range</span>
-					</div>
-				<div class="viewBottom">
-						<div class="viewBottomLeft" id="priceRangeLeft"></div>
-						<div class="viewBottomRight" id="priceRangeRight"></div>
-					</div>
+					<h3>第6屏</h3>
+					<p>请查看右边的圆圈</p>
 				</div>
 				<div class="section">
-					<h3>第8屏</h3>
+					<h3>第7屏</h3>
 					<p>请查看右边的圆圈</p>
 				</div>
 				<div class="section">
@@ -214,9 +204,6 @@
 	<script src="/js/salesAnalysis/trafficSource/skill.js"></script>
 	<script src="/js/salesAnalysis/optionJson.js"></script>
 	<script src="/js/salesAnalysis/overAll.js"></script>
-	<script src="/js/localTableTitle.js"></script>
-	<script src="/js/bootstrap/bootstrap-table.js"></script>
-	
 	<!-- 	<script src="/js/salesAnalysis/chinaMap.js"></script>
  -->
 

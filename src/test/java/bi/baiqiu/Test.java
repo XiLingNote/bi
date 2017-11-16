@@ -23,7 +23,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		
-		String [][]aa=new String [3][2];
+		testForeach();
 		
 		
 	}
@@ -42,30 +42,36 @@ public class Test {
 			midDate = endDate.compareTo(midDate) > 0 ? midDate : endDate;
 		} while (startDate.compareTo(endDate) < 0);
 	}
-	public void testForeach(){
+	public static void testForeach(){
 
 		int INSERTSIZE=200;
 		List<TradeTemplate> tradeList=new ArrayList<TradeTemplate>(800);
 		List<OrderTemplate> goodsList=new ArrayList<OrderTemplate>(800);
-		for(int i=0;i<1005;i++){
+		for(int i=0;i<321321;i++){
 			tradeList.add(new TradeTemplate());
 			goodsList.add(new OrderTemplate());
 		}
-		System.out.println(goodsList.size());
-		System.out.println(tradeList.size());
-
+		
 		int goodsSize=0;
+		int goodsSizeTest=0;
 		for(int i=0;i<goodsList.size();i=i+INSERTSIZE){
 			goodsSize=(i+INSERTSIZE)>=goodsList.size()?goodsList.size():(i+INSERTSIZE);
-			System.out.println(i+"-"+goodsSize);
+			List<OrderTemplate> subGoodsList=goodsList.subList(i, goodsSize);
+			goodsSizeTest+=subGoodsList.size();
+			System.out.println(subGoodsList.size());
 		}
 		int tradeSize=0;
+		int tradeSizeTest=0;
+
 		for(int i=0;i<tradeList.size();i=i+INSERTSIZE){
 			tradeSize=(i+INSERTSIZE)>=tradeList.size()?tradeList.size():(i+INSERTSIZE);
-			System.out.println(i+"-"+tradeSize);
-
+			List<TradeTemplate> subTradeList=tradeList.subList(i, tradeSize);
+			tradeSizeTest+=subTradeList.size();
+			System.out.println(subTradeList.size());
 		}
-			
+		System.out.println("总的数据trade"+tradeSizeTest);	
+		System.out.println("总的数据goods"+goodsSizeTest);	
+
 	
 	}
 public void redisTest() throws ParseException{

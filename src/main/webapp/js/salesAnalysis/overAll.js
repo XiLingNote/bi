@@ -7,248 +7,6 @@ var unit = 1000;
 	
 	var b = true;
 	var time = 10000;
-//左侧销售量
-	var json = {
-		chart : {
-			zoomType : 'xy'
-		},
-		title : {
-			text : ''
-		},
-		subtitle : {
-			text : ''
-		},
-		xAxis : [ {
-			categories : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-					'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
-			crosshair : true,
-			tickInterval : 0
-		} ],
-		yAxis : [ { // Primary yAxis
-			labels : {
-				formatter : function() {
-					return this.value / unit + unitE;
-				},
-				style : {
-					color : "#707073"
-				}
-			},
-			
-			plotLines:[{
-				color:'#707073',           //线的颜色，定义为红色
-				dashStyle:'longdash',     //默认值，这里定义为实线solid
-				value:0,               //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
-				width:1                //标示线的宽度，2px
-			}],
-			//网格线
-			gridLineWidth: 0.1,
-			title : {
-				text : 'GMV',
-				style : {
-					color : "#707073"
-				}
-			}
-		} ],
-		legend:{
-			enabled :false
-		},
-		tooltip : {
-			shared : true,
-			style : { // 提示框内容的样式
-				color : 'pink',
-				padding : '10px', // 内边距 (这个会常用到)
-				fontSize : '9pt'
-			} ,
-			formatter : function() {
-				var s = '<b style="float:right;color:#ffffff" >' + this.x + '</b>';
-				$.each(
-						this.points,
-						function(i, value) {
-							var _value = value.y;
-							if (i != 4) {
-								if (dateType == "MONTH") {
-									_value = _value / unit;
-									_value = _value.toFixed(1);
-									_value = formatNum(_value);
-								} else {
-									_value = _value / unit;
-									_value = _value.toFixed(0);
-									_value = formatNum(_value);
-								}
-							}
-							s += '<br/>'
-									+ '<span style="float:right;color:'
-					+ value.series.color + '">'
-									+ value.series.name
-									+ ' : </span>'
-									+ '<span style="float:left;color:'
-					+ value.series.color + '">'
-									+ _value
-									+ value.series.tooltipOptions.valueSuffix
-									+ '</span>';
-						});
-				return s;
-			} 
-		},
-		/* legend : {
-			layout : 'vertical',
-			align : 'left',
-			x : 0,
-			verticalAlign : 'top',
-			y : 0,
-			floating : true,
-			backgroundColor : (Highcharts.theme && Highcharts.theme.legendBackgroundColor)
-					|| '#FFFFFF'
-		}, */
-		plotOptions : {
-			areaspline : {
-				marker : {
-					enabled : false,
-					symbol : 'circle',
-					radius : 2,
-					states : {
-						hover : {
-							enabled : true
-						}
-					}
-				}
-			},
-			spline : {
-				marker : {
-					enabled : false,
-					symbol : 'circle',
-					radius : 2,
-					states : {
-						hover : {
-							enabled : true
-						}
-					}
-				}
-			}
-		},
-		series : [ {
-			name : 'GMV',
-			type : 'spline',
-			color : '#FF9933',
-			data : [],
-			tooltip : {
-				valueSuffix : ''
-			}
-		}]
-	};
-	//客单量曲线
-	var atvjson = {
-			chart : {
-				zoomType : 'xy'
-			},
-			title : {
-				text : ''
-			},
-			subtitle : {
-				text : ''
-			},
-			xAxis : [ {
-				categories : [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-						'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
-				crosshair : true,
-				tickInterval : 0
-			} ],
-			yAxis : [ { // Primary yAxis
-				labels : {
-					style : {
-						color : "#707073"
-					}
-				},
-				
-				plotLines:[{
-					color:'#707073',           //线的颜色，定义为红色
-					dashStyle:'longdash',     //默认值，这里定义为实线solid
-					width:1                //标示线的宽度，2px
-				}],
-				//网格线
-				gridLineWidth: 0.1,
-				title : {
-					text : 'ATV',
-					style : {
-						color : "#707073"
-					}
-				}
-			} ],
-			legend:{
-				enabled :false
-			},
-			tooltip : {
-				shared : true,
-				style : { // 提示框内容的样式
-					color : '#ffffff',
-					padding : '10px', // 内边距 (这个会常用到)
-					fontSize : '9pt'
-				} ,
-				formatter : function() {
-					var s = '<b>' + this.x + '</b>';
-					$.each(
-							this.points,
-							function(i, value) {
-								var _value = value.y;
-								s += '<br/>'
-										+ '<span style="float:right;color:'
-						+ value.series.color + '">'
-										+ value.series.name
-										+ ' : </span>'
-										+ '<span style="float:left;color:'
-						+ value.series.color + '">'
-										+ _value
-										+ value.series.tooltipOptions.valueSuffix
-										+ '</span>';
-							});
-					return s;
-				} 
-			},
-			/* legend : {
-				layout : 'vertical',
-				align : 'left',
-				x : 0,
-				verticalAlign : 'top',
-				y : 0,
-				floating : true,
-				backgroundColor : (Highcharts.theme && Highcharts.theme.legendBackgroundColor)
-						|| '#FFFFFF'
-			}, */
-			plotOptions : {
-				areaspline : {
-					marker : {
-						enabled : false,
-						symbol : 'circle',
-						radius : 2,
-						states : {
-							hover : {
-								enabled : true
-							}
-						}
-					}
-				},
-				spline : {
-					marker : {
-						enabled : false,
-						symbol : 'circle',
-						radius : 2,
-						states : {
-							hover : {
-								enabled : true
-							}
-						}
-					}
-				}
-			},
-			series : [ {
-				name : 'ATV',
-				type : 'spline',
-				color : '#FF9933',
-				tooltip : {
-					valueSuffix : ''
-				}
-			}]
-		};
 	var options = {
 		weekStart : 1,
 		todayBtn : 1,
@@ -269,11 +27,11 @@ var unit = 1000;
 		$("#ShopSales").attr("class", "nav nav-second-level in");
 		$("#leftStoresales").css("background", "#578EBE");
 		
-		//	pandora潘多拉官方旗舰店
+		// pandora潘多拉官方旗舰店
 		var datetype = $("input[name='datetype']:checked").val();
 		$("input[name='datetype']:last").attr("checked", true);
-		//	json.series[1].tooltip.valueSuffix = 'k';
-		//	json.series[2].tooltip.valueSuffix = 'k';
+		// json.series[1].tooltip.valueSuffix = 'k';
+		// json.series[2].tooltip.valueSuffix = 'k';
 		var end = new Date();
 		var day = end.getDate();
 		var year = end.getFullYear();
@@ -324,19 +82,19 @@ var unit = 1000;
 		$('#s1>input[name = begin ]').val(_beginY);
 		$('#s1>input[name = end ]').val(_endY);
 		getData();
-		/*年日期选项   */
+		/* 年日期选项 */
 		options.minView = 4;
 		options.startView = 4;
 		options.format = "yyyy";
 		$('#s1>input[name = begin ]').datetimepicker(options);
 		$('#s1>input[name = end ]').datetimepicker(options);
-		/*月日期选项   */
+		/* 月日期选项 */
 		options.minView = 3;
 		options.startView = 3;
 		options.format = "yyyy/MM";
 		$('#s2>input[name = begin ]').datetimepicker(options);
 		$('#s2>input[name = end ]').datetimepicker(options);
-		/*日日期选项   */
+		/* 日日期选项 */
 		options.minView = 2;
 		options.startView = 2;
 		options.format = "yyyy/MM/dd";
@@ -346,71 +104,49 @@ var unit = 1000;
 		// 后台数据
 		$('#s3>input[name = begin ]').change(function() {
 			beginStr = this.value;
-			 getDataByChange()
+			 getDataByChange();
 
 		});
 		$('#s3>input[name = end ]').change(function() {
 			endStr = this.value;
-			 getDataByChange()
+			 getDataByChange();
 		});
 
 		$('#s2>input[name = begin ]').change(function() {
 			beginStr = this.value + "/01";
-			 getDataByChange()
+			 getDataByChange();
 
 		});
 		$('#s2>input[name = end ]').change(function() {
 			endStr = this.value + "/01";
-			 getDataByChange()
+			 getDataByChange();
 
 		});
 
 		$('#s1>input[name = begin ]').change(function() {
 			beginStr = this.value + '/01/01';
-			 getDataByChange()
+			 getDataByChange();
 
 		});
 
 		$('#s1>input[name = end ]').change(function() {
 			endStr = this.value + '/01/01';
-			 getDataByChange()
+			 getDataByChange();
 
 		});
 
 		$("input[name='datetype']").change(function() {
-			 getDataByChange()
+			 getDataByChange();
 		});
 		
 
 			$('#dowebok').fullpage({
-				//背景色
-				sectionsColor: ['', '#4BBFC3', '', '',"",'#4BBFC3', '#7BAABE', '#f90',],
-				//滚动回调函数 
+				// 背景色
+				sectionsColor: ['', '#4BBFC3', '', '',"",'', '#7BAABE', '#f90',],
+				// 滚动回调函数
 				onLeave: function(index, nextIndex, direction){
-					//刷新将要到达的页面的数据
-					switch (nextIndex) {
-					case 1:
-						getData();
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					case 5:
-						getDiscountData();
-						break;
-					case 6:
-						break;
-					case 7:
-						break;
-					case 8:
-						break;
-
-					default:
-						break;
-					}
+					// 刷新将要到达的页面的数据
+					getDataByChange();
 				 },
 				 anchors: ['page1', 'page2', 'page3', 'page4','page5', 'page6', 'page7', 'page8'],
 				 menu: '#fullPage-nav',
@@ -421,7 +157,7 @@ var unit = 1000;
 		      d3.select(self.frameElement).style("height", "700px");
 
 	});
-	//查询条件改变时更改变化
+	// 查询条件改变时更改变化
 	function getDataByChange(){
 		 dateType = $("input[name='datetype']:checked").val();
 		if (dateType == "YEAR") {
@@ -445,9 +181,27 @@ var unit = 1000;
 			beginStr = $('#s3>input[name = begin ]').val();
 			endStr = $('#s3>input[name = end ]').val();
 		}
-		getData();
+		var path=$('#dowebok')[0].baseURI;
+		if(path.indexOf("#page1")>-1){
+			getData();
+		}else if(path.indexOf("#page2")>-1){
+			
+		}else if(path.indexOf("#page2")>-1){
+			
+		}else if(path.indexOf("#page3")>-1){
+			
+		}else if(path.indexOf("#page4")>-1){
+		}else if(path.indexOf("#page5")>-1){
+			getDiscountData();
+		}else if(path.indexOf("#page6")>-1){
+			getpriceRangeData();
+		}else if(path.indexOf("#page7")>-1){
+			
+		}else if(path.indexOf("#page8")>-1){
+			
+		}
 	}
-	//求平均值
+	// 求平均值
 	function getAve(array){
 	    var ave=0;
 	    for(var i=0;i<array.length;i++){
@@ -456,7 +210,7 @@ var unit = 1000;
 	    if(i>0)ave/=i;
 	    return ave;
 	}
-	//求和数组
+	// 求和数组
 	function getArraySum(array){
 	    var sum=0;
 	    for(var i=0;i<array.length;i++){
@@ -464,7 +218,7 @@ var unit = 1000;
 	    }
 	    return sum;
 	}
-	//获取更改json
+	// 获取更改json第一屏
 	function getData() {
 		if (dateType == "DAY") {
 			unit = 1000;
@@ -481,7 +235,7 @@ var unit = 1000;
 		$("#cpl").html(null);
 		
 		
-		$.post("/store/storeSale.do", {
+		$.post("/salesAnalysis/storeSale.do", {
 			"dateType" : dateType,
 			"beginStr" : beginStr,
 			"endStr" : endStr,
@@ -507,32 +261,32 @@ var unit = 1000;
 				var totalTarget = 0.00;
 				var totalAlipay = 0.00;
 				var totalCplR;
-				//redis取出数据
+				// redis取出数据
 				$.each(treeSet,
 						function(i, value) {
 							totalGmv = totalGmv + value.gmv;
 							totalTarget = totalTarget + value.target;
 							totalAlipay = totalAlipay + value.alipay;
-							//gmv
+							// gmv
 							var gmv = value.gmv;
 							var viewGmv = eval('(' + (value.gmv).toFixed(0)
 									+ ')');
 							gmvs.push(viewGmv);
-							//atv
+							// atv
 							var atvForOne = eval('('
 									+ (value.orderNum!=0?value.gmv/value.orderNum:0).toFixed(0) + ')');
 							
 							atvs.push(atvForOne);
 							categories.push(value.datetime);
 						});
-				//求平均值
+				// 求平均值
 				var gmvAve=getAve(gmvs);
 				json.yAxis[0].plotLines[0].value = gmvAve;
 				var atvAve=getAve(atvs)
 				atvjson.yAxis[0].plotLines[0].value=atvAve;
-				//求和金额
+				// 求和金额
 				var gmvSum=getArraySum(gmvs);
-				//数量
+				// 数量
 				var atvSum=getArraySum(atvs);
 				$("#numsValue").text(formatNum(atvSum));
 				$("#gmvValue").text(formatNum(gmvSum));
@@ -555,13 +309,12 @@ var unit = 1000;
 
 				$("#viewBottomLeft").highcharts(json);
 				$("#viewBottomRight").highcharts(atvjson);
-				$("#viewBottomDiscount").highcharts(discount);
 				if (totalTarget) {
 					totalCplR = (totalGmv / totalTarget * 100).toFixed(2);
 				} else {
 					totalCplR = 0;
 				}
-				//gmv alipay target cpl
+				// gmv alipay target cpl
 				totalGmv = totalGmv.toFixed(0);
 				totalAlipay = totalAlipay.toFixed(0);
 				totalTarget = totalTarget.toFixed(0);
@@ -578,7 +331,7 @@ var unit = 1000;
 		});
 	}
 	
-	//获取更改json
+	// 获取更改json第四屏幕
 	function getDiscountData() {
 		if (dateType == "DAY") {
 			unit = 1000;
@@ -593,103 +346,104 @@ var unit = 1000;
 		$("#alipay").html(null);
 		$("#gmv").html(null);
 		$("#cpl").html(null);
-		
-		alert(beginStr)
-			alert(endStr)
-		$.post("/store/storePromotion.do", {
-			"dateType" : dateType,
-			"beginStr" : beginStr,
-			"endStr" : endStr,
-		}, function(data) {
-			console.log(data);
-			if (data) {
-				try {
-					var obj = eval('(' + data + ')');
-				} catch (e) {
-					var response = decodeURI(data);
-					alert(response);
-					return;
-				}
-				var obj = eval('(' + data + ')');
-				var treeSet = obj.treeSet;
-
-				var categories = [];
-				var rates = [];
-
-				var gmvs = [];
-				var atvs = [];
-				var alipays = [];
-				var totalGmv = 0.00;
-				var totalTarget = 0.00;
-				var totalAlipay = 0.00;
-				var totalCplR;
-				//redis取出数据
-				$.each(treeSet,
-						function(i, value) {
-							totalGmv = totalGmv + value.gmv;
-							totalTarget = totalTarget + value.target;
-							totalAlipay = totalAlipay + value.alipay;
-							//gmv
-							var gmv = value.gmv;
-							var viewGmv = eval('(' + (value.gmv).toFixed(0)
-									+ ')');
-							gmvs.push(viewGmv);
-							//atv
-							var atvForOne = eval('('
-									+ (value.orderNum!=0?value.gmv/value.orderNum:0).toFixed(0) + ')');
-							
-							atvs.push(atvForOne);
-							categories.push(value.datetime);
-						});
-				//求平均值
-				var gmvAve=getAve(gmvs);
-				json.yAxis[0].plotLines[0].value = gmvAve;
-				var atvAve=getAve(atvs)
-				atvjson.yAxis[0].plotLines[0].value=atvAve;
-				//求和金额
-				var gmvSum=getArraySum(gmvs);
-				//数量
-				var atvSum=getArraySum(atvs);
-				$("#numsValue").text(formatNum(atvSum));
-				$("#gmvValue").text(formatNum(gmvSum));
-				$("#atvValue").text(atvSum==0?0:(gmvSum/atvSum).toFixed(2));
-				if (categories.length > 60) {
-					json.xAxis[0].tickInterval = 6;
-					atvjson.xAxis[0].tickInterval = 6;
-				} else if (categories.length > 30) {
-					json.xAxis[0].tickInterval = 3;
-					atvjson.xAxis[0].tickInterval = 3;
-				} else if (categories.length > 15) {
-					json.xAxis[0].tickInterval = 2;
-					atvjson.xAxis[0].tickInterval = 2;
-				}
-
-				json.xAxis[0].categories = categories;
-				atvjson.xAxis[0].categories = categories;
-				json.series[0].data = gmvs;
-				atvjson.series[0].data = atvs;
-
-				$("#viewBottomLeft").highcharts(json);
-				$("#viewBottomRight").highcharts(atvjson);
-				$("#viewBottomDiscount").highcharts(discount);
-				if (totalTarget) {
-					totalCplR = (totalGmv / totalTarget * 100).toFixed(2);
-				} else {
-					totalCplR = 0;
-				}
-				//gmv alipay target cpl
-				totalGmv = totalGmv.toFixed(0);
-				totalAlipay = totalAlipay.toFixed(0);
-				totalTarget = totalTarget.toFixed(0);
-				var _totalGmv = formatNum(totalGmv);
-				var _totalAlipay = formatNum(totalAlipay);
-				var _totalTarget = formatNum(totalTarget);
-				$("#gmv").html(_totalGmv);
-				$("#alipay").html(_totalAlipay);
-				$("#target").html(_totalTarget);
-				$("#cpl").html(totalCplR + "%");
-			} else {
-				alert("查询失败");
-			}
-		});
+			  $.ajax({
+              url: "/salesAnalysis/storePromotion.do",
+					type : "post",
+					data : {
+						"dateType" : dateType,
+						"beginStr" : beginStr,
+						"endStr" : endStr,
+					},
+					 dataType: "json", 
+					success : function(data, status) {
+							if (data) {
+								discount.series[0].data=data.detailDiscountFeeSection;
+								discount.xAxis.categories = data.promotionName;
+								$("#viewBottomDiscount").highcharts(discount);
+								$("#discountTotal").text(formatNum(Number(data.sumTotalFee).toFixed(0)));
+								$("#discountPayment").text(formatNum(Number(data.sumPayment).toFixed(0)));
+								$("#discountValue").text(((data.sumPayment/data.sumTotalFee)*100).toFixed(2)+"%");
+							} else {
+								toastr.success("error");
+							}
+						
+					
+					}
+				});
+			
 	}
+	//第五屏幕
+	function getpriceRangeData(){
+		var tableTitleName="storeManage";
+		getTitle(tableTitleName,"");
+	}
+	 function initTable(tableTitle) {
+         // 先销毁表格
+         // 初始化表格,动态从服务器加载数据
+         $("#priceRangeLeft").bootstrapTable({
+              method: "post",  // 使用get请求到服务器获取数据
+             contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+             url: "/storeManage/getStroeList.do", // 获取数据的Servlet地址
+             striped: false,  // 表格显示条纹
+             pagination: false, // 启动分页
+             pageSize: 15,  // 每页显示的记录数
+             pageNumber:1, // 当前第几页
+             pageList: [2,10, 25, 50, 100],  // 记录数可选列表
+             search: false,  // 是否启用查询
+             showColumns: false,  // 显示下拉框勾选要显示的列
+             showRefresh: false,  // 显示刷新按钮
+             showExport: false,
+             paginationPreText:'PreText',
+             paginationNextText:'NextText',
+             paginationDetailHAlign:'left',
+             sidePagination: "server", // 表示服务端请求
+             exportDataType: "all",
+             // 设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+             // 设置为limit可以获取limit, offset, search, sort, order
+             queryParamsType : "undefined",
+             columns:tableTitle,
+             onEditableSave: function (field, row, oldValue, $el) {
+                 $.ajax({
+                     type: "post",
+                     url: "",
+                     data: row,
+                     dataType: 'JSON',
+                     success: function (data, status) {
+                         if (status == "success") {
+                             toastr.success('提交数据成功');
+                         }
+                     },
+                     error: function () {
+                         alert('编辑失败');
+                     },
+                     complete: function () {
+                     }
+                 });
+                 },
+             queryParams: function queryParams(param) {   // 设置查询参数
+                  param = {
+                     pageNum:this.pageNumber,
+                     pageSize:this.pageSize,
+                     sortOrder:this.sortName?this.sortOrder:"desc",
+                     sortName:this.sortName?this.sortName:"",
+                    	storeStatus:$("#queryStoreStatus").attr('checked')?1:"", 
+                 };
+                 return param;
+                 
+             },
+             onLoadError: function(){  // 加载失败时执行
+             },
+             onLoadSuccess:function(){
+             	/* 初始查询条数用以删除显示提示用 */
+            	 $(".deleteRows").text(this.totalRows+" pieces of data on "+$("#queryStartDate").val());
+         		/* 初始化表头提示框 */
+             	$(".th-inner").each(function (index,element){
+         			$(this).attr("data-toggle","tooltip");
+         			$(this).attr("data-placement","top");
+         			$(this).attr("title",$(this).text());
+         			
+         		});
+             	$("[data-toggle='tooltip']").tooltip();
+             }
+         });
+     }

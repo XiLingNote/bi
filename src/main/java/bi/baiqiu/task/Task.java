@@ -18,11 +18,12 @@ import com.jd.open.api.sdk.request.order.OrderSearchRequest;
 public class Task {
 	private Date begin;
 	// 5秒更新一次
-	//@Scheduled(fixedDelay = 5000)
+	//@Scheduled(fixedDelay = 5000L)
 	// 一分钟更新一次
 //	@Scheduled(cron = "0 0/1 * * * ?")
 	public void doUpdateIndexData() {
-		System.out.println();
+		System.out.println("Test"
+				+ "");
 	}
 
 }
