@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html lang="en">
 <head>
 <title>index</title>
@@ -165,21 +170,50 @@
 				<div class="section">
 				<div class="viewHeader">
 						<span class="viewHeaderFont"></span> <span
-							class="viewHeaderFontBorder">Price Range</span>
+							class="viewHeaderFontBorder">PriceRange</span>
 					</div>
-				<div class="viewBottom">
+				<div class="viewPriceBottom">
 						<div class="viewBottomLeft" id="priceRangeLeft"></div>
 						<div class="viewBottomRight" id="priceRangeRight"></div>
 					</div>
 				</div>
+				<!--第七屏幕  -->
 				<div class="section">
-					<h3>第8屏</h3>
-					<p>请查看右边的圆圈</p>
+				<div class="viewHeader">
+						<span class="viewHeaderFont"></span> <span
+							class="viewHeaderFontBorder">FundsFlow</span>
+					</div>
+				<div class="viewPriceBottom">
+					</div>
 				</div>
+				<!--第八屏幕  -->
 				<div class="section">
-					<h3>第8屏</h3>
-					<p>请查看右边的圆圈</p>
+				<div class="viewHeader">
+						<span class="viewHeaderFont"></span> <span
+							class="viewHeaderFontBorder">StoreCompare</span>
+								<span class=""style="float: right"  >
+								<select class="form-control queryConditions" name="departmentId"
+					id="querySaleCate" style="float: left" ></select> 
+						<input  id="queryStore" class=" form-control"
+							style="float: left" />
+							</span>
+					</div>
+					<div class="viewTop">
+						<div class="viewTopFont">
+							<div class="viewTopFontTop">店铺销售额</div>
+							<div class="viewTopFontBottom" id="storeGmvTotal"></div>
+						</div>
+						<div class="viewTopFont">
+							<div class="viewTopFontTop">对比店铺销售额</div>
+							<div class="viewTopFontBottom" id="storeComparisonTotal"></div>
+						</div>
+					</div>
+					<div class="viewBottom">
+						<div class="viewBottomBottom" id="storeComparison"></div>
+					</div>
+					</div>
 				</div>
+				<!-- 导航 -->
 				<div id="fullPage-nav" class="right"
 					style="color: rgb(0, 0, 0); margin-top: -43.5px;">
 					<ul>
@@ -204,7 +238,7 @@
 	<script src="/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script src="/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script src="/js/highcharts.js"></script>
+	<script src="/js/highcharts2.js"></script>
 	<script src="/js/Highchartstheme.js"></script>
 	<script src="/js/salesAnalysis/highcharts-more.js"></script>
 	<script src="/js/salesAnalysis/highcharts-more.src.js"></script>
@@ -216,7 +250,7 @@
 	<script src="/js/salesAnalysis/overAll.js"></script>
 	<script src="/js/localTableTitle.js"></script>
 	<script src="/js/bootstrap/bootstrap-table.js"></script>
-	
+		<script src="<%=basePath%>/js/bootstrap/bootstrap-typeahead.js"></script>
 	<!-- 	<script src="/js/salesAnalysis/chinaMap.js"></script>
  -->
 

@@ -1,0 +1,186 @@
+package bi.baiqiu.task;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import com.jd.open.api.sdk.JdClient;
+import com.jd.open.api.sdk.JdException;
+import com.jd.open.api.sdk.domain.order.OrderSearchInfo;
+import com.jd.open.api.sdk.request.order.OrderSearchRequest;
+import com.jd.open.api.sdk.response.order.OrderSearchResponse;
+import bi.baiqiu.mapper.FirstStartMapper;
+import bi.baiqiu.mapper.JdOrderInfoMapper;
+import bi.baiqiu.mapper.ShopBeanMapper;
+import bi.baiqiu.pojo.FirstStart;
+import bi.baiqiu.pojo.ShopBean;
+import bi.baiqiu.pojo.ShopBeanExample;
+import bi.baiqiu.pojo.jd.JdToken;
+import bi.baiqiu.utils.DateUtils;
+
+@Component
+public class JdGetDataTask {
+	Logger log = Logger.getLogger(JdGetDataTask.class);
+	@Autowired
+	private JdOrderInfoMapper jdOrderInfoDao;
+	@Autowired
+	private OrderSearchRequest request;
+	@Autowired
+	private FirstStartMapper firstStartDao;
+	@Autowired
+	private ShopBeanMapper shopDao;
+	@Autowired
+	private JdToken jdToken;
+
+	@Scheduled(fixedDelay = 30 * 1000)
+	public void getData() {
+		log.info("JdGetDataTask--getDate--start--");
+		Date taskStartTime = new Date();
+		FirstStart first = firstStartDao.selectByPrimaryKey(new Byte("8"));
+		// id为5的数据决定定时器是否执行，状态为1时执行
+		if (first != null && first.getStatus() == 1) {
+			Date startDate = first.getJdpModify();
+			try {
+				// 记录数据初始状态,更改状态防止重复启动
+				first.setStatus(-1);
+				firstStartDao.updateByPrimaryKey(first);
+				getDataBystartDate(DateUtils.dateToString(startDate), taskStartTime);
+				//已经执行
+				first.setJdpModify(taskStartTime);
+			} catch (JdException e) {
+				//执行出错
+				first.setJdpModify(startDate);
+				e.printStackTrace();
+				log.error(e.getMessage());
+			} catch (ParseException e) {
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+			first.setStatus(1);
+			firstStartDao.updateByPrimaryKey(first);
+			// 定时器结束时归还状态
+			Date taskEndTime = new Date();
+			log.info("JdGetDataTask --getDate--end--useTime:" + (taskEndTime.getTime() - taskStartTime.getTime()) + "ms");
+		}
+	}
+
+	/**
+	 * @Function: getDataBystartDate
+	 * @Description:根据modify时间和定时器开始时间作为间隔时间拉取数据
+	 * @param startDate
+	 * @param taskStartDate
+	 * @throws JdException
+	 * @return void
+	 * @throws ParseException
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年10月19日 Jared v1.0.0
+	 */
+	public void getDataBystartDate(String startDate, Date taskStartDate) throws JdException, ParseException {
+		Date d1 = new Date();
+		Calendar calendar = Calendar.getInstance();
+		Calendar nextStartCalendar = Calendar.getInstance();
+		Calendar nextEndCalendar = Calendar.getInstance();
+		ShopBeanExample shopExample = new ShopBeanExample();
+		// 有效店铺且平台为京东的
+		shopExample.createCriteria().andExEqualTo(new Byte("1")).andPlatIdEqualTo(2);
+		List<ShopBean> list = shopDao.selectByExample(shopExample);
+		for (ShopBean shop : list) {
+			calendar.setTime(DateUtils.yyyyMMddHHmmss.parse(startDate));
+			nextStartCalendar.setTime(calendar.getTime());
+			nextEndCalendar.setTime(calendar.getTime());
+			calendar.setTime(taskStartDate);
+			// xml中注入京东key和appSecret 表中获取token,超时时间
+			JdClient clarksJd = new JdClientDefault(jdToken.getServerUrl(), shop.getToken(), jdToken.getAppkey(),
+					jdToken.getSecretkey(), 5*60*1000,5*60*1000);
+			do {
+				// 数据拉取的间隔秒数
+				nextEndCalendar.add(Calendar.SECOND, 24 * 60 * 60);
+				nextEndCalendar.setTime(
+						nextEndCalendar.compareTo(calendar) < 0 ? nextEndCalendar.getTime() : calendar.getTime());
+				request.setTimestamp(DateUtils.dateToString(new Date()));
+				request.setStartDate(DateUtils.dateToString(nextStartCalendar.getTime()));
+				request.setEndDate(DateUtils.dateToString(nextEndCalendar.getTime()));
+				saveJdDataByRequest(String.valueOf(shop.getId()), clarksJd, request);
+				log.info("拉取间隔时间：" + DateUtils.dateToString(nextStartCalendar.getTime()) + "到"
+						+ DateUtils.dateToString(nextEndCalendar.getTime()));
+				nextStartCalendar.setTime(nextEndCalendar.getTime());
+			} while (nextStartCalendar.compareTo(calendar) != 0);
+		}
+
+		Date d2 = new Date();
+		log.info("总花费毫秒秒数：" + (d2.getTime() - d1.getTime()));
+	}
+
+	/**
+	 * @Function: saveJdDataByPage
+	 * @Description:根据总页数循环调用数据保存
+	 * @param page
+	 * @param orderInfoList
+	 * @param client
+	 * @param request
+	 * @throws JdException
+	 * @return void
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年10月17日 Jared v1.0.0
+	 */
+	public void saveJdDataByRequest(String shopId, JdClient client, OrderSearchRequest request) throws JdException {
+		OrderSearchResponse responseToday = client.execute(request);
+		// 总条数
+		if (responseToday.getOrderInfoResult() != null && responseToday.getOrderInfoResult().getOrderTotal() > 0) {
+			int total = responseToday.getOrderInfoResult().getOrderTotal();
+			// 页数非正页数，加1
+			int page = total % Integer.valueOf(request.getPageSize()) > 0
+					? total / Integer.valueOf(request.getPageSize()) + 1
+					: total / Integer.valueOf(request.getPageSize());
+			for (int i = 1; i <= page; i++) {
+				request.setPage(String.valueOf(i));
+				Date d1 = new Date();
+				List<OrderSearchInfo> list = getJdDataByClientAndRequestBase(client, request);
+				Date d2 = new Date();
+				jdOrderInfoDao.insertByJdOrderInfoByBatch(list, shopId);
+				Date d3 = new Date();
+				log.info("拉取100条数据接口耗时：" + (d2.getTime() - d1.getTime()) + "ms");
+				log.info("保存耗时：" + (d3.getTime() - d2.getTime()) + "ms");
+			}
+		} else {
+			log.info(responseToday.getMsg());
+		}
+	}
+
+	/**
+	 * @Function: getJdDataByClientAndRequestBase
+	 * @Description:根据链接调用数据
+	 * @param client
+	 * @param request
+	 * @return
+	 * @return List<OrderSearchInfo>
+	 * @throws JdException
+	 * @throws
+	 *
+	 * 			Modification
+	 *             History: Date Author Version Description
+	 *             ---------------------------------------------------------
+	 *             2017年10月18日 Jared v1.0.0
+	 */
+	public List<OrderSearchInfo> getJdDataByClientAndRequestBase(JdClient client, OrderSearchRequest request)
+			throws JdException {
+		List<OrderSearchInfo> list = new ArrayList<OrderSearchInfo>();
+		OrderSearchResponse response = client.execute(request);
+		list = response.getOrderInfoResult().getOrderInfoList();
+		return list;
+	}
+}

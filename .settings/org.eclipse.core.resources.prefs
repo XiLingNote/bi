@@ -1,8 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/main/java=UTF-8
-encoding//src/main/resources/jdbc.properties=GBK
-encoding//src/main/resources/jdbc2.properties=GBK
-encoding//src/main/resources/jdbc3.properties=UTF-8
-encoding//src/main/resources/log4j22.proper=GBK
-encoding//src/main/webapp/WEB-INF/jsp/screen/departmentTV.jsp=UTF-8
-encoding//src/test/java=UTF-8

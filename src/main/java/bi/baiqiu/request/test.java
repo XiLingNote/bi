@@ -1,11 +1,14 @@
 package bi.baiqiu.request;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -41,20 +44,11 @@ public class test {
 	public static Logger log = Logger.getLogger(test.class);
 
 	public static void main(String[] args) throws Exception {
-		Date startDate = DateUtils.stringToDate("2017-1-1");
-		Date nowDate = new Date();
+		Map<String, BigDecimal> mapMonth = new LinkedHashMap<>();
 		
-		int EVERTIME=1;
-		//中间状态
-		Date endDate = DateUtils.dateAddDay(startDate,EVERTIME);
-		endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
-		do {
-			System.out.println(DateUtils.YMDSin1.format(startDate));
-			startDate = endDate;
-			endDate = DateUtils.dateAddDay(startDate,EVERTIME);
-			endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
-		} while (startDate.compareTo(nowDate) < 0);
-		
+		System.out.println(DateUtils.stringToDate("2017-02-01").compareTo(DateUtils.stringToDate("2017-01-01")));
+		System.out.println(3/1000);
+	/*	System.out.println(monthValue);*/
 		
 	}
 	public void testInsert(){
@@ -74,6 +68,22 @@ public class test {
 		}
 	
 	
+	}
+	public void dateForEach(){
+		Date startDate = DateUtils.stringToDate("2017-1-1");
+		Date nowDate = new Date();
+		
+		int EVERTIME=1;
+		//中间状态
+		Date endDate = DateUtils.dateAddDay(startDate,EVERTIME);
+		endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
+		do {
+			System.out.println(DateUtils.YMDSin1.format(startDate));
+			startDate = endDate;
+			endDate = DateUtils.dateAddDay(startDate,EVERTIME);
+			endDate = nowDate.compareTo(endDate) > 0 ? endDate : nowDate;
+		} while (startDate.compareTo(nowDate) < 0);
+		
 	}
 	private void getJDDataFrom() throws JsonParseException, JsonMappingException, IOException, ParseException {
 		SearchOrdersPojo searchOrdersPojo = new SearchOrdersPojo();

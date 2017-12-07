@@ -19,13 +19,14 @@
 	</bean>
 	<!-- redis配置 -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<!-- <constructor-arg ref="poolConfig" index="0"></constructor-arg> -->
-
+		<constructor-arg ref="poolConfig" index="0"></constructor-arg>
 		<!--线上 101.37.17.224 -->
 		<!--60 192.168.0.60 -->
-		<constructor-arg value="192.168.0.60" index="0"
+		<constructor-arg value="192.168.0.60" index="1"
 			type="java.lang.String" />
-		<constructor-arg value="6379" index="1" />
+		<constructor-arg value="6379" index="2" />
+		<constructor-arg value="2000" index="3" />
+		<constructor-arg value="bibaiqiuredispassword" index="4" />
 	</bean>
 
 </beans>

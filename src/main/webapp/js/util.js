@@ -189,9 +189,11 @@ function getSaleCate(id, selected) {
 	$(id).empty();
 	$.ajax({
 		async : false,
+		type : "post",
 		dataType : "json",
-		url : "saleCate/getSaleCate.do",
+		url : "/saleCate/getSaleCate.do",
 		success : function(data, status) {
+			console.log(data);
 			data = data.data;
 			$(id).append("<option value=''></option>");
 			for ( var a in data) {
@@ -208,7 +210,35 @@ function getSaleCate(id, selected) {
 		}
 	});
 }
-
+/**
+ * 如getSaleCate(“#id”,2) id的select 默认选中value=2的选项
+ * 
+ * @param id
+ * @param selected
+ */
+function getSaleCateByShop(id, selected) {
+	$(id).empty();
+	$.ajax({
+		async : false,
+		type : "post",
+		dataType : "json",
+		url : "/saleCate/getSaleCateByShop.do",
+		success : function(data, status) {
+			data = data.data;
+			for ( var a in data) {
+				if (selected == data[a].id) {
+					$(id).append(
+							"<option selected value='" + data[a].id + "'>"
+									+ data[a].nameEn + "</option>");
+				} else {
+					$(id).append(
+							"<option value='" + data[a].id + "'>"
+									+ data[a].nameEn + "</option>");
+				}
+			}
+		}
+	});
+}
 /**
  * 部门
  * 
@@ -266,3 +296,12 @@ function formatNum(strNum) {
 	}
 	return a + "" + b + "" + c;
 }
+/**遍历json
+ * @param myJson
+ */
+function foreachJson(myJson){
+	for(var p in myJson){//遍历json对象的每个key/value对,p为key
+		  alert(p + " " + myJson[p]);
+		}
+}
+

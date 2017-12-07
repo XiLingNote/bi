@@ -2,6 +2,7 @@ package bi.baiqiu.utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -193,5 +194,48 @@ public class UtilTool {
 		}
 		String[] result = {};
 		return hs.toArray(result);
+	}
+	/** 
+	 * @Function: getStringArrayBySplit 
+	 * @Description:返回数组的工具
+	 * @param str
+	 * @param strSplit
+	 * @return    
+	 * @return String[] 
+	 * @throws 
+	 *
+	 * Modification History:
+	 * Date         Author          Version            Description
+	 *---------------------------------------------------------
+	 * 2017年11月20日      Jared           v1.0.0              
+	*/
+	public static String[] getStringArrayBySplit(String str,String strSplit){
+		if(str!=null){
+			return str.split(strSplit);
+		}else{		
+			String[] result = {};
+			return result;
+		}
+		
+	}
+	/** 
+	 * @Function: stringPercent 
+	 * @Description:两个字符串的百分比，前面分子后面分母
+	 * @param numerator
+	 * @param denominator
+	 * @return    
+	 * @return String 
+	 * @throws 
+	 *
+	 * Modification History:
+	 * Date         Author          Version            Description
+	 *---------------------------------------------------------
+	 * 2017年11月20日      Jared           v1.0.0              
+	*/
+	public static String stringPercent(String numerator,String denominator){
+		if(StringUtils.isEmpty(denominator)||StringUtils.isEmpty(numerator)||new BigDecimal(denominator).compareTo(BigDecimal.ZERO)==0){
+			return "0";
+		}
+		return String.valueOf(new BigDecimal(numerator).divide(new BigDecimal(denominator),new MathContext(4)));
 	}
 }

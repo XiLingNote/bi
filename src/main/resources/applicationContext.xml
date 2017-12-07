@@ -19,7 +19,7 @@
 				<!-- 正式环境ecs 拉数据到java正式库bi2 -->
 				<!-- <value>classpath:jdbc2.properties</value>-->
 				<!-- 63ecs测试连接  拉数据到61 bi -->
-				<value>classpath:jdbc3.properties</value> 
+				<value>classpath:jdbc.properties</value> 
 			</set>
 		</property>
 	</bean>

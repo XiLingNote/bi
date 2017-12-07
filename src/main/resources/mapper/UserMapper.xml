@@ -11,6 +11,7 @@
 		user.shop_id,
 		user.phone,
 		user.role_ids,
+		user.function_ids,
 		user.sc_ids as scIds,
 		shop.name as shopName,
 		shop.name_plat as

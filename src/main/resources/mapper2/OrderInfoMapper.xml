@@ -2528,13 +2528,15 @@
 		SELECT
 		COUNT(DISTINCT orderInfo.deal_code)
 		FROM
-		${repertoryName}.order_info orderInfo
+		${repertoryName}.order_info
+		orderInfo
 		LEFT JOIN
 		${repertoryName}.psendlk psendlk ON
 		orderInfo.order_id =
 		psendlk.order_id
 		AND orderInfo.presell !=2
-		LEFT JOIN ${repertoryName}.check_pick_new
+		LEFT JOIN
+		${repertoryName}.check_pick_new
 		checkPickNew
 		ON orderInfo.order_id =
 		checkPickNew.order_id and
@@ -2547,19 +2549,24 @@
 		UNIX_TIMESTAMP(DATE_FORMAT(NOW(),'%Y-%m-01'))
 		AND
 		UNIX_TIMESTAMP(NOW())
+		<if test="erpShangdianId!=null">
+		and orderInfo.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!-- #上月发货数 无all -->
 	<select id="queryLastMonthShipmentAmount" resultType="java.lang.Integer">
 		SELECT
 		COUNT(DISTINCT orderInfo.deal_code)
 		FROM
-		${repertoryName}.order_info orderInfo
+		${repertoryName}.order_info
+		orderInfo
 		LEFT JOIN
 		${repertoryName}.psendlk psendlk ON
 		orderInfo.order_id =
 		psendlk.order_id
 		AND orderInfo.presell !=2
-		LEFT JOIN ${repertoryName}.check_pick_new
+		LEFT JOIN
+		${repertoryName}.check_pick_new
 		checkPickNew
 		ON orderInfo.order_id =
 		checkPickNew.order_id and
@@ -2570,10 +2577,14 @@
 		WHERE
 		PERIOD_DIFF(
 		DATE_FORMAT(
-		NOW( ) , '%Y%m' ) ,
+		NOW( ) ,
+		'%Y%m' ) ,
 		DATE_FORMAT(
 		FROM_UNIXTIME(checkPickNew.scan_time), '%Y%m'
 		))=1
+		<if test="erpShangdianId!=null">
+		and orderInfo.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!-- #今日总单量 无all -->
 	<select id="queryTotalSingleAmount" resultType="java.lang.Integer">
@@ -2582,7 +2593,8 @@
 		sys_info.jdp_tb_trade where (seller_nick=#{shopName} and
 		jdp_modified>=DATE_FORMAT(NOW(),"%Y-%m-%d") and jdp_response like
 		CONCAT('%"pay_time":"',DATE_FORMAT(NOW(),"%Y-%m-%d"),'%')
-		AND type!='step'
+		AND
+		type!='step'
 		)
 		OR
 		(seller_nick=#{shopName} and
@@ -2593,18 +2605,20 @@
 	</select>
 	<!-- #预售付定金单量 无 -->
 	<select id="queryTotalStepNotPayAmount" resultType="java.lang.Integer">
-		SELECT 
+		SELECT
 		COUNT(*)
 		from
 		sys_info.jdp_tb_trade where seller_nick=#{shopName} and
 		jdp_modified>=DATE_FORMAT('2017-10-20',"%Y-%m-%d") and (
-		(jdp_response like
+		(jdp_response
+		like
 		CONCAT('%"pay_time":"',DATE_FORMAT('2017-10-11',"%Y-%m"),'%')
 		)OR(jdp_response like
 		CONCAT('%"pay_time":"',DATE_FORMAT('2017-11-11',"%Y-%m"),'%')
 		)
 		)
-		AND jdp_response like
+		AND
+		jdp_response like
 		CONCAT('%"step_trade_status":"FRONT_PAID_FINAL_NOPAID"%')
 		and
 		STATUS='WAIT_BUYER_PAY' and type='step'
@@ -2623,7 +2637,8 @@
 	</select>
 	<!-- #今日转单数 payTime需要改为addTime -->
 	<select id="queryTurnAmount" resultType="java.lang.Integer">
-		SELECT count(DISTINCT ord.deal_code) from
+		SELECT count(DISTINCT
+		ord.deal_code) from
 		${repertoryName}.order_info ord
 		left join
 		${repertoryName}.tb_push_status st on
@@ -2634,23 +2649,34 @@
 		UNIX_TIMESTAMP(date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 1
 		day))
 		AND st.status=1
+		<if test="erpShangdianId!=null">
+		and ord.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!-- #已经完成转单未打印 -->
 	<select id="queryNotPrintAmount" resultType="java.lang.Integer">
 		SELECT
 		count(DISTINCT ord.deal_code)
-		FROM ${repertoryName}.order_info ord
+		FROM ${repertoryName}.order_info
+		ord
 		LEFT JOIN
-		${repertoryName}.tb_push_status AS st ON st.tid = ord.deal_code
+		${repertoryName}.tb_push_status AS st ON st.tid =
+		ord.deal_code
 		LEFT
-		JOIN ${repertoryName}.psendlk AS p ON ord.order_id = p.order_id
+		JOIN ${repertoryName}.psendlk AS p ON ord.order_id =
+		p.order_id
 		WHERE
 		ord.order_status!=3
-		AND p.is_print &lt; 1 
-		AND p.is_cancel!=1
+		AND p.is_print &lt; 1
+		AND
+		p.is_cancel!=1
 		AND ord.shipping_status!=1
 		AND ord.shipping_status!=2
- 		AND (ord.lylx=1 OR ord.lylx=10)
+		AND
+		(ord.lylx=1 OR ord.lylx=10)
+		<if test="erpShangdianId!=null">
+		and ord.sd_id=#{erpShangdianId}
+		</if>
 		<!-- 现在只统计天猫和京东的数据 -->
 	</select>
 	<!-- #已经打印未发货配货中 -->
@@ -2672,15 +2698,19 @@
 		repertoryName }.psendlk p ON ord.order_id =
 		p.order_id
 		WHERE
-		st. STATUS = 1
-		AND p.is_print IS NOT NULL
+		p.is_print IS NOT NULL
 		AND p.is_print
 		&gt;0
-		AND p.check_two != 1
+		AND
+		p.check_two != 1
 		AND ord.order_status!=3
 		AND p.is_cancel!=1
-		AND ord.shipping_status!=1
+		AND
+		ord.shipping_status!=1
 		AND ord.shipping_status!=2
+		<if test="erpShangdianId!=null">
+		and ord.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!-- 今日发货数非预售 无all -->
 	<select id="queryTodayShippedGeneralAmount" resultType="java.lang.Integer">
@@ -2701,6 +2731,9 @@
 		UNIX_TIMESTAMP(DATE_FORMAT(NOW(),'%Y-%m-%d')) AND
 		UNIX_TIMESTAMP(date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 1
 		day))
+		<if test="erpShangdianId!=null">
+		and orderInfo.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!-- #今日发货数预售 无all -->
 	<select id="queryTodayShippedPresellAmount" resultType="java.lang.Integer">
@@ -2715,13 +2748,16 @@
 		LEFT
 		JOIN ${repertoryName}.check_pick_new checkPickNew ON
 		orderInfo.order_id =
-		checkPickNew.order_id and 
+		checkPickNew.order_id and
 		psendlk.check_two = 1
 		WHERE
 		checkPickNew.scan_time BETWEEN
 		UNIX_TIMESTAMP(DATE_FORMAT(NOW(),'%Y-%m-%d')) AND
 		UNIX_TIMESTAMP(date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 1
 		day))
+		<if test="erpShangdianId!=null">
+		and orderInfo.sd_id=#{erpShangdianId}
+		</if>
 	</select>
 	<!--#今日总计发货 无all -->
 	<select id="queryTodayShippedAmount" resultType="java.lang.Integer">
@@ -2733,21 +2769,27 @@
 		LEFT JOIN ${repertoryName}.psendlk psendlk ON
 		orderInfo.order_id = psendlk.order_id
 		AND orderInfo.presell !=2
-		LEFT JOIN
+		LEFT
+		JOIN
 		${repertoryName}.check_pick_new checkPickNew ON
-		orderInfo.order_id =
+		orderInfo.order_id
+		=
 		checkPickNew.order_id and
-		psendlk.check_two = 1 
+		psendlk.check_two = 1
 		WHERE
 		checkPickNew.scan_time BETWEEN
 		UNIX_TIMESTAMP(DATE_FORMAT(NOW(),'%Y-%m-%d')) AND
 		UNIX_TIMESTAMP(date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 1
 		day))
+		<if test="erpShangdianId!=null">
+		and orderInfo.sd_id=#{erpShangdianId}
+		</if>
 	</select>
-	
-<!-- oa数据库 -->
+
+	<!-- oa数据库 -->
 	<select id="queryOaShopSaleData" resultType="map">
-		SELECT SUM(payment) as saleGmv,COUNT(*) as orderNumber from oa.jd_syn_order
+		SELECT SUM(payment)
+		as saleGmv,COUNT(*) as orderNumber from oa.jd_syn_order
 		where
 		seller_nick=#{sellerNick}
 		AND
@@ -2767,6 +2809,18 @@
 		UNIX_TIMESTAMP(#{startDate}) AND
 		UNIX_TIMESTAMP(#{endDate})
 		)
-
+	</select>
+	<!-- #未转单数目 无all -->
+	<select id="queryNotTurnAmountJd" resultType="java.lang.Integer">
+		SELECT
+		count(jd_tid) countTid from
+		${repertoryName}.jingdong_trade where
+		temp2order_status=1
+	</select>
+	<!-- #今日总单量 无all -->
+	<select id="queryTotalSingleAmountJd" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		from ${repertoryName}.jingdong_trade where
+		payment_confirm_time>UNIX_TIMESTAMP(DATE_FORMAT(now(),"%Y-%m-%d"))
 	</select>
 </mapper>

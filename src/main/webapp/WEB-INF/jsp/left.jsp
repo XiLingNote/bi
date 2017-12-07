@@ -8,7 +8,6 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	request.setAttribute("basePath", basePath);
 %>
 <!-- shiro标签库 -->
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
@@ -34,7 +33,31 @@
  --%>
 <!--        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
  -->
+<style type="text/css">
+::-webkit-scrollbar {
+	width: 0px;
+	height: 4px;
+	background-color: #F5F5F5;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background: #fff;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: rgba(7, 170, 247, 0.7);
+}
 
+::-webkit-scrollbar-thumb:hover {
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: rgba(7, 170, 247, 1);
+}
+
+</style>
 </head>
 <body>
 
@@ -65,7 +88,8 @@
 		</nav>
 
 		<!--/. NAV TOP  -->
-		<nav class="navbar-default navbar-side" role="navigation">
+		<nav class="navbar-default navbar-side" role="navigation"
+			style="position: absolute; height: 93%; overflow-x: hidden; overflow-y: auto;">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 					<!-- 店铺管理员 -->
@@ -78,9 +102,9 @@
 						<li><a href="<%=basePath%>user/admin.do" id="leftAdmin"><i
 								class="fa fa-tachometer"></i> admin </a></li>
 
-						<li><a href="<%=basePath%>storeManage/storeView.do"
+						<%-- <li><a href="<%=basePath%>storeManage/storeView.do"
 							id="storeManage"><i class="fa fa-tachometer"></i> storeManage
-						</a></li>
+						</a></li> --%>
 					</shiro:hasRole>
 					<!-- bi第一阶段功能 经理及以上能看 -->
 					<shiro:hasAnyRoles name="admin,director">
@@ -100,26 +124,47 @@
 								<li><a href="<%=basePath%>page/salesTrend.do"
 									id="leftStoresales">Storesales</a></li>
 							</ul></li>
-						<%-- 	<li><a href="#" class=""><i class="fa fa-sitemap"></i>
+
+					</shiro:hasAnyRoles>
+					<shiro:hasAnyRoles name="admin">
+
+						<li><a href="#" class=""><i class="fa fa-sitemap"></i>
 								Industry Data<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="<%=basePath%>page/saleContribution.do">Sale
 										Contribution</a></li>
 								<li><a href="<%=basePath%>page/topStore.do">TOP Store</a></li>
 								<li><a href="<%=basePath%>page/topBrand.do">TOP Brand</a></li>
-							</ul></li> --%>
-						<%-- 	<li><a href="#" class=""><i class="fa fa-sitemap"></i>
-							Store Analysis<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="<%=basePath%>page/storeSalesDemonstrate.do">Store
-									Overall</a></li>
-							<li><a href="<%=basePath%>page/dailySales.do">Real Time</a>
-							</li>
-							<li><a href="<%=basePath%>page/salesTrend.do">Storesales</a>
-							</li>
-						</ul></li> --%>
-					</shiro:hasAnyRoles>
+							</ul></li>
+						<li><a href="#" class=""><i class="fa fa-sitemap"></i>
+								Store Analysis<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level" id="leftStoreAnalysis">
+								<li><a href="<%=basePath%>page/storeSalesDemonstrate.do" id="storeSalesDemonstrate2">Store
+										Overall</a></li>
+								<li><a href="<%=basePath%>page/salesAnalysis/storeSalesDemonstrate.do" id="storeSalesDemonstrate">storeSalesDemonstrate</a>
+								</li>
+								<li><a href="<%=basePath%>page/dailySales.do">Real Time</a>
+								</li>
+								<li><a href="<%=basePath%>page/salesAnalysis/overAll.do" id="storeAnalysis">Store Analysis</a>
+								</li>
+								<li><a href="<%=basePath%>page/salesTrend.do">Storesales</a>
+								</li>
+							</ul></li>
 
+						<li><a href="#" class=""><i class="fa fa-sitemap"></i>
+								Commodity Analysis<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="<%=basePath%>commodityAnalysis/overall.do">
+										Overall</a></li>
+								<li><a href="<%=basePath%>commodityAnalysis/spuSku.do">SPU/SKU</a>
+								</li>
+								<li><a href="<%=basePath%>commodityAnalysis/feature.do">Feature</a>
+								</li>
+								<li><a href="<%=basePath%>commodityAnalysis/priceRange.do">Price
+										Range</a></li>
+							</ul></li>
+
+					</shiro:hasAnyRoles>
 					<shiro:hasAnyRoles name="admin,store_admin">
 						<li><a href="#"><i class="fa   fa-upload"></i> upload
 								Data<span class="fa arrow"></span></a>
@@ -181,46 +226,62 @@
 
 							</ul></li>
 					</shiro:hasAnyRoles>
-					<shiro:hasAnyRoles name="admin">
+					<shiro:hasAnyRoles name="admin,tvView,director">
 						<li><a href="#"><i class="fa   fa-upload"></i> business
-								TV<span class="fa arrow"></span></a>
-
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>wareHouse/screen.do"
-									id="leftTarget"><i class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/Bag.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Bag</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/Shoes.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Shoes</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/Dress.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>Dress</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/ACC.do" id="leftTarget"><i
-										class="fa fa-crosshairs"></i>ACC</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Bag.do"
-									id="leftTarget"><i class="fa fa-crosshairs"></i>Bag</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Shoes.do"
-									id="leftTarget"><i class="fa fa-crosshairs"></i>Shoes</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/Dress.do"
-									id="leftTarget"><i class="fa fa-crosshairs"></i>Dress</a></li>
-							</ul>
-							<ul class="nav nav-second-level">
-								<li><a href="<%=basePath%>overall/department/ACC.do"
-									id="leftTarget"><i class="fa fa-crosshairs"></i>ACC</a></li>
-							</ul></li>
+								TV<span class="fa arrow"></span></a> <shiro:hasPermission
+								name="alipay">
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>alipay/inAmount.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>alipay inAmount</a></li>
+								</ul>
+							</shiro:hasPermission> <shiro:hasPermission name="wareHourse">
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>wareHouse/screen.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>wareHourdeScreen</a></li>
+								</ul>
+							</shiro:hasPermission> <shiro:hasPermission name="businessTV">
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/Bag.do" target="_blank"
+										id="leftTarget"><i class="fa fa-crosshairs"></i>Bag</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/Shoes.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>Shoes</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/Dress.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>Dress</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/ACC.do" target="_blank"
+										id="leftTarget"><i class="fa fa-crosshairs"></i>ACC</a></li>
+								</ul>
+							</shiro:hasPermission> <shiro:hasPermission name="departmentTV">
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/department/Bag.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>Bag</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/department/Shoes.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>Shoes</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/department/Dress.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>Dress</a></li>
+								</ul>
+								<ul class="nav nav-second-level">
+									<li><a href="<%=basePath%>overall/department/ACC.do"
+										target="_blank" id="leftTarget"><i
+											class="fa fa-crosshairs"></i>ACC</a></li>
+								</ul>
+							</shiro:hasPermission></li>
 					</shiro:hasAnyRoles>
 					<shiro:hasRole name="store_sub_role">
 

@@ -60,8 +60,8 @@ public class StoreSaleServiceImpl implements StoreSaleService {
 		}
 
 		Date date = new Date();
-		// String yyyyMM = DateUtils.getyyyyMM(date);
-		String yyyyMM = "201705";
+		 String yyyyMM = DateUtils.getyyyyMM(date);
+//		String yyyyMM = "201705";
 		TreeSet<SortShop> treeSet = new TreeSet<SortShop>();
 		// 店铺简称
 		for (String shopName : querySet) {
@@ -234,13 +234,17 @@ public class StoreSaleServiceImpl implements StoreSaleService {
 			 * if (date.after(end)) { break; }
 			 */
 			String string = jedis.hget(name + KeyUtils.DAY, thisdate);
+			RedisPojo redisPojo ;
 			if (StringUtils.isNotBlank(string)) {
-				RedisPojo redisPojo = GsonUtils.gson.fromJson(string,
+				 redisPojo = GsonUtils.gson.fromJson(string,
 						RedisPojo.class);
 				redisPojo.setAlipayCompleteness();
 				redisPojo.setCompleteness();
-				treeSet.add(redisPojo);
+			}else{
+				redisPojo =new RedisPojo();
+				redisPojo.setDatetime(thisdate);
 			}
+			treeSet.add(redisPojo);
 
 		}
 		map.put("treeSet", treeSet);
@@ -264,13 +268,17 @@ public class StoreSaleServiceImpl implements StoreSaleService {
 			}
 			String string = jedis.hget(name + KeyUtils.MONTH,
 					DateUtils.getyyyyMM(date));
+			RedisPojo redisPojo ;
 			if (StringUtils.isNotBlank(string)) {
-				RedisPojo redisPojo = GsonUtils.gson.fromJson(string,
+				 redisPojo = GsonUtils.gson.fromJson(string,
 						RedisPojo.class);
 				redisPojo.setAlipayCompleteness();
 				redisPojo.setCompleteness();
-				treeSet.add(redisPojo);
+			}else{
+				redisPojo =new RedisPojo();
+				redisPojo.setDatetime(DateUtils.getyyyyMM(date));
 			}
+			treeSet.add(redisPojo);
 		}
 		map.put("treeSet", treeSet);
 
@@ -286,13 +294,17 @@ public class StoreSaleServiceImpl implements StoreSaleService {
 		String name = jedis.get(store);
 		for (int i = y1; i <= y2; i++) {
 			String string = jedis.hget(name + KeyUtils.YEAR, "" + i);
+			RedisPojo redisPojo ;
 			if (StringUtils.isNotBlank(string)) {
-				RedisPojo redisPojo = GsonUtils.gson.fromJson(string,
+				 redisPojo = GsonUtils.gson.fromJson(string,
 						RedisPojo.class);
 				redisPojo.setAlipayCompleteness();
 				redisPojo.setCompleteness();
-				treeSet.add(redisPojo);
+			}else{
+				redisPojo =new RedisPojo();
+				redisPojo.setDatetime(i+"");
 			}
+			treeSet.add(redisPojo);
 		}
 		map.put("treeSet", treeSet);
 		jedisPool.returnResource(jedis);

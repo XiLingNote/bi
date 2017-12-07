@@ -1,5 +1,8 @@
 package bi.baiqiu.controller;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -10,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import bi.baiqiu.page.PageHelper.Page;
+import bi.baiqiu.pojo.ShopBean;
 import bi.baiqiu.pojo.User;
 import bi.baiqiu.pojo.management.StoreManagerPojo;
 import bi.baiqiu.service.impl.ShopBeanServiceImpl;
+import bi.baiqiu.utils.GsonUtils;
 
 @Controller
 @RequestMapping(value = "storeManage")
@@ -128,6 +133,19 @@ public class CategoryStoreManageController extends BaseController {
 			WriteGson(response, page.getResult(),page.getTotal());
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value = "getShopBeanByDepartMent", produces = "text/html;charset=UTF-8")
+	public String getShopBeanByDepartMent(Model model,Integer scId, HttpServletRequest request) {
+		List<ShopBean> list;
+		try {
+			list = shopBeanServiceImpl.getShopBeanByDepartMent(scId);
+			String json = GsonUtils.gson.toJson(list);
+			return json;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
 		}
 	}
 }

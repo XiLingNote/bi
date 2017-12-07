@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import com.jd.open.api.sdk.JdClient;
 import com.jd.open.api.sdk.JdException;
@@ -38,7 +37,7 @@ public class JdGetDataTask {
 	@Autowired
 	private JdToken jdToken;
 
-	@Scheduled(fixedDelay = 30 * 1000)
+ //@Scheduled(fixedDelay = 30 * 1000)
 	public void getData() {
 		log.info("JdGetDataTask--getDate--start--");
 		Date taskStartTime = new Date();
@@ -51,24 +50,24 @@ public class JdGetDataTask {
 				first.setStatus(-1);
 				firstStartDao.updateByPrimaryKey(first);
 				getDataBystartDate(DateUtils.dateToString(startDate), taskStartTime);
-				//已经执行
+				// 已经执行
 				first.setJdpModify(taskStartTime);
 			} catch (JdException e) {
-				//执行出错
+				// 执行出错
 				first.setJdpModify(startDate);
 				e.printStackTrace();
 				log.error(e.getMessage());
 			} catch (ParseException e) {
 				e.printStackTrace();
 				log.error(e.getMessage());
-
 			}
 			first.setStatus(1);
 			firstStartDao.updateByPrimaryKey(first);
+			// 定时器结束时归还状态
+			Date taskEndTime = new Date();
+			log.info("JdGetDataTask --getDate--end--useTime:" + (taskEndTime.getTime() - taskStartTime.getTime())
+					+ "ms");
 		}
-		// 定时器结束时归还状态
-		Date taskEndTime = new Date();
-		log.info("JdGetDataTask --getDate--end--useTime:" + (taskEndTime.getTime() - taskStartTime.getTime()) + "ms");
 	}
 
 	/**
@@ -102,7 +101,7 @@ public class JdGetDataTask {
 			calendar.setTime(taskStartDate);
 			// xml中注入京东key和appSecret 表中获取token,超时时间
 			JdClient clarksJd = new JdClientDefault(jdToken.getServerUrl(), shop.getToken(), jdToken.getAppkey(),
-					jdToken.getSecretkey(), 5*60*1000,5*60*1000);
+					jdToken.getSecretkey(), 5 * 60 * 1000, 5 * 60 * 1000);
 			do {
 				// 数据拉取的间隔秒数
 				nextEndCalendar.add(Calendar.SECOND, 24 * 60 * 60);

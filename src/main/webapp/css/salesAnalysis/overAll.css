@@ -1,13 +1,15 @@
-.view{
+.view {
 	background-color: #1d2c37;
-	top:8%;
+	top: 8%;
 	height: 92%;
 }
-.queryCriteria{
-		position: fixed;
-		z-index: 10;
-	    height: 8%;
+
+.queryCriteria {
+	position: fixed;
+	z-index: 10;
+	height: 8%;
 }
+
 .queryDateFont {
 	position: relative;
 	width: 36px;
@@ -15,6 +17,7 @@
 	float: left;
 	text-align: center;
 }
+
 .viewHeader {
 	height: 4%;
 }
@@ -29,20 +32,21 @@
 	width: 100%
 }
 
-.viewHeaderFontBorder{
-		padding-left: 0.3%;
+.viewHeaderFontBorder {
+	padding-left: 0.3%;
 	padding-top: 0.3%;
 	padding-bottom: 0.3%;
 	width: 6rem;
 	border-bottom: 2px solid #a49494;
 	color: #ffffff;
 	display: inline-block;
-	width: 8%
+	width: auto;
 }
+
 .viewTop {
 	height: 20%;
 	width: 100%;
-	color:#ffffff;
+	color: #ffffff;
 }
 
 .viewTopFont {
@@ -53,7 +57,7 @@
 }
 
 .viewBottom {
-	height:70%;
+	height: 70%;
 	width: 100%;
 }
 
@@ -79,23 +83,52 @@
 	height: 80%;
 	width: 47%;
 }
-.firstView{
+
+.firstView {
 	width: 100%;
 }
-.secondView{
+
+.secondView {
 	height: 60%;
 }
 /* 左侧导航条 */
-#fullPage-nav .active span{
+#fullPage-nav .active span {
 	background: white;
 }
+
 #fullPage-nav li span {
-    border: 1px solid #fcf8f8;
-	}
-	.viewBottomBottom{
+	border: 1px solid #fcf8f8;
+}
+
+.viewBottomBottom {
 	height: 80%;
 	width: 100%;
-	}
-	.skills-sunburst,svg ,.skills-chart,#skills-chart-breadcrumb {
-	    display: inline;
-	}
+}
+
+.skills-sunburst, svg, .skills-chart, #skills-chart-breadcrumb {
+	display: inline;
+}
+
+.bootstrap-table {
+	color: #FFFFFF;
+}
+.table thead>tr>th {
+  border-bottom: none;
+}
+.table tbody>tr>td {
+    border-top: none;
+}
+.clearfix:before, .clearfix:after {
+    display: none;
+    content: " ";
+}
+.viewPriceBottom {
+	height: 90%;
+	width: 100%;
+}
+#priceRangeRight {
+	margin-top: 4%;
+}
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+    background-color: #855e35;
+}

@@ -102,7 +102,8 @@ position: relative;
 		var myChart = echarts.init(document.getElementById('main'));
 		var colors = [ '#5793f3', '#d14a61', '#675bba' ];
 		$(function() {
-
+			$("#leftStoreAnalysis").attr("class", "nav nav-second-level in");
+			$("#storeSalesDemonstrate").css("background", "#578EBE");
 			var storeName = "c.p.u.";
 			var gmv = 0;
 			$

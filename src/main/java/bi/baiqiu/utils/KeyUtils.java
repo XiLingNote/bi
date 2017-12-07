@@ -63,6 +63,12 @@ public class KeyUtils {
 	 */
 	public static final String PROMOTIONDETAIL="PromotionDetail";
 	/**
+	 * 订单价格区间key组成
+	 * hget 店铺简称+PriceRange+DAY+,对应日期
+	 */
+	public static final String PRICERANGE="PriceRange";
+
+	/**
 	 * 系统所用map集合中的标记
 	 */
 	public static String regix = "，，，";

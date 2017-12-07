@@ -67,7 +67,7 @@
 		</foreach>
 	</insert>
 	<!-- 批量单条插入 ，存在约束时替换该数据 -->
-	<insert id="insertOne" parameterType="java.util.List"
+	<insert id="insertOne" parameterType="ThrougTrainBean"
 		useGeneratedKeys="true">
 		replace INTO `bi_throug_train` (
 		`date`,
@@ -86,8 +86,6 @@
 		`remark`
 		)
 		VALUES
-		<foreach collection="list" item="item" index="index"
-			separator=",">
 			(
 			#{date},
 			#{cost},
@@ -104,7 +102,6 @@
 			now(),
 			#{remark}
 			)
-		</foreach>
 	</insert>
 	<!-- 批量删除 -->
 	<delete id="deleteByBatch" parameterType="int">

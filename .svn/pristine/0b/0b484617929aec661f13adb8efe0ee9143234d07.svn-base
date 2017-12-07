@@ -1,0 +1,176 @@
+body {
+	position: fixed;
+	height: 100%;
+	width: 96%;
+	background-color: #1c2b36;
+	color: #ffffff;
+	margin: 0% 2% 0% 2%;
+}
+
+.screenHeader {
+	position: relative;
+	height: 13%;
+	width: 100%;
+	/* 	margin-top: 0px;
+    margin-bottom: 0px; */
+}
+
+.screenTop {
+	position: relative;
+	width: 100%;
+	height: 15%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.headline {
+	width: 70%;
+	margin-left: 15%;
+	text-align: center;
+	font-size: 36px;
+}
+
+.date {
+	height: 10%;
+	float: right;
+	position: relative;
+	margin-top: -4%;
+	margin-right: 20px;
+}
+
+.collect {
+	position: relative;
+	width: 20%;
+	height: 100%;
+	float: left;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	background-color: #2a2e3b;
+}
+
+.collect .explain {
+	text-align:left;
+	position: relative;
+	height: 40%;
+	font-size: 36px;
+	margin-left: 5%;
+}
+
+.collect .num {
+	position: relative;
+	height: 60%;
+	font-size: 40px;
+	float: right;
+	margin-right: 10%;
+	text-align:right;
+}
+
+ul {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+}
+
+.slide-title {
+	position: relative;
+	width: 100%;
+	height: 12%;
+	
+}
+
+
+.title span {
+	margin: -1px;
+	overflow: hidden;
+	border-width: 1px;
+	white-space: nowrap;
+	border-style: solid;
+	border-color: #a9c6c9;
+	display: inline-block;
+	text-overflow: ellipsis;
+}
+
+.slide-container {
+	position: relative;
+	height: 60%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.slide-list-top {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	color: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+
+.slide-list {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+.slide-list li {
+	height: 60px;
+	line-height: 60px;
+	list-style: none;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	padding: 0 0px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #a9c6c9;
+	color: #ffffff;
+}
+
+.slide-list li span {
+	margin: -1px;
+	overflow: hidden;
+	border-width: 1px;
+	white-space: nowrap;
+	border-style: solid;
+	display: inline-block;
+	border-color: #a9c6c9;
+	text-overflow: ellipsis;
+}
+
+.js-slide-list li:nth-child(odd) {
+	/* 	background: #66cdaa; */
+	
+}
+
+.js-slide-list li:nth-child(even) {
+	/* 	background: rgba(51, 79, 109, .1); */
+	
+}
+
+li>span:nth-child(n) {
+	position: relative;
+	width: 16%;
+	text-align: right;
+	float: left;
+}
+
+li>span:nth-child(1) {
+	position: relative;
+	width: 20%;
+	text-align: center;
+	float: left;
+}
+
+.title {
+	list-style: none;
+	text-align: center;
+	/* background: #2a2e3b; */
+}

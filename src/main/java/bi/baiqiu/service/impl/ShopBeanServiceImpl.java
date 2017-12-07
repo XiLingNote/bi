@@ -1,5 +1,7 @@
 package bi.baiqiu.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,7 @@ import bi.baiqiu.mapper.WareHouseMapper;
 import bi.baiqiu.page.PageHelper;
 import bi.baiqiu.page.PageHelper.Page;
 import bi.baiqiu.pojo.ShopBean;
+import bi.baiqiu.pojo.ShopBeanExample;
 import bi.baiqiu.pojo.WareHouse;
 import bi.baiqiu.pojo.WareHouseExample;
 import bi.baiqiu.pojo.management.StoreManagerPojo;
@@ -121,5 +124,25 @@ public class ShopBeanServiceImpl {
 			 wareStatus=warehouseDao.updateByExampleSelective(ware, example);
 		}
 		if(wareStatus==0||shopStatus==0)throw new ThrowExceptions(BaseController.savesErroy);
+	}
+	/** 
+	 * @Function: getShopBeanByDepartMent 
+	 * @Description:根据部门id查询店铺
+	 * @param departmentId
+	 * @return
+	 * @throws Exception    
+	 * @return List<ShopBean> 
+	 * @throws 
+	 *
+	 * Modification History:
+	 * Date         Author          Version            Description
+	 *---------------------------------------------------------
+	 * 2017年12月5日      Jared           v1.0.0              
+	*/
+	public List<ShopBean> getShopBeanByDepartMent( Integer departmentId) throws Exception{
+		ShopBeanExample example=new ShopBeanExample();
+		example.createCriteria().andExEqualTo(new Byte("1")).andScIdEqualTo(departmentId);
+		shopDao.selectByExample(example);
+		return shopDao.selectByExample(example);
 	}
 }
